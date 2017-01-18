@@ -1,0 +1,19 @@
+Hi Peter:
+Here are two programs that have been used to get Qo, or solar radiation at the top of the atmosphere:
+1. C++Program.doc  This is an original C++ program used to compute various climatic indices, from which the Java programs were created, I believe.  The daylength/solar radiation routine begins on line 556.
+
+
+2.  Solar Rad Qo.txt    A file with a FORTRAN subroutine that computes the same thing.
+
+
+Hope this helps.
+
+
+Andy
+
+On Monday, June 23, 2014 1:48:00 PM, "Schut, Peter" <Peter.Schut@AGR.GC.CA> wrote:
+
+Hi Andy,
+ 
+The first thing I've spotted is that my calculations of solar radiation are too low compared to the JAVA code - probably because I'm currently using the FAO formula from http://www.fao.org/docrep/x0490e/x0490e07.htm#radiation.  I could reverse engineer the existing JAVA code, but I'd prefer to work from your original formulas if you have them, since the JAVA code is quite convoluted (the product of too many happy programmers...).
+ 

@@ -1,0 +1,24 @@
+<% form_for(@lsrs_soildata) do |f| %>
+  <%= f.error_messages %>
+  <table>
+    <tr>
+      <th>Region:</th>
+      <td><%= f.text_field :Region, :size=>60 %></td>
+    </tr>
+    <tr>
+      <th>SoilNamesTable:</th>
+      <td><%= f.text_field :SoilNamesTable, :size=>60 %></td>
+    </tr>
+    <tr>
+      <th>SoilLayersTable:</th>
+      <td><%= f.text_field :SoilLayersTable, :size=>60 %></td>
+    </tr>
+    <tr>
+      <th>Title_en:</th>
+      <td><%= f.text_field :Title_en, :size=>60 %></td>
+    </tr>
+  </table>
+  <p>
+    <%= f.submit @action %>
+  </p>
+<% end %>

@@ -1,0 +1,73 @@
+<%= render :partial => "clf1" %>
+<title>LSRS Manual, Section 4.2.3</title>
+<%= render :partial => "clf2" %>
+
+<p>&nbsp;</p>
+
+<h3 ALIGN="JUSTIFY">5.4.3 Reaction and nutrient status (V)</h3>
+
+<p ALIGN="JUSTIFY">Subsurface acidity, while not as critical as surface
+considerations can still affect plant growth and nutrient availability.</p>
+
+<p ALIGN="left">&nbsp;</p>
+
+<table BORDER="1" CELLSPACING="1" CELLPADDING="5" WIDTH="506">
+  <tr>
+    <td WIDTH="492" VALIGN="TOP" colspan="2"><b>Table 5.10 </b>Percent
+    deduction for subsurface reaction/nutrient status.</td>
+  </tr>
+  <tr>
+    <td WIDTH="78" VALIGN="TOP">pH (1)</td>
+    <td WIDTH="400" VALIGN="TOP">% deduction</td>
+  </tr>
+  <tr>
+    <td WIDTH="78" VALIGN="TOP">7.0</td>
+    <td WIDTH="400" VALIGN="TOP"><p ALIGN="CENTER">0</td>
+  </tr>
+  <tr>
+    <td WIDTH="78" VALIGN="TOP">6.0</td>
+    <td WIDTH="400" VALIGN="TOP"><p ALIGN="CENTER">0</td>
+  </tr>
+  <tr>
+    <td WIDTH="78" VALIGN="TOP">5.0</td>
+    <td WIDTH="400" VALIGN="TOP"><p ALIGN="CENTER">10</td>
+  </tr>
+  <tr>
+    <td WIDTH="78" VALIGN="TOP">4.0</td>
+    <td WIDTH="400" VALIGN="TOP"><p ALIGN="CENTER">20</td>
+  </tr>
+  <tr>
+    <td WIDTH="78" VALIGN="TOP">3.0</td>
+    <td WIDTH="400" VALIGN="TOP"><p ALIGN="CENTER">30</td>
+  </tr>
+  <tr>
+    <td VALIGN="TOP" COLSPAN="2" width="492">(1) Measured in saturated
+    paste.</td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<table border="1" width="100%">
+  <tbody><tr>
+    <td width="100%"><strong>Table 5.10 Implementation - Subsurface
+    Reaction / Nutrient Status % Deduction (V).</strong><small> </small><p>% Deduction V = a + bx</p>
+    <p>a = 60<br>
+    b = -10</p>
+    <p>x = SubsurfacePH </p></td>
+  </tr>
+  <tr>
+    <td width="100%"><img src="/images/Table5-10.gif" alt="Table5-10.gif (24289 bytes)" height="450" width="600"></td>
+  </tr>
+  <tr>
+    <td width="100%">Comments:<ul>
+      <li>Minimum Deduction allowed is 0.</li>
+    </ul>
+    </td>
+  </tr>
+</tbody></table>
+
+<p>&nbsp;</p>
+
+
+<%= render :partial => "clf3" %>

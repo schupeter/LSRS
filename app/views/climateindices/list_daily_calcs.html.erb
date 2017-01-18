@@ -1,0 +1,18 @@
+<h1>Tests for Daily Data</h1>
+
+<em></em>CHU calculations</em>
+<ul>
+	<li>Start accumulating the first day when the <%=params[:chu2springdays]%>-day running mean is &ge; <%=params[:chu2springtemp]%><sup>o</sup>C after <%=params[:chu2springfirstday]%>.</li>
+	<li>Stop accumulating by <%=params[:chu2falllastday]%> or if the minimum temperature is &le; <%=params[:chu2fallmin]%><sup>o</sup>C.</p></li>
+</ul>
+
+<table>
+<%for stationyear in @dailyStations do %>
+<%station = stationyear.split("/")[0]%><input id="data" name="data" type="hidden">
+<%year = stationyear.split("/")[2].split(".")[0]%>
+	<tr>
+		<td><%=station%>: <%=year%></td>
+		<td><a href="calculate_daily.html?station=<%=station%>&daily=<%=year%>&chu2springfirstday=<%=params[:chu2springfirstday]%>&chu2springtemp=<%=params[:chu2springtemp]%>&chu2springdays=<%=params[:chu2springdays]%>&chu2springtemp10ave=<%=params[:chu2springtemp10ave]%>&chu2falltemp=<%=params[:chu2falltemp]%>&chu2falltempmin=<%=params[:chu2falltempmin]%>&chu2falltemp10min=<%=params[:chu2falltemp10min]%>&chu2falllastday=<%=params[:chu2falllastday]%>">calculate</a></td>
+	</tr>
+<%end%>
+</table>

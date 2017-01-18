@@ -1,0 +1,104 @@
+
+<%= render :partial => "/lsrs/clf1" %>
+<title>LSRS Manual, Section 4.2.3</title>
+<%= render :partial => "/lsrs/clf2" %>
+
+
+<h3>Basic Landscape Deduction (T)</h3>
+
+<p>The basic deduction (T) is obatined from one of the 2 Equations shown below.  Three input parameters are required;<br>
+- Climatic Region of soil in question<br>
+- Slope of land<br>
+- Landscape type - Simple or Complex<br>
+
+<p>For Region 2, the equation in Figure 6.2 is used for <b>complex</b> slopes while the equation in Figure 6.3 is used for <b>simple</b> slopes.</p>
+
+<p>In Region 1, it was felt that the longer slopes, while easier to farm, were more prone
+to erosion and that the two factors would more or less balance. Therefore only one
+calculation is required and the equation in Figure 6.2 is used.</p>
+
+<p>The graphs are presented to show how the equations fit to
+the data points (as indicated in the tables).</font></p>
+
+<p>&nbsp;</p>
+
+<table border="1" width="100%">
+  <tr>
+    <td width="100%"><font face="Arial"><strong>Figure 6.2 Implementation (Revision A) - USED
+    FOR LSRS VERSION 2.7<br>
+    Point Deduction for Slope Gradient (T)<br>
+    Region 1 - Simple Landscapes<br>
+    Region 1 - Complex Landscapes<br>
+    Region 2 - Complex Landscapes<br>
+    </strong></font><p><font
+    face="Arial">Bent Hyperbola Model: <strong>Point Deduction = a + b*x - sqrt((c + b*x)^2 +
+    d^2)</strong><br>
+    Coefficient Data:<br>
+    </font><font FACE="Arial" SIZE="3">a = 128.20977<br>
+    b = 8.5212186<br>
+    c = 24.148183<br>
+    d = 126.64124</font><font face="Arial"><br>
+    <br>
+    x = % slope</font></td>
+  </tr>
+  <tr>
+    <td width="100%"><img src="/images/Section6_Figure6-2A.gif" width="621" height="388"
+    alt="Section6_Figure6-2A.gif (9745 bytes)"></td>
+  </tr>
+  <tr>
+    <td width="100%"><font face="Arial">COMMENTS:</font><ul>
+      <li><font face="Arial">This equation is meant to be used for slope gradient for all
+        landscape types in Region 1 and for landscape types with complex slopes in Region 2.</font></li>
+      <li><font face="Arial">This equation was modified from the one that follows to take into
+        account more modern farming practices (zero-till, etc.).</font></li>
+    </ul>
+    </td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+
+<hr>
+
+<table border="1" width="100%">
+  <tr>
+    <td width="100%"><font face="Arial"><strong>Figure 6.3 Implementation (Revision A) - USED
+    FOR LSRS VERSION 2.7<br>
+    Point Deduction for Slope Gradient (T) <br>
+    Region 2 - Simple Landscapes</strong></font><p>
+    <font face="Arial">Bent Hyperbola Model: <strong>Point Deduction = a + b*x - sqrt((c + b*x)^2 +
+    d^2)</strong><br>
+    Coefficient Data:<br>
+    </font><font FACE="Arial" SIZE="3">a = 66.560928<br>
+    b = 2.156809<br>
+    c = -38.609623<br>
+    d = 54.877374</font><font face="Arial"><br>
+    <br>
+    x = % slope</font></td>
+  </tr>
+  <tr>
+    <td width="100%"><img src="/images/Section6_Figure6-3A.gif" width="621" height="388"
+    alt="Section6_Figure6-3A.gif (9705 bytes)"></td>
+  </tr>
+  <tr>
+    <td width="100%"><font face="Arial">COMMENTS:</font><ul>
+      <li><font face="Arial">This equation is meant to be used for slope gradient for simple
+        slopes in Region 2.</font></li>
+      <li><font face="Arial">This equation was modified from the one that follows to take into
+        account more modern farming practices (zero-till, etc.).</font></li>
+    </ul>
+    </td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+
+
+
+<p>&nbsp;</p>
+
+
+<%= render :partial => "/lsrs/clf3" %>
+

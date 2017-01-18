@@ -1,0 +1,41 @@
+<% content_for :title do %>LSRS Climate Indices Output Format<%end%>
+
+<p>The climate indices are output as a tab-delimited ascii text file.  The first line contains the column headers.  Each subsequent line includes the climate indices for a single location.  Columns are as follows:</p>
+
+<ul>
+<%num=1%>
+<%for field in @fields do%>
+<li>Column <%=num%>:  <a href="<%=field.name%>.html"><%=field.title_en%></a> (<%=field.units_en%>) </li>
+<%num+=1%>
+<%end%>
+</ul>
+
+<hr/>
+
+<ul>
+<li>Column 1:  <a href="Longitude.html">Longitude</a> (decimal degrees) </li>
+<li>Column 2:  <a href="Latitude.html">Latitude</a> (decimal degrees) </li>
+<li>Column 3:  <a href="Elevation.html">Elevation</a> (m) </li>
+<li>Column 4:  <a href="StationIdentifier.html">Id = Station identifier</a> </li>
+<li>Column 5:  <a href="Year.html">First = First year of observations</a></li>
+<li>Column 6:  <a href="Year.html">Final = Final year of observations</a></li>
+<li>Column 7:  <a href="Region.html">Region = Erosivity Region</a></li>
+<li>Column 8:  <a href="GDD_First.html">GDD_First = Growing Season Start</a> (julian day)</li>
+<li>Column 9:  <a href="GDD_Last.html">GDD_Last = Growing Season End</a> (julian day)</li>
+<li>Column 10:  <a href="GDD1Length.html">GDD_Length = Growing Season Length</a> (days)</li>
+<li>Column :  GDD = Growing Degree Days (degrees C)</li>
+<li>Column :  EGDD = Effective Growing Degree Days (degrees C)</li>
+<li>Column :  CHU = Crop Heat Units</li>
+<li>Column :  JulyMean</li>
+<li>Column :  canhm</li>
+<li>Column :  EFF = Early Fall Frost (days)</li>
+<li>Column :  ESM = Excess Spring Moisture (mm)</li>
+<li>Column :  EFM = Excess Fall Moisture (mm)</li>
+<li>Column :  PPE = Precipitation - Potential Evapotranspiration (mm)</li>
+<li>Column :  <a href="RiskHail.html">RHI = Risk of Hail Index</a></li>
+</ul>
+<a href="/schemas/climatedaily/1.0/examples/daily_input.txt">Example</a>
+<pre>
+Long	Lat	Elev	Id	First
+22.39	49.03	54	42708	1971 ....
+</pre>

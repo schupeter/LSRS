@@ -1,0 +1,21 @@
+  <h2>Step 1</h2>
+  <form name="framework" method="get" action="client">
+    <table>
+      <tr>
+        <td><br/><b>Select a Spatial Framework</b>: </td>
+        <td class="left"><br/>
+          <select name="FrameworkName" size="1">
+          <%for soilDataset in @soilDatasets do%>
+            <option value=<%=soilDataset.FrameworkName%> ><%=soilDataset.Title_en%></option>
+          <%end%>
+           </select>
+        </td>
+      </tr>
+      <tr>
+        <td/>
+        <td class="left">
+          <br><input type="submit" value="Next">
+        </td>
+      </tr>
+    </table>
+  </form>

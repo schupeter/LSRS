@@ -1,0 +1,94 @@
+<%= render :partial => "clf1" %>
+<title>LSRS Manual, Section 4.2.3</title>
+<%= render :partial => "clf2" %>
+
+<p>&nbsp;</p>
+
+<h3 ALIGN="JUSTIFY">5.3.3 Salinity (N)</h3>
+
+<p>Saline organic soils are rare in the interior but may occur in
+coastal areas.</p>
+
+<table BORDER="1" CELLSPACING="1" WIDTH="493">
+  <tr>
+    <td VALIGN="TOP" colspan="2" width="487"><b><br>
+    Table 5.7</b> - Point deductions for salinity.<b><br>
+    </b></td>
+  </tr>
+  <tr>
+    <td VALIGN="TOP" width="173" align="center">Salinity<br>
+    dS/m (1)</td>
+    <td VALIGN="TOP" width="308" align="center">Point deduction</td>
+  </tr>
+  <tr>
+    <td VALIGN="TOP" width="173" align="center">2</td>
+    <td VALIGN="TOP" width="308" align="center">0</td>
+  </tr>
+  <tr>
+    <td VALIGN="TOP" width="173" align="center">4</td>
+    <td VALIGN="TOP" width="308" align="center">20</td>
+  </tr>
+  <tr>
+    <td VALIGN="TOP" width="173" align="center">8</td>
+    <td VALIGN="TOP" width="308" align="center">50</td>
+  </tr>
+  <tr>
+    <td VALIGN="TOP" width="173" align="center">16</td>
+    <td VALIGN="TOP" width="308" align="center">75</td>
+  </tr>
+  <tr>
+    <td VALIGN="TOP" colspan="2" width="487"><br>
+    (1) Measured in saturated paste.<br>
+    </td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<table border="1" width="100%">
+  <tbody><tr>
+    <td width="100%"><strong>Table 5.7 Implementation - Surface Salinity
+    Deduction (N).</strong><small> </small></font><p>Deduction N =
+    (a*b+c*x^d) / (b+x^d)</p>
+    <p><font face="Arial">Coefficient Data: <br>
+    a = -13.230275 <br>
+    b = 22.752925 <br>
+    c = 94.480275 <br>
+    d = 1.67181 </p>
+    <p>x = Salinity EC</p></td>
+  </tr>
+  <tr>
+    <td width="100%"><img src="/images/Table5-07MMF1.gif" alt="Table5-07MMF.gif (6069 bytes)" height="450" width="600"></font></td>
+  </tr>
+  <tr>
+    <td width="100%">COMMENTS:<ul>
+      <li>Minimum deduction is 0.</li>
+      <li>In the Agrasid database, if there is no value for salinity (i.e.,
+        -9), use 0.1.</li>
+    </ul>
+    </td>
+  </tr>
+</tbody></table>
+
+<hr>
+
+<p>&nbsp;</p>
+
+<table border="1" width="100%">
+  <tbody><tr>
+    <td bgcolor="#FFFF00" width="100%"><strong>IMPORTANT NOTE:</strong><br>
+    Only the larger of the two <strong>Surface</strong> deductions for Reaction and Salinity
+    is used for soil rating calculations purposes.</font><p><font face="Arial">Thus if the <strong>Surface
+    Reaction</strong> deduction is 15 and the <strong>Surface Salinity</strong> deduction is
+    7, only the 15 is used for further soil rating calculations.</p></td>
+  </tr>
+</tbody></table>
+
+
+
+
+
+<p>&nbsp;</p>
+
+
+<%= render :partial => "clf3" %>

@@ -1,0 +1,34 @@
+<%= render :partial => "/lsrs/clf1" %>
+<title>LSRS Manual, Section 3.4</title>
+<%= render :partial => "/lsrs/clf2" %>
+<h1>3.4. Notes on Manually Determining Climate Ratings</h1>
+
+<p>The attached work sheet [LSRS Manual Figure 3.6] may be used to facilitate the
+calculation. The following steps are suggested: 
+
+<ol>
+  <li>Locate the site on the enclosed moisture map [LSRS Manual Map 1], </li>
+  <li>Estimate the moisture index (proportional from isolines) and enter it in the value space on the work sheet.</li>
+  <li>Assign the appropriate deduction [LSRS Manual Figure 3.1].</li>
+  <li>Subtract the deduction from 100 to deter-mine the A rating.</li>
+  <li>Locate the site on the enclosed temperature map [LSRS Manual Map 2]. </li>
+  <li>Estimate the effective growing degree days and enter the value on the work sheet.</li>
+  <li>Assign the appropriate deduction [LSRS Manual Figure 3.2].</li>
+  <li>Subtract the deduction from 100 to determine the H rating.</li>
+  <li>The basic climate rating is the lowest of A or H.</li>
+  <li>For excess spring moisture, excess fall moisture and fall
+    frost modifiers follow the same procedure as for A and H &#151; enter value and assign
+    appropriate deductions. [LSRS Manual Figures 3.3 to 3.5].</li>
+  <li>Total the modifier % deductions and multiply by the basic
+    rating to determine the modification point deduction.</li>
+  <li>Subtract the modifier deduction from the basic rating to
+    determine the Final Climatic Rating.</li>
+  <li>You may wish to place the site into a capability class using
+    the classification table [LSRS Manual Table 2.1].</li>
+</ol>
+
+<p>To designate a subclass identify any factors which resulted in a <strong>15 or greater
+point deduction</strong> and assign the appropriate symbol. For example, a final rating of
+75 with a 23 point deduction for moisture would be 2 A.</p>
+
+<%= render :partial => "/lsrs/clf3" %>

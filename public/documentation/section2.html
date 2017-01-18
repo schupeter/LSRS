@@ -1,0 +1,381 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 3.0">
+<title>Section 2 - LSRS - System Development</title>
+<link rel="stylesheet" media="screen" type="text/css" href="css/screen.css" />
+</head>
+
+<body>
+
+<h1>2. SYSTEM DEVELOPMENT</h1>
+
+
+<h2>2.1 Approach and Assumptions</h2>
+
+<p>An &quot;expert system&quot; approach was used based on available data and the
+collective knowledge and experience of people involved with land science and the rating of
+land suitability for crop production throughout the country. The CLI system (ARDA, 1965)
+was used as a general framework as it has proven useful and it is familiar to people
+involved with all aspects of land evaluation. Thus, a seven class system was chosen with
+Class I having the highest suitability (least limitations) and Class 7 having the lowest
+suitability (greatest limitations). The component breakdown and specific factor ratings
+follow the early approach of Stone (1933) and more recently that of the Alberta Soils
+Advisory Committee (1987).</p>
+
+<p>Changes from the CLI are reflected in some of the following guidelines and assumptions:
+
+<ol>
+  <li>The system is interpretive and based on limitations for crop production. The framework
+    of the system is suitable for all crops but specific rating factors are developed,
+    initially, for only spring-seeded small grains (wheat, barley, oats), crops which can be
+    grown in all the agricultural regions of Canada.</li>
+  <li>The system recognizes three major components that determine the suitability of land for
+    crops: climate, soils and landscape. Each component is rated separately and assigned a
+    value between 0 and 100. The final land suitability rating is based on the most limiting
+    of the three, not on the accumulated total.</li>
+  <li>Distance to market, availability of land transportation, size of farm, cultural
+    patterns, and exceptional skill or resources of the farm operator are not criteria for
+    this classification.</li>
+  <li>Permafrost affected soils are not considered separately because once
+    land is cleared of its vegetative cover the permafrost recedes to a depth greater than 1
+    metre.</li>
+  <li>The interpretations are subject to change as new information on soil
+    response to management becomes available. New technology may also require changes in the
+    classification.</li>
+  <li>Organic soils are rated for the same crops as mineral soils.</li>
+</ol>
+
+
+
+<hr>
+
+
+
+
+<p>As a basis for developing specific ratings for various factors, the following
+relationship was established:</p>
+<div align="center"><center>
+
+<table BORDER="1" CELLSPACING="1" CELLPADDING="7" WIDTH="589">
+  <tr>
+    <td VALIGN="TOP" COLSPAN="3">LSRS Manual Table 2.1 -- Relationship of
+    suitability class to index points.</td>
+  </tr>
+  <tr>
+    <td WIDTH="20%" VALIGN="TOP">Suitability Class</td>
+    <td WIDTH="21%" VALIGN="TOP">Index Points</td>
+    <td WIDTH="59%" VALIGN="TOP">Limitations for specified crop*</td>
+  </tr>
+  <tr>
+    <td WIDTH="20%" VALIGN="TOP">1</td>
+    <td WIDTH="21%" VALIGN="TOP">80 -100</td>
+    <td WIDTH="59%" VALIGN="TOP">none to slight</td>
+  </tr>
+  <tr>
+    <td WIDTH="20%" VALIGN="TOP">2</td>
+    <td WIDTH="21%" VALIGN="TOP">60 &#150; 79</td>
+    <td WIDTH="59%" VALIGN="TOP">slight</td>
+  </tr>
+  <tr>
+    <td WIDTH="20%" VALIGN="TOP">3</td>
+    <td WIDTH="21%" VALIGN="TOP">45 &#150; 59</td>
+    <td WIDTH="59%" VALIGN="TOP">moderate</td>
+  </tr>
+  <tr>
+    <td WIDTH="20%" VALIGN="TOP">4</td>
+    <td WIDTH="21%" VALIGN="TOP">30 &#150; 44</td>
+    <td WIDTH="59%" VALIGN="TOP">severe</td>
+  </tr>
+  <tr>
+    <td WIDTH="20%" VALIGN="TOP">5</td>
+    <td WIDTH="21%" VALIGN="TOP">20 &#150; 29</td>
+    <td WIDTH="59%" VALIGN="TOP">very severe</td>
+  </tr>
+  <tr>
+    <td WIDTH="20%" VALIGN="TOP">6</td>
+    <td WIDTH="21%" VALIGN="TOP">10 &#150; 19</td>
+    <td WIDTH="59%" VALIGN="TOP">extremely severe</td>
+  </tr>
+  <tr>
+    <td WIDTH="20%" VALIGN="TOP">7</td>
+    <td WIDTH="21%" VALIGN="TOP">0 &#150; 9</td>
+    <td WIDTH="59%" VALIGN="TOP">unsuitable</td>
+  </tr>
+  <tr>
+    <td VALIGN="TOP" COLSPAN="3">*Limitations are for production of the
+    specified crops. This does not imply that the land could not be developed for other crops
+    or for other uses.</td>
+  </tr>
+</table>
+</center></div>
+
+
+
+
+
+<h2>2.2 System Description</h2>
+
+<p>The system has two categories: &quot;Classes&quot; based on the degree of limitation of
+land for production of the specified crop or crops (LSRS Manual Table 2.1), and
+&quot;Subclasses&quot; based on the kind of limitation. This information is useful for
+land use planning and for determining conservation and management requirements. The first
+three classes are considered suitable for sustained production of the crop in question,
+Class 4 is considered marginal, and Classes 5 to 7 are not considered capable of
+supporting sustained production of the crop using presently recommended practices.
+Subclasses reflect the kind of climate, soil and landscape limitations.</p>
+
+<p>Provision is made for a third category &quot;Units&quot; which are groupings of
+soil-landscapes based on management considerations. For example, all areas having similar
+requirements for conservation practices, or drainage, or fertility amendments might be
+grouped. This category has not been developed here but attempts have been made where
+intensive land management is practiced (cf Luttmerding, 1984).</p>
+
+<p>It must be emphasized that land areas assigned to the same suitability class are
+similar only with respect to the degree, and not the kind, of limitation for production of
+a crop. Each class can include different soil and landscape characteristics which may
+require different management practices.</p>
+
+
+
+<h3>2.2.1 Classes (degree of limitation)</h3>
+
+
+<table border="1" width="100%">
+  <tr>
+    <td width="15%">Class 1</td>
+    <td width="85%">Land in this class has no significant limitations for
+    production of the specified crops (80 - 100 index points).</td>
+  </tr>
+  <tr>
+    <td width="15%">Class 2</td>
+    <td width="85%">Land in this class has slight limitations that may
+    restrict the growth of the specified crops or require modified management practices (60 -
+    79 index points).</td>
+  </tr>
+  <tr>
+    <td width="15%">Class 3</td>
+    <td width="85%">Land in this class has moderate limitations that
+    restrict the growth of the specified crops or require special management practices (45 -
+    59 index points).</td>
+  </tr>
+  <tr>
+    <td width="15%">Class 4</td>
+    <td width="85%">Land in this class has severe limitations that restrict
+    the growth of the specified crops or require special management practices or both. <strong>This
+    class is marginal for sustained production</strong> of the specified crops (30 - 44 index
+    points).</td>
+  </tr>
+  <tr>
+    <td width="15%">Class 5</td>
+    <td width="85%">Land in this class has very severe limitations for
+    sustained production of the specified crops. Annual cultivation using common cropping
+    practices is not recommended (20 - 29 index points).</td>
+  </tr>
+  <tr>
+    <td width="15%">Class 6</td>
+    <td width="85%">Land in this class has extremely severe limitations for
+    sustained production of the specified crops. Annual cultivation is not recommended even on
+    an occasional basis (10 - 19 index points).</td>
+  </tr>
+  <tr>
+    <td width="15%">Class 7</td>
+    <td width="85%">Land in this class is not suitable for the production
+    of the specified crops (0 - 9 index points).</td>
+  </tr>
+</table>
+
+
+
+
+<h3>2.2.2 Subclasses (kind of limitation)</h3>
+
+
+
+
+<p>CLIMATE (C): A general climatic restriction.</p>
+
+<table border="1" width="100%">
+  <tr>
+    <td width="24%">Temperature (H)</td>
+    <td width="76%">This subclass indicates inadequate heat units for the
+    optimal growth of the specified crops.</td>
+  </tr>
+  <tr>
+    <td width="24%">Moisture (A)</td>
+    <td width="76%">This subclass indicates inadequate moisture for the
+    optimal growth of the specified crops.</td>
+  </tr>
+</table>
+
+
+
+<hr>
+
+
+
+<p>SOIL (S): A general soil restriction.</p>
+
+
+<table border="1" width="100%">
+  <tr>
+    <td width="24%">Water holding capacity/texture (M)</td>
+    <td width="76%">This subclass indicates land areas where the specified
+    crops are adversely affected by lack of water due to inherent soil characteristics.</td>
+  </tr>
+  <tr>
+    <td width="24%">Soil structure (D)</td>
+    <td width="76%">This subclass indicates land areas where the specified
+    crops are adversely affected either by soil structure that limits the depth of rooting, or
+    by surface crusting that limits the emergence of shoots. Root restriction by bedrock and
+    by a high water table are considered separately (see Rock and Drainage).</td>
+  </tr>
+  <tr>
+    <td width="24%">Organic matter (F)</td>
+    <td width="76%">This subclass indicates mineral soil with a low organic
+    matter content in the Ap or Ah horizon (often considered a fertility factor).</td>
+  </tr>
+  <tr>
+    <td width="24%">Depth of topsoil (E)</td>
+    <td width="76%">This subclass indicates mineral soil with a thin Ap or
+    Ah horizon (often resulting from erosion).</td>
+  </tr>
+  <tr>
+    <td width="24%">Soil reaction (V)</td>
+    <td width="76%">This subclass indicates soils with a pH value either
+    too high or too low for optimum growth of the specified crops.</td>
+  </tr>
+  <tr>
+    <td width="24%">Salinity (N)</td>
+    <td width="76%">This subclass indicates soils with amounts of soluble
+    salts sufficient to have an adverse effect on the growth of the specified crops.</td>
+  </tr>
+  <tr>
+    <td width="24%">Sodicity (Y)</td>
+    <td width="76%">This subclass indicates soils having amounts of
+    exchangeable sodium sufficient to have an adverse effect on soil structure or on the
+    growth of the specified crops. It&#146;s use is restricted to reconstructed soils.</td>
+  </tr>
+  <tr>
+    <td width="24%">Organic surface (0)</td>
+    <td width="76%">This subclass indicates mineral soils having a peaty
+    surface layer up to 40 cm thick.</td>
+  </tr>
+  <tr>
+    <td width="24%">Drainage (W)</td>
+    <td width="76%">This subclass indicates soils in which excess water
+    (not due to inundation) limits the production of specified crops. Excess water may result
+    from a high water table or inadequate soil drainage.</td>
+  </tr>
+  <tr>
+    <td width="24%">Organic soil temperature (Z)</td>
+    <td width="76%">This subclass recognizes the additional temperature
+    limitation associated with organic soils - particularly where the regional climate has
+    less than 1600 Effective Growing Degree Days (EGDD).</td>
+  </tr>
+  <tr>
+    <td width="24%">Rock (R)</td>
+    <td width="76%">This subclass indicates soils having bedrock
+    sufficiently close to the surface to have an adverse effect on the production of the
+    specified crops.</td>
+  </tr>
+  <tr>
+    <td width="24%">Degree of Decomposition or Fibre Content (B)</td>
+    <td width="76%">This subclass identifies organic soils in which the
+    degree of decomposition of the organic material is not optimum for the production of the
+    specified crops.</td>
+  </tr>
+  <tr>
+    <td width="24%">Depth and Substrate (G)</td>
+    <td width="76%">This subclass indicates shallow organic soils with
+    underlying material that is not optimum for the production of the specified crops.</td>
+  </tr>
+</table>
+
+
+
+
+<hr>
+
+
+
+<p>LANDSCAPE (L): a general landscape restriction.</p>
+
+
+<table border="1" width="100%">
+  <tr>
+    <td width="24%">Slope (T)</td>
+    <td width="76%">This subclass indicates landscapes with slopes steep
+    enough to incur a risk of water erosion or to limit cultivation.</td>
+  </tr>
+  <tr>
+    <td width="24%">Landscape Pattern (K)</td>
+    <td width="76%">This subclass indicates land areas with strongly
+    contrasting soils and/or nonarable obstacles that limit production of the specified crops
+    or substantially impact on management practices.</td>
+  </tr>
+  <tr>
+    <td width="24%">Stoniness and Coarse Fragments (P)</td>
+    <td width="76%">This subclass indicates land that is sufficiently stony
+    (fragments coarser than 7.5 cm) or gravelly (fragments smaller than 7.5 cm diameter) so as
+    to hinder tillage or limit the production of specified crops.</td>
+  </tr>
+  <tr>
+    <td width="24%">Wood content (J)</td>
+    <td width="76%">This subclass indicates organic soils with a content of
+    wood or of Eriophorum species sufficient to limit the production of the specified crops.</td>
+  </tr>
+  <tr>
+    <td width="24%">Inundation (I)</td>
+    <td width="76%">This subclass indicates land areas subject to
+    inundation or flooding that limits the production of the specified crops.</td>
+  </tr>
+</table>
+
+
+
+
+
+<h3>2.2.3 Units (management groups)</h3>
+
+<p>Units should be considered as soil management groups. That is, groupings of soils or
+map units with similar relevance and response to a particular management objective. It is
+suggested that criteria and groupings could change with objective of decision and scale of
+data or application. These types of groupings are more appropriate at levels of detailed
+land management such as individual farms or site plans and the need for national
+guidelines has not been established. However, some general statements are included for
+orientation.</p>
+
+<p>The original concept (Klingebiel and Montgomery, 1961) was that the capability unit
+should group soils that were nearly alike in their suitability for plant growth and
+responses to management. Thus, soils in the same unit should be sufficiently uniform to
+(a) produce similar kinds of cultivated crops and pasture plants with similar management
+practices, (b) require similar conservation treatment and management under the same kind
+and condition of plant cover, and (c) have comparable potential productivity. The
+principal control-ling parameters are texture, drainage, slope and climate although others
+such as fertility requirements, salinity or stoniness can be locally important.</p>
+
+
+
+
+
+<h2>2.3 Information Requirements</h2>
+
+<p>Use of the rating system requires information for each factor within the climate, soil
+and landscape components. The information may be for a specific site or estimated from
+maps, reports and local information. In some cases, data for factors can be estimated from
+data for other parameters. For example, the AWC can be estimated from information on
+texture and structure, or the water table of undrained mineral soils might be estimated
+from the classification of the soil. The level and purpose of the suitability rating have
+a bearing on the degree of specificity of the data required. Regional assessments of the
+suitability of land can generally be made using published data. Assessments of specific
+tracts of land for the production of specified crops, however, usually require specific
+data for the sites involved, including on-site inspection, unless the available data are
+unusually comprehensive.</p>
+
+
+
+
+</body>
+</html>

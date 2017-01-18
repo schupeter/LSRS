@@ -1,0 +1,121 @@
+<%= render :partial => "clf1" %>
+<title>LSRS Manual, Section 4.2.3</title>
+<%= render :partial => "clf2" %>
+
+
+<h3>6.2.2 Wood content (J)</h3>
+</font><font FACE="Arial" SIZE="3">
+
+<p>The problems due to hard, coarse, woody fragments greater than 5 cm in diameter and, in
+some cases, tough clumps of Eriophorum sp. in organic soils are similar to those due to
+cobbles and stones in mineral soils. Coarse wood fragments In the plow layer or at the
+surface interfere with seeding, crop emergence, harvesting and tillage. In subsurface
+layers. wood fragments can improve permeability and reduce the rate of subsidence as they
+shrink less than peat on drying. Therefore, evaluation of woody fragments is linked to
+depth within the organic soil profile as well as to amount (LSRS Manual Table 6.3).</p>
+
+<p>&nbsp;</p>
+</font>
+
+<table BORDER="1" CELLSPACING="1" CELLPADDING="7" width="75%">
+  <tr>
+    <td VALIGN="TOP" COLSPAN="5" width="669"><font FACE="Arial" SIZE="3">LSRS Manual Table 6.3
+    Percent deduction for wood content in organic soils</font></td>
+  </tr>
+  <tr>
+    <td WIDTH="107" VALIGN="TOP">&nbsp;</td>
+    <td WIDTH="93" VALIGN="TOP">&nbsp;</td>
+    <td WIDTH="192" VALIGN="TOP">&nbsp;</td>
+    <td WIDTH="223" VALIGN="TOP" COLSPAN="2"><font FACE="Arial" SIZE="3">Percent Deduction</font></td>
+  </tr>
+  <tr>
+    <td WIDTH="107" VALIGN="TOP"><font FACE="Arial" SIZE="3">Wood Content (% by volume)</font></td>
+    <td WIDTH="93" VALIGN="TOP"><font FACE="Arial" SIZE="3">Comment</font></td>
+    <td WIDTH="192" VALIGN="TOP"><font FACE="Arial" SIZE="3">Common peatland type</font></td>
+    <td WIDTH="99" VALIGN="TOP"><font FACE="Arial" SIZE="3">Depth:<br>
+    0 &#150; 40 cm</font></td>
+    <td WIDTH="106" VALIGN="TOP"><font FACE="Arial" SIZE="3">Depth:<p>40 &#150; 120 cm</font></td>
+  </tr>
+  <tr>
+    <td WIDTH="107" VALIGN="TOP"><font FACE="Arial" SIZE="3">1</font></td>
+    <td WIDTH="93" VALIGN="TOP"><font FACE="Arial" SIZE="3">very low</font></td>
+    <td WIDTH="192" VALIGN="TOP"><font FACE="Arial" SIZE="3">treeless fens</font></td>
+    <td WIDTH="99" VALIGN="TOP"><font FACE="Arial" SIZE="3">0</font></td>
+    <td WIDTH="106" VALIGN="TOP"><font FACE="Arial" SIZE="3">0</font></td>
+  </tr>
+  <tr>
+    <td WIDTH="107" VALIGN="TOP"><font FACE="Arial" SIZE="3">2</font></td>
+    <td WIDTH="93" VALIGN="TOP"><font FACE="Arial" SIZE="3">low</font></td>
+    <td WIDTH="192" VALIGN="TOP"><font FACE="Arial" SIZE="3">domed bogs, treed fens</font></td>
+    <td WIDTH="99" VALIGN="TOP"><font FACE="Arial" SIZE="3">5</font></td>
+    <td WIDTH="106" VALIGN="TOP"><font FACE="Arial" SIZE="3">0</font></td>
+  </tr>
+  <tr>
+    <td WIDTH="107" VALIGN="TOP"><font FACE="Arial" SIZE="3">5</font></td>
+    <td WIDTH="93" VALIGN="TOP"><font FACE="Arial" SIZE="3">moderate</font></td>
+    <td WIDTH="192" VALIGN="TOP"><font FACE="Arial" SIZE="3">treed fens, bogs</font></td>
+    <td WIDTH="99" VALIGN="TOP"><font FACE="Arial" SIZE="3">10</font></td>
+    <td WIDTH="106" VALIGN="TOP"><font FACE="Arial" SIZE="3">5</font></td>
+  </tr>
+  <tr>
+    <td WIDTH="107" VALIGN="TOP"><font FACE="Arial" SIZE="3">10</font></td>
+    <td WIDTH="93" VALIGN="TOP"><font FACE="Arial" SIZE="3">high</font></td>
+    <td WIDTH="192" VALIGN="TOP"><font FACE="Arial" SIZE="3">bogs, swamps</font></td>
+    <td WIDTH="99" VALIGN="TOP"><font FACE="Arial" SIZE="3">20</font></td>
+    <td WIDTH="106" VALIGN="TOP"><font FACE="Arial" SIZE="3">10</font></td>
+  </tr>
+  <tr>
+    <td WIDTH="107" VALIGN="TOP"><font FACE="Arial" SIZE="3">20</font></td>
+    <td WIDTH="93" VALIGN="TOP"><font FACE="Arial" SIZE="3">very high</font></td>
+    <td WIDTH="192" VALIGN="TOP"><font FACE="Arial" SIZE="3">hardwood swamps</font></td>
+    <td WIDTH="99" VALIGN="TOP"><font FACE="Arial" SIZE="3">50</font></td>
+    <td WIDTH="106" VALIGN="TOP"><font FACE="Arial" SIZE="3">25</font></td>
+  </tr>
+</table>
+<font FACE="Arial" SIZE="3">
+
+<p>&nbsp;</p>
+
+<table border="1" width="100%">
+  <tr>
+    <td width="100%" bgcolor="#FFFF00"><strong><font face="Arial">IMPORTANT NOTE</font></strong><p><font
+    face="Arial">The following shows how the intent of Table 6.3 has been implemented in the
+    current LSRS 2.x program. This differs from what is shown in the LSRS Manual.</font></p>
+    <p>&nbsp;</td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<table border="1" width="100%">
+  <tr>
+    <td width="100%"><font face="Arial"><strong>Table 6.3 Implementation</strong></font><p><font
+    face="Arial">Formula was used which utilizes the % Surface Wood content and % Subsurface
+    Wood content as follows:</font></p>
+    <p><font face="Arial"><br>
+    <br>
+    % Deduction = (2.0 * SurfaceWoodContent%) + SubsurfaceWoodContent%</font></p>
+    <p>&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="100%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="100%"><font face="Arial">COMMENTS: </font><ul>
+      <li><font face="Arial">Maximum deduction allowed is 25.</font></li>
+      <li><font face="Arial">If -9 (no value / unknown) appears in the Agrasid database, then use
+        0 for calculating deduction -- this will lead to a 0 deduction being determined.</font></li>
+    </ul>
+    </td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<%= render :partial => "clf3" %>
+
+
+

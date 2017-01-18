@@ -1,0 +1,52 @@
+<h1>BR1:  Baier and Robertson Method (Equation I) (Baier and Robertson, 1965; Baier, 1971)</h1>
+<p>(This method must be used when deriving LSRS crop ratings, since the P-PE deduction curves contained within 
+the LSRS calculator have been calibrated for "Baier Robertson P-PE" values.)</p>
+
+<pre>
+PE BR1 = 0.086 * (0.928 * Tmaxf + 0.933 * Trangef + 0.0486 * RStop - 87.03);
+        if PE BR1 &lt; 0   then  PE BR1 =0.0;        
+
+where  Tmaxf = Tmax * 9 / 5 + 32  
+Tminf = Tmin * 9 / 5 + 32   
+Trangef = Tmaxf - Tminf
+RStop =  23.89* Ra
+Tmax and Tmin are the mean daily maximum and minimum temperatures in ?C; Tmaxf and Tminf are the mean daily maximum and minimum temperatures in ?F.
+Ra is the extra terrestrial radiation in MJ/m2/day.  
+RStop is extra terrestrial radiation in cal/cm2/day.   
+(1 cal/cm2/day = 0.041868 MJ/m2/day;  1 MJ/m2/day = 23.89 cal/cm2/day) 
+</pre>
+
+<table>
+	<tr>
+		<th>Advantages</th> <th>Disadvantages</th>
+	</tr>
+	<tr>
+		<td>
+			<ul>
+				<li>minimal input variables needed. </li>
+				<li>used in LSRS calibrations.</li>
+				<li>good correlation and small bias with ETo for short crop over full season across Canada. </li>
+				<li>developed using data from across Canada.	o underestimates ETo for tall crops, </li>
+			</ul>
+		</td>
+		<td>
+			<ul>
+				<li>full season across Canada.  </li>
+				<li>relatively low coefficient of efficiency for prairie region, full season, short crop.</li>
+				<li>variable results for shorter season.</li>
+				<li>tested only at 3 locations for short seasons.</li>
+			</ul>
+		</td>
+	</tr>
+</table>
+
+
+<h2>References</H2>
+
+<p><a href="http://sis.agr.gc.ca/cansis/publications/manuals/1995-lsrs/lsrs.pdf">Agronomic Interpretations Working Group. 1995.</a>  Land suitability rating for agricultural crops: 1. Spring-seeded small grains.  Edited by W.W. Pettapiece. Tech. Bull. No. 1995-6E. Centre for Land and Biological Resources Research, Research Branch, Agriculture and Agri-Food Canada, Ottawa. 90 pp., 2 maps.</p>
+
+<p><a href="http://pubs.aic.ca/doi/pdf/10.4141/cjps71-053">Baier, 1971.</a>  Evaluation of latent evaporation estimates and their conversion to potential evaporation.  Can. J. Plant Sci. 51: 255-266.</p>
+ 
+<p><a href="http://pubs.aic.ca/doi/pdf/10.4141/cjps65-051">Baier, W. and Robertson, G.W. 1965.</a>  Estimation of latent evaporation from simple weather observations.  Can. J. Plant Sci. 45: 276-284.</p>
+
+

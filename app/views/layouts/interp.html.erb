@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>InterpNB</title>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/soilname.css">
+</head>
+<body>
+
+<section id="breadcrumb">
+<a href="http://doc.gis.agr.gc.ca">CanSIS</a> &gt;
+<a href="/">LSRS</a> &gt; 
+<a href="/interp/">Interps</a>
+<%if params[:sector] then %>&gt; <a href="/interp/<%=params[:sector]%>"><%=params[:sector]%></a><%end%>
+<%if params[:interpretation] then %>&gt; <a href="/interp/<%=params[:interpretation]%>"><%=params[:interpretation]%></a><%end%>
+</section>
+
+<%= yield %>
+
+</body>
+</html>

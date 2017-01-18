@@ -1,0 +1,31 @@
+<% @buffer = (@data[-1][:value] - @data[0][:value])/10%>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+					['<%=@factor[:acronym_en]%>', 'Deduction' ], 
+					<%=@data.map{|x|[x[:value],x[:deduction]]}.to_s[1..-2]%>
+        ]);
+
+        var options = {
+          curveType: 'function',
+					pointsVisible: true,
+					pointSize: 16,
+					legend: 'none',
+					hAxis: { title: '<%=@factor[:acronym_en]%> (<%=@factor[:units_en]%>)', textStyle: {fontSize: 14}, titleTextStyle: {fontSize: 18, bold: true}, viewWindow:{min: <%=@data[0][:value] - @buffer%>, max: <%=@data[-1][:value] + @buffer%>} },
+					vAxis: { title: 'Point deduction', gridlines: {count: 6}, textStyle: {fontSize: 14}, titleTextStyle: {fontSize: 18, bold: true}},
+					backgroundColor: '#f1f8e9',
+					width: 800,
+					height: 400
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart:<%=@factor[:name]%>'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+<div id="chart:<%=@factor[:name]%>" style="width: 800px; height: 400px"></div>

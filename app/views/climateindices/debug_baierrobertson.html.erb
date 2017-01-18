@@ -1,0 +1,11 @@
+<h1>LSRS CLimate indices - baierrrobertson</h1>
+
+P-PE Jan 1 - Dec 31= <%=@ppeArray.sum%><br/>
+P-PE May 1 - Sep 30= <%=@ppeArray[120..272].sum%>
+<hr/>
+<%=debug @ppeArray%>
+<hr/>
+<ul>
+<%for i in 0..364 do%>
+<%= i %> = <%=@observationsArray[i][:month]%> <%=@observationsArray[i][:day]%><br/>
+<%end%>

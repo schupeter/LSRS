@@ -1,0 +1,11 @@
+<h1>Interpretations for <%=params[:sector]%></h1>
+<table>
+<%for interpretation in @interpretations do%>
+	<tr>
+		<td><%=interpretation.title_en%></td>
+		<td><%=link_to "describe", interpretation.sector + "/" + interpretation.interpretation + "/describe"%></td>
+	</tr>
+<%end%>
+</table>
+
+<%=debug params%>

@@ -1,0 +1,61 @@
+<%= render :partial => "/lsrs/clf1" %>
+<title>LSRS for SLC</title>
+<%= render :partial => "/lsrs/clf2" %>
+<center>
+<h1>LSRS batch processor</h1>
+
+<p>Select a group of polygons to calculate their LSRS ratings.</p>
+<p>(E.g.: 800001 to 800007)</p>
+<form name="formSearch" method="get" action="/lsrsbatch/service">
+  <table>
+    <tr>
+      <td>Climate Scenario:</td>
+      <td class="left">
+        <select name="ClimateTable" size="1">
+          <option selected="selected" value="Ca_all_slc_v3x0_climate1961x90">1961-90 climate normals</option>
+         </select>
+      </td>
+    </tr>
+    <tr>
+      <td>Spatial Framework:</td>
+			<em>generate this picklist...</em>
+      <td class="left">
+        <select name="FrameworkName" size="1">
+          <option selected="selected" value="Ca_all_slc_v3x0_cmp">SLC 3.0</option>
+          <option value="Bc_okanagan_soil_v2x0_cmp">Okanagan</option>
+          <option value="Bc_tulameen_soil_v2x0_cmp">Tulameen</option>
+         </select>
+      </td>
+    </tr>
+    <tr>
+      <td>From Polygon Id:</td>
+      <td class="left"><input type="text" name="FROMPOLY" size="25" /></td>
+    </tr>
+    <tr>
+      <td>To Polygon Id:</td>
+      <td class="left"><input type="text" name="TOPOLY" size="25" /></td>
+    </tr>
+    <tr>
+      <td>Crop:</td>
+			<em>generate this picklist...</em>
+      <td class="left">
+        <select name="CROP" size="1">
+          <option selected="selected" value="alfalfa">Alfalfa</option>
+          <option value="brome">Brome</option>
+          <option value="canola">Canola</option>
+          <option value="corn">Corn</option>
+          <option value="soybean">Soybeans</option>
+          <option value="sssgrain">Spring seeded small grains</option>
+         </select>
+      </td>
+    </tr>
+    <tr>
+      <td/>
+      <td class="left">
+<br><input type="submit" value="Rate these polygons!">
+      </td>
+    </tr>
+  </table>
+</form>
+</center>
+<%= render :partial => "/lsrs/clf3" %>

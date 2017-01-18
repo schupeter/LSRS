@@ -1,0 +1,52 @@
+<tr><th colspan="9">3) Other Climate Factors</th></tr>
+	<tr>
+		<td>Excess Spring Moisture (ESM) =</td>
+		<td><%=@site.climate.ESM%></td>
+		<td>% deduction =</td>
+		<td><%=@site.climate.modifiers.m1.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td class="Abbr"><a href="/lsrs5/documentation/climate/esm/<%=@crop%>">more info</a></td>
+	</tr>
+	<tr>
+		<td>Excess Fall Moisture (EFM) =</td>
+		<td><%=@site.climate.EFM%></td>
+		<td>% deduction =</td>
+		<td><%=@site.climate.modifiers.m2.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td class="Abbr"><a href="/lsrs5/documentation/climate/efm/<%=@crop%>">more info</a></td>
+	</tr>
+<%if @crop == "canola" then%>
+  <tr>
+		<td>Canola Flowering Inhibited (CFI) =</td>
+		<td><%=@site.climate.CANHM%></td>
+		<td>% deduction =</td>
+		<td><%=@site.climate.modifiers.canhm.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td class="Abbr"><a href="/lsrs5/documentation/climate/canhm/<%=@crop%>">more info</a></td>
+	</tr>
+<%end%>
+	<tr>
+		<td></td>
+		<td></td>
+		<td>Total % deduction =</td>
+		<td><%=@site.climate.modifiers.total_percent.round(0)%></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>deduction applied =</td><td><%=@site.climate.modifiers.deduction.round(0)%></td>
+		<td class="Abbr">(<i>m</i>)</td>
+	</tr>

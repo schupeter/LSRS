@@ -1,0 +1,40 @@
+<%= render :partial => "/lsrs/clf1" %>
+<title>LSRS Manual, Section 3.3</title>
+<%= render :partial => "/lsrs/clf2" %>
+
+
+<h2>3.3.3 Fall frost</h2>
+
+<p>This deduction accounts for the occurrence of frost prior to the regional average which
+is recognized in the H factor. Days before the average regional fall frost is used as the
+rating variable [LSRS Manual Figure 3.5].</p>
+
+<center>
+<table border="1" width="100%">
+  <tr>
+    <td class="left">
+      <strong>Figure 3.5 Implementation - % Deduction for early Frost</strong><br/>
+      Linear Fit<br/>
+      <br/>
+      % Deduction = a + bx<br/>
+      <br/>
+      Coefficient Data:<br/>
+      a = 0<br/>
+      b = 0.33333333<br/>
+      <br/>
+      x = Days before average fall frost
+    </td>
+  </tr>
+  <tr>
+    <td><img SRC="/images/Figure3-5.gif" width="600" height="450"></td>
+  </tr>
+  <tr>
+    <td class="left">COMMENTS: Maximum deduction allowed is 10%.</td>
+  </tr>
+</table>
+<br/><br/>
+</center>
+
+
+
+<%= render :partial => "/lsrs/clf3" %>

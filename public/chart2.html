@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+					['P-PE', 'Deduction' ], 
+					[-650, 100], 
+					[-500, 70], 
+					[-400, 50], 
+					[-300, 30], 
+					[-150, 0] 
+        ]);
+
+        var options = {
+          curveType: 'function',
+					pointsVisible: true,
+					pointSize: 16,
+					legend: 'none',
+					hAxis: { title: 'P-PE', textStyle: {fontSize: 14}, titleTextStyle: {fontSize: 18, bold: true}, viewWindow:{min: -700, max: -100} },
+					vAxis: { title: 'Point deduction', gridlines: {count: 6}, textStyle: {fontSize: 14}, titleTextStyle: {fontSize: 18, bold: true}},
+					backgroundColor: '#f1f8e9',
+					width: 800,
+					height: 400
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="curve_chart" style="width: 800px; height: 500px"></div>
+  </body>
+</html>

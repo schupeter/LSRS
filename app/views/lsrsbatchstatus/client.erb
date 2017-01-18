@@ -1,0 +1,91 @@
+<%= render :partial => "/lsrs/clf1" %>
+<title>LSRS batch queue</title>
+<%= render :partial => "/lsrs/clf2" %>
+<center>
+<h1>LSRS batch queue</h1>
+
+<p>As of <%= DateTime::now.to_s[0,19].gsub("-", ".").gsub("T"," ") %></p>
+
+<p><a href="client">Reload</a> to update.</p>
+
+<p><b>Note</b>: When status = "FAILED", execution of subsequent batch processes is blocked.<br/>
+Delete the failed job to continue processing.</p>
+
+<table width="1100">
+  <tr>
+    <th class="mid">Job submission date</th>
+    <th>Framework</th>
+    <th>From #</th>
+    <th>To #</th>
+    <th>Crop</th>
+    <th>Status</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% for jobName in @resultsJobsArray %>
+  <tr>
+  <% if jobName[0..7].to_i < 20101020 then %>
+    <td class="mid"><%= jobName[0..3] %>.<%= jobName[4..5] %>.<%= jobName[6..7] %> <%= jobName[9..10] %>:<%= jobName[11..12] %>:<%= jobName[13..14] %></td>
+    <td class="mid"><%= @statusHash[jobName]["FrameworkName"] %></td>
+    <td class="mid"><%= @statusHash[jobName]["FromPoly"] %></td>
+    <td class="mid"><%= @statusHash[jobName]["ToPoly"] %></td>
+    <td class="mid"><%= @statusHash[jobName]["Crop"] %></td>
+    <td class="mid"><%= @statusHash[jobName][:Status] %></td>
+    <td class="mid">
+      <% if @statusHash[jobName][:Status] == "Complete" %><a href="/batch/results/<%= jobName %>/output.xml">Results</a>
+      <% elsif @statusHash[jobName][:Status] == "** FAILED **" %><a href="/batch/results/<%= jobName %>/output.xml">Results</a>
+      <% elsif @statusHash[jobName][:Status] == "Processing" %><a href="/batch/results/<%= jobName %>/status.xml">Status</a>
+      <% end %></td>
+    <td class="mid"></td>
+    <td class="mid">
+      <% if @statusHash[jobName][:Status] == "Complete" %>
+        <% if File::exists?( "/usr/local/httpd/lsrs/public/batch/results/" + jobName + "/mapclient.html" ) %>
+          <a href="/batch/results/<%= jobName %>/mapclient.html">View Map</a>
+        <% else %>
+          <a href="/wms/create?coverage=<%= @statusHash[jobName]["FrameworkName"] %>&tmpdir=<%= jobName %>">Create Map</a>
+        <% end %>
+      <% end %>
+    </td>
+    <td class="mid"><a href="remove?JobName=<%= jobName %>">
+      <% if @statusHash[jobName][:Status] == "Complete" %>Delete
+      <% elsif @statusHash[jobName][:Status] == "** FAILED **" %>Delete
+      <% elsif @statusHash[jobName][:Status] == "Pending" %>Cancel
+      <% end %></a></td>
+  <% else %>
+    <td class="mid"><%= jobName[0..3] %>.<%= jobName[4..5] %>.<%= jobName[6..7] %> <%= jobName[9..10] %>:<%= jobName[11..12] %>:<%= jobName[13..14] %></td>
+    <td class="mid"><%= @statusHash[jobName]["FrameworkName"] %></td>
+    <td class="mid"><%= @statusHash[jobName]["FromPoly"] %></td>
+    <td class="mid"><%= @statusHash[jobName]["ToPoly"] %></td>
+    <td class="mid"><%= @statusHash[jobName]["Crop"] %></td>
+    <td class="mid"><%= @statusHash[jobName][:Status] %></td>
+    <td class="mid">
+      <% if @statusHash[jobName][:Status] == "Complete" %><a href="/batch/results/<%= jobName %>/output.html">Results</a>
+      <% elsif @statusHash[jobName][:Status] == "** FAILED **" %><a href="/batch/results/<%= jobName %>/output.html">Results</a>
+      <% elsif @statusHash[jobName][:Status] == "Processing" %><a href="/batch/results/<%= jobName %>/status.xml">Status</a>
+      <% end %></td>
+    <td class="mid">
+      <% if @statusHash[jobName][:Status] == "Complete" %>
+        <a href="http://<%= request.host %><%= @statusHash[jobName]["OutputDbfURL"] %>">dbf</a>
+        <a href="http://<%= request.host %><%= "#{@statusHash[jobName]["OutputDbfURL"]}"[0..-5] %>summary.dbf">summary</a>
+        <% if jobName[0..7].to_i > 20101216 then %><a href="http://<%= request.host %>/batch/results/<%= jobName %>/output.csv">csv</a><% end %>
+      <% end %></td>
+    <td class="mid">
+      <% if @statusHash[jobName][:Status] == "Complete" %>
+          <a href="/batch/results/<%= jobName %>/output.kml">KML</a>
+      <% end %>
+    </td>
+    <td class="mid"><a href="remove?JobName=<%= jobName %>">
+      <% if @statusHash[jobName][:Status] == "Complete" %>Delete
+      <% elsif @statusHash[jobName][:Status] == "** FAILED **" %>Delete
+      <% elsif @statusHash[jobName][:Status] == "Pending" %>Cancel
+      <% end %></a></td>
+  <% end %>
+  </tr>
+  <% end %>
+</table>
+
+</center>
+
+<%= render :partial => "/lsrs/clf3" %>

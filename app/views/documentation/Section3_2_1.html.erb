@@ -1,0 +1,109 @@
+<%= render :partial => "/lsrs/clf1" %>
+<title>LSRS Manual, Section 3.2</title>
+<%= render :partial => "/lsrs/clf2" %>
+
+
+<h3>(h1) - Temperature Deduction</h3>
+
+<p>The temperature factor for spring seeded small grains is based on an effective <i>growing </i>degree day (EGDD)
+calculation which includes length of season, degree days and day length. Growing degrees
+days were accumulated beginning 10 days after the average date when the mean daily
+temperature reached 5 degrees C (April 1 was the earliest possible starting date).<b> </b>This
+approximates date of seeding. The end of the growing season was represented by the average
+date of<i> </i>the first frost after July 15 (October 31 was taken as the latest possible
+end date). The GDDs were calculated from the average mean daily air temperatures computed
+from monthly normal values.</p>
+
+<p>The GDD value was adjusted to recognize the effect of the longer day length in the
+north (Alberta Soils Advisory Committee, <i>1987). </i>The value of the modification
+varies from 0% at 49 degrees N to 18% at 64 degrees N latitude. The adjusted value was
+considered to be the Effective GDD (EGDD).</p>
+
+<p>The critical points used for development of the rating, based on requirements for
+spring-seeded small grains and farming experience were:</p>
+
+
+<table BORDER="1" CELLSPACING="1" CELLPADDING="7" WIDTH="636">
+  <tr>
+    <td WIDTH="17%" VALIGN="TOP"><b><p ALIGN="CENTER">EGDD</b></td>
+    <td WIDTH="83%" VALIGN="TOP"><b><p ALIGN="CENTER">Deduction</b></td>
+  </tr>
+  <tr>
+    <td WIDTH="17%" VALIGN="TOP">1600</td>
+    <td WIDTH="83%" VALIGN="TOP"><ul>
+      
+      <li>assigned 0 point deduction</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td WIDTH="17%" VALIGN="TOP">1200</td>
+    <td WIDTH="83%" VALIGN="TOP"><ul>
+      
+      <li>close to the point where wheat becomes a minor component in a dominantly barley system</li>
+      <li>this was considered a moderate heat limitation</li>
+      <li>Class 3</li>
+      <li>assigned 40 point deduction</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td WIDTH="17%" VALIGN="TOP">1050</td>
+    <td WIDTH="83%" VALIGN="TOP"><ul>
+      
+      <li>the point where spring-seeded small grains occupy less than 50% of the cultivated area</li>
+      <li>this was considered a severe heat limitation</li>
+      <li>Class 4</li>
+      <li>assigned 55 point deduction</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td WIDTH="17%" VALIGN="TOP">900</td>
+    <td WIDTH="83%" VALIGN="TOP"><ul>
+      
+      <li>approximates the limit of small grain production</li>
+      <li>a very severe heat limitation</li>
+      <li>Class 5</li>
+      <li>assigned 70 point deduction</li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td WIDTH="17%" VALIGN="TOP">500</td>
+    <td WIDTH="83%" VALIGN="TOP"><ul>
+      
+      <li>no potential for small grains</li>
+      <li>Class7</li>
+      <li>assigned 90 point deduction</li>
+    </ul>
+    </td>
+  </tr>
+</table>
+
+<p> Deduction points for temperature are calculated using an EGDD (effective growing degree days) value.
+This number is used in the equation below which was derived using critical cut-off points for spring-seeded small grains.
+
+<table border="1">
+  <tr>
+    <td class="left"><strong>Figure 3.2 Implementation - Temperature Point Deduction (H)</strong>
+    <p>3rd degree Polynomial Fit: </p>
+    <p>Point Deduction H = a + bx + cx^2 + dx^3...<br/>
+    Coefficient Data:<br/>
+    a = 48.652257<br/>
+    b = 0.18610747<br/>
+    c = -0.00023921011<br/>
+    d = 6.4935065e-008</p>
+    <p>x = EGDD</p>
+  </tr>
+  <tr>
+    <td><img SRC="/images/Figure3-2.gif" width="600" height="449"></td>
+  </tr>
+  <tr>
+    <td class="left">COMMENTS: The function curves from EGDD=900 to EGDD=500 while in the original LSRS Manual it is represented by a straight line. This is not believed to be important since the critical deduction level is 70.</td>
+  </tr>
+</table>
+
+
+
+<%= render :partial => "/lsrs/clf3" %>

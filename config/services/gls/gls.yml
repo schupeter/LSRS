@@ -1,0 +1,103 @@
+# MapAttributes config file.  
+#
+# Edit the example contents as appropriate.  Note that the 
+# field names and indentation are important!!!  Just edit the 
+# content after the colon (:).
+# In the Languages section, add language codes as desired (e.g. en-CA) and fill in contents
+
+OperationsMetadata:
+  HTTP:
+    Get: http://wms1.agr.gc.ca/gls
+    Post: http://wms1.agr.gc.ca/gls
+  GetData:
+    GeolinkidsLimit: 1000
+    AttributeLimit: 1
+  JoinData:
+    AttributeLimit: 1
+
+DefaultLanguage: en
+
+Languages:
+  en:
+    ServiceIdentification:
+      Title: MapAttributes
+      Abstract: Map attributes server.
+      Keywords: 
+       - GLS
+       - gdas
+       - aafc
+      Fees: none
+      AccessConstraints: none
+    ServiceProvider:
+      ProviderName: Agriculture and Agri-Food Canada
+      ProviderSite: http://wps.agr.gc.ca/
+      ServiceContact:
+        IndividualName: Peter Schut
+        PositionName: Information System Scientist
+        ContactInfo:
+          Phone:
+            Voice: +1 613 759-1874
+            Facsimile: +1 613 759-1937
+          Address:
+            DeliveryPoint: Room 1135, Neatby Building, 960, Carling Avenue
+            City: Ottawa
+            AdministrativeArea: ON
+            PostalCode: K1AOC6
+            Country: Canada
+            ElectronicMailAddress: schutp@agr.gc.ca
+  fr:
+    ServiceIdentification:
+      Title: MapAttributesfr
+      Abstract: Map attributes server.fr
+      Keywords: 
+       - GLSfr
+       - gdasfr
+       - aafcfr
+      Fees: nonefr
+      AccessConstraints: nonefr
+    ServiceProvider:
+      ProviderName: Agriculture and Agri-Food Canadafr
+      ProviderSite: http://wps.agr.gc.ca/fr
+      ServiceContact:
+        IndividualName: Peter Schutfr
+        PositionName: Information System Scientistfr
+        ContactInfo:
+          Phone:
+            Voice: +1 613 759-1874fr
+            Facsimile: +1 613 759-1937fr
+          Address:
+            DeliveryPoint: Room 1135, Neatby Building, 960, Carling Avenuefr
+            City: Ottawafr
+            AdministrativeArea: ONfr
+            PostalCode: K1AOC6fr
+            Country: Canadafr
+            ElectronicMailAddress: schutp@agr.gc.cafr
+
+OutputMechanisms:
+  sld:
+    Title: 
+      en: SLD currently unavailable
+      fr: SLD n'est pas disponible a ce momente
+    Abstract: 
+      en: SLD currently unavailable
+      fr: SLD n'est pas disponible a ce momente
+    Reference: http://schemas.opengis.net/sld/1.1.0/
+  wms:
+    Title:
+      en: Web Map Server v1.1.1
+      fr: Web Map Server v1.1.1
+    Abstract:
+      en: The OpenGIS® Web Map Service Interface Standard (WMS) provides a simple HTTP interface for requesting geo-registered map images from one or more distributed geospatial databases. A WMS request defines the geographic layer(s) and area of interest to be processed. The response to the request is one or more geo-registered map images (returned as JPEG, PNG, etc) that can be displayed in a browser application. The interface also supports the ability to specify whether the returned images should be transparent so that layers from multiple servers can be combined or not.
+      fr: 
+    Reference: http://schemas.opengis.net/wms/1.1.1/
+
+OutputStylings:
+  MapServer:
+    Title:
+      en: MapServer .MAP file
+      fr: MapServer .MAP file
+    Abstract:
+      en: The MapServer MAP file allows styling via CLASS descriptions.
+      fr: 
+    Reference: http://ms.gis.umn.edu/docs/reference/mapfile/class
+    Schema: 

@@ -1,0 +1,24 @@
+<h1>LSRS Soil Names and Soil Layers Tables</h1>
+
+<table border = "1">
+  <tr>
+    <th>Region</th>
+    <th>Warehouse name</th>
+    <th>Title en</th>
+  </tr>
+
+<% for dataset in @lsrs_soildata %>
+  <tr>
+    <td><%=h dataset.Region %></td>
+    <td><%=h dataset.SoilNamesTable %></td>
+    <td><%=h dataset.SoilLayersTable %></td>
+    <td><%=h dataset.Title_en %></td>
+    <td><%= link_to 'Show', dataset %></td>
+    <td><%= link_to 'Edit', edit_lsrs_soil_path(dataset) %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New lsrs_soildata', new_lsrs_soil_path %>

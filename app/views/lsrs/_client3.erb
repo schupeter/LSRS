@@ -1,0 +1,11 @@
+      <tr><td colspan="2"><hr/></td></tr>
+      <tr>
+        <td><b>Select a Climate Scenario</b>:</td>
+        <td class="left">
+          <select name="ClimateTable" size="1">
+            <%for climateTable in @climateTables do%>
+            <option value="<%=climateTable.WarehouseName.capitalize%>"><%=climateTable.Title_en%></option>
+            <%end%>
+           </select>
+        </td>
+      </tr>

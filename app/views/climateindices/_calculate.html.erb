@@ -1,0 +1,51 @@
+<%fields = Definition.select(:name).where("format_lsrs1>0").order(:format_lsrs1).map{|f|f.name}%>
+Station # = <%=params[:station]%><br/>
+Year = <%=@station[:year]%><br/>
+Latitude = <%=@station[:lat]%><br/>
+Longitude = <%=@station[:long]%><br/>
+Elevation = <%=@station[:elev]%><br/>
+<a href="/climateindices/documentation/GDD_First.html">GDD_First</a> = <%=@station[:GDD_First]%><br/>
+<a href="/climateindices/documentation/GDD_Last.html">GDD_Last</a> = <%=@station[:GDD_Last]%><br/>
+<a href="/climateindices/documentation/GDD_Length.html">GDD_Length</a> = <%=@station[:GDD_Length]%><br/>
+<a href="/climateindices/documentation/GDD.html">GDD</a> = <%=@station[:GDD]%><br/>
+<br/>
+<a href="/climateindices/documentation/GDD_First.html">GDDF_First</a> = <%=@station[:GDDF_First]%><br/>
+<a href="/climateindices/documentation/GDD_Last.html">GDDF_Last</a> = <%=@station[:GDDF_Last]%><br/>
+<a href="/climateindices/documentation/GDD_Length.html">GDDF_Length</a> = <%=@station[:GDDF_Length]%><br/>
+<a href="/climateindices/documentation/GDD.html">GDDF</a> = <%=@station[:GDDF]%><br/>
+<br/>
+<a href="/climateindices/documentation/EGDD_First.html">EGDD_First</a> = <%=@station[:EGDD_First]%><br/>
+<a href="/climateindices/documentation/EGDD_Last.html">EGDD_Last</a> = <%=@station[:EGDD_Last]%><br/>
+<a href="/climateindices/documentation/EGDD.html">EGDD</a> = <%=@station[:EGDD]%><br/>
+<br/>
+CHU1 First = <%=@station[:CHU_First]%> <i> - the third consecutive day where the daily mean air temperatures are at or above 12.8 <sup>o</sup>C, on or after April 15th</i><br/>
+CHU1 Last = <%=@station[:CHU_Last]%> <i> - the day before the daily minimum temperature is at or below -2 <sup>o</sup>C, or October 15th at the latest</i><br/>
+<a href="/climateindices/documentation/CHU.html">CHU1</a> = <%=@station[:CHU1]%><br/>
+<br/>
+CHU2 First = <%=@station[:CHU2_First]%> <i> - the first day that the <%=params[:chu2springdays]%>-day running tmean is &ge; <%=params[:chu2springtemp]%><sup>o</sup>C, on or after <%=params[:chu2springfirstday]%></i><br/>
+CHU2 Last = <%=@station[:CHU2_Last]%> <i> - the day before the minimum temperature is below <%=params[:chu2falltempmin]%>, or the running tmean temperature is at or below <%=params[:chu2falltemp]%><sup>o</sup>C, or the ten year mean is below <%=params[:chu2falltemp10min]%>, or <%=params[:chu2falllastday]%> at the latest</i><br/>
+<a href="/climateindices/documentation/CHU.html">CHU2</a> = <%=@station[:CHU2]%><br/>
+<br/>
+<a href="/climateindices/documentation/PPE.html">PPE</a> = <%=@station[:PPE]%><br/>
+<br/>
+<a href="/climateindices/documentation/CanHM.html">Days over 30<sup>o</sup>C during Canola Flower</a> = <%=@station[:CanHM]%><br/>
+<br/>
+<a href="/climateindices/documentation/ESM.html">ESM</a> = <%=@station[:ESM]%><br/>
+<a href="/climateindices/documentation/EFM.html">EFM</a> = <%=@station[:EFM]%><br/>
+<a href="/climateindices/documentation/EFF.html">Early Fall Frost</a> = 0 (not currently implemented)<br/>
+<a href="/climateindices/documentation/RHI.html">Risk of Hail Index</a> = 0 (not currently implemented)<br/>
+<a href="/climateindices/documentation/Region.html">Region</a> = 0 (not currently implemented)<br/>
+<br/>
+PPE April = <%=@station[:PPE_April]%><br/>
+PPE May = <%=@station[:PPE_May]%><br/>
+PPE June = <%=@station[:PPE_June]%><br/>
+PPE July = <%=@station[:PPE_July]%><br/>
+PPE August = <%=@station[:PPE_August]%><br/>
+PPE September = <%=@station[:PPE_September]%><br/>
+<br/>
+<a href="/lsrs5/crop/alfalfa/climate/<%=@station[:PPE].round(0)%>/<%=@station[:GDDF]%>/<%=@station[:GDDF_Length]%>/<%=@station[:ESM]%>/<%=@station[:EFM]%>/details.html">Alfalfa</a>
+<a href="/lsrs5/crop/brome/climate/<%=@station[:PPE].round(0)%>/<%=@station[:GDDF]%>/<%=@station[:GDDF_Length]%>/<%=@station[:ESM]%>/<%=@station[:EFM]%>/details.html">Brome</a>
+<a href="/lsrs5/crop/canola/climate/<%=@station[:PPE].round(0)%>/<%=@station[:EGDD]%>/<%=@station[:ESM]%>/<%=@station[:EFM]%>/details.html">Canola</a>
+<a href="/lsrs5/crop/corn/climate/<%=@station[:PPE].round(0)%>/<%=@station[:CHU1]%>/<%=@station[:ESM]%>/<%=@station[:EFM]%>/details.html">Corn</a>
+<a href="/lsrs5/crop/soybean/climate/<%=@station[:PPE].round(0)%>/<%=@station[:CHU1]%>/<%=@station[:ESM]%>/<%=@station[:EFM]%>/details.html">Soybean</a>
+<a href="/lsrs5/crop/sssgrain/climate/<%=@station[:PPE].round(0)%>/<%=@station[:EGDD]%>/<%=@station[:ESM]%>/<%=@station[:EFM]%>/details.html">SSSGrain</a>

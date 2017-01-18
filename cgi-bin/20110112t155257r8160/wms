@@ -1,0 +1,17 @@
+#!/bin/bash
+MAPSERV="/usr/lib/cgi-bin/mapserv"
+MAPFILE="/usr/local/httpd/lsrs/public/batch/results/20110112t155257r8160/mapfile.map"
+if [ "${REQUEST_METHOD}" != "GET" ]; then
+  echo "Content-type: text/html"
+  echo ""
+  echo ""
+  echo "Sorry, I only understand GET requests."
+  exit
+fi
+if [ -z ${QUERY_STRING} ] ; then
+  QUERY_STRING="map=${MAPFILE}"
+else
+  QUERY_STRING="map=${MAPFILE}&${QUERY_STRING}"
+fi
+exec ${MAPSERV}
+exit

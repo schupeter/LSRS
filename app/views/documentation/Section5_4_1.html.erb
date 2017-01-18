@@ -1,0 +1,155 @@
+<%= render :partial => "clf1" %>
+<title>LSRS Manual, Section 4.2.3</title>
+<%= render :partial => "clf2" %>
+
+<p>&nbsp;</p>
+
+<h3 ALIGN="JUSTIFY">5.4.1 Structure and consistence (B) (degree of
+decomposition)</h3>
+
+<p ALIGN="JUSTIFY">This general index reflects the kind of material and
+its state of decomposition (fibre content). It is based on an average for the 40 to 120 cm
+depth or to a shallower strongly contrasting material such as mineral soil or a
+sedimentary peat layer more than 10 cm thick.</p>
+
+<p ALIGN="JUSTIFY">&nbsp;</p>
+
+<table BORDER="1" CELLSPACING="1" CELLPADDING="5">
+  <tr>
+    <td WIDTH="791" VALIGN="TOP" COLSPAN="10"><p ALIGN="left"><strong><br>
+    Table 5.8</strong> - Percent deduction for subsurface structure / bulk density of organic
+    soils.<br>
+    </td>
+  </tr>
+  <tr>
+    <td WIDTH="54" VALIGN="TOP">&nbsp;</td>
+    <td WIDTH="147" VALIGN="TOP">Subsurface<br>
+    </td>
+    <td WIDTH="118" VALIGN="TOP" colspan="2"><p align="center">fibric<br>
+    </td>
+    <td WIDTH="83" VALIGN="TOP"><p align="center">|</td>
+    <td WIDTH="138" VALIGN="TOP" colspan="2"><p align="center">mesic</td>
+    <td WIDTH="83" VALIGN="TOP"><p ALIGN="CENTER">|</td>
+    <td WIDTH="138" VALIGN="TOP" colspan="2"><p align="center">humic</td>
+  </tr>
+  <tr>
+    <td WIDTH="54" VALIGN="TOP">&nbsp;</td>
+    <td WIDTH="147" VALIGN="TOP">Fibre content (1)<br>
+    von Post scale<br>
+    bulk density (2)</td>
+    <td WIDTH="91" VALIGN="TOP"><p align="center">80<br>
+    1&nbsp;&nbsp;&nbsp;&nbsp; 2<br>
+    0.04</td>
+    <td WIDTH="74" VALIGN="TOP"><p align="center">60<br>
+    3<br>
+    0.07</td>
+    <td WIDTH="83" VALIGN="TOP"><p ALIGN="CENTER">40<br>
+    4<br>
+    0.10</td>
+    <td WIDTH="83" VALIGN="TOP"><p ALIGN="CENTER">30<br>
+    5<br>
+    0.13</td>
+    <td WIDTH="83" VALIGN="TOP"><p align="center">20<br>
+    6<br>
+    0.16</td>
+    <td WIDTH="83" VALIGN="TOP"><p align="center">10<br>
+    7<br>
+    0.18</td>
+    <td WIDTH="83" VALIGN="TOP"><p align="center">5<br>
+    8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9<br>
+    0.20</td>
+    <td WIDTH="83" VALIGN="TOP"><p align="center">0<br>
+    10<br>
+    0.22</td>
+  </tr>
+  <tr>
+    <td WIDTH="54" VALIGN="TOP">Percent deduction</td>
+    <td WIDTH="147" VALIGN="TOP">&nbsp;</td>
+    <td WIDTH="91" VALIGN="TOP" align="center">20</td>
+    <td WIDTH="74" VALIGN="TOP" align="center">10</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">0</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">0</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">0</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">5</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">10</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">20</td>
+  </tr>
+  <tr>
+    <td WIDTH="665" VALIGN="TOP" colspan="10"><br>
+    (1) % rubbed fibre &gt;0.15 mm.<br>
+    (2) BuIk density in Mg/cubic m.<br>
+    </td>
+  </tr>
+</table>
+
+<p>Table 5.8 has been realized with two functions, one for
+SubsurfaceFibre &gt;= 40 and the other for SubsurfaceFibre &lt;= 20. <br>
+If 20 &lt; SubsurfaceFibre &lt; 40 then then % Deduction = 0.<br>
+</p>
+
+<table border="1" width="100%">
+  <tbody><tr>
+    <td width="100%"><strong>Table 5.8 Implementation (Part A) - Subsurface
+    Structure % Deduction - Surface Fibre &gt;= 40</strong><p>If
+    SubsurfaceFibre &gt;= 40 then % Deduction = -20 + 0.5 * SubsurfaceFibre <br>
+    </p></td>
+  </tr>
+  <tr>
+    <td width="100%"><img src="/images/Table5-08A.gif" alt="Table5-08A.gif (24527 bytes)" height="432" width="576"></td>
+  </tr>
+  <tr>
+    <td>COMMENTS:<ul>
+      <li>If 20 &lt; SubsurfaceFibre &lt; 40 then % Deduction = 0.</li>
+      <li>If SubsurfaceFibre &lt;= 20 then see implementation (Part B)
+        below.&nbsp;&nbsp; </li>
+    </ul>
+    </td>
+  </tr>
+</tbody></table>
+
+<p>&nbsp;</p>
+
+<table border="1" width="100%">
+  <tbody><tr>
+    <td width="100%"><strong>Table 5.8 Implementation (Part B) - Subsurface
+    Structure % Deduction - Subsurface Fibre &lt;= 20</strong><p>If
+    SubsurfaceFibre &lt;= 20 then % Deduction = (a + bx) / (1 + cx) <br>
+    <br>
+    Coefficients:<br>
+    a = 20<br>
+    b = -1 <br>
+    c = 0.1 <br>
+    <br>
+    x = SubsurfaceFibre &nbsp;</p></td>
+  </tr>
+  <tr>
+    <td width="100%"><img src="/images/Table5-08B.gif" alt="Table5-08B.gif (19358 bytes)" height="432" width="576"></td>
+  </tr>
+  <tr>
+    <td width="100%">COMMENTS:<ul>
+      <li>For Subsurface fibre &lt;= 20 the full equation is:</li>
+    </ul>
+    <blockquote>
+      <p>Rational Function: y=(a+bx)/(1+cx+dx^2)<br>
+      Coefficient Data:<br>
+      a =&nbsp;&nbsp;&nbsp; 20; b =&nbsp;&nbsp;&nbsp; -1; c =&nbsp;&nbsp;&nbsp; 0.1; d
+      =&nbsp;&nbsp;&nbsp; -2.2103615e-011<br>
+      The term dx^2 was dropped since it is effectively zero.</p>
+    </blockquote>
+    <ul>
+      <li>If 20 &lt; SubsurfaceFibre &lt; 40 then % Deduction = 0.</li>
+      <li>If SubsurfaceFibre &gt;= 40 then see implementation (Part A)
+        above.&nbsp;&nbsp; </li>
+    </ul>
+    </td>
+  </tr>
+</tbody></table>
+
+
+
+
+
+<p>&nbsp;</p>
+
+
+<%= render :partial => "clf3" %>

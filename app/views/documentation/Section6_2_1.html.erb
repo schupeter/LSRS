@@ -1,0 +1,151 @@
+
+
+<%= render :partial => "clf1" %>
+<title>LSRS Manual, Section 4.2.3</title>
+<%= render :partial => "clf2" %>
+
+
+
+<p>&nbsp;</p>
+
+<h3>6.2.1 Stoniness (P)</h3>
+</font><font FACE="Arial" SIZE="3">
+
+<p>This factor accounts for limitation, due to surface stoniness. Two categories are
+recognized; stones (&gt;7.5 cm in diameter) and coarse fragments (c7.5 cm in diameter).
+The deduction for stones is related to the cost of removal and equipment maintenance. The
+coarse fragments deduction is related to equipment maintenance only and is applicable to
+areas where clearing is generally not required. The deductions for stones and for coarse
+fragments are applied as a <u>percentage</u> of the initial Landscape rating (LSRS Manual
+Figures 6.4 and 6.5). Descriptions of conventional stoniness classes in terms of initial
+and annual removal are proposed for trial (LSRS Manual Table 6.2).</p>
+</font>
+
+<table border="1" width="64%">
+  <tr>
+    <td width="100%" colspan="2"><font FACE="Arial"><br>
+    LSRS Table 6.2 - Stoniness class descriptions in relation to initial and annual removal.<br>
+    </font></td>
+  </tr>
+  <tr>
+    <td width="17%" align="center"><font FACE="Arial">Stoniness Class</font></td>
+    <td width="83%" align="center"><font FACE="Arial">Description</font></td>
+  </tr>
+  <tr>
+    <td width="17%"><font FACE="Arial">1</font></td>
+    <td width="83%"><font FACE="Arial">No hinderence to cultivation; clearing rarely required.<br>
+    initial removal: &lt;0.3 cubic metres/ha;<br>
+    annual removal: &lt;0.01 cubic metres/ha.</font></td>
+  </tr>
+  <tr>
+    <td width="17%"><font FACE="Arial">2</font></td>
+    <td width="83%"><font FACE="Arial">Minor hinderence to cultivation; clearing required
+    every few years.<br>
+    initial removal: 0.3 - 0.5 cubic metres/ha;<br>
+    annual removal: 0.01 - 0.3 cubic metres/ha.</font></td>
+  </tr>
+  <tr>
+    <td width="17%"><font FACE="Arial">3</font></td>
+    <td width="83%"><font FACE="Arial">Moderate hinderence to cultivation; clearing required
+    annually or every other year.<br>
+    initial removal: 0.5 - 1.5 cubic metres/ha;<br>
+    annual removal: 0.3 - 0.5 cubic metres/ha.</font></td>
+  </tr>
+  <tr>
+    <td width="17%"><font FACE="Arial">4</font></td>
+    <td width="83%"><font FACE="Arial">Severe hinderence to cultivation; substantial clearing
+    required.<br>
+    initial removal: 1.5 - 3.0 cubic metres/ha;<br>
+    annual removal: 0.5 - 1.5 cubic metres/ha.</font></td>
+  </tr>
+  <tr>
+    <td width="17%"><font FACE="Arial">5</font></td>
+    <td width="83%"><font FACE="Arial">Nonarable.<br>
+    initial removal: &gt;3.0 cubic metres/ha;<br>
+    annual removal: &gt;1.5 cubic metres/ha.</font></td>
+  </tr>
+  <tr>
+    <td width="100%" colspan="2"><font FACE="Arial">Note: These stoniness class descriptions
+    differ somewhat from those given by the Expert Committee on Soil Survey (1987) although
+    the general intent remains the same.</font></td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<p><font face="Arial">Stoniness deduction (P) is determined by using Figure 6.4 and Figure
+6.5.</font></p>
+
+<p>&nbsp;</p>
+
+<table border="1" width="100%">
+  <tr>
+    <td width="100%"><font face="Arial"><strong>Figure 6.4 Implementation - % Deduction for
+    Surface Stoniness (P)</strong></font><p><font face="Arial">Linear Fit: <strong>% Deduction
+    = a + b*x</strong><br>
+    Coefficient Data:<br>
+    a = 0<br>
+    b = 53.333333<br>
+    <br>
+    x = Annual Removal (cubic m/ha)</font></td>
+  </tr>
+  <tr>
+    <td width="100%"><font face="Arial"><img SRC="/images/Section6_Figure6-4.gif" width="600"
+    height="451"></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><font face="Arial">COMMENTS: This deduction would be added to any
+    deduction determined by Figure 6.5.</font></td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<hr>
+
+<p>&nbsp;</p>
+
+<table border="1" width="100%">
+  <tr>
+    <td width="100%"><font face="Arial"><strong>Figure 6.5 Implementation - % Deduction for
+    Coarse Fragment Content / Gravel (P)</strong></font><p><font face="Arial">Quadratic Fit: <strong>%
+    Deduction = a + b*x + c*x^2</strong><br>
+    Coefficient Data:<br>
+    a = -9<br>
+    b = 0.96285714<br>
+    c = -0.0057142857<br>
+    <br>
+    x = Coarse Fragment Content (% vol)</font></td>
+  </tr>
+  <tr>
+    <td width="100%"><font face="Arial"><img SRC="/images/Section6_Figure6-5.gif" width="600"
+    height="449"></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><font face="Arial">COMMENTS: This deduction would be added to any
+    deduction determined by Figure 6.4.</font></td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<table border="1" width="59%">
+  <tr>
+    <td width="100%"><font face="Arial">General Note: StoneClass in the database is used to
+    determine a StoninessValue as shown below.</font><blockquote>
+      <p><font face="Arial">If &quot;nothing&quot; then 0.00<br>
+      If StoneClass == &quot;-&quot;&nbsp; then StoninessValue = 0.00<br>
+      If StoneClass == &quot;N&quot; then StoninessValue = 0.00 <br>
+      If StoneClass == &quot;S&quot; then StoninessValue = 0.05 <br>
+      If StoneClass == &quot;U&quot; then StoninessValue = 0.00 <br>
+      If StoneClass == &quot;V&quot; then StoninessValue = 0.50</font></p>
+    </blockquote>
+    </td>
+  </tr>
+</table>
+
+
+
+<p>&nbsp;</p>
+
+<%= render :partial => "clf3" %>

@@ -1,0 +1,12 @@
+<html>
+<head><title>DEFWheat</title></head>
+<body>
+<b> Definition </b><br />
+Average water deficit (PE-P) for wheat (mm).  Proposed indice to compute suitability ratings for small grain cereals in LSRS; Must be scaled and multiplied by -1 to convert to P-PE.<br /><br />
+<b> Method of calculation </b><br />
+Sum of average daily values of Potential evapotranspiration minus Precipitation (PE-P) from GDD2Start to STOPWheat. If STOPWheat is later than GDD2Stop (estimated average date of first fall frost), then accumulation is stopped on GDD2Stop.
+PE is calculated using the Baier-Roberson formulae (Baier and Robertson, 1965; Baier, 1971) by default, or as selected by the user. The scaling of DEFWheat is determined as follows:
+Scaled Deficit = 1.2306 (DEFwheat) – 17.566
+For a complete explanation of the Scaled Deficit, see Bootsma, 2007.
+</body>
+</html>

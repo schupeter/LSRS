@@ -1,0 +1,43 @@
+<%= render :partial => "/lsrs/clf1" %>
+<title>LSRS compare</title>
+<%= render :partial => "/lsrs/clf2" %>
+<center>
+<h1>LSRS compare results</h1>
+
+<p><b>STEP 2:</b> Select the other job to compare:</p>
+
+<p>The following list shows jobs which have completed as of <%= DateTime::now.to_s[0,19].gsub("-", ".").gsub("T"," ") %></p> 
+
+<form name="formCompare" method="get" action="/lsrscompare/client">
+  <table>
+    <tr>
+      <th class="mid">Job submission date</th>
+      <th>Framework</th>
+      <th>From #</th>
+      <th>To #</th>
+      <th>Crop</th>
+    </tr>
+    <% for jobName in @comparableJobsArray %>
+    <tr>
+      <td class="mid"><input type="radio" name="Job" value="<%= jobName %>"> <%= jobName[0..3] %>.<%= jobName[4..5] %>.<%= jobName[6..7] %> <%= jobName[9..10] %>:<%= jobName[11..12] %>:<%= jobName[13..14] %> </td>
+      <td class="mid"><%= @resultsHash[jobName]["FrameworkName"] %></td>
+      <td class="mid"><%= @resultsHash[jobName]["FromPoly"] %></td>
+      <td class="mid"><%= @resultsHash[jobName]["ToPoly"] %></td>
+      <td class="mid"><%= @resultsHash[jobName]["Crop"] %></td>
+    </tr>
+    <% end %>
+    <tr>
+      <td/>
+      <td class="left">
+        <br/>
+        <input type="submit" value="NEXT!">
+      </td>
+    </tr>
+  </table>
+  <input type="hidden" name="Step" value="2">
+</form>
+
+</center>
+<%= @comparableJobsArray %>
+
+<%= render :partial => "/lsrs/clf3" %>

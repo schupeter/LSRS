@@ -1,0 +1,19 @@
+EMG:
+  title: "Excessive Moisture for Germination"
+  assess: "Typical number of days from GSS to GSS+40 where P-PE > 0"
+  deductions:
+    10: 0
+    15: 5
+    20: 15
+    30: 40
+    35: 60
+    40: 70
+IMG:
+  title: "Insufficient Moisture for Germination"
+  assess: "Typical maximum number of days in any 40 day mid to end-growth period where P-PE < -5"
+  deductions:
+    10: 0
+    20: 10
+    30: 40
+    35: 60
+    40: 70

@@ -1,0 +1,22 @@
+<div class="l-content">
+	<div class="action-tables pure-g">
+	
+		<div class="pure-u-1 pure-u-md-1-1">
+			<div class="action-table-b">
+				<div class="action-table-header">
+					<h1>Climate Indices Tool - WPS Proxy</h1>
+				</div>
+			</div>
+		</div>
+
+		<div class="pure-u-1 pure-u-md-1-1">
+			<h2></h2>
+			<%for timestamp in Request.active do%><%filename = Request.filename(timestamp)%>
+			<%=timestamp%> <a href="/cit_v1r2/active/<%=timestamp%>/<%=filename%>"><%=filename%></a><br/>
+			<%end%>
+
+		</div>
+	
+	</div> <!-- end action-tables -->
+
+</div>

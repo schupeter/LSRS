@@ -1,0 +1,26 @@
+<%= form_for(@lsrs_climatedata) do |f| %>
+
+  <table>
+    <tr>
+      <th>WarehouseName:</th>
+      <td><%= f.text_field :WarehouseName, :size=>60 %></td>
+    </tr>
+    <tr>
+      <th>PolygonTable:</th>
+      <td><%= f.text_field :PolygonTable, :size=>60 %></td>
+    </tr>
+    <tr>
+      <th>FrameworkURI:</th>
+      <td><%= f.text_field :FrameworkURI, :size=>60 %></td>
+    </tr>
+    <tr>
+      <th>Title_en:</th>
+      <td><%= f.text_field :Title_en, :size=>60 %></td>
+    </tr>
+  </table>
+  <p>
+    <%= f.submit @action %>
+  </p>
+<% end %>
+
+<%=debug @lsrs_climatedata%>

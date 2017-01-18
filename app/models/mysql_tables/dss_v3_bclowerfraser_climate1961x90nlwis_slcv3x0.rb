@@ -1,0 +1,3 @@
+class Dss_v3_bclowerfraser_climate1961x90nlwis_slcv3x0 < ActiveRecord::Base
+  self.table_name="dss_v3_bclowerfraser_climate1961x90nlwis_slcv3x0"
+end

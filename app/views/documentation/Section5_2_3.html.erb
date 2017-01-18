@@ -1,0 +1,244 @@
+<%= render :partial => "clf1" %>
+<title>LSRS Manual, Section 4.2.3</title>
+<%= render :partial => "clf2" %>
+
+<p>&nbsp;</p>
+
+<h3>Water Table Adjustment Factor  (m2)</h3>
+
+<p>&nbsp;</p>
+
+<p ALIGN="JUSTIFY">Drainage or depth to water table is nearly always a
+factor in managing organic soils.  This factor is used to adjust or reduce the imapct of (m1) the moisture
+ deficit factor.  A water table at surface yields a value of 100% which completely compesnsates for 
+ (m1) deduction points.  (m2) is calculated by  multiplying the percentage value obtained from Table 5.4 by -1.
+ 100% = -1.0, while 80% = -0.8. </p>
+
+<p>The influence of water table depth also varies with density (porosity) of
+organic material.  Denser material has a higher water retention potential so can tolerate lower water table depths.</p>
+
+<p>The water table adjustment factor is calculated using the following equation:</p>
+
+  <p>% Adjustment = 100-((WaterTableDepth^2)/12)/(5+(10/(0.1*SubsurfFibre)))</p>
+
+<p> Values for ((WaterTableDepth^2)/12)/(5+(10/(0.1*SubsurfFibre))) in 25 cm incremental depths are shown
+below</p>
+
+
+
+<table BORDER="1" CELLSPACING="1" CELLPADDING="5">
+  <tr>
+    <td WIDTH="791" VALIGN="TOP" COLSPAN="10"><p ALIGN="left"><strong><br>
+    Table 5.4</strong> - Water table adjustment (100 = no reduction) to water supplying ability for
+    organic soils.<br>
+    </td>
+  </tr>
+  <tr>
+    <td WIDTH="54" VALIGN="TOP">Depth to water table (cm)</td>
+    <td WIDTH="147" VALIGN="TOP">Surface<br>
+    </td>
+    <td WIDTH="118" VALIGN="TOP" colspan="2"><p align="center">fibric<br>
+    </td>
+    <td WIDTH="83" VALIGN="TOP"><p align="center">|</td>
+    <td WIDTH="138" VALIGN="TOP" colspan="2"><p align="center">mesic</td>
+    <td WIDTH="83" VALIGN="TOP"><p ALIGN="CENTER">|</td>
+    <td WIDTH="138" VALIGN="TOP" colspan="2"><p align="center">humic</td>
+  </tr>
+  <tr>
+    <td WIDTH="54" VALIGN="TOP">&nbsp;</td>
+    <td WIDTH="147" VALIGN="TOP">Fibre content (1)<br>
+    von Post scale<br>
+    bulk density (2)</td>
+    <td WIDTH="91" VALIGN="TOP" align="center">80<br><br>
+    1&nbsp;&nbsp;&nbsp;&nbsp; 2<br><br>
+    0.04</td>
+    <td WIDTH="74" VALIGN="TOP" align="center">60<br><br>
+      3<br><br>
+      0.07</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">40<br><br>
+    4<br><br>
+    0.10</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">30<br><br>
+    5<br><br>
+    0.13</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">20<br><br>
+    6<br><br>
+    0.16</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">10<br><br>
+      7<br><br>
+      0.18</p></td>
+    <td WIDTH="83" VALIGN="TOP" align="center">5<br><br>
+    8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9<br><br>
+    0.20</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">0<br><br>
+    10<br><br>
+    0.22</td>
+  </tr>
+  <tr>
+    <td WIDTH="54" VALIGN="TOP">0</td>
+    <td WIDTH="147" VALIGN="TOP">&nbsp;</td>
+    <td WIDTH="91" VALIGN="TOP" align="center">100</td>
+    <td WIDTH="74" VALIGN="TOP" align="center">100</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">100</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">100</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">100</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">100</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">100</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">100</td>
+  </tr>
+  <tr>
+    <td WIDTH="54" VALIGN="TOP">25</td>
+    <td WIDTH="147" VALIGN="TOP">&nbsp;</td>
+    <td WIDTH="91" VALIGN="TOP" align="center">90</td>
+    <td WIDTH="74" VALIGN="TOP" align="center">90</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">95</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">95</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">100</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">100</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">100</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">100</td>
+  </tr>
+  <tr>
+    <td WIDTH="54" VALIGN="TOP">50</td>
+    <td WIDTH="147" VALIGN="TOP">&nbsp;</td>
+    <td WIDTH="91" VALIGN="TOP" align="center">60</td>
+    <td WIDTH="74" VALIGN="TOP" align="center">70</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">80</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">85</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">90</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">95</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">95</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">95</td>
+  </tr>
+  <tr>
+    <td WIDTH="54" VALIGN="TOP">75</td>
+    <td WIDTH="147" VALIGN="TOP">&nbsp;</td>
+    <td WIDTH="91" VALIGN="TOP" align="center">20</td>
+    <td WIDTH="74" VALIGN="TOP" align="center">30</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">40</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">60</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">70</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">80</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">80</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">90</td>
+  </tr>
+  <tr>
+    <td WIDTH="54" VALIGN="TOP">100</td>
+    <td WIDTH="147" VALIGN="TOP">&nbsp;</td>
+    <td WIDTH="91" VALIGN="TOP" align="center">0</td>
+    <td WIDTH="74" VALIGN="TOP" align="center">0</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">10</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">30</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">45</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">60</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">60</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">70</td>
+  </tr>
+  <tr>
+    <td WIDTH="54" VALIGN="TOP">125</td>
+    <td WIDTH="147" VALIGN="TOP">&nbsp;</td>
+    <td WIDTH="91" VALIGN="TOP" align="center">0</td>
+    <td WIDTH="74" VALIGN="TOP" align="center">0</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">0</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">10</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">20</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">30</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">30</td>
+    <td WIDTH="83" VALIGN="TOP" align="center">50</td>
+  </tr>
+  <tr>
+    <td WIDTH="665" VALIGN="TOP" colspan="10"><br>
+    (1) % rubbed fibre &gt;0.15 mm.<br>
+    (2) BuIk density in Mg/cubic m.<br>
+    </td>
+  </tr>
+</table>
+
+
+
+<p>When water table depth is not available, it is
+estimated by using Drainage Class values, as is the case with the
+Agrisid and NSDB databases. </p>
+
+  <table border="1" width="100%">
+      <tbody><tr>
+        <td colspan="3" align="center" width="100%"><p align="left">For Agrasid
+        data, WaterTableDepth is determined as follows:</p></td>
+      </tr>
+      <tr>
+        <td align="center" width="17%"><strong>DrainageClass</strong></td>
+        <td align="center" width="26%"><strong>Organic_WaterTableDepth</strong></td>
+        <td width="57%"><p align="center"><strong>Comments</strong></p></td>
+      </tr>
+      <tr>
+        <td align="center" width="17%">'VP'</td>
+        <td align="center" width="26%">0 </td>
+        <td width="57%">&nbsp;</td>
+      </tr>
+      <tr>
+        <td align="center" width="17%">'P'</td>
+        <td align="center" width="26%">25 </td>
+        <td width="57%">&nbsp;</td>
+      </tr>
+      <tr>
+        <td align="center" width="17%">'PI'</td>
+        <td align="center" width="26%">50 </td>
+        <td width="57%">&nbsp;</td>
+      </tr>
+      <tr>
+        <td align="center" width="17%">'I'</td>
+        <td align="center" width="26%">75 </td>
+        <td width="57%">&nbsp;</td>
+      </tr>
+      <tr>
+        <td align="center" width="17%">'MW'</td>
+        <td align="center" width="26%">100 </td>
+        <td width="57%">&nbsp;</td>
+      </tr>
+      <tr>
+        <td align="center" width="17%">'W'</td>
+        <td align="center" width="26%">125 </td>
+        <td width="57%">&nbsp;</td>
+      </tr>
+      <tr>
+        <td align="center" width="17%">'-'</td>
+        <td align="center" width="26%">25</td>
+        <td width="57%">In the Mineral Soil case, this Drainage Class value
+        caused Water Table Depth to be set to 100. </td>
+      </tr>
+      <tr>
+        <td align="center" width="17%">'R'</td>
+        <td align="center" width="26%">150 <br>
+        </td>
+        <td width="57%"><br>
+        </td>
+      </tr>
+      <tr>
+        <td align="center" width="17%">'V'</td>
+        <td align="center" width="26%">0</td>
+        <td width="57%">Occurs in NSDB.</td>
+      </tr>
+      <tr>
+        <td align="center" width="17%">'VR'</td>
+        <td align="center" width="26%">150</td>
+        <td width="57%">Occurs in NSDB.</td>
+      </tr>
+      <tr>
+        <td align="center" width="17%">'M'</td>
+        <td align="center" width="26%">100</td>
+        <td width="57%">Occurs in NSDB.</td>
+      </tr>
+      <tr>
+        <td align="center" width="17%">None of the above</td>
+        <td align="center" width="26%">25</td>
+        <td width="57%">If for some reason, an unknown Drainage Class occurs,
+        then we set the Organic Water Table Depth to 25 in order to continue processing.
+	<p>In the Mineral Soil case we used a value of 100 if this case ever occurred.</p></td>
+      </tr>
+    </tbody></table>
+
+<p>&nbsp;</p>
+
+
+
+<%= render :partial => "clf3" %>

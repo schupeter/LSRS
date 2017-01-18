@@ -1,0 +1,90 @@
+<%= render :partial => "/lsrs/clf1" %>
+<title>LSRS Manual, Section 3.2</title>
+<%= render :partial => "/lsrs/clf2" %>
+
+<h1>3.2 Temperature Factor (100 - H)</h1>
+
+<p>The temperature factor is based on an effective <i>growing </i>degree day (EGDD)
+calculation and the <i>growing<i> season length (GSL) which includes length of season, degree
+days and day length. Growing degrees days are accumulated beginning 10 days after the
+average date when the mean daily temperature reaches 5 degrees C (April 1 being the earliest possible starting date). 
+This approximates date of seeding. The end of the growing season is represented by the average
+date of the first frost after July 15 (October 31 being the latest possible end date). GDDs are
+calculated from the average mean daily air temperatures computed from monthly normal values.</p>
+
+<p>The GDD value is adjusted to recognize the effect of the longer day length in the
+north (Alberta Soils Advisory Committee, 1987).  The value of the modification
+varies from 0% at 49 degrees N to 18% at 64 degrees N latitude. The adjusted value is 
+considered to be the Effective GDD (EGDD).</p>
+
+<p>The critical points used for development of the rating, based on requirements for
+spring-seeded small grains and farming experience are:</p>
+
+
+<table border="1">
+  <tr>
+    <th>EGDD</td>
+    <th>Deduction</td>
+  </tr>
+  <tr>
+    <td class="mid">1600</td>
+    <td class="left">
+      <ul>
+        <li>assigned 0 point deduction</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td class="mid">1200</td>
+    <td class="left">
+      <ul>
+        <li>close to the point where wheat becomes a minor component in a dominantly barley system</li>
+        <li>this was considered a moderate heat limitation</li>
+        <li>Class 3</li>
+        <li>assigned 40 point deduction</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td class="mid">1050</td>
+    <td class="left">
+      <ul>
+        <li>the point where spring-seeded small grains occupy less than 50% of the cultivated area</li>
+        <li>this was considered a severe heat limitation</li>
+        <li>Class 4</li>
+        <li>assigned 55 point deduction</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td class="mid">900</td>
+    <td class="left">
+      <ul>
+        <li>approximates the limit of small grain production</li>
+        <li>a very severe heat limitation</li>
+        <li>Class 5</li>
+        <li>assigned 70 point deduction</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td class="mid">500</td>
+    <td class="left">
+      <ul>
+        <li>no potential for small grains</li>
+        <li>Class7</li>
+        <li>assigned 90 point deduction</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+
+<p>The temperature deduction value (H) is the larger of two point deduction values; (h1) or (h2).  
+(h1) is calculated from an equation that uses EGDD.  (h2) is calculated from an equation that
+uses (GSL).</p>
+
+<p>The Temperature Factor is then caluculated as 100 - (H).</p>
+
+
+<%= render :partial => "/lsrs/clf3" %>

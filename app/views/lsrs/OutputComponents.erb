@@ -1,0 +1,3 @@
+POLY_ID,POLY_RATING,CMP,PERCENT,CMP_RATING,CLIMATE_RATING,CLIMATE_CLASS,SOIL_NAME,SOIL_RATING,SOIL_CLASS,LANDSCAPE_RATING,LANDSCAPE_CLASS
+<% for cmp in @lsrsArray do %><br/><%= @polyId %>,<%= @lsrsRating %>,<%= cmp.cmp %>,<%= cmp.percent %>,<%= [@climate.Value,cmp.FinalSoilRating,cmp.LandscapeFinalRating].min.to_i %>,<%= [@climate.Rating,cmp.SoilClass,cmp.LandscapeClass].max.to_i %>,<%= @climate.Value.to_i %>,<%= @climate.Rating %>,<%= cmp.SoilName %>,<%= cmp.FinalSoilRating.to_i %>,<%= cmp.SoilClass %>,<%= cmp.LandscapeFinalRating.to_i %>,<%= cmp.LandscapeClass %>
+<% end %>

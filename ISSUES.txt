@@ -1,0 +1,1 @@
+"M" is used in two places, causing confusion.  (In Climate Modifiers, and in Moisture Deficit Deduction) 

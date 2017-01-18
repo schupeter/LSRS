@@ -1,0 +1,8 @@
+<h1>LSRS Climate Indices from <%if params[:daily] then%>Daily<%else%>Monthly<%end%> Data</h1>
+
+<%= render :partial => 'calculate' %> 
+
+DEBUG: 
+<a href="calculate_daily.debug?<%=request.query_string%>">show table</a> | 
+<a href="calculate_daily.csv?<%=request.query_string%>">get csv</a>
+

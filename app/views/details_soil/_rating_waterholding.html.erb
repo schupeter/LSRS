@@ -1,0 +1,131 @@
+<tr><th colspan="9">1) Water Retention Factor</th></tr>
+	<tr>
+		<td>Moisture Deficit (P-PE) =</td>
+		<td><%=@site.climate.PPE%></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td class="Abbr">Surface AWHC</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Surface %Si =</td>
+		<td><%=@site.soil.SurfaceSi.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Surface %C =</td>
+		<td><%=@site.soil.SurfaceC.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Surface %CF =</td>
+		<td><%=@site.soil.SurfaceCF.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td>surface AWHC deduction =</td>
+		<td><%=@site.soil.SurfaceAWHCdeduction.round(0)%></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td class="Abbr">Subsurface AWHC</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Subsurface %Si =</td>
+		<td><%=@site.soil.SubsurfaceSi.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Subsurface %C =</td>
+		<td><%=@site.soil.SubsurfaceC.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Subsurface %CF =</td>
+		<td><%=@site.soil.SubsurfaceCF.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td>subsurface adjustment =</td>
+		<td><%=@site.soil.SubsurfaceAdjustment.round(0)%></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>subtotal texture deductions  =</td>
+		<td><%=@site.soil.SubtotalTextureDeduction.round(0)%></td>
+		<td class="Abbr">(<i>a</i>)</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Water Table Depth (cm)=</td>
+		<td><%=@site.soil.WaterTableDepth.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td>water table deduction %  =</td>
+		<td><%=@site.soil.WaterTableDeduction.round(0)%></td>
+		<td class="Abbr"></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>reduction amount of (<i>a</i>)  =</td>
+		<td><%=@site.soil.MoistureReductionAmount.round(0)%></td>
+		<td class="Abbr">(<i>b</i>)</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>total moisture deduction (<i>a</i> - <i>b</i>) =</td>
+		<td><%=@site.soil.MoistureDeduction.round(0)%></td>
+		<td class="Abbr">(<b>M</b>)</td>
+		<td></td>
+	</tr>

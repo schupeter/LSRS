@@ -1,0 +1,32 @@
+
+<%=`cat Rails.root + "config/routes.rb" | grep "lsrs5"`%>
+
+<hr/>
+
+<%File.readlines(Rails.root + "config/routes.rb").grep(/lsrs5/).each do |xx| %>
+ <%=xx.split(/'/)[1]%><br/>
+<%end%>
+<hr/>
+
+
+File.each_line(Rails.root + "config/routes.rb") do |li|
+
+File.foreach('file.txt').grep /regexp/
+
+<br/>
+
+ENV
+<ul>
+<% ENV.keys.each do |key| %>
+   <li>ENV['<%= key %>'] = <%= ENV[key] %></li>
+<% end %>
+</ul>
+
+request.env
+<ul>
+<% request.env.keys.each do |key| %>
+   <li>request.env['<%= key %>'] = <%= request.env[key] %></li>
+<% end %>
+</ul>
+
+<%=console%>

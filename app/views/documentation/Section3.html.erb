@@ -1,0 +1,54 @@
+<%= render :partial => "/lsrs/clf1" %>
+<title>LSRS Manual, Section 3</title>
+<%= render :partial => "/lsrs/clf2" %>
+<h1>3. CLIMATIC FACTORS</h1>
+
+<p>Climate is a major factor governing the suitability of land for arable agriculture. The
+indices selected for this evaluation were based on their relative importance to annual
+field crops. Emphasis was placed on the summer growing period although spring and autumn
+periods were also taken into consideration.</p>
+
+<p>The two<i> </i>principal variables are a temperature (or heat) factor and a moisture
+factor, the most limiting of these determines the basic climatic rating. Factors such as
+spring moisture, fall moisture, and fall frost can also have an effect on the suitability
+of land for crop production. These factors, which are mainly of local concern which may
+differ from one area to another, are included under the section on Modifying Factors. </p>
+
+<p>Analysis of the climatic data during the initial development of the LSRS algorithm indicated a 
+strong correlation between complex parameters such as soil moisture budget or corn heat units 
+and simpler indices such as annual precipitation and growing degree days. it was decided, therefore,
+to choose relatively simple indices which have had general use and for which basic data
+are readily available. </p>
+
+<p>The factors chosen were: </p>
+<ul>
+  <li>growing degree days over 5 degrees C (Edey, 1977), and</li>
+  <li>moisture deficit (precipitation minus potential evapotranspiration)</li>
+</ul>
+<p>both calculated for a defined growing season.</p>
+
+<h2>Climate Deductions</h2>
+
+<ul>
+  <li><a href="Section3_1">Moisture Factor (A)</a></li>
+  <li><a href="Section3_2">Temperature Factor (H)</a></li>
+  <li><a href="Section3_3">Modifying Factors</a></li>
+</ul>
+
+<h2>Climate Rating Calculation</h2>
+
+<p>Given the above deductions, the Climate Calculation is as follows:</p>
+
+<blockquote>
+  <p>Basic Climate Rating (B) = the lesser of (100 - A) or (100 - H)</p>
+  <p>Final Climate Rating = B - (total climate modifiers % * B) </p>
+</blockquote>
+
+<h2>Manual Procedure</h2>
+
+<ul>
+  <li><a href="Section3_4">Manually Determining Climate Ratings</a></li>
+</ul>
+
+
+<%= render :partial => "/lsrs/clf3" %>

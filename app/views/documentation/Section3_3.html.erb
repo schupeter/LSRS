@@ -1,0 +1,118 @@
+<%= render :partial => "/lsrs/clf1" %>
+<title>LSRS Manual, Section 3.3</title>
+<%= render :partial => "/lsrs/clf2" %>
+<h1>3.3 Modifying Factors</h1>
+
+<p>A number of factors other than P-PE and EGDD reduce climatic
+suitability. Some of these are excess spring and fall moisture, fall frost, aspect
+and coastal effects on accumulated degree days. The effect of these modifiers is mainly of 
+regional concern.</p>
+
+<p>The modifying factors are summed and are percentage deductions (%) meant to reduce the
+Basic Climate Rating.  Individual modifiers are not allowed more than a 10% deduction.  
+The maximum % deduction allowed for all Modifying Factors is 30%.</p>
+<br/>
+
+
+<h2>3.3.1 Excess spring moisture</h2>
+
+<p>This modifier was identified to recognize the effect of excess spring moisture in
+delaying seeding operations and effectively shortening the growing season. It uses the
+(P-PE) index for May as the rating variable [LSRS Manual Figure 3.3]. A deficit of 50 mm
+was considered to be no problem and an excess of 50 mm was considered a significant
+concern.</p>
+
+<center>
+<table border="1" width="100%">
+  <tr>
+    <td class="left">
+      <strong>Figure 3.3 Implementation - % Deduction for Excess Spring Moisture</strong>
+      Linear Fit<hr/>
+      Deduction = a + bx<br/>
+      <br/>
+      Coefficient Data:<br/>
+      a = 5<br/>
+      b = 0.1<br/>
+      <br/>
+      x = P-PE (mm) for May.
+    </td>
+  </tr>
+  <tr>
+    <td><img SRC="/images/Figure3-3.gif" width="600" height="450"></td>
+  </tr>
+  <tr>
+    <td class="left">COMMENTS: Maximum deduction allowed is 10%.</td>
+  </tr>
+</table>
+<br/><br/>
+</center>
+
+
+<h2>3.3.2 Excess fall moisture</h2>
+
+<p>This factor reflects the adverse effect of excess moisture during
+harvesting. It uses the P-PE value for September as the rating variable [LSRS
+Manual Figure 3.4] Soil factors, which may also be important, are not included. Any excess
+moisture is considered to decrease the suitability of land for crop production.</p>
+
+<center>
+<table border="1">
+  <tr>
+    <td class="left">
+      <strong>Figure 3.4 Implementation - % Deduction for Excess Fall Moisture</strong><br/>
+      Linear Fit<br/>
+      <br/>
+      % Deduction = a + bx<br/>
+      <br/>
+      Coefficient Data:<br/>
+      a = 0<br/>
+      b = 0.1<br/>
+      x = P-PE (mm) for September
+    </td>
+  </tr>
+  <tr>
+    <td><img SRC="/images/Figure3-4.gif" width="600" height="449"></td>
+  </tr>
+  <tr>
+    <td class="left">COMMENTS: Maximum deduction allowed is 10%.</td>
+  </tr>
+</table>
+<br/><br/>
+</center>
+
+
+<h2>3.3.3 Fall frost</h2>
+
+<p>This deduction accounts for the occurrence of frost prior to the regional average which
+is recognized in the H factor. Days before the average regional fall frost is used as the
+rating variable [LSRS Manual Figure 3.5].</p>
+
+<center>
+<table border="1" width="100%">
+  <tr>
+    <td class="left">
+      <strong>Figure 3.5 Implementation - % Deduction for early Frost</strong><br/>
+      Linear Fit<br/>
+      <br/>
+      % Deduction = a + bx<br/>
+      <br/>
+      Coefficient Data:<br/>
+      a = 0<br/>
+      b = 0.33333333<br/>
+      <br/>
+      x = Days before average fall frost
+    </td>
+  </tr>
+  <tr>
+    <td><img SRC="/images/Figure3-5.gif" width="600" height="450"></td>
+  </tr>
+  <tr>
+    <td class="left">COMMENTS: Maximum deduction allowed is 10%.</td>
+  </tr>
+</table>
+<br/><br/>
+</center>
+
+
+
+<%= render :partial => "/lsrs/clf3" %>

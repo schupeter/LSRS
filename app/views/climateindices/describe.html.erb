@@ -1,0 +1,18 @@
+<% content_for :title do %>LSRS Climate Fields Description<%end%>
+&gt; Calculation descriptions 
+
+<h1><%=@field.title_en%></h1>
+
+<h2>Definition</h2>
+
+<%=raw @field.definition_en%> <%if @field.units_en != "n/a" then%>(<%=@field.units_en%>)<%end%>
+
+<%if @field.calculation_daily_en == "same as monthly" then%>
+<h2>Calculation (daily or monthly data)</h2>
+<%=raw @field.calculation_monthly_en%>
+<%else%>
+<h2>Calculation for Monthly Data</h2>
+<%=raw @field.calculation_monthly_en%>
+<h2>Calculation for Daily Data</h2>
+<%=raw @field.calculation_daily_en%>
+<%end%>

@@ -1,0 +1,82 @@
+<h1>LSRS Climate indices - monthly results</h1>
+
+<%fields = Definition.select(:name).where("format_lsrs1>0").order(:format_lsrs1).map{|f|f.name}%>
+Polygon Dataset = <%=params[:polygonset]%><br/>
+Polygon # = <%=params[:polygon]%><br/>
+Normals = <%=params[:normals]%><br/>
+Latitude = <%=@station[:lat]%><br/>
+Longitude = <%=@station[:long]%><br/>
+Elevation = <%=@station[:elev]%><br/>
+<a href="/climateindices/documentation/GDD_First.html">GDD_First</a> (<b>gss</b>) = <%=@station[:GDD_First]%><br/>
+<a href="/climateindices/documentation/GDD_Last.html">GDD_Last</a> (<b>gse</b>) = <%=@station[:GDD_Last]%><br/>
+<a href="/climateindices/documentation/GDD_Length.html">GDD_Length</a> (<b>gsl</b>) = <%=@station[:GDD_Length]%><br/>
+<a href="/climateindices/documentation/GDD.html">GDD</a> (<b>gdd</b>) = <%=@station[:GDD]%><br/>
+<br/>
+<a href="/climateindices/documentation/EGDD_First.html">EGDD_First</a> = <%=@station[:EGDD_First]%><br/>
+<a href="/climateindices/documentation/EGDD_Last.html">EGDD_Last</a> = <%=@station[:EGDD_Last]%><br/>
+<a href="/climateindices/documentation/EGDD.html">EGDD</a> (<b>egdd</b>) = <%=@station[:EGDD]%><br/>
+<br/>
+CHU start temperature = <%=@station[:chu_thresholds][:start_temp]%> <i>determined from thresholds table</i><br/>
+CHU stop temperature = <%=@station[:chu_thresholds][:stop_temp]%> <i>determined from thresholds table</i><br/>
+<br/>
+CHU start = <%=@station[:chu_start]%> <i>first day that tmean exceeds the CHU regional start temperature</i><br/>
+CHU stop = <%=@station[:chu_stop]%> <i>first day that tmean is below the CHU regional stop temperature</i><br/>
+<br/>
+<a href="/climateindices/documentation/CHU.html">CHU normal</a> = <%=@station[:CHU1]%><br/>
+<a href="/climateindices/documentation/CHU.html">CHU ave</a> (<b>chu</b>) = <%=@station[:CHU2]%><br/>
+<br/>
+<a href="/climateindices/documentation/PPE.html">PPE</a> (<b>ppe</b>) = <%=@station[:PPE]%> <i>May 1 - August 31</i><br/>
+<br/>
+
+EGDD600 = <%=@station[:EGDD600]%><br/>
+EGDD1100 = <%=@station[:EGDD1100]%><br/>
+TmaxEGDD = <%=@station[:TmaxEGDD]%><br/>
+<a href="/climateindices/documentation/CanHM.html">Days over 30<sup>o</sup>C during Canola Flower</a> (<b>canhm</b>) = <%=@station[:CanHM]%><br/>
+<br/>
+<a href="/climateindices/documentation/ESM.html">Excess Spring Moisture (<b>esm</b>)</a> = -50 (not calculated or implemented in LSRS)<br/>
+<a href="/climateindices/documentation/EFM.html">Excess Fall Moisture (<b>efm</b>)</a> = -50 (not calculated or implemented in LSRS)<br/>
+<a href="/climateindices/documentation/EFF.html">Early Fall Frost (<b>eff</b>)</a> = 0 (not calculated or implemented in LSRS)<br/>
+<a href="/climateindices/documentation/RHI.html">Risk of Hail Index (<b>rhi</b>)</a> = 0 (not calculated or implemented in LSRS)<br/>
+<br/>
+<a href="/climateindices/documentation/Region.html">Region</a> (<b>ErosivityRegion</b>) = <%=@station[:ErosivityRegion]%><br/>
+<br/>
+<table>
+<tr>
+<th><a href="/climateindices/documentation/julian.html">Day</a></th>
+<th><a href="/climateindices/documentation/day.html">Date</a></th>
+<th class="temp1"><a href="/climateindices/documentation/tmin.html">tmin</a></th>
+<th class="temp1"><a href="/climateindices/documentation/tmax.html">tmax</a></th>
+<th class="temp1"><a href="/climateindices/documentation/tmean.html">tmean</a></th>
+<th class="temp4"><a href="/climateindices/documentation/tmean.html">tmean5</a></th>
+<th class="temp2"><a href="/climateindices/documentation/GDD.html">GDD</a></th>
+<th class="temp2"><a href="/climateindices/documentation/EGDD.html">EGDD</a></th>
+<th class="temp3"><a href="/climateindices/documentation/CHU.html">CHU</a></th>
+<th class="precip1"><a href="/climateindices/documentation/precip.html">precip</a></th>
+<th class="precip2"><a href="/climateindices/documentation/radiation.html">Radiation</a></th>
+<th class="precip2"><a href="/climateindices/documentation/pe.html">PE</a></th>
+<th class="temp2"><a href="/climateindices/documentation/EGDD.html">EGDDsum</a></th>
+
+</tr>
+<%egddsum = 0%>
+<%for day in @station[:climate] do%>
+
+<tr>
+<td><%=day[:daynumber] %></td>
+<td><%=Date.ordinal(2001,day[:daynumber]).strftime("%b %d")%></td>
+<td class="temp1"><%=number_with_precision(day[:tmin], :precision=>2)%></td>
+<td class="temp1"><%=number_with_precision(day[:tmax], :precision=>2)%></td>
+<td class="temp1"><%=number_with_precision(day[:tmean], :precision=>2)%></td>
+<td class="temp4"><%=number_with_precision(day[:tmean5], :precision=>2)%></td>
+<td class="temp2"><%if day[:gdd] then%><%=number_with_precision(day[:gdd], :precision=>2)%><%end%></td>
+<td class="temp2"><%if day[:egdd] then%><%=number_with_precision(day[:egdd], :precision=>2)%><%end%></td>
+<td class="temp3"><%=number_with_precision(day[:chu1], :precision=>2)%></td>
+<td class="precip1"><%=number_with_precision(day[:precip], :precision=>2)%></td>
+<td class="precip2"><%=number_with_precision(day[:radiation], :precision=>2)%></td>
+<td class="precip2"><%=number_with_precision(day[:pe], :precision=>2)%></td>
+<td class="temp2"><%if day.key?(:egdd) then egddsum += day[:egdd]%><%=number_with_precision(egddsum, :precision=>0)%><%end%></td>
+
+</tr>
+<%end%>
+</table>
+<hr/>
+<%= debug @station%>

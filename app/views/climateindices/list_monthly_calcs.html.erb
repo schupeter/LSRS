@@ -1,0 +1,73 @@
+<h1>Tests for Monthly Data</h1>
+
+<%if params[:polygonset] then%>
+	<%if params[:polygon] then%>
+
+<h2>Normals for <%=params[:polygonset]%>, polygon <%=params[:polygon]%></h2>
+<%Dir.chdir("/production/data/climate/polygons/#{params[:polygonset]}/#{params[:polygon]}/monthly/")%>
+<table>
+<%for filename in Dir.glob("*").sort do %>
+<%if not filename.include?("_indices.json")%>
+<%period = filename[0..-6]%>
+	<tr>
+		<td><%=period%></td>
+		<td><a href="calculate_monthly.html?polygonset=<%=params[:polygonset]%>&polygon=<%=params[:polygon]%>&normals=<%=period%>">calculate</a></td>
+	</tr>
+<%end%>
+<%end%>
+</table>
+
+
+
+
+	<%else%>
+<h2>Polygons for <%=params[:polygonset]%></h2>
+<%Dir.chdir("/production/data/climate/polygons/#{params[:polygonset]}")%>
+<table>
+<%for polygon in Dir.glob("*").sort do %>
+	<tr>
+		<td><%=polygon%></td>
+		<td><a href="list_monthly_calcs.html?polygonset=<%=params[:polygonset]%>&polygon=<%=polygon%>">list normals</a></td>
+	</tr>
+<%end%>
+</table>
+
+	<%end%>
+<%elsif params[:station] then%>
+<h2>Station <%=params[:station]%></h2>
+<%Dir.chdir("/production/data/climate/stations/#{params[:station]}")%>		
+<table>
+<%for filename in Dir.glob(File.join("monthly", "*.json")).sort do %>
+<%period = filename.split("/")[1].split(".")[0]%>
+	<tr>
+		<td><%=params[:station]%>: <%=period%></td>
+		<td><a href="calculate_monthly.html?station=<%=params[:station]%>&normals=<%=period%>">calculate</a></td>
+	</tr>
+<%end%>
+</table>
+
+<%else%>
+<h2>Polygon coverages</h2>
+<%Dir.chdir('/production/data/climate/polygons')%>
+<%polygonsets = Dir.glob("*")%>		
+<table>
+<%for polygonset in polygonsets do %>
+	<tr>
+		<td><%=polygonset%></td>
+		<td><a href="/climateindices/list_monthly_calcs?polygonset=<%=polygonset%>">list polygons</a></td>
+	</tr>
+<%end%>
+</table>
+
+<h2>Stations</h2>
+<%Dir.chdir('/production/data/climate/stations')%>		
+<%stations = Dir.glob(File.join("*/monthly", "*.json")).map{|x|x.split('/')[0]}%>		
+<table>
+<%for station in stations do %>
+	<tr>
+		<td><%=station%></td>
+		<td><a href="/climateindices/list_monthly_calcs?station=<%=station%>">list years</a></td>
+	</tr>
+<%end%>
+</table>
+<%end%>

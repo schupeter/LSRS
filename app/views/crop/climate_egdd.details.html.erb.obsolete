@@ -1,0 +1,133 @@
+<% content_for :title do %>LSRS detailed calculation<%end%>
+ 
+ <center>
+
+<h2>Climate Rating for <%=@crop.capitalize%></h2>
+
+<table cellspacing="0">
+
+<tr><th colspan="9">1) Aridity Factor</th></tr>
+	<tr>
+		<td>Moisture Deficit (P-PE) =</td>
+		<td><%=@site.climate.PPE%></td>
+		<td class="Abbr"></td>
+		<td></td>
+		<td></td>
+		<td>deduction =</td>
+		<td><%=@site.climate.aridity.A.round(0)%></td>
+		<td class="Abbr">(<b>A</b>)</td>
+		<td class="Abbr"><a href="/lsrs5/documentation/climate/ppe/<%=@crop%>">more info</a></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>aridity rating =</td>
+		<td><%=@site.climate.aridity.Rating.round(0)%></td>
+		<td class="Abbr">(<i>a</i>)</td>
+	</tr>
+
+<tr><th colspan="9">2) Heat Factor</th></tr>
+  <tr>
+		<td>Effective Growing Degree Days (EGDD)  =</td>
+		<td><%=@site.climate.EGDD%></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>deduction =</td>
+		<td><%=@site.climate.heat.H.round(0)%></td>
+		<td class="Abbr">(<b>H</b>)</td>
+		<td class="Abbr"><a href="/lsrs5/documentation/climate/egdd/<%=@crop%>">more info</a></td>
+	</tr>
+  <tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>heat rating =</td>
+		<td><%=@site.climate.heat.Rating.round(0)%></td>
+		<td class="Abbr">(<i>h</i>)</td>
+	</tr>
+
+<tr><th colspan="9">3) Basic Climate Rating</th></tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>basic rating (lower of <i>a</i> or <i>h</i>) =</td>
+		<td><%=@site.climate.basic_rating.round(0)%></td>
+		<td class="Abbr">(<i>b</i>)</td>
+	</tr>
+
+<tr><th colspan="9">4) Climate Modifiers</th></tr>
+
+	<tr>
+		<td>Excess Spring Moisture (ESM) =</td>
+		<td><%=@site.climate.ESM%></td>
+		<td>% deduction =</td>
+		<td><%=@site.climate.modifiers.m1.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td class="Abbr"><a href="/lsrs5/documentation/climate/esm/<%=@crop%>">more info</a></td>
+	</tr>
+	<tr>
+		<td>Excess Fall Moisture (EFM) =</td>
+		<td><%=@site.climate.EFM%></td>
+		<td>% deduction =</td>
+		<td><%=@site.climate.modifiers.m2.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td class="Abbr"><a href="/lsrs5/documentation/climate/efm/<%=@crop%>">more info</a></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td>Total % deduction =</td>
+		<td><%=@site.climate.modifiers.total_percent.round(0)%></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>deduction applied =</td><td><%=@site.climate.modifiers.deduction.round(0)%></td>
+		<td class="Abbr">(<i>m</i>)</td>
+	</tr>
+
+<tr><th colspan="9">Climate Rating</th></tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>final rating (<i>b</i> - <i>m</i>) =</td>
+		<td><%=@site.climate.final_rating.round(0)%></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>Climate Suitability =</td>
+		<td colspan="2" class="Abbr"><b>Class <%=@site.climate.suitability%></b></td>
+	</tr>
+
+</table>
+
+</center> 
+
+<a href="/lsrs5/<%=@crop%>/api.html">API help</a>

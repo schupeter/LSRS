@@ -1,0 +1,15 @@
+ <style>
+.url_link
+{
+		font-weight: bold;
+    text-decoration: none;
+}
+</style>
+<%File.readlines(Rails.root + "config/routes.rb").grep(/lsrs5/).grep(/#{Regexp.quote(params[:crop])}/).each do |route| %>
+	<%uriPattern = route.split(/'/)[1].split("/")%>
+	<h2><%=uriPattern[3..4].join(": ")%></h2>
+	<%markedupPattern = Array.new%>
+	<h3><%for param in uriPattern[1..-1] do%>/<%if param[0] == ":" and param != ":view.:format" then%><a class="url_link" href="/lsrs5/documentation/interface/inputs/<%=param[1..-1]%>"><%=param%></a><%else%><%=param%><%end%><%end%></h3>
+	<hr/>
+<%end%>
+ 

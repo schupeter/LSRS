@@ -1,0 +1,154 @@
+<tr><th colspan="9">2) Surface Factors</th></tr>
+	<tr>
+		<td class="Abbr">Structure/Consistency</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Surface %OC =</td>
+		<td><%=@site.soil.SurfaceOC.round(2)%></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Surface %S =</td>
+		<td><%=@site.soil.SurfaceS.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td>deduction =</td>
+		<td><%=@site.soil.SurfaceDeductionD.round(0)%></td>
+		<td class="Abbr">(<b>D</b>)</td>
+		<td class="Abbr"><a href="/documentation/Section4_2_1">more info</a></td>	</tr>
+	</tr>
+	<tr>
+		<td>OM Content (using %OC above) =</td>
+		<td><%=@site.soil.SurfaceOC.round(2)%></td>
+		<td></td>
+		<td></td>
+		<td>deduction =</td>
+		<td><%=@site.soil.SurfaceDeductionF.round(0)%></td>
+		<td class="Abbr">(<b>F</b>)</td>
+		<td class="Abbr"><a href="/documentation/Section4_2_2">more info</a></td>	</tr>
+	</tr>
+	<tr>
+		<td>Depth of Top Soil (cm) =</td>
+		<td><%=@site.soil.SurfaceDepthTopSoil.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td>deduction =</td>
+		<td><%=@site.soil.SurfaceDeductionE.round(0)%></td>
+		<td class="Abbr">(<b>E</b>)</td>
+		<td class="Abbr"><a href="/documentation/Section4_2_3">more info</a></td>	</tr>
+	</tr>
+	<tr>
+		<td class="Abbr">Chemistry</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Reaction (pH) =</td>
+		<td><%=@site.soil.SurfaceReaction.round(2)%></td>
+		<td>deduction =</td>
+		<td><%=@site.soil.SurfaceReactionDeductionInterim.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td class="Abbr">(<b>V</b>)</td>
+		<td class="Abbr"><a href="/documentation/Section4_2_4">more info</a></td>	</tr>
+	</tr>
+	<tr>
+		<td>Salinity (EC) (dS/m) =</td>
+		<td><%=@site.soil.SurfaceSalinity.round(2)%></td>
+		<td>deduction =</td>
+		<td><%=@site.soil.SurfaceSalinityDeductionInterim.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td class="Abbr">(<b>N</b>)</td>
+		<td class="Abbr"><a href="/documentation/Section4_2_5">more info</a></td>	</tr>
+	</tr>
+	<tr>
+		<td>Sodicity (SAR) =</td>
+		<td><%=@site.soil.SurfaceSodicity.round(2)%></td>
+		<td>deduction =</td>
+		<td><%=@site.soil.SurfaceSodicityDeductionInterim.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td class="Abbr">(<b>Y</b>)</td>
+		<td class="Abbr"><a href="/documentation/Section4_2_6">more info</a></td>	</tr>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>deduction (max of V, N, Y) =</td>
+		<td><%=@site.soil.SurfaceMostLimitingDeduction.round(0)%></td>
+		<td class="Abbr">(<i>c</i>)</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td class="Abbr">Organic Surfaces</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Depth organic horizons (cm) =</td>
+		<td><%=@site.soil.OrganicDepth.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Bulk density organic horizons =</td>
+		<td><%=@site.soil.OrganicBD.round(2)%></td>
+		<td></td>
+		<td></td>
+		<td>deduction =</td>
+		<td><%=@site.soil.OrganicDeductionO.round(0)%></td>
+		<td class="Abbr">(<b>O</b>)</td>
+		<td class="Abbr"><a href="/documentation/Section4_2_7">more info</a></td>	</tr>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>total surface deduction =</td>
+		<td><%=@site.soil.SurfaceTotalDeductions.round(0)%></td>
+		<td class="Abbr">(<i>d</i>)</td>
+		<td></td>
+	</tr>
+	<tr>
+		<th colspan="9"></th>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>Preliminary Soil Rating (100 - M - <i>d</i>) =</td>
+		<td><%=@site.soil.SurfaceInterimSoilRating.round(0)%></td>
+		<td class="Abbr">(<i>e</i>)</td>
+		<td></td>
+	</tr>

@@ -1,0 +1,193 @@
+
+<%= render :partial => "clf1" %>
+<title>LSRS Manual, Section 4.2.3</title>
+<%= render :partial => "clf2" %>
+
+
+
+
+
+
+<h3>6.2.4 Flooding (I)</h3>
+</font><font FACE="Arial" SIZE="3">
+
+<p>This factor accounts for a temporary covering of the soil surface by flowing water from
+any source, such as streams overflowing their banks, runoff from adjacent or surrounding
+slopes, inflow from high tides, or any combination of sources. Standing water (ponding) or
+water that forms a permanent covering is not considered. The flooding deduction (LSRS
+Manual Table 6.4) is applied as a <u>percentage</u> of the initial landscape rating.</font></p>
+
+<p>&nbsp;</p>
+
+<table BORDER="1" CELLSPACING="1" CELLPADDING="7" WIDTH="75%">
+  <tr>
+    <td VALIGN="TOP" COLSPAN="7" width="739"><font FACE="Arial" SIZE="3">LSRS Manual Table 6.4<br>
+    Percent deduction related to frequency and duration of flooding</font></td>
+  </tr>
+  <tr>
+    <td WIDTH="171" VALIGN="TOP" COLSPAN="2"><font FACE="Arial" SIZE="3"><p ALIGN="CENTER">Frequency</font></td>
+    <td WIDTH="550" VALIGN="TOP" COLSPAN="5"><font FACE="Arial" SIZE="3"><p ALIGN="CENTER">Inundation
+    Period</font></td>
+  </tr>
+  <tr>
+    <td WIDTH="79" VALIGN="TOP"><font FACE="Arial" SIZE="3">Frequency Scale</font></td>
+    <td WIDTH="74" VALIGN="TOP"><font FACE="Arial" SIZE="3">Frequency Nominal</font></td>
+    <td WIDTH="89" VALIGN="TOP"><font FACE="Arial" SIZE="3">Very Brief<br>
+    &lt;2 days</font></td>
+    <td WIDTH="87" VALIGN="TOP"><font FACE="Arial" SIZE="3">Brief<br>
+    2-7 days</font></td>
+    <td WIDTH="94" VALIGN="TOP"><font FACE="Arial" SIZE="3">Long<br>
+    5 &#150; 10 weeks</font></td>
+    <td WIDTH="104" VALIGN="TOP"><font FACE="Arial" SIZE="3">Long<br>
+    5 &#150; 10 weeks</font></td>
+    <td WIDTH="104" VALIGN="TOP"><font FACE="Arial" SIZE="3">Very Long<br>
+    &gt;4 weeks</font></td>
+  </tr>
+  <tr>
+    <td WIDTH="171" VALIGN="TOP" colspan="2"><font FACE="Arial" SIZE="3">(Usuable growing
+    season length)</font></td>
+    <td WIDTH="89" VALIGN="TOP"><font FACE="Arial" SIZE="3">(&gt;10 weeks)</font></td>
+    <td WIDTH="87" VALIGN="TOP"><font FACE="Arial" SIZE="3">(&gt;10 weeks)</font></td>
+    <td WIDTH="94" VALIGN="TOP"><font FACE="Arial" SIZE="3">(&gt;10 weeks)</font></td>
+    <td WIDTH="104" VALIGN="TOP"><font FACE="Arial" SIZE="3">(5 - 10 weeks)</font></td>
+    <td WIDTH="104" VALIGN="TOP"><font FACE="Arial" SIZE="3">(&lt;5 weeks)</font></td>
+  </tr>
+  <tr>
+    <td WIDTH="79" VALIGN="TOP"><font FACE="Arial" SIZE="3">Rare</font></td>
+    <td WIDTH="74" VALIGN="TOP"><font FACE="Arial" SIZE="3">1%</font></td>
+    <td WIDTH="89" VALIGN="TOP"><font FACE="Arial" SIZE="3">0</font></td>
+    <td WIDTH="87" VALIGN="TOP"><font FACE="Arial" SIZE="3">5</font></td>
+    <td WIDTH="94" VALIGN="TOP"><font FACE="Arial" SIZE="3">5</font></td>
+    <td WIDTH="104" VALIGN="TOP"><font FACE="Arial" SIZE="3">10</font></td>
+    <td WIDTH="104" VALIGN="TOP"><font FACE="Arial" SIZE="3">10</font></td>
+  </tr>
+  <tr>
+    <td WIDTH="79" VALIGN="TOP"><font FACE="Arial" SIZE="3">Occasional</font></td>
+    <td WIDTH="74" VALIGN="TOP"><font FACE="Arial" SIZE="3">10%</font></td>
+    <td WIDTH="89" VALIGN="TOP"><font FACE="Arial" SIZE="3">0</font></td>
+    <td WIDTH="87" VALIGN="TOP"><font FACE="Arial" SIZE="3">5</font></td>
+    <td WIDTH="94" VALIGN="TOP"><font FACE="Arial" SIZE="3">10</font></td>
+    <td WIDTH="104" VALIGN="TOP"><font FACE="Arial" SIZE="3">20</font></td>
+    <td WIDTH="104" VALIGN="TOP"><font FACE="Arial" SIZE="3">20</font></td>
+  </tr>
+  <tr>
+    <td WIDTH="79" VALIGN="TOP"><font FACE="Arial" SIZE="3">Common</font></td>
+    <td WIDTH="74" VALIGN="TOP"><font FACE="Arial" SIZE="3">30%</font></td>
+    <td WIDTH="89" VALIGN="TOP"><font FACE="Arial" SIZE="3">10</font></td>
+    <td WIDTH="87" VALIGN="TOP"><font FACE="Arial" SIZE="3">30</font></td>
+    <td WIDTH="94" VALIGN="TOP"><font FACE="Arial" SIZE="3">65</font></td>
+    <td WIDTH="104" VALIGN="TOP"><font FACE="Arial" SIZE="3">75</font></td>
+    <td WIDTH="104" VALIGN="TOP"><font FACE="Arial" SIZE="3">75</font></td>
+  </tr>
+  <tr>
+    <td WIDTH="79" VALIGN="TOP"><font FACE="Arial" SIZE="3">Frequent</font></td>
+    <td WIDTH="74" VALIGN="TOP"><font FACE="Arial" SIZE="3">50%</font></td>
+    <td WIDTH="89" VALIGN="TOP"><font FACE="Arial" SIZE="3">30</font></td>
+    <td WIDTH="87" VALIGN="TOP"><font FACE="Arial" SIZE="3">65</font></td>
+    <td WIDTH="94" VALIGN="TOP"><font FACE="Arial" SIZE="3">70</font></td>
+    <td WIDTH="104" VALIGN="TOP"><font FACE="Arial" SIZE="3">85</font></td>
+    <td WIDTH="104" VALIGN="TOP"><font FACE="Arial" SIZE="3">95</font></td>
+  </tr>
+</table>
+<font FACE="Arial" SIZE="3">
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<table border="1" width="100%">
+  <tr>
+    <td width="100%"><font face="Arial"><strong>Table 6.4 Implementation - % Deduction for
+    Frequency and Duration of Flooding</strong></font><p><font face="Arial">This information
+    would be specified manually. See LSRS manual. See table below. Is not currenlty part of
+    the Agrasid database.</font></p>
+    <p>&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="100%"><p align="center">&nbsp;</p>
+    <div align="center"><center><table BORDER="1" CELLSPACING="1" CELLPADDING="7" WIDTH="75%">
+      <tr>
+        <td VALIGN="TOP" COLSPAN="7" width="739"><font face="Arial">LSRS Manual Table 6.4<br>
+        Percent deduction related to frequency and duration of flooding</font></td>
+      </tr>
+      <tr>
+        <td WIDTH="171" VALIGN="TOP" COLSPAN="2"><p ALIGN="CENTER"><font face="Arial">Frequency</font></td>
+        <td WIDTH="550" VALIGN="TOP" COLSPAN="5"><p ALIGN="CENTER"><font face="Arial">Inundation
+        Period</font></td>
+      </tr>
+      <tr>
+        <td WIDTH="79" VALIGN="TOP"><font face="Arial">Frequency Scale</font></td>
+        <td WIDTH="74" VALIGN="TOP"><font face="Arial">Frequency Nominal</font></td>
+        <td WIDTH="89" VALIGN="TOP"><font face="Arial">Very Brief<br>
+        &lt;2 days</font></td>
+        <td WIDTH="87" VALIGN="TOP"><font face="Arial">Brief<br>
+        2-7 days</font></td>
+        <td WIDTH="94" VALIGN="TOP"><font face="Arial">Long<br>
+        5 &#150; 10 weeks</font></td>
+        <td WIDTH="104" VALIGN="TOP"><font face="Arial">Long<br>
+        5 &#150; 10 weeks</font></td>
+        <td WIDTH="104" VALIGN="TOP"><font face="Arial">Very Long<br>
+        &gt;4 weeks</font></td>
+      </tr>
+      <tr>
+        <td WIDTH="171" VALIGN="TOP" colspan="2"><font face="Arial">(Usuable growing season
+        length)</font></td>
+        <td WIDTH="89" VALIGN="TOP"><font face="Arial">(&gt;10 weeks)</font></td>
+        <td WIDTH="87" VALIGN="TOP"><font face="Arial">(&gt;10 weeks)</font></td>
+        <td WIDTH="94" VALIGN="TOP"><font face="Arial">(&gt;10 weeks)</font></td>
+        <td WIDTH="104" VALIGN="TOP"><font face="Arial">(5 - 10 weeks)</font></td>
+        <td WIDTH="104" VALIGN="TOP"><font face="Arial">(&lt;5 weeks)</font></td>
+      </tr>
+      <tr>
+        <td WIDTH="79" VALIGN="TOP"><font face="Arial">Rare</font></td>
+        <td WIDTH="74" VALIGN="TOP"><font face="Arial">1%</font></td>
+        <td WIDTH="89" VALIGN="top" bgcolor="#808000"><font face="Arial">0</font></td>
+        <td WIDTH="87" VALIGN="top" bgcolor="#808000"><font face="Arial">5</font></td>
+        <td WIDTH="94" VALIGN="top" bgcolor="#808000"><font face="Arial">5</font></td>
+        <td WIDTH="104" VALIGN="top" bgcolor="#808000"><font face="Arial">10</font></td>
+        <td WIDTH="104" VALIGN="top" bgcolor="#808000"><font face="Arial">10</font></td>
+      </tr>
+      <tr>
+        <td WIDTH="79" VALIGN="TOP"><font face="Arial">Occasional</font></td>
+        <td WIDTH="74" VALIGN="TOP"><font face="Arial">10%</font></td>
+        <td WIDTH="89" VALIGN="top" bgcolor="#808000"><font face="Arial">0</font></td>
+        <td WIDTH="87" VALIGN="top" bgcolor="#808000"><font face="Arial">5</font></td>
+        <td WIDTH="94" VALIGN="top" bgcolor="#808000"><font face="Arial">10</font></td>
+        <td WIDTH="104" VALIGN="top" bgcolor="#808000"><font face="Arial">20</font></td>
+        <td WIDTH="104" VALIGN="top" bgcolor="#808000"><font face="Arial">20</font></td>
+      </tr>
+      <tr>
+        <td WIDTH="79" VALIGN="TOP"><font face="Arial">Common</font></td>
+        <td WIDTH="74" VALIGN="TOP"><font face="Arial">30%</font></td>
+        <td WIDTH="89" VALIGN="top" bgcolor="#808000"><font face="Arial">10</font></td>
+        <td WIDTH="87" VALIGN="top" bgcolor="#808000"><font face="Arial">30</font></td>
+        <td WIDTH="94" VALIGN="top" bgcolor="#808000"><font face="Arial">65</font></td>
+        <td WIDTH="104" VALIGN="top" bgcolor="#808000"><font face="Arial">75</font></td>
+        <td WIDTH="104" VALIGN="top" bgcolor="#808000"><font face="Arial">75</font></td>
+      </tr>
+      <tr>
+        <td WIDTH="79" VALIGN="TOP"><font face="Arial">Frequent</font></td>
+        <td WIDTH="74" VALIGN="TOP"><font face="Arial">50%</font></td>
+        <td WIDTH="89" VALIGN="top" bgcolor="#808000"><font face="Arial">30</font></td>
+        <td WIDTH="87" VALIGN="top" bgcolor="#808000"><font face="Arial">65</font></td>
+        <td WIDTH="94" VALIGN="top" bgcolor="#808000"><font face="Arial">70</font></td>
+        <td WIDTH="104" VALIGN="top" bgcolor="#808000"><font face="Arial">85</font></td>
+        <td WIDTH="104" VALIGN="top" bgcolor="#808000"><font face="Arial">95</font></td>
+      </tr>
+    </table>
+    </center></div><p>&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="100%"><font face="Arial">COMMENTS:</font></td>
+  </tr>
+</table>
+
+
+
+
+<p>&nbsp;</p>
+
+
+<p>&nbsp;</p>
+
+<%= render :partial => "clf3" %>

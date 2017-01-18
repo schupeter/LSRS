@@ -1,0 +1,76 @@
+<tr><th colspan="9">2) Large Fragments Factor</th></tr>
+	<tr>
+		<td class="Abbr">Stone Content</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Stoniness (m<sup>3</sup>/ha/year) =</td>
+		<td><%=@site.landscape.Stoniness%></td>
+		<td>% reduction =</td>
+		<td><%=@site.landscape.StoninessPercentReduction.round(0)%></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Coarse Fragments (% gravel) =</td>
+		<td><%=@site.soil.SurfaceCF.round(0)%></td>
+		<td>% reduction =</td>
+		<td><%=@site.landscape.CoarseFragmentPercentReduction.round(0)%></td>
+		<td class="Abbr">(<b>P</b>)</td>
+		<td class="Abbr"><a href="/documentation/Section6_2_1">more info</a></td>
+	</tr>
+	<tr>
+		<td class="Abbr">Wood Content</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Surface Wood (%) =</td>
+		<td><%=@site.soil.SurfaceWood%></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Subsurface Wood (%) =</td>
+		<td><%=@site.soil.SubsurfaceWood%></td>
+		<td>% reduction =</td>
+		<td><%=@site.landscape.WoodPercentReduction.round(0)%></td>
+		<td class="Abbr">(<b>J</b>)</td>
+		<td class="Abbr"><a href="/documentation/Section6_2_2">more info</a></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td>total % reduction of (<i>a</i>) =</td>
+		<td><%=@site.landscape.TotalCFPercentReduction.round(0)%></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td>deduction =</td>
+		<td><%=@site.landscape.CFDeduction.round(0)%></td>
+		<td class="Abbr">(<i>b</i>)</td>
+		<td></td>
+	</tr>
+	<tr>
+		<th colspan="9"></th>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td>Interim Landscape Rating (<i>a</i> - <i>b</i>) =</td>
+		<td><%=@site.landscape.InterimRating.round(0)%></td>
+		<td class="Abbr">(<i>c</i>)</td>
+		<td></td>
+	</tr>

@@ -1,0 +1,44 @@
+<% form_for(@lsrs_cmp) do |f| %>
+  <%= f.error_messages %>
+  <table>
+    <tr>
+      <th>WarehouseName:</th>
+      <td><%= f.text_field :WarehouseName, :size=>60 %></td>
+    </tr>
+    <tr>
+      <th>PolygonTable:</th>
+      <td><%= f.text_field :PolygonTable, :size=>60 %></td>
+    </tr>
+    <tr>
+      <th>DSSClimatePolygonTable:</th>
+      <td><%= select_tag(:DSSClimatePolygonTable, options_for_select(@ClimateTableArray, "bc_lowerfraser_soil_v2x0_pat" )) %></td>
+    </tr>
+    <tr>
+      <th>XXX:</th>
+      <td><%= select_tag("xx", options_for_select(["1","2","3"], "3")) %></td>
+    </tr>
+    <tr>
+      <th>SLCClimatePolygonTable:</th>
+      <td><%= f.select :SLCClimatePolygonTable, [@ClimateTableArray, "bc_lowerfraser_soil_v2x0_pat"] %></td>
+    </tr>
+    <tr>
+      <th>Soil Name Table:</th>
+      <td><%= f.select :NameTable, @NamesTableArray %></td>
+    </tr>
+    <tr>
+      <th>Soil Layer Table:</th>
+      <td><%= f.select :LayerTable, @LayersTableArray %></td>
+    </tr>
+    <tr>
+      <th>FrameworkURI:</th>
+      <td><%= f.text_field :FrameworkURI, :size=>60 %></td>
+    </tr>
+    <tr>
+      <th>Title_en:</th>
+      <td><%= f.text_field :Title_en, :size=>60 %></td>
+    </tr>
+  </table>
+  <p>
+    <%= f.submit @action %>
+  </p>
+<% end %>

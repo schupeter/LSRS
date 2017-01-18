@@ -1,0 +1,16 @@
+20 = class 1-2 boundary
+40 = class 2-3 boundary
+55 = class 3-4 boundary
+70 = class 4-5 boundary
+80 = class 5-6 boundary
+90 = class 6-7 boundary
+
+# 
+cd /production/sites/sislsrs/app/models/crops
+search "deduction=>20" | grep -v "1-2 boundary"
+search "deduction=>40" | grep -v "2-3 boundary"
+search "deduction=>55" | grep -v "3-4 boundary"
+search "deduction=>70" | grep -v "4-5 boundary"
+search "deduction=>80" | grep -v "5-6 boundary"
+search "deduction=>90" | grep -v "6-7 boundary"
+

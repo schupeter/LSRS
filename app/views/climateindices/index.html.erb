@@ -1,0 +1,137 @@
+<h1>LSRS Climate Indices Calculator (v2.0 beta)</h1>
+
+
+<p>This calculator converts climate station daily observations or monthly normals into climate indices suitable for LSRS.</p>
+
+<h2>Monthly Normals</h2>
+<p><a href="format_monthly.html">Monthly data input file requirements</a></p>
+
+<h3>Load monthly normals data</h3>
+<%= form_tag({:action => :load_monthly_data}, :multipart => true) do %>
+  <%= file_field_tag 'file', :size=>80 %>
+	<input type="submit" value="Submit"/>
+<% end %>
+
+
+<h2>Daily Observations</h2>
+<p><a href="format_daily.html">Daily data input file requirements</a></p>
+
+<p>Load a daily climate observations file:</p>
+<%= form_tag({:action => :load_daily_data}, :multipart => true) do %>
+  <%= file_field_tag 'file', :size=>80 %>
+	<input type="submit" value="Submit"/> <%=flash[:daily]%>
+<% end %>
+
+<hr/>
+<h2>TESTS</h2>
+<h3>Daily calcs</h3>
+
+<%= form_tag({:action => :list_daily_calcs}) do %>
+
+<p>Start accumulating CHU2 in the spring the first day after:
+<ol>
+	<li>the <%= select_tag(:chu2springdays, options_for_select([["3-day", "3"],["4-day", "4"],["5-day", "5"],["6-day", "6"],["7-day", "7"],["8-day", "8"],["9-day", "9"]], "5")) %> running mean daily average temperature is &ge; 
+	<%= text_field_tag :chu2springtemp, "14.2", :style=>"width: 2em;" %><sup>o</sup>C after 
+	<%= select_tag(:chu2springfirstday, options_for_select(("March 1, 2001".to_date.."May 1, 2001".to_date).to_a.map{|d| d.strftime("%B %-d")}, "April 15")) %>, and </li>
+	<li>the 10 year running mean daily average temperature by date is &ge; <%= text_field_tag :chu2springtemp10ave, "10", :style=>"width: 2em;" %><sup>o</sup>C.</li>
+</ol>
+
+Stop accumulating CHU2 in the fall when:
+<ol>
+	<li>the daily minimum temperature is &le; <%= text_field_tag :chu2falltempmin, "-2", :style=>"width: 2em;" %><sup>o</sup>C, or</li>
+	<li>the running mean daily average temperature is &le; <%= text_field_tag :chu2falltemp, "10.1", :style=>"width: 2em;" %><sup>o</sup>C, or</li>
+	<li>the 10 year running mean daily minimum temperature by date is &lt; <%= text_field_tag :chu2falltemp10min, "10", :style=>"width: 2em;" %><sup>o</sup>C, or</li>
+	<li>it is after <%= select_tag(:chu2falllastday, options_for_select(("October 1, 2001".to_date.."November 30, 2001".to_date).to_a.map{|d| d.strftime("%B %-d")}, "October 15")) %>.</li>
+</ol> 
+
+
+
+</p>
+
+<input name="button" type="submit" value="List all tests">
+<%end%>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<h3>Monthly calcs</h3>
+
+<p><a href="/climateindices/list_monthly_calcs">List all tests</a></p>
+<p><a href="/climateindices/calculate_monthly?framework=dss_v3_yt&polygon=ytc001&dataset=1961x90_Observations">test monthly calcs</a></p>
+
+
+<style>
+#chu2springtemp
+{ width : 30px; }
+#chu2fallmin
+{ width : 18px; }
+</style>
+
+
+
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<hr/>
+<h1>Other Functionality (under development)</h1>
+
+<h2>observations</h2>
+<%=debug flash%>
+
+<hr/>
+
+
+<p>Monthly calcs</p>
+<table>
+<%for filename in @monthlyFilenames do %>
+	<tr>
+		<td><%=filename%></td>
+		<td><a href="calculate?monthly=<%=filename%>&xx=junk">calculate</a></td>
+	</tr>
+<%end%>
+</table>
+monthly_input2 = Jeewani's test dataset
+
+
+<hr/>
+<a href="/climateindices/documentation/format_lsrs1.html">Output file format</a>
+
+<hr/>
+<p>Please select the fields to be included in the output file:<br />(If you want CHU output fields, please select the CHU output field you want and upload the "Threshold Input" in addition to "Standard Input")</p>
+ 	<table style = "border: .1em solid black;"> 
+		<tr valign = "top" >'<td> 
+				 	<input type = "checkbox" checked = "checked" name = "blnLatitude">Latitude </input><a href="Latitude.html"><img src="/images/information.png" style="border-style: none"/></a><br />
+					<input type = "checkbox" checked = "checked" name = "blnLongitude">Longitude </input><a href="Longitude.html"><img src="/images/information.png" style="border-style: none"/></a><br />		
+					<input type = "checkbox" checked = "checked" name = "blnElevation">Elevation </input><a href="Elevation.html"><img src="/images/information.png" style="border-style: none"/></a><br /> 
+					<input type = "checkbox" checked = "checked" name = "blnGDDSUM1">GDD </input><a href="GDD.html"><img src="/images/information.png" style="border-style: none"/></a><br />
+					<input type = "checkbox" checked = "checked" name = "blnGDD_First">GDD_First </input><a href="GDD_First.html"><img src="/images/information.png" style="border-style: none"/></a><br />	
+				</td>
+				<td>
+					<input type = "checkbox" checked = "checked" name = "blnGDD1Stop">GDD_Last </input><a href="GDD_Last.html"><img src="/images/information.png" style="border-style: none"/></a><br />
+					<input type = "checkbox" checked = "checked" name = "blnGsl">GSL </input><a href="GDD_Length.html"><img src="/images/information.png" style="border-style: none"/></a><br />
+					<input type = "checkbox" checked = "checked" name = "blnEGDD2">EGDD </input><a href="EGDD.html"><img src="/images/information.png" style="border-style: none"/></a><br />	
+			    	<input type = "checkbox" checked = "checked" name = "blnDeficit4">Deficit4 </input><a href="Deficit4.html"><img src="/images/information.png" style="border-style: none"/></a><br />
+			    	<input type = "checkbox" checked = "checked" name = "blnTmaxEGDD">TmaxEGDD </input><a href="TmaxEGDD.html"><img src="/images/information.png" style="border-style: none"/></a><br />	
+				</td>	
+				<td>
+					<input type = "checkbox" checked = "checked" name = "blnDays30">Days>30 </input><a href="Days30.html"><img src="/images/information.png" style="border-style: none"/></a><br />	
+					<input type = "checkbox" checked = "checked" name = "blnPpeMay">PpeMay </input><a href="PpeMay.html"><img src="/images/information.png" style="border-style: none"/></a><br />	
+					<input type = "checkbox" checked = "checked" name = "blnPpeSept">PpeSept </input><a href="PpeSept.html"><img src="/images/information.png" style="border-style: none"/></a><br />
+					<input type = "checkbox" checked = "checked" name = "blnDbaveff">Dbaveff </input><a href="Dbaveff.html"><img src="/images/information.png" style="border-style: none"/></a><br />
+					<input type = "checkbox" checked = "checked" name = "blnRiskhail">Riskhail </input><a href="Riskhail.html"><img src="/images/information.png" style="border-style: none"/></a><br />
+				</td>
+				<td>
+					<input type = "checkbox" checked = "checked" name = "blnRegion">Region </input><a href="Region.html"><img src="/images/information.png" style="border-style: none"/></a><br />
+					<input type = "checkbox"  id = "blnCHUave" name = "blnCHUave" onclick = "thresholdInputLSRS()">CHUAve </input><a href="CHUAve.html"><img src="/images/information.png" style="border-style: none"/></a><br />	
+				</td>
+		</tr>	
+	</table> 
+	
+

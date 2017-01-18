@@ -1,0 +1,33 @@
+<%= render :partial => "/lsrs/clf1" %>
+<title>LSRS MultiCrop client</title>
+<%= render :partial => "/lsrs/clf2" %>
+<center>
+
+<h1>LSRS MultiCrop client</h1>
+
+<%if @step == 1 then%>
+  <%= render :partial => "/lsrs/client1" %>
+<%else%>
+  <%= render :partial => "/lsrs/client2" %>
+
+  <h2>Step 2</h2>
+  <form name="MultiInputs" method="get" action="/lsrsmulticrop/service">
+    <input type="hidden" name="FrameworkName" value="<%=@frameworkName%>" />
+    <table>
+      <tr>
+        <td><br/><b>Select a Polygon:</b> </td>
+        <td class="left"><br/> &nbsp;<input type="text" name="PolyId" size="25" /></td>
+      </tr>
+      <tr>
+        <td colspan="2" class="mid">For SLC enter a POLY_ID such as 244055 or 800001
+          <br/>For DSS enter a POLY_ID such as <%poly_id = eval(@patTable).first.poly_id%><%=poly_id[0..5]%><b><%=poly_id[6..-1]%></b>
+        </td>
+      </tr>
+      <%= render :partial => "/lsrs/client3" %>
+    </table>
+    <br/><input type="submit" value="Get a rating!">
+  </form>
+<%end%>
+
+</center>
+<%= render :partial => "/lsrs/clf3" %>

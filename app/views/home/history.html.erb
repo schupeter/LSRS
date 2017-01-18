@@ -1,0 +1,35 @@
+<%= render :partial => "/lsrs/clf1" %>
+<title>LSRS history</title>
+<%= render :partial => "/lsrs/clf2" %>
+<center>
+<h1>LSRS history</h1>
+</center>
+
+<p>1995.  The Agronomic Interpretations Working Group chaired by Wayne Pettapiece (AAFC) publishes the first LSRS manual for Spring Seeded Small Grains. This report developed the initial concept of the LSRS including the identification of specific climate, soil and landform input parameters and the definition of the suitability relationships.</p>
+ 
+<p>1997.  <b>Version 1</b>.  Glenn Lelyk (AAFC) under the direction of Wayne Pettapiece uses code originally written by Paul Krug to develop the first automated prototype for LSRS calculations (version 1). It was written in DBase and was specific to NSDB databases (a priority of the Working Group).</p>
+ 
+<p>2002.  <b>Version 2</b>.  Gerry Tychon (Spatial Data Systems Consulting) and Wayne Pettapiece (Pettapiece Pedology) under a contract with Alberta Agriculture Food and Rural Development develop a completely new prototype for LSRS calculations for AGRASID data based on spreadsheet technology (Excel).  This version of the calculator introduced a geographic interface which permitted viewing AGRASID spatial data and deriving ratings on an individual polygon basis.  </p>
+ 
+<p>2005.  Tony Brierley (AAFC) takes over the scientific direction of LSRS activities at AAFC.</p>
+ 
+<p>2006.  <b>Version 3</b>.  Wayne Pettapiece and Gerry Tychon under a contract with AAFC  modify the Alberta prototype to accommodate NSDB data, and documented the process for SLC polygon ratings across Canada.  </p>
+ 
+<p>2007.  Wayne Pettapiece and Gerry Tychon under a contract with AAFC developed and documented a procedure for modifying the original LSRS program for alternative crops and alternate climatic inputs as well as other soil inputs.  With climate support from Andy Bootsma they further develop and document LSRS modifications for assessing suitability for corn, soybean, canola and forage crops.</p>
+ 
+<p>2009.  <b>Version 4</b>.  Peter Schut (AAFC) begins to rewrite LSRS in Ruby as a suite of web services, so that it can be integrated with other models for climate change, environmental impact, and socio-economic impact.  This latest program has the ability to run and store batch processes, calculate results for multiple crops simultaneously, use both DSS and SLC data, accept climate scenarios transmitted from other systems, output data as HTML, CSV, and GDAS, display CLI-style ratings, and provide thematic maps via WMS and KML.  It supports batch processing compliant with WPS.  Internally at AAFC it is fully integrated with the NSDB data and systems.  A significant number of adjustments are made to the original algorithms as the results are validated for agricultural areas outside of Alberta.</p>
+ 
+<p>2011.  Limited calculator functionality is made available to the general public via the Internet.</p>
+
+<p>2017.  <b>Version 5</b> will:
+<ul>
+	<li>integrate the climate indices tool with the rest of LSRS</li>
+	<li>add support for daily climate data</li>
+	<li>provide support for raster datasets</li>
+	<li>return results by individual soil</li>
+	<li>improve performance via caching</li>
+</ul>
+</p>
+
+</center>
+<%= render :partial => "/lsrs/clf3" %>

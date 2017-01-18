@@ -1,0 +1,49 @@
+<%= render :partial => "/lsrs/clf1" %>
+<title>LSRS client</title>
+<%= render :partial => "/lsrs/clf2" %>
+<center>
+
+<h1>Calculate an LSRS rating</h1>
+
+<%if @step == 1 then%>
+  <%= render :partial => "/lsrs/client1" %>
+<%else%>
+  <%= render :partial => "/lsrs/client2" %>
+
+
+  <h2>Step 2</h2>
+  <form name="formSearch" method="get" action="/lsrs/service">
+    <input type="hidden" name="FrameworkName" value="<%=@frameworkName%>" />
+    <table>
+      <tr>
+        <td><b>Select a Polygon: </b></td>
+        <td class="left"><input type="text" name="PolyId" size="25" /></td>
+      </tr>
+      <tr>
+        <td colspan="2" class="mid">
+				<%if @frameworkName[0..2].upcase=="SLC" then%>Enter a POLY_ID such as 244055 or 800001<%end%>
+				<%if @frameworkName[0..2].upcase=="DSS" then%><%poly_id = eval(@patTable).first.poly_id%>Enter a POLY_ID such as <%=poly_id[0..5]%><b><%=poly_id[6..-1]%></b><%end%>
+        </td>
+      </tr>
+      <%= render :partial => "/lsrs/client3" %>
+      <%= render :partial => "/lsrs/client4" %>
+      <%= render :partial => "/lsrs/client5" %>
+      <tr><td colspan="2"><hr/></td></tr>
+      <tr>
+        <td><b>Select a type of Response: </b></td>
+        <td class="left">
+          <select name="RESPONSE" size="1">
+            <option selected="selected" value="Details">Calculate</option>
+            <option value="Summary">Summarize</option>
+            <option value="Rate">Rate</option>
+            <option value="Debug">Debug</option>
+           </select>
+        </td>
+      </tr>
+    </table>
+    <br><input type="submit" value="Get a rating!">
+  </form>
+<%end%>
+
+</center>
+<%= render :partial => "/lsrs/clf3" %>

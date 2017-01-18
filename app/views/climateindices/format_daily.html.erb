@@ -1,0 +1,89 @@
+<% content_for :title do %>Daily climate inputs<%end%>
+<h1>Input Format for Daily Climate Data</h1>
+
+<p>The daily climate data is loaded into LSRS using a custom file format that incorporates both documentation and climate data.  The file is divided into two sections.  The first section contains the documentation in YAML format, and the second section contains the data as a set of tab-separated values (TSV).  </p>
+
+<h2>YAML documentation</h2>
+
+<p>This section contains documentation in <a href="https://en.wikipedia.org/wiki/YAML">YAML format</a>, and includes the following fields: 
+<table>
+	<tr>
+		<th align="right">Title:</th>
+		<td>A short title for the dataset, which may be used to populate pick lists in LSRS</td>
+	</tr>
+	<tr>
+		<th align="right">Geography:</th>
+		<td>A short string that defines the type of geographic data.  Must be one of climate stations ("stations"), GIS polygons ("polygons").</td>
+	</tr>
+	<tr>
+		<th align="right">Framework:</th>
+		<td>A short string that identifies the geographic framework of the dataset, (e.g. "dss_v3_yt" or "slc_v3r2_canada" or "Environment_Canada").</td>
+	</tr>
+	<tr>
+		<th align="right">Timeframe:</th>
+		<td>A short string identifying the time period for the dataset (e.g. "1961x1990").</td>
+	</tr>
+	<tr>
+		<th align="right">Origin:</th>
+		<td>A short string that identifies the climate model and related parameters used to generate the data (e.g. "canesm2_85"), or "Observations" for historical data.</td>
+	</tr>
+	<tr>
+		<th align="right">Description:</th>
+		<td>An full human-readable text description that fully describes the model / dataset.</td>
+	</tr>
+</table>
+<i>Note that all strings should be enclosed in quotation marks.</i>
+</p>
+
+<h2>TSV data</h2>
+
+<p>This section includes the climate data formatted as a tab-delimited ascii text file.  Each line represents the data for a single day, for a particular climate station.  Columns are as follows:
+<table>
+	<tr>
+		<th align="right">long:</th>
+		<td>Longitude (decimal degrees) (a negative value in the western hemisphere)</td>
+	</tr>
+	<tr>
+		<th align="right">lat:</th>
+		<td>Latitude (decimal degrees)</td>
+	</tr>
+	<tr>
+		<th align="right">elev:</th>
+		<td>Elevation (m).</td>
+	</tr>
+	<tr>
+		<th align="right">station:</th>
+		<td>Station identifier</td>
+	</tr>
+	<tr>
+		<th align="right">year:</th>
+		<td>Year of observation</td>
+	</tr>
+	<tr>
+		<th align="right">month:</th>
+		<td>Month of observation</td>
+	</tr>
+	<tr>
+		<th align="right">day:</th>
+		<td>Day of observation</td>
+	</tr>
+	<tr>
+		<th align="right">tmax:</th>
+		<td>Maximum temperature (degrees C)</td>
+	</tr>
+	<tr>
+		<th align="right">tmin:</th>
+		<td>Minimum temperature (degrees C)</td>
+	</tr>
+	<tr>
+		<th align="right">total_ppt:</th>
+		<td>Total precipitation (mm)</td>
+	</tr>
+</table>
+</p>
+
+<h2>Example</h2>
+<p>An <a href="/schemas/climatedaily/2.0/examples/daily_climate_example.txt">example</a> is reproduced below:</p>
+<pre>
+<%=File.read("/production/schemas/climatedaily/2.0/examples/daily_climate_example.txt")%>
+</pre>

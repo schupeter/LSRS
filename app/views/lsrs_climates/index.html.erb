@@ -1,0 +1,21 @@
+<h1>LSRS Component Tables</h1>
+
+<table border = "1">
+  <tr>
+    <th>Warehouse name</th>
+    <th>Title en</th>
+  </tr>
+
+<% for dataset in @lsrs_climatedata %>
+  <tr>
+    <td><%=h dataset.WarehouseName %></td>
+    <td><%=h dataset.Title_en %></td>
+    <td><%= link_to 'Show', dataset %></td>
+    <td><%= link_to 'Edit', edit_lsrs_climate_path(dataset) %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New lsrs_climatedata', new_lsrs_climate_path %>

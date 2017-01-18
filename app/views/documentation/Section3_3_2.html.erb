@@ -1,0 +1,41 @@
+<%= render :partial => "/lsrs/clf1" %>
+<title>LSRS Manual, Section 3.3</title>
+<%= render :partial => "/lsrs/clf2" %>
+
+
+<h2>3.3.2 Excess fall moisture</h2>
+
+<p>This factor reflects the adverse effect of excess moisture during
+harvesting. It uses the P-PE value for September as the rating variable [LSRS
+Manual Figure 3.4] Soil factors, which may also be important, are not included. Any excess
+moisture is considered to decrease the suitability of land for crop production.</p>
+
+<center>
+<table border="1">
+  <tr>
+    <td class="left">
+      <strong>Figure 3.4 Implementation - % Deduction for Excess Fall Moisture</strong><br/>
+      Linear Fit<br/>
+      <br/>
+      % Deduction = a + bx<br/>
+      <br/>
+      Coefficient Data:<br/>
+      a = 0<br/>
+      b = 0.1<br/>
+      x = P-PE (mm) for September
+    </td>
+  </tr>
+  <tr>
+    <td><img SRC="/images/Figure3-4.gif" width="600" height="449"></td>
+  </tr>
+  <tr>
+    <td class="left">COMMENTS: Maximum deduction allowed is 10%.</td>
+  </tr>
+</table>
+<br/><br/>
+</center>
+
+
+
+
+<%= render :partial => "/lsrs/clf3" %>

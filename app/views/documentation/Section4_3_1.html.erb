@@ -1,0 +1,286 @@
+<%= render :partial => "clf1" %>
+<title>LSRS Manual, 4.3.1 Structure and consistence (D) </title>
+<%= render :partial => "clf2" %>
+<h1>4.3.1 Structure and consistence (D) </h1>
+
+<p>Subsurface soil structure, consistence and density affect root
+penetration and therefore the availability of water and nutrients (Trouse, 1971; HaIl et
+al., 1977; Kiniry et al., 1983). The effects of those three factors are also related to
+texture (Jones, 1983). For example, a bulk density of 1.5 to 1.6 Mg m<sup>-3 </sup>may be
+favourable for plant growth in sand but in clay it is likely to be associated with massive
+material that is waterlogged when wet and very hard when dry and, is thus highly
+unfavourable as a rooting medium for most crops.</p>
+
+<p ALIGN="JUSTIFY">The actual impact of a layer that restricts root
+penetration depends upon the depth at which the layer occurs and also on the regional
+climate. Therefore, the primary deduction (Table 4.12) is modified by depth and climate
+factors (Table 4.13) to give a final point rating for impeding subsurface layers. For
+example, consider a soil with a clay loam subsoil with a bulk density of 1.6 Mg m<sup>-3 </sup>at
+a depth of 60 cm occuring in the -150 P-PE zone. The deduction for the impeding subsurface
+layer would be 40 (from Table 4.12) which when multiplied by 50% (from Table 4.13) = 20%.</p>
+
+<table border="1" cellspacing="1" cellpadding="5">
+  <tr>
+    <th class="tblcaption" colspan="7">Table 4.12 <br/> Percent deduction for combination of bulk density and texture (or % clay) of impeding subsurface layer.<sup>1</sup></th>
+  </tr>
+  <tr>
+    <th rowspan="2">Bulk<br>density</td>
+    <th colspan="6">% Clay<br/>(Texture)</td>
+  </tr>
+  <tr>
+    <th>0<br> (S)</td>
+    <th>10<br> (SL)</td>
+    <th>20<br> (L)</td>
+    <th>35<br> (CL)</td>
+    <th>50<br> (SiC)</td>
+    <th>70<br> (HC)</td>
+  </tr>
+  <tr>
+    <td class="mid">1.20</td>
+    <td class="mid">0</td>
+    <td class="mid">0</td>
+    <td class="mid">0</td>
+    <td class="mid">0</td>
+    <td class="mid">0</td>
+    <td class="mid">0</td>
+  </tr>
+
+  <tr>
+    <td class="mid">1.30</td>
+    <td class="mid">0</td>
+    <td class="mid">0</td>
+    <td class="mid">0</td>
+    <td class="mid">0</td>
+    <td class="mid">0</td>
+    <td class="mid">5</td>
+  </tr>
+  <tr>
+    <td class="mid">1.35</td>
+    <td class="mid">0</td>
+    <td class="mid">0</td>
+    <td class="mid">0</td>
+    <td class="mid">0</td>
+    <td class="mid">5</td>
+    <td class="mid">10</td>
+  </tr>
+  <tr>
+    <td class="mid">1.40</td>
+    <td class="mid">0</td>
+    <td class="mid">0</td>
+    <td class="mid">0</td>
+    <td class="mid">5</td>
+    <td class="mid">10</td>
+    <td class="mid">20</td>
+  </tr>
+  <tr>
+    <td class="mid">1.45</td>
+    <td class="mid">0</td>
+    <td class="mid">0</td>
+    <td class="mid">5</td>
+    <td class="mid">10</td>
+    <td class="mid">20</td>
+    <td class="mid">40</td>
+  </tr>
+  <tr>
+    <td class="mid">1.50</td>
+    <td class="mid">0</td>
+    <td class="mid">5</td>
+    <td class="mid">10</td>
+    <td class="mid">20</td>
+    <td class="mid">40</td>
+    <td class="mid">50</td>
+  </tr>
+  <tr>
+    <td class="mid">1.60</td>
+    <td class="mid">10</td>
+    <td class="mid">20</td>
+    <td class="mid">30</td>
+    <td class="mid">40</td>
+    <td class="mid">55</td>
+    <td class="mid">70</td>
+  </tr>
+  <tr>
+    <td class="mid">1.70</td>
+    <td class="mid">30</td>
+    <td class="mid">40</td>
+    <td class="mid">50</td>
+    <td class="mid">60</td>
+    <td class="mid">70</td>
+    <td class="mid">90</td>
+  </tr>
+  <tr>
+    <td class="mid">1.80</td>
+    <td class="mid">50</td>
+    <td class="mid">60</td>
+    <td class="mid">70</td>
+    <td class="mid">80</td>
+    <td class="mid">90</td>
+    <td class="mid">&#151;</td>
+  </tr>
+  <tr>
+    <td class="mid">1.90</td>
+    <td class="mid">70</td>
+    <td class="mid">80</td>
+    <td class="mid">90</td>
+    <td class="mid">90</td>
+    <td class="mid">&#151;</td>
+    <td class="mid">&#151;</td>
+  </tr>
+  <tr>
+    <td class="mid">2.00</td>
+    <td class="mid">80</td>
+    <td class="mid">90</td>
+    <td class="mid">90</td>
+    <td class="mid">&#151;</td>
+    <td class="mid">&#151;</td>
+    <td class="mid">&#151;</td>
+  </tr>
+  <tr>
+    <td class="mid">Rock</td>
+    <td class="mid" colspan="6">90</td>
+  </tr>
+  <tr>
+    <td class="mid" colspan="7">
+      <sup>1</sup>A paralithic layer (rippable bedrock) is considered to have a bulk densily of 2.00.</td>
+  </tr>
+</table>
+
+<table border="1">
+  <tr>
+    <th class="tblcaption">Table 4.12 Implementation <br/> subsurface impedence</th>
+  </tr>
+  <tr>
+    <td class="leftdoc">
+      Subsurface Impedence factor is calculated as the maximum value of
+      <blockquote>
+        <p><strong>% Deduction = ((BD - 1.60) * 200) + (% C)</strong></p>
+      </blockquote>
+      calculated for all subsurface layers, where:
+      <ul>
+        <li>BD = Bulk Density value</li>
+        <li>% C = percent clay value for the specific horizon</li>
+      </ul>
+      In addition, if there is a layer with an impedence value of &gt; 20 that lies within 20 cm of the surface, then the depth of topsoil used in <a href="/documentation/Section4_2_3">Table 4.7</a> shall be set to the upper depth of that layer.
+    </td>
+  </tr>
+  <tr>
+    <td class="leftdoc">COMMENTS:
+    <ul>
+      <li>Any negative value is set to 0</li>
+      <li>Any value &gt; 90 is set to 90</li>
+      <li>ZBR (any rock) = 90</li>
+    </ul>
+    </td>
+  </tr>
+  <tr bgcolor="#C0C0C0">
+    <td>Below is the formula used prior to LSRS Version 3.0.  This and earlier formulas used the maximum BD instead of the maximum calculated impedence.<br>
+      <blockquote>
+        <p><strong>% Deduction = ((BD - 1.60) * 200) + (% C * 0.75)</strong></p>
+      </blockquote>
+      Below is the formula used prior to LSRS Version 2.7 (Agrasid only version).<br>
+      Formula was adjusted for LSRS 2.7 to try and take into account national data values for BD.
+      <blockquote>
+        <p><strong>% Deduction = ((BD - 1.55) * 200) + (% C)</strong></p>
+      </blockquote>
+      <ul>
+        <li>Formula revised 2003/10/22. <br>
+          Previous: % Deduction = ((BD - 1.50) * 200) + (% C * 0.75). </li>
+        <li>Formula revised 2003/11/12. <br>
+          Previous: % Deduction = ((BD - 1.53) * 200) + (0.121 * (% C^1.575))</li>
+        <li>Formula revised 2003/12/01. <br>
+          New: %Deduction = ((BD - 1.55)*200)+(%C). <br>
+          Previous: % Deduction = ((BD - 1.55) * 200) + (0.15 * (% C^1.49))</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+<table border="1">
+  <tr>
+    <th class="tblcaption" colspan="4">Table 4.13 <br/> Percent depth modifications for impeding subsurface layers in different climatic zones.</th>
+  </tr>
+  <tr>
+    <th>Depth<br/>(cm)</th>
+    <th colspan="3">P-PE</th>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><strong>-50<br>
+    (perhumid)</strong></td>
+    <td><strong>-150<br>
+    (humid)</strong></td>
+    <td><strong>&gt; -250<br>
+    (subhumid)</strong></td>
+  </tr>
+  <tr>
+    <td><strong>20</strong></td>
+    <td>90</td>
+    <td>95</td>
+    <td>100</td>
+  </tr>
+  <tr>
+    <td><strong>40</strong></td>
+    <td>70</td>
+    <td>75</td>
+    <td>80</td>
+  </tr>
+  <tr>
+    <td><strong>60</strong></td>
+    <td>40</td>
+    <td>50</td>
+    <td>60</td>
+  </tr>
+  <tr>
+    <td><strong>80</strong></td>
+    <td>10</td>
+    <td>25</td>
+    <td>35</td>
+  </tr>
+  <tr>
+    <td><strong>100</strong></td>
+    <td>0</td>
+    <td>0</td>
+    <td>10</td>
+  </tr>
+  <tr>
+    <td><strong>120</strong></td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+  </tr>
+</table>
+
+<table border="1">
+  <tr>
+    <th class="tblcaption">Table 4.13 Implementation <br/> Percent depth modifications for impeding subsurface layers in different climatic zones.</th>
+  </tr>
+  <tr>
+    <td class="leftdoc">
+      <blockquote>
+        <p><strong>% modification = ((100 - (((350 + (P-PE)) / 100) * 3)) - ((D - 20) * (LOG10(10.0 + 2 * (350 + P-PE)) / 100))))</strong></p>
+      </blockquote>
+    </td>
+  </tr>
+  <tr>
+    <td class="leftdoc">Where:
+      <ul>
+        <li>D = depth to impeding layer.</li>
+        <li>P-PE is climate values used before.</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td class="leftdoc">COMMENTS: 
+    <ul>
+      <li>This equation must be used in conjunction with Table 4.12.</li>
+      <li>This formula was initially defined as % modification = ((100 - (((300 + (P-PE)) / 100) *
+        5)) - ((D - 20) * (LOG10(12.5 + 3 * (300 + P-PE)) / 100)))). It was revised (2003/10/22)
+        to better reflect Agrasid BD changes and values.</li>
+    </ul>
+    </td>
+  </tr>
+</table>
+
+
+
+<%= render :partial => "clf3" %>

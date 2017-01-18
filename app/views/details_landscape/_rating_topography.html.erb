@@ -1,0 +1,52 @@
+<tr><th colspan="9">1) Topography Factor</th></tr>
+	<tr>
+		<td>Climate Erosivity Region =</td>
+		<td><%=@site.landscape.ErosivityRegion%></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Slope (%) =</td>
+		<td><%=@site.landscape.SlopePercent%></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Slope Length (m) =</td>
+		<td><%=@site.landscape.SlopeLength%></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Landscape Complexity =</td>
+		<td><%=@site.landscape.Complexity%></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Landscape Model =</td>
+		<td><%=@site.landscape.Model%></td>
+		<td>deduction =</td>
+		<td><%=@site.landscape.SlopeDeduction.round(0)%></td>
+		<td class="Abbr">(<b>T</b>)</td>
+		<td class="Abbr"><a href="/documentation/Section6_1">more info</a></td>
+	</tr>
+	<tr>
+		<th colspan="9"></th>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td>Basic Landscape Rating</td>
+		<td><%=@site.landscape.BasicRating.round(0)%></td>
+		<td class="Abbr">(<i>a</i>)</td>
+		<td></td>
+	</tr>

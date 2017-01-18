@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en"><head>
+<title>testpost2</title>
+
+<script type="text/javascript" language="javascript">
+   var http_request = false;
+   function makePOSTRequest(url, parameters) {
+      http_request = false;
+      if (window.XMLHttpRequest) { // Mozilla, Safari,...
+         http_request = new XMLHttpRequest();
+         if (http_request.overrideMimeType) {
+         	// set type accordingly to anticipated content type
+            //http_request.overrideMimeType('text/xml');
+            http_request.overrideMimeType('text/html');
+         }
+      } else if (window.ActiveXObject) { // IE
+         try {
+            http_request = new ActiveXObject("Msxml2.XMLHTTP");
+         } catch (e) {
+            try {
+               http_request = new ActiveXObject("Microsoft.XMLHTTP");
+            } catch (e) {}
+         }
+      }
+      if (!http_request) {
+         alert('Cannot create XMLHTTP instance');
+         return false;
+      }
+      
+      http_request.onreadystatechange = alertContents;
+      http_request.open('POST', url, false);
+      http_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      http_request.setRequestHeader("Content-length", parameters.length);
+      http_request.setRequestHeader("Connection", "close");
+      http_request.send(parameters);
+   }
+
+   function alertContents() {
+      if (http_request.readyState == 4) {
+         if (http_request.status == 200) {
+            //alert(http_request.responseText);
+            result = http_request.responseText;
+            document.getElementById('myspan').innerHTML = result;            
+         } else {
+            alert('There was a problem with the request.');
+         }
+      }
+   }
+   
+   function get(obj) {
+      var poststr = "mytextarea1=" + encodeURI( document.getElementById("mytextarea1").value ) +
+                    "&mytextarea2=" + encodeURI( document.getElementById("mytextarea2").value );
+      makePOSTRequest('post.php', poststr);
+   }
+</script>
+
+
+<form action="javascript:get(document.getElementById('myform'));" name="myform" id="myform">
+<textarea id="mytextarea1">my test
+1
+2
+3
+</textarea>
+<textarea id="mytextarea2">my test2
+4
+5
+6</textarea>
+<br>
+<input type="button" name="button" value="Submit" 
+   onclick="javascript:get(this.parentNode);">
+<input type="submit" name="button" value="Normal Submit Button">
+</form>
+
+<br><br>
+Server-Response:<br>
+<hr>
+<span name="myspan" id="myspan"></span>
+<hr>
+
+
+</center>
+</body></html>

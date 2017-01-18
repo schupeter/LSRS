@@ -1,0 +1,120 @@
+<%= render :partial => "clf1" %>
+<title>LSRS Manual, Section 4.2.3</title>
+<%= render :partial => "clf2" %>
+
+<table border="1" width="100%">
+  <tr>
+    <td width="100%" bgcolor="#FFFF00"><strong>IMPORTANT NOTE ON 4.2.4, 4.2.5, AND 4.2.6</strong><p>High
+    pH, high salinity (and high sodicity) values often indicate the same problem - a poor soil
+    solution chemical balance that inhibits water uptake by plants. In order to limit
+    &quot;double counting&quot;, only the most limiting of surface and subsurface values of
+    the most limiting factor is used for the final deduction. This comparison is made after
+    all factors have been calculated.</p>
+    <p>&nbsp;</td>
+  </tr>
+</table>
+
+<h3><font face="Arial">4.2.6 Sodicity (Y) (This factor is recommended only for
+reconstructed soils.)</font></h3>
+
+<p ALIGN="JUSTIFY"><font face="Arial">As the percentage of sodium on the soil exchange
+complex increases over about 15% (usually associated with a pH over 8.5) the stability of
+soil aggregates decreases markedly. The finer soil particles, clays and organic matter,
+become dispersed resulting in adverse physical conditions, i.e. massive and sticky when
+wet and extremely hard when dry. This factor is not used if the surface texture is coarser
+than loam (Alberta Soils Advisory Committee, 1987b).</font></p>
+
+<dir>
+  <dir>
+    <dir>
+      <p ALIGN="JUSTIFY">&nbsp;</p>
+    </dir>
+  </dir>
+</dir>
+
+<table BORDER="1" CELLSPACING="1" CELLPADDING="5" WIDTH="473">
+  <tr>
+    <td WIDTH="459" VALIGN="TOP" colspan="3"><font face="Arial"><br>
+    Table 4.10 Point deductions for surface soil sodicity<sup>1</sup><br>
+    </font></td>
+  </tr>
+  <tr>
+    <td WIDTH="96" VALIGN="TOP" align="center"><font face="Arial">Sodicity (SAR)<sup>2</sup></font></td>
+    <td WIDTH="169" VALIGN="TOP" align="center"><font face="Arial">Saturation percentage<sup>3</sup><br>
+    (Sat %)</font></td>
+    <td WIDTH="166" VALIGN="TOP" align="center"><font face="Arial">Points deducted</font></td>
+  </tr>
+  <tr>
+    <td WIDTH="96" VALIGN="TOP"><p ALIGN="CENTER"><font face="Arial">4</font></td>
+    <td WIDTH="169" VALIGN="TOP"><p ALIGN="CENTER"><font face="Arial">60</font></td>
+    <td WIDTH="166" VALIGN="TOP" align="center"><font face="Arial">0</font></td>
+  </tr>
+  <tr>
+    <td WIDTH="96" VALIGN="TOP"><p ALIGN="CENTER"><font face="Arial">4</font></td>
+    <td WIDTH="169" VALIGN="TOP" align="center"><font face="Arial">80</font></td>
+    <td WIDTH="166" VALIGN="TOP" align="center"><font face="Arial">10</font></td>
+  </tr>
+  <tr>
+    <td WIDTH="96" VALIGN="TOP" align="center"><font face="Arial">12</font></td>
+    <td WIDTH="169" VALIGN="TOP" align="center"><font face="Arial">120</font></td>
+    <td WIDTH="166" VALIGN="TOP" align="center"><font face="Arial">30</font></td>
+  </tr>
+  <tr>
+    <td WIDTH="96" VALIGN="TOP" align="center"><font face="Arial">16</font></td>
+    <td WIDTH="169" VALIGN="TOP" align="center"><font face="Arial">160</font></td>
+    <td WIDTH="166" VALIGN="TOP" align="center"><font face="Arial">50</font></td>
+  </tr>
+  <tr>
+    <td WIDTH="96" VALIGN="TOP" align="center"><font face="Arial">20</font></td>
+    <td WIDTH="169" VALIGN="TOP" align="center"><font face="Arial">&gt;160</font></td>
+    <td WIDTH="166" VALIGN="TOP" align="center"><font face="Arial">80</font></td>
+  </tr>
+  <tr>
+    <td WIDTH="459" VALIGN="TOP" colspan="3"><font face="Arial"><sup>1</sup>Used for reclaimed
+    soils only. If points are deducted for SAR, do not deduct for pH and salinity. <br>
+    <sup>2</sup>SAR = Sodium Adsorplion Ratio (see glossary for definition). <br>
+    <sup>3</sup>Saturation percentage can be used as a proxy for SAR.</font></td>
+  </tr>
+</table>
+
+<p ALIGN="JUSTIFY">&nbsp;</p>
+
+<p ALIGN="JUSTIFY">&nbsp;</p>
+
+
+
+
+<table border="1" width="100%">
+  <tr>
+    <td width="68%"><h4><font face="Arial"><strong>Table 4.10 Implementation - Deduction for
+    Surface Sodicity (Y)</strong></font></h4>
+    </td>
+  </tr>
+  <tr>
+    <td width="68%"><font face="Arial">Quadratic Fit: <strong>Point Deduction = a + b*x +
+    c*x^2 </strong><br>
+    Coefficient Data: <br>
+    a = -6 <br>
+    b = 0.71428571 <br>
+    c = 0.17857143 <br>
+    <br>
+    x = Sodicity (SAR)</font></td>
+  </tr>
+  <tr>
+    <td width="100%"><font face="Arial"><img src="/images/Table4-10_SAR.gif"
+    alt="Table4-10_SAR.gif (7230 bytes)" width="576" height="434"></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><font face="Arial">COMMENTS: </font><ul>
+      <li><font face="Arial">If Sodicity (SAR) is not known, then Saturation Percent (Sat%) may be
+        used as a proxy to detemine SAR&nbsp; by using the equation illustrated below in Table
+        4.10.</font></li>
+    </ul>
+    </td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+
+<%= render :partial => "clf3" %>

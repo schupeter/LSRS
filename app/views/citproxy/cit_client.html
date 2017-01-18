@@ -1,0 +1,614 @@
+	<% content_for :title do %>CLIMATE INDICE TOOL for Agriculture Applications Version 1.2 (proxied)<%end%>
+	<script type="text/javascript">
+	function validateForm(){
+		if (document.getElementById("standardInput1").value == ""){
+		    alert("Please upload the Standard Input");
+		    return false;
+	    }
+		if (document.getElementById("outputType1").checked){
+	      if (document.getElementById("PEgroup6").checked){
+	    	if(!document.getElementById("blnCropType1").checked && !document.getElementById("blnCropType2").checked){
+		    	alert("Please select the crop type for Penman Monteith Reference calculations");
+		    	return false;
+	    	}
+		    if (!document.getElementById("blnWithActVapPre1").checked && !document.getElementById("blnWithActVapPre2").checked){
+		    	alert("Please select whether the actual vapour pressure is included in the daily input");
+		    return false;
+	   		}
+	      }
+		}
+	    if (document.getElementById("cornheartInput").value == ""){
+		    alert("The threshold file is not uploaded. Threshold input is required only if CHU calculations are performed. ie. when CHU outputs are clicked.");
+		    return false;
+	    }
+	    
+	}
+	
+	function dailyActVapPreAndCropInput(){
+		if (document.getElementById('PEgroup6').checked){
+			document.getElementById('cropType').innerHTML ='Enter the crop type<input type = "radio"  id = "blnCropType1" name = "blnCropType" value = "tallCrop">Tall crop<input type = "radio" id = "blnCropType2" name = "blnCropType" value = "shortCrop">Short crop';
+			document.getElementById('ActVapPre').innerHTML ='Enter whether the daily input includes  actual vapour pressure<input type = "radio" id = "blnWithActVapPre1" name = "blnWithActVapPre" value = "WithActVapPre">Yes<input type = "radio" id = "blnWithActVapPre2" name = "blnWithActVapPre" value = "WithoutActVapPre">No';
+			document.getElementById('standardInput').innerHTML = '<input checked type ="radio" id="blnInputType2" name="blnInputType" value = "Daily Input" onclick = "dailyInputActVapPre()"/> Daily Normals<br />';
+		}
+		else if (document.getElementById('PEgroup1').checked){
+			commonPEgroup();
+		}
+		else if (document.getElementById('PEgroup2').checked){
+			commonPEgroup();
+		}
+		else if (document.getElementById('PEgroup3').checked){
+			commonPEgroup();
+		}
+		else if (document.getElementById('PEgroup4').checked){
+			commonPEgroup();
+		}
+		else if (document.getElementById('PEgroup5').checked){
+			commonPEgroup();
+		}
+	}
+	function commonPEgroup(){
+		document.getElementById('cropType').innerHTML = '';
+		document.getElementById('ActVapPre').innerHTML = '';
+		document.getElementById('standardInput').innerHTML = ' <input checked type ="radio" id="blnInputType1" name="blnInputType" value = "Monthly Input" onclick = "dailyInputActVapPre()" /> Monthly Normals<br />' +
+        '<input type ="radio" id="blnInputType2" name="blnInputType" value = "Daily Input" onclick = "dailyInputActVapPre()"/> Daily Normals<br />';
+	}
+	
+	function thresholdInputAll(){
+		if ((document.getElementById('blnCHUnormal').checked || document.getElementById('blnCHU2normal').checked || document.getElementById('blnCHUave').checked ||document.getElementById('blnCHU80').checked) && document.getElementById('thresholdInput').innerHTML == ""){
+			document.getElementById('thresholdInput').innerHTML = 'Threshold Input: <input id ="cornheartInput" name ="cornheartInput" type = "file" value = "Input File" size = "40">' + '<br />' + '<a href="/LSRS/downloads/thresholds.xls" target="_blank">Example Of Threshold Input</a>';
+		}
+		else if ((!document.getElementById('blnCHUnormal').checked && !document.getElementById('blnCHU2normal').checked && !document.getElementById('blnCHUave').checked && !document.getElementById('blnCHU80').checked)){
+			document.getElementById('thresholdInput').innerHTML = "";
+		}
+	}
+	
+	function thresholdInputLSRS(){
+		if ((document.getElementById('blnCHUave').checked) && document.getElementById('thresholdInput').innerHTML == ""){
+			document.getElementById('thresholdInput').innerHTML = 'Threshold Input: <input id ="cornheartInput" name ="cornheartInput" type = "file" value = "Input File" size = "40">' + '<br />' + '<a href="/LSRS/downloads/thresholds.xls" target="_blank">Example Of Threshold Input</a>';
+		}
+		else if (!document.getElementById('blnCHUave').checked){
+			document.getElementById('thresholdInput').innerHTML = "";
+		}
+	}
+	
+	function outputTypeFunc(){
+		if (document.getElementById('outputType1').checked){
+	 		document.getElementById('output').innerHTML = 'Please select the fields to be included in the output file:<br />(If you want CHU output fields, please select the CHU output field you want and upload the "Threshold Input" in addition to "Standard Input")<br />' +
+	 		'<br /><table style = "border: .1em solid black;">' + 
+				'<tr valign = "top" >' +
+					'<td>' + 
+					 	'<input type = "checkbox" checked = "checked" name = "blnLatitude">Latitude </input><a href="javascript:latitude()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +
+						'<input type = "checkbox" checked = "checked" name = "blnLongitude">Longitude </input><a href="javascript:longitude()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +		
+						'<input type = "checkbox" checked = "checked" name = "blnElevation">Elevation </input><a href="javascript:elevation()"><img src="/images/information_white.png" style="border-style: none"/></a><br /> ' +
+						'<input type = "checkbox" checked = "checked" name = "blnGDDSUM1">GDDSUM1 </input><a href="javascript:GDDSum1()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +
+						'<input type = "checkbox" checked = "checked" name = "blnGDD1Start">GDD1Start </input><a href="javascript:GDD1Start()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+						'<input type = "checkbox" checked = "checked" name = "blnGDD1Stop">GDD1Stop </input><a href="javascript:GDD1Stop()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+						'<input type = "checkbox" checked = "checked" name = "blnEGDD2Start">EGDD2Start </input><a href="javascript:EGDD2Start()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+						'<input type = "checkbox" checked = "checked" name = "blnEGDD2Stop">EGDD2Stop </input><a href="/LSRS/downloads/output_desc/EGDD2Stop.doc" target ="_blank"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+						'<input type = "checkbox" checked = "checked" name = "blnEGDD2">EGDD2 </input><a href="javascript:EGDD2()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+						'<input type = "checkbox" checked = "checked" name = "blnGDDSUM2">GDDSUM2 </input><a href="javascript:GDDSum2()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'</td>' +
+					'<td>' +	
+					    '<input type = "checkbox" checked = "checked" name = "blnGDD2Start">GDD2Start </input><a href="javascript:GDD2Start()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+						'<input type = "checkbox" checked = "checked" name = "blnGDD2Stop">GDD2Stop </input><a href="/LSRS/downloads/output_desc/GDD2Stop.doc" target ="_blank"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+						'<input type = "checkbox" checked = "checked" name = "blnEGDD">EGDD </input><a href="/LSRS/downloads/output_desc/EGDD.doc" target ="_blank"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +		
+						'<input type = "checkbox" checked = "checked" name = "blnDeficit1">Deficit1 </input><a href="javascript:deficit1()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +		
+						'<input type = "checkbox" checked = "checked" name = "blnPE1">PE1 </input><a href="javascript:PE1()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +		
+						'<input type = "checkbox" checked = "checked" name = "blnDeficit2">Deficit2 </input><a href="javascript:deficit2()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+						'<input type = "checkbox" checked = "checked" name = "blnPE2">PE2 </input><a href="javascript:PE2()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +		
+						'<input type = "checkbox" checked = "checked" name = "blnDeficit3">Deficit3 </input><a href="javascript:deficit3()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+						'<input type = "checkbox" checked = "checked" name = "blnPE3">PE3 </input><a href="javascript:PE3()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+						'<input type = "checkbox" checked = "checked" name = "blnDeficit4">Deficit4 </input><a href="javascript:deficit4()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'</td>' +	
+					'<td>' +	
+						'<input type = "checkbox" checked = "checked" name = "blnPE4">PE4 </input><a href="javascript:PE4()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+						'<input type = "checkbox" checked = "checked" name = "blnDeficit5">Deficit5 </input><a href="javascript:deficit5()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +			
+						'<input type = "checkbox" checked = "checked" name = "blnPE5">PE5 </input><a href="javascript:PE5()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +		
+						'<input type = "checkbox" checked = "checked" name = "blnArid150_50">Arid150_50 </input><a href="javascript:Arid150_50()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+						'<input type = "checkbox" checked = "checked" name = "blnArid150_10">Arid150_10 </input><a href="javascript:Arid150_10()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +		
+						'<input type = "checkbox" checked = "checked" name = "blnArid200_50">Arid200_50 </input><a href="javascript:Arid200_50()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +				
+						'<input type = "checkbox" checked = "checked" name = "blnArid200_10">Arid200_10 </input><a href="javascript:Arid200_10()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +		
+						'<input type = "checkbox" checked = "checked" name = "blnSTOPBarley">STOPBarley </input><a href="javascript:stopBarley ()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+						'<input type = "checkbox" checked = "checked" name = "blnSTOPWheat">STOPWheat </input><a href="javascript:stopWheat()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+						'<input type = "checkbox" checked = "checked" name = "blnGDDWheat">GDDWheat </input><a href="javascript:GDDWheat()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +		
+					'</td>' +	
+					'<td>' +	
+						'<input type = "checkbox" checked = "checked" name = "blnGDDBarley">GDDBarley </input><a href="javascript:GDDBarley()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+						'<input type = "checkbox" checked = "checked" name = "blnDEFWheat">DEFWheat </input><a href="javascript:DEFWheat()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+						'<input type = "checkbox" checked = "checked" name = "blnDEFBarley">DEFBarley </input><a href="javascript:DEFBarley()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+						'<input type = "checkbox" checked = "checked" name = "blnPEWheat">PEWheat </input><a href="javascript:PEWheat()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+						'<input type = "checkbox" checked = "checked" name = "blnPEBarley">PEBarley </input><a href="javascript:PEBarley()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +		
+						'<input type = "checkbox" checked = "checked" name = "blnEGGD600">EGDD600 </input><a href="javascript:EGDD600()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+						'<input type = "checkbox" checked = "checked" name = "blnEGDD1100">EGDD1100 </input><a href="javascript:EGDD1100()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +				
+						'<input type = "checkbox" checked = "checked" name = "blnTmaxEGDD">TmaxEGDD </input><a href="javascript:TmaxEGDD()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+						'<input type = "checkbox" checked = "checked" name = "blnDays30">Days>30 </input><a href="javascript:days30()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+						'<input type = "checkbox" checked = "checked" name = "blnStart_CHU">Start_CHU </input><a href="javascript:start_CHU()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+						
+					'</td>' +	
+					'<td>' +				
+						'<input type = "checkbox" checked = "checked" name = "blnStop_CHU">Stop_CHU </input><a href="javascript:stop_CHU()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +
+						'<input type = "checkbox"  id = "blnCHUnormal" name = "blnCHUnormal" onclick = "thresholdInputAll()">CHUnormal </input><a href="javascript:CHUnormal()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+						'<input type = "checkbox"  id = "blnCHU2normal" name = "blnCHU2normal" onclick = "thresholdInputAll()">CHU2normal </input><a href="javascript:CHU2normal()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+						'<input type = "checkbox"  id = "blnCHUave" name = "blnCHUave" onclick = "thresholdInputAll()">CHUAve </input><a href="javascript:CHUAve()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+						'<input type = "checkbox"  id = "blnCHU80" name = "blnCHU80" onclick = "thresholdInputAll()">CHU80% </input><a href="javascript:CHU80()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'</td>' +
+				'</tr>' +	
+			'</table>' + 
+			'<a href = "/LSRS/downloads/output_desc/References to output vars.html" target = "_blank"> References to Output Variables </a>';
+	 		document.getElementById('thresholdInput').innerHTML = "";
+	 		document.getElementById('PEmethod').innerHTML = '<table style = "border: .1em solid black;">' +
+		     '<tr>' +
+		         '<td>' +
+		          '<input type="radio" id ="PEgroup1" name="PEgroup" value="blnDoBaierAndRobertson" onclick = "dailyActVapPreAndCropInput()" checked> BaierAndRobertson <a href="/LSRS/downloads/input_desc/BR1.doc" target="_blank"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +
+	              '<input type="radio" id ="PEgroup2" name="PEgroup" value="blnHargreavesAndSamani" onclick = "dailyActVapPreAndCropInput()"> HargreavesAndSamani<a href="/LSRS/downloads/input_desc/HG.doc" target="_blank"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +
+	              '<input type="radio" id ="PEgroup3" name="PEgroup" value="blnModifiedHargreavesTemperature" onclick = "dailyActVapPreAndCropInput()"> ModifiedHargreavesTemperature <a href="/LSRS/downloads/input_desc/MHG.doc" target="_blank"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +
+	              '<input type="radio" id ="PEgroup4" name="PEgroup" value="blnTemperatureModel" onclick = "dailyActVapPreAndCropInput()"> TemperatureModel <a href="/LSRS/downloads/input_desc/Mt.doc" target="_blank"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +
+	              '<input type="radio" id ="PEgroup5" name="PEgroup" value="blnTemperaturAndHumidityModel" onclick = "dailyActVapPreAndCropInput()"> TemperatureAndHumidityModel <a href="/LSRS/downloads/input_desc/Mtr.doc" target="_blank"><img src="/images/information_white.png" style="border-style: none"/></a><br />' + 
+	              '<input type="radio" id ="PEgroup6" name="PEgroup" value="blnPenmanMonteithReference" onclick = "dailyActVapPreAndCropInput()"> PenmanMonteithReference <a href="/LSRS/downloads/input_desc/Reference ETo.doc" target="_blank"><img src="/images/information_white.png" style="border-style: none"/></a><br />' + 
+	              '<div id="cropType"></div>' +
+	              '<div id="ActVapPre"></div>' +
+	           '</td>' +
+	       '</tr>' +
+	     '</table>';
+	 		document.getElementById('standardInput').innerHTML = ' <input checked type ="radio" id="blnInputType1" name="blnInputType" value = "Monthly Input" onclick = "dailyInputActVapPre()" /> Monthly Normals<br />' +
+            '<input type ="radio" id="blnInputType2" name="blnInputType" value = "Daily Input" onclick = "dailyInputActVapPre()"/> Daily Normals<br />';
+		}
+		else if (document.getElementById('outputType2').checked){
+			document.getElementById('output').innerHTML = 'Please select the fields to be included in the output file:<br />(If you want CHU output fields, please select the CHU output field you want and upload the "Threshold Input" in addition to "Standard Input")<br />' +
+	 		'<br /><table style = "border: .1em solid black;">' + 
+			'<tr valign = "top" >' +
+				'<td>' + 
+				 	'<input type = "checkbox" checked = "checked" name = "blnLatitude">Latitude </input><a href="javascript:latitude()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +
+					'<input type = "checkbox" checked = "checked" name = "blnLongitude">Longitude </input><a href="javascript:longitude()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +		
+					'<input type = "checkbox" checked = "checked" name = "blnElevation">Elevation </input><a href="javascript:elevation()"><img src="/images/information_white.png" style="border-style: none"/></a><br /> ' +
+					'<input type = "checkbox" checked = "checked" name = "blnGDDSUM1">GDDSUM1 </input><a href="javascript:GDDSum1()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +
+					'<input type = "checkbox" checked = "checked" name = "blnGDD1Start">GDD1Start </input><a href="javascript:GDD1Start()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+				'</td>' +
+				'<td>' +
+					'<input type = "checkbox" checked = "checked" name = "blnGDD1Stop">GDD1Stop </input><a href="javascript:GDD1Stop()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +
+					'<input type = "checkbox" checked = "checked" name = "blnGsl">Gsl </input><a href="javascript:Gsl()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +
+					'<input type = "checkbox" checked = "checked" name = "blnEGDD2">EGDD2 </input><a href="javascript:EGDD2()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+			    	'<input type = "checkbox" checked = "checked" name = "blnDeficit4">Deficit4 </input><a href="javascript:deficit4()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +
+			    	'<input type = "checkbox" checked = "checked" name = "blnTmaxEGDD">TmaxEGDD </input><a href="javascript:TmaxEGDD()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+				'</td>' +	
+				'<td>' +
+					'<input type = "checkbox" checked = "checked" name = "blnDays30">Days>30 </input><a href="javascript:days30()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnPpeMay">PpeMay </input><a href="javascript:PpeMay()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnPpeSept">PpeSept </input><a href="javascript:PpeSept()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +
+					'<input type = "checkbox" checked = "checked" name = "blnDbaveff">Dbaveff </input><a href="javascript:Dbaveff()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +
+					'<input type = "checkbox" checked = "checked" name = "blnRiskhail">Riskhail </input><a href="javascript:Riskhail()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +
+				'</td>' +
+				'<td>' +
+					'<input type = "checkbox" checked = "checked" name = "blnRegion">Region </input><a href="javascript:region()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +
+					'<input type = "checkbox"  id = "blnCHUave" name = "blnCHUave" onclick = "thresholdInputLSRS()">CHUAve </input><a href="javascript:CHUAve()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+				'</td>' +
+			'</tr>' +	
+		    '</table>' + 
+			'<a href = "/LSRS/downloads/output_desc/References to output vars.html" target = "_blank"> References to Output Variables </a>';;
+			document.getElementById('PEmethod').innerHTML = '<table style = "border: .1em solid black;">' +
+	     '<tr>' +
+	         '<td>' +
+	          '<input type="radio" id ="PEgroup1" name="PEgroup" value="blnDoBaierAndRobertson" onclick = "dailyActVapPreAndCropInput()" checked> BaierAndRobertson <a href="/LSRS/downloads/input_desc/BR1.doc" target="_blank"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +
+            '</td>' +
+       '</tr>' +
+     '</table>'; 
+		 document.getElementById('standardInput').innerHTML = ' <input checked type ="radio" id="blnInputType1" name="blnInputType" value = "Monthly Input" onclick = "dailyInputActVapPre()" /> Monthly Normals<br />'; 
+		 document.getElementById('thresholdInput').innerHTML = "";
+		}
+	else if (document.getElementById('outputType3').checked){
+		document.getElementById('output').innerHTML = 'Please select the fields to be included in the output file:<br />' +
+ 		'<br /><table style = "border: .1em solid black;">' + 
+			'<tr valign = "top" >' +
+				'<td>' + 
+				 	'<input type = "checkbox" checked = "checked" name = "blnLatitude">Latitude </input><a href="javascript:latitude()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +
+					'<input type = "checkbox" checked = "checked" name = "blnLongitude">Longitude </input><a href="javascript:longitude()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +		
+					'<input type = "checkbox" checked = "checked" name = "blnElevation">Elevation </input><a href="javascript:elevation()"><img src="/images/information_white.png" style="border-style: none"/></a><br /> ' +
+					'<input type = "checkbox" checked = "checked" name = "blnGDDSUM1">GDDSUM1 </input><a href="javascript:GDDSum1()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +
+					'<input type = "checkbox" checked = "checked" name = "blnGDD1Start">GDD1Start </input><a href="javascript:GDD1Start()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnGDD1Stop">GDD1Stop </input><a href="javascript:GDD1Stop()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnEGDD2Start">EGDD2Start </input><a href="javascript:EGDD2Start()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnEGDD2Stop">EGDD2Stop </input><a href="/LSRS/downloads/output_desc/EGDD2Stop.doc" target ="_blank"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnEGDD2">EGDD2 </input><a href="javascript:EGDD2()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnGDDSUM2">GDDSUM2 </input><a href="javascript:GDDSum2()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+				'</td>' +
+				'<td>' +	
+				    '<input type = "checkbox" checked = "checked" name = "blnGDD2Start">GDD2Start </input><a href="javascript:GDD2Start()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnGDD2Stop">GDD2Stop </input><a href="/LSRS/downloads/output_desc/GDD2Stop.doc" target ="_blank"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnEGDD">EGDD </input><a href="/LSRS/downloads/output_desc/EGDD.doc" target ="_blank"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +		
+					'<input type = "checkbox" checked = "checked" name = "blnDeficit1">Deficit1 </input><a href="javascript:deficit1()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +		
+					'<input type = "checkbox" checked = "checked" name = "blnPE1">PE1 </input><a href="javascript:PE1()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +		
+					'<input type = "checkbox" checked = "checked" name = "blnDeficit2">Deficit2 </input><a href="javascript:deficit2()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnPE2">PE2 </input><a href="javascript:PE2()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +		
+					'<input type = "checkbox" checked = "checked" name = "blnDeficit3">Deficit3 </input><a href="javascript:deficit3()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnPE3">PE3 </input><a href="javascript:PE3()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnDeficit4">Deficit4 </input><a href="javascript:deficit4()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+				'</td>' +	
+				'<td>' +	
+					'<input type = "checkbox" checked = "checked" name = "blnPE4">PE4 </input><a href="javascript:PE4()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnDeficit5">Deficit5 </input><a href="javascript:deficit5()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +			
+					'<input type = "checkbox" checked = "checked" name = "blnPE5">PE5 </input><a href="javascript:PE5()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +		
+					'<input type = "checkbox" checked = "checked" name = "blnArid150_50">Arid150_50 </input><a href="javascript:Arid150_50()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnArid150_10">Arid150_10 </input><a href="javascript:Arid150_10()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +		
+					'<input type = "checkbox" checked = "checked" name = "blnArid200_50">Arid200_50 </input><a href="javascript:Arid200_50()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +				
+					'<input type = "checkbox" checked = "checked" name = "blnArid200_10">Arid200_10 </input><a href="javascript:Arid200_10()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +		
+					'<input type = "checkbox" checked = "checked" name = "blnSTOPBarley">STOPBarley </input><a href="javascript:stopBarley ()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnSTOPWheat">STOPWheat </input><a href="javascript:stopWheat()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnGDDWheat">GDDWheat </input><a href="javascript:GDDWheat()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +		
+				'</td>' +	
+				'<td>' +	
+					'<input type = "checkbox" checked = "checked" name = "blnGDDBarley">GDDBarley </input><a href="javascript:GDDBarley()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnDEFWheat">DEFWheat </input><a href="javascript:DEFWheat()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnDEFBarley">DEFBarley </input><a href="javascript:DEFBarley()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnPEWheat">PEWheat </input><a href="javascript:PEWheat()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnPEBarley">PEBarley </input><a href="javascript:PEBarley()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +		
+					'<input type = "checkbox" checked = "checked" name = "blnEGGD600">EGDD600 </input><a href="javascript:EGDD600()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnEGDD1100">EGDD1100 </input><a href="javascript:EGDD1100()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +				
+					'<input type = "checkbox" checked = "checked" name = "blnTmaxEGDD">TmaxEGDD </input><a href="javascript:TmaxEGDD()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+										
+				'</td>' +	
+				
+			'</tr>' +	
+		'</table>' + 
+		'<a href = "/LSRS/downloads/output_desc/References to output vars.html" target = "_blank"> References to Output Variables </a>';
+ 		document.getElementById('thresholdInput').innerHTML = "";
+ 		document.getElementById('PEmethod').innerHTML = '<table style = "border: .1em solid black;">' +
+	     '<tr>' +
+	         '<td>' +
+
+              '<input type="radio" id ="PEgroup6" name="PEgroup" value="blnPriestlyAndTaylor" checked> PriestlyAndTaylor<br />' + 
+           '</td>' +
+       '</tr>' +
+     '</table>'; 
+ 		document.getElementById('standardInput').innerHTML = ' <input type ="radio" id="blnInputType3" name="blnInputType" value = "Actual Daily Input" checked/> Actual Daily <br />' ; 
+		
+	}
+	}
+	function storeExecuteResponse(){
+		if (document.getElementById('ResponseForm1').checked)
+			document.getElementById('StoreExecuteResponse').value = true;
+		if (document.getElementById('ResponseForm1').checked)
+			document.getElementById('StoreExecuteResponse').value = false;
+	}
+	
+	function latitude() {
+		window.open('/LSRS/downloads/output_desc/Latitude.html','','scrollbars=no,menubar=no,left=700,top=200, height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function longitude() {
+		window.open('/LSRS/downloads/output_desc/Longitude.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function elevation() {
+		window.open('/LSRS/downloads/output_desc/Elevation.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function GDDSum1() {
+		window.open('/LSRS/downloads/output_desc/GDDSUM1.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function GDD1Start() {
+		window.open('/LSRS/downloads/output_desc/GDD1Start.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function GDD1Stop() {
+		window.open('/LSRS/downloads/output_desc/GDD1Stop.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function EGDD2Start() {
+		window.open('/LSRS/downloads/output_desc/EGDD2Start.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function GDDSum2() {
+		window.open('/LSRS/downloads/output_desc/GDDSum2.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no');
+	}
+	function GDD2Start() {
+		window.open('/LSRS/downloads/output_desc/GDD2Start.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function EGDD2() {
+		window.open('/LSRS/downloads/output_desc/EGDD2.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function deficit1() {
+		window.open('/LSRS/downloads/output_desc/Deficit1.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function PE1() {
+		window.open('/LSRS/downloads/output_desc/PE1.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function deficit2() {
+		window.open('/LSRS/downloads/output_desc/Deficit2.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function PE2() {
+		window.open('/LSRS/downloads/output_desc/PE2.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function deficit3() {
+		window.open('/LSRS/downloads/output_desc/Deficit3.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function PE3() {
+		window.open('/LSRS/downloads/output_desc/PE3.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function deficit4() {
+		window.open('/LSRS/downloads/output_desc/Deficit4.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function PE4() {
+		window.open('/LSRS/downloads/output_desc/PE4.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function deficit5() {
+		window.open('/LSRS/downloads/output_desc/Deficit5.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function PE5() {
+		window.open('/LSRS/downloads/output_desc/PE5.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function Arid150_50() {
+		window.open('/LSRS/downloads/output_desc/Arid150_50.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function Arid150_10() {
+		window.open('/LSRS/downloads/output_desc/Arid150_10.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function Arid200_50() {
+		window.open('/LSRS/downloads/output_desc/Arid200_50.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function Arid200_10() {
+		window.open('/LSRS/downloads/output_desc/Arid200_10.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function stopBarley() {
+		window.open('/LSRS/downloads/output_desc/STOPBarley.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function stopWheat() {
+		window.open('/LSRS/downloads/output_desc/STOPWheat.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function GDDWheat() {
+		window.open('/LSRS/downloads/output_desc/GDDWheat.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function GDDBarley() {
+		window.open('/LSRS/downloads/output_desc/GDDBarley.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function DEFWheat() {
+		window.open('/LSRS/downloads/output_desc/DEFWheat.html','','scrollbars=no,menubar=no,left=700,top=200,height=350,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function DEFBarley() {
+		window.open('/LSRS/downloads/output_desc/DEFBarley.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function PEWheat() {
+		window.open('/LSRS/downloads/output_desc/PEWheat.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function PEBarley() {
+		window.open('/LSRS/downloads/output_desc/PEBarley.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function EGDD600() {
+		window.open('/LSRS/downloads/output_desc/EGDD600.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function EGDD1100() {
+		window.open('/LSRS/downloads/output_desc/EGDD1100.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function TmaxEGDD() {
+		window.open('/LSRS/downloads/output_desc/TmaxEGDD.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function days30() {
+		window.open('/LSRS/downloads/output_desc/Days30.html','','scrollbars=no,menubar=no,left=700,top=200,height=400,width=500,resizable=yes,toolbar=no,status=no');
+	}
+	function start_CHU() {
+		window.open('/LSRS/downloads/output_desc/Start_CHU.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function stop_CHU() {
+		window.open('/LSRS/downloads/output_desc/Stop_CHU.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function CHUnormal() {
+		window.open('/LSRS/downloads/output_desc/CHUnormal.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function CHU2normal() {
+		window.open('/LSRS/downloads/output_desc/CHU2normal.html','','scrollbars=no,menubar=no,left=700,top=200,height=300,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function CHUAve() {
+		window.open('/LSRS/downloads/output_desc/CHUAve.html','','scrollbars=no,menubar=no,left=700,top=200,height=350,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function CHU80() {
+		window.open('/LSRS/downloads/output_desc/CHU80.html','','scrollbars=no,menubar=no,left=700,top=200,height=350,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function PpeMay() {
+		window.open('/LSRS/downloads/output_desc/PpeMay.html','','scrollbars=no,menubar=no,left=700,top=200,height=350,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function PpeSept() {
+		window.open('/LSRS/downloads/output_desc/PpeSept.html','','scrollbars=no,menubar=no,left=700,top=200,height=350,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function Dbaveff() {
+		window.open('/LSRS/downloads/output_desc/Dbaveff.html','','scrollbars=no,menubar=no,left=700,top=200,height=350,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function Riskhail() {
+		window.open('/LSRS/downloads/output_desc/Riskhail.html','','scrollbars=no,menubar=no,left=700,top=200,height=350,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function region() {
+		window.open('/LSRS/downloads/output_desc/Region.html','','scrollbars=no,menubar=no,left=700,top=200,height=350,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	function Gsl() {
+		window.open('/LSRS/downloads/output_desc/Gsl.html','','scrollbars=no,menubar=no,left=700,top=200,height=350,width=400,resizable=yes,toolbar=no,status=no');
+	}
+	
+	window.onunload = function(e) {
+		// Firefox || IE
+		e = e || window.event;
+
+		var y = e.pageY || e.clientY;
+
+		if(y < 0) {
+		}
+		else 
+		{
+			document.getElementById('blnInputType1').checked = true;
+			document.getElementById('PEgroup1').checked = true;
+			//document.getElementById('outputType1').checked = false;
+			//document.getElementById('outputType2').checked = false;
+			
+		}
+	};
+	
+    function load(){
+    	document.getElementById('output').innerHTML = 'Please select the fields to be included in the output file:<br />(If you want CHU output fields, please select the CHU output field you want and upload the "Threshold Input" in addition to "Standard Input")<br />' +
+ 		'<br /><table style = "border: .1em solid black;">' + 
+			'<tr valign = "top" >' +
+				'<td>' + 
+				 	'<input type = "checkbox" checked = "checked" name = "blnLatitude">Latitude </input><a href="javascript:latitude()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +
+					'<input type = "checkbox" checked = "checked" name = "blnLongitude">Longitude </input><a href="javascript:longitude()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +		
+					'<input type = "checkbox" checked = "checked" name = "blnElevation">Elevation </input><a href="javascript:elevation()"><img src="/images/information_white.png" style="border-style: none"/></a><br /> ' +
+					'<input type = "checkbox" checked = "checked" name = "blnGDDSUM1">GDDSUM1 </input><a href="javascript:GDDSum1()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +
+					'<input type = "checkbox" checked = "checked" name = "blnGDD1Start">GDD1Start </input><a href="javascript:GDD1Start()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnGDD1Stop">GDD1Stop </input><a href="javascript:GDD1Stop()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnEGDD2Start">EGDD2Start </input><a href="javascript:EGDD2Start()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnEGDD2Stop">EGDD2Stop </input><a href="/LSRS/downloads/output_desc/EGDD2Stop.doc" target ="_blank"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnEGDD2">EGDD2 </input><a href="javascript:EGDD2()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnGDDSUM2">GDDSUM2 </input><a href="javascript:GDDSum2()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+				'</td>' +
+				'<td>' +	
+				    '<input type = "checkbox" checked = "checked" name = "blnGDD2Start">GDD2Start </input><a href="javascript:GDD2Start()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnGDD2Stop">GDD2Stop </input><a href="/LSRS/downloads/output_desc/GDD2Stop.doc" target ="_blank"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnEGDD">EGDD </input><a href="/LSRS/downloads/output_desc/EGDD.doc" target ="_blank"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +		
+					'<input type = "checkbox" checked = "checked" name = "blnDeficit1">Deficit1 </input><a href="javascript:deficit1()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +		
+					'<input type = "checkbox" checked = "checked" name = "blnPE1">PE1 </input><a href="javascript:PE1()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +		
+					'<input type = "checkbox" checked = "checked" name = "blnDeficit2">Deficit2 </input><a href="javascript:deficit2()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnPE2">PE2 </input><a href="javascript:PE2()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +		
+					'<input type = "checkbox" checked = "checked" name = "blnDeficit3">Deficit3 </input><a href="javascript:deficit3()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnPE3">PE3 </input><a href="javascript:PE3()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnDeficit4">Deficit4 </input><a href="javascript:deficit4()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+				'</td>' +	
+				'<td>' +	
+					'<input type = "checkbox" checked = "checked" name = "blnPE4">PE4 </input><a href="javascript:PE4()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnDeficit5">Deficit5 </input><a href="javascript:deficit5()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +			
+					'<input type = "checkbox" checked = "checked" name = "blnPE5">PE5 </input><a href="javascript:PE5()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +		
+					'<input type = "checkbox" checked = "checked" name = "blnArid150_50">Arid150_50 </input><a href="javascript:Arid150_50()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnArid150_10">Arid150_10 </input><a href="javascript:Arid150_10()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +		
+					'<input type = "checkbox" checked = "checked" name = "blnArid200_50">Arid200_50 </input><a href="javascript:Arid200_50()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +				
+					'<input type = "checkbox" checked = "checked" name = "blnArid200_10">Arid200_10 </input><a href="javascript:Arid200_10()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +		
+					'<input type = "checkbox" checked = "checked" name = "blnSTOPBarley">STOPBarley </input><a href="javascript:stopBarley ()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnSTOPWheat">STOPWheat </input><a href="javascript:stopWheat()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnGDDWheat">GDDWheat </input><a href="javascript:GDDWheat()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +		
+				'</td>' +	
+				'<td>' +	
+					'<input type = "checkbox" checked = "checked" name = "blnGDDBarley">GDDBarley </input><a href="javascript:GDDBarley()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnDEFWheat">DEFWheat </input><a href="javascript:DEFWheat()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnDEFBarley">DEFBarley </input><a href="javascript:DEFBarley()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnPEWheat">PEWheat </input><a href="javascript:PEWheat()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnPEBarley">PEBarley </input><a href="javascript:PEBarley()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +		
+					'<input type = "checkbox" checked = "checked" name = "blnEGGD600">EGDD600 </input><a href="javascript:EGDD600()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnEGDD1100">EGDD1100 </input><a href="javascript:EGDD1100()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +				
+					'<input type = "checkbox" checked = "checked" name = "blnTmaxEGDD">TmaxEGDD </input><a href="javascript:TmaxEGDD()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnDays30">Days>30 </input><a href="javascript:days30()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox" checked = "checked" name = "blnStart_CHU">Start_CHU </input><a href="javascript:start_CHU()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					
+				'</td>' +	
+				'<td>' +				
+					'<input type = "checkbox" checked = "checked" name = "blnStop_CHU">Stop_CHU </input><a href="javascript:stop_CHU()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +
+					'<input type = "checkbox"  id = "blnCHUnormal" name = "blnCHUnormal" onclick = "thresholdInputAll()">CHUnormal </input><a href="javascript:CHUnormal()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox"  id = "blnCHU2normal" name = "blnCHU2normal" onclick = "thresholdInputAll()">CHU2normal </input><a href="javascript:CHU2normal()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox"  id = "blnCHUave" name = "blnCHUave" onclick = "thresholdInputAll()">CHUAve </input><a href="javascript:CHUAve()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+					'<input type = "checkbox"  id = "blnCHU80" name = "blnCHU80" onclick = "thresholdInputAll()">CHU80% </input><a href="javascript:CHU80()"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +	
+				'</td>' +
+			'</tr>' +	
+		'</table>' + 
+		'<a href = "/LSRS/downloads/output_desc/References to output vars.html" target = "_blank"> References to Output Variables </a>';
+    	document.getElementById('outputType1').checked = true;
+    	document.getElementById('PEmethod').innerHTML = '<table style = "border: .1em solid black;">' +
+	     '<tr>' +
+	         '<td>' +
+	          '<input type="radio" id ="PEgroup1" name="PEgroup" value="blnDoBaierAndRobertson" onclick = "dailyActVapPreAndCropInput()" checked> BaierAndRobertson <a href="/LSRS/downloads/input_desc/BR1.doc" target="_blank"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +
+              '<input type="radio" id ="PEgroup2" name="PEgroup" value="blnHargreavesAndSamani" onclick = "dailyActVapPreAndCropInput()"> HargreavesAndSamani<a href="/LSRS/downloads/input_desc/HG.doc" target="_blank"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +
+              '<input type="radio" id ="PEgroup3" name="PEgroup" value="blnModifiedHargreavesTemperature" onclick = "dailyActVapPreAndCropInput()"> ModifiedHargreavesTemperature <a href="/LSRS/downloads/input_desc/MHG.doc" target="_blank"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +
+              '<input type="radio" id ="PEgroup4" name="PEgroup" value="blnTemperatureModel" onclick = "dailyActVapPreAndCropInput()"> TemperatureModel <a href="/LSRS/downloads/input_desc/Mt.doc" target="_blank"><img src="/images/information_white.png" style="border-style: none"/></a><br />' +
+              '<input type="radio" id ="PEgroup5" name="PEgroup" value="blnTemperaturAndHumidityModel" onclick = "dailyActVapPreAndCropInput()"> TemperatureAndHumidityModel <a href="/LSRS/downloads/input_desc/Mtr.doc" target="_blank"><img src="/images/information_white.png" style="border-style: none"/></a><br />' + 
+              '<input type="radio" id ="PEgroup6" name="PEgroup" value="blnPenmanMonteithReference" onclick = "dailyActVapPreAndCropInput()"> PenmanMonteithReference <a href="/LSRS/downloads/input_desc/Reference ETo.doc" target="_blank"><img src="/images/information_white.png" style="border-style: none"/></a><br />' + 
+              '<div id="cropType"></div>' +
+              '<div id="ActVapPre"></div>' +
+           '</td>' +
+         '</tr>' +
+        '</table>'; 
+    	document.getElementById('standardInput').innerHTML = ' <input checked type ="radio" id="blnInputType1" name="blnInputType" value = "Monthly Input" onclick = "dailyInputActVapPre()" /> Monthly Normals<br />' +
+             '<input type ="radio" id="blnInputType2" name="blnInputType" value = "Daily Input" onclick = "dailyInputActVapPre()"/> Daily Normals<br />'
+            
+     
+    }
+	
+</script>
+	
+</head>
+
+	<div align ="left">
+
+	<h3> CLIMATE INDICE TOOL for Agriculture Applications Version  1.2</h3>
+
+<form method="post" name = "myForm" enctype="multipart/form-data"  action="/cit/create_request" onsubmit='return validateForm();'>
+    
+	Please select one of the outputs below: <br /><br />
+     <input type ="radio" id="outputType1" name="outputType" value = "All" onclick = "outputTypeFunc()"  /> <b>All</b><br />   
+		 <input type ="radio" id="outputType2" name="outputType" value = "LSRS" onclick = "outputTypeFunc()"/> <b>LSRS</b> <br />
+		 <input type ="radio" id="outputType3" name="outputType" value = "PriestlyAndTaylorExperimental" onclick = "outputTypeFunc()"/> <b>Priestly & Taylor Experimental (for actual daily values)</b><br />
+    <br />
+    <div id='output'></div>
+    <br />
+    Please select the method of calculating Potential Evaporation<br />
+	<br />
+	<div id='PEmethod'></div>
+	
+    <br/>
+    <div id="divWait" style="position:absolute;z-index:5;top:70%;left:22%;visibility:hidden">
+      <img src="images/ppmn_statusBar1.gif" alt="please wait...">
+    </div>
+    
+    <br />
+    <i> Threshold input is required only if CHU calculations are performed </i> <a href="/LSRS/downloads/input_desc/Threshold file description.doc" target="_blank"><img src="/images/information_white.png" style="border-style: none"/></a>
+    <table style = "border: .1em solid black;">
+	  <tr>
+		  <td> Select a Type of Input: </td>
+	  </tr>
+<!--  	  <tr>
+		  <td> Monthly Normals <input checked type ="radio" id="blnInputType1" name="blnInputType" value = "Monthly Input" onclick = "dailyInputActVapPre()" /> </td>
+		  <td> Daily Normals<input type ="radio" id="blnInputType2" name="blnInputType" value = "Daily Input" onclick = "dailyInputActVapPre()"/></td>
+	  </tr>-->
+	 <!-- <tr>
+		  <td> <input checked type ="radio" id="blnInputType1" name="blnInputType" value = "Monthly Input" onclick = "dailyInputActVapPre()" /> Monthly Normals </td>
+      </tr>
+	  <tr>
+		  <td> <input type ="radio" id="blnInputType2" name="blnInputType" value = "Daily Input" onclick = "dailyInputActVapPre()"/> Daily Normals</td>
+	  </tr>
+	  <tr>
+		  <td> <input type ="radio" id="blnInputType3" name="blnInputType" value = "Actual Daily Input" onclick = "dailyInputActVapPre()"/> Actual Daily </td>
+	  </tr>-->
+	  <tr>
+	  <td ><div id='standardInput'></div></td>
+	  </tr>
+	  <tr>
+		  <td>
+			  Please select input files: <font color="red"> ** Please upload an input file with the correct format as per the example below </font> 
+		  </td>
+	  </tr>
+	  <tr>
+		  <td colspan = '2'>Standard Input:<input id ="standardInput1" name ="standardInput1" type = "file" value = "Input File" size = "40" /> </td>
+	  </tr>
+	  <tr>
+		  <td colspan = '2' ><a href="/LSRS/downloads/Monthly_normals_input.txt" target="_blank">Example Of Standard Input(Monthly Normals)</a></td>
+	  </tr>
+	
+	  <tr>
+	      <td colspan = '2'><div id='thresholdInput'></div></td>
+		  <!-- <td>Threshold Input:</td><td><input id ="cornheartInput" name ="cornheartInput" type = "file" value = "Input File" size = "40" /></td>-->
+	  </tr>	
+	  
+	  <tr><td><input type = "hidden" name ="Request" value ="Execute" /></td></tr>
+      <tr><td>Choose the response</td></tr>
+      <tr><td><input type = "radio" id = "ResponseForm2" name ="ResponseForm" value ="RawDataOutput" onclick = "storeExecuteResponse()" checked/>Direct Response of Data</td></tr>
+      <tr><td><input type = "radio" id = "ResponseForm1" name ="ResponseForm" value ="ResponseDocument" onclick = "storeExecuteResponse()"/>Store and Download Data</td></tr>
+      <tr><td><input type = "hidden" id = "StoreExecuteResponse" name ="StoreExecuteResponse" value ="false" /></td></tr>
+      <tr><td>Choose the format of the output </td></tr>
+      <tr><td><input type = "radio" name ="MimeType" value ="application/dbase" checked /> DBF file</td></tr>
+      <tr><td><input type = "radio" name ="MimeType" value ="text/comma-separated-value" /> Comma separated</td></tr>
+      <tr>
+		  <td colspan = '2'>
+			  <input type = "submit" value = "Start Calculations" onclick ="javascript:document.getElementById('divWait').style.visibility ='hidden'"/>
+		  </td>
+	  </tr>
+    </table>
+</form>
+
+<form method="get" enctype="multipart/form-data"  action="wps">
+<br />
+<b>Other WPS Operations</b>
+ <table style = "border: .1em solid black;">
+   <tr><td>Choose a Request:</td></tr>
+   <tr><td><input type = "radio" name ="Request" value ="GetCapabilities" checked/> Get Capabilities </td>
+       <td><input type = "radio" name ="Request" value ="DescribeProcess" /> Describe Process </td>
+   </tr>
+   <tr><td><input type = "hidden" name ="Service" value ="WPS" /></td></tr>
+   <tr><td><input type = "submit" value = "Start Requests" /></td></tr>
+  </table>
+</form>
+</div>
+	

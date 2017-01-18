@@ -1,0 +1,30 @@
+<h1>Monthly Data Loaded</h1>
+
+<p>The following data was loaded:</p>
+
+<table>
+	<tr>
+		<th><%="id"%></th>
+		<th><%="lat"%></th>
+		<th><%="long"%></th>
+		<th><%="elev"%></th>
+		<%for m in 1..12 do %><th><%=sprintf("precip%02d", m)%></th><%end%>
+		<%for m in 1..12 do %><th><%=sprintf("tmin%02d", m)%></th><%end%>
+		<%for m in 1..12 do %><th><%=sprintf("tmax%02d", m)%></th><%end%>
+	</tr>
+<%for id in @loaded[:coordinatesHash].keys do %>
+	<tr>
+		<td><%=id%></td>
+		<td><%=@loaded[:coordinatesHash][id][:lat]%></td>
+		<td><%=@loaded[:coordinatesHash][id][:long]%></td>
+		<td><%=@loaded[:coordinatesHash][id][:elev]%></td>
+		<%for v in @loaded[:normalsHash][id][:precip] do%><td><%=v%></td><%end%>
+		<%for v in @loaded[:normalsHash][id][:tmin] do%><td><%=v%></td><%end%>
+		<%for v in @loaded[:normalsHash][id][:tmax] do%><td><%=v%></td><%end%>
+	</tr>
+<%end%>
+</table>
+
+<hr/>
+
+<br/>

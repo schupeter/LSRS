@@ -1,0 +1,46 @@
+require "xml/libxml"
+class LibXML::XML::Node
+  ##
+  # Open up XML::Node from libxml and add convenience methods inspired
+  # by hpricot.
+  # (http://code.whytheluckystiff.net/hpricot/wiki/HpricotBasics)
+  # Also:
+  #  * provide better handling of default namespaces
+  # original code from http://thebogles.com/blog/an-hpricot-style-interface-to-libxml
+
+  # find the array of child nodes matching the given xpath
+  def search(xpath)
+    results = self.find(xpath).to_a
+    if block_given?
+      results.each do |result|
+        yield result
+      end
+    end
+    return results
+  end
+
+  # identify the default namespace
+  def default_namespace
+    @default_namespace
+  end
+
+  # set the default namespace (e.g. "tjs")
+  def register_default_namespace(name)
+    @default_namespace = name
+  end
+
+  # find an XPath using the default namespace (upgraded from original code)
+  def find_with_default_ns(xpath_expr)
+    find_base(xpath_expr, {self.default_namespace=>self.namespaces.default.to_s})
+  end
+
+  # set aliases so that find syntax uses the default namespace
+  alias_method :find_base, :find unless method_defined?(:find_base)
+  alias_method :find, :find_with_default_ns
+end
+
+class String
+  def to_libxml_doc
+    return LibXML::XML::Document.string(self)
+  end
+end

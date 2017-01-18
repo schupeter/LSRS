@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>LSRS calculation service</title>
+<style type="text/css">
+.restable {margin: auto; background: #FFF; border-collapse: collapse; border-top: 1px solid #363;}
+.restable th {font-weight: bold; padding: .3em .7em; text-align: left; vertical-align: top; background: #9C9; white-space: nowrap; border-top: 1px solid #363; border-bottom: 1px solid #363;}
+.restable td {font-weight: normal; padding: .3em .7em; text-align: left; vertical-align: top;}
+th {font-size:16px; font-weight: bold; padding: .3em .7em; text-align: right;}
+th.main {font-size:20px; font-weight: bold; font-style:italic; padding: .3em .7em; text-align: left;}
+</style>
+</head>
+<body>
+<h1>LSRS calculation service</h1>
+<table>
+  <tr><td colspan="3"><hr/></td></tr>
+  <tr><th class="main">Purpose</th><td colspan="2">This service performs the <a href="/">Land Suitability Rating System</a> calculation for a specified polygon, crop, and climate scenario.</td></tr>
+  <tr><td colspan="3"><hr/></td></tr>
+  <tr><th class="main">Request</th><th>Method:</th><td>GET</td></tr>
+  <tr><th></th><th>URL:</th><td><a href="http://<%=request.host%>/lsrs/service?">http://<%=request.host%>/lsrs/service?</a></td></tr>
+  <tr><th></th><th></th><td>
+    <table class="restable">
+      <tbody><tr><th>Parameter</th><th>Value</th><th>Description</th></tr>
+      <tr><td><b>ClimateTable</b></td><td>string (mandatory)</td><td>name of the climate scenario table to be used: [<i>"Ca_all_slc_v3x0_climate1961x90"</i>]</td></tr>
+      <tr><td><b>FrameworkName</b></td><td>string (mandatory)</td><td>name of the NSDB framework to be used: [<i>"Ca_all_slc_v3x0_cmp", "Bc_tulameen_soil_v2x0_cmp"</i>]</td></tr>
+      <tr><td><b>PolyId</b></td><td>string (mandatory)</td><td>polygon identifier (must be found in the component table)</td></tr>
+      <tr><td><b>Crop</b></td><td>string (mandatory)</td><td>crop to be rated: [<i>"alfalfa", "brome", "canola", "corn", "soybean", "sssgrain"</i>]</td></tr>
+      <tr><td><b>Response</b></td><td>string (optional)</td><td>form of output: [<i>"Details", "Summary", "Rate", "Debug"</i>].  <i>Details</i> provides complete calculation details.  <i>Summary</i> provides a restricted list of intermediate values.  <i>Rate</i> delivers only the rating. <i>Debug</i> is identical to <i>Details</i>, but without a stylesheet.  The default is <i>Details</i>.</td></tr>
+      <tr><td colspan="3">Note:  If none of the mandatory parameters is present the service returns this service description document.</td></tr>
+    </table><td></tr>
+  <tr><td colspan="3"><hr/></td></tr>
+  <tr><th class="main">Response</th><th>Format:</th><td>XML (the form and content is controlled with the <i>Response</i> parameter.)</td></tr>
+  <tr><th></th><th>Schema:</th><td></td></tr>
+  <tr><td colspan="3"><hr/></td></tr>
+  <tr><th class="main">Example</th><th>Details:</th><td><a href="http://<%=request.host%>/lsrs/service?&ClimateTable=Ca_all_slc_v3x0_climate1961x90&CmpTable=Ca_all_slc_v3x0_cmp&PolyId=800001&Crop=alfalfa">http://<%=request.host%>/lsrs/service?&ClimateTable=Ca_all_slc_v3x0_climate1961x90&CmpTable=Ca_all_slc_v3x0_cmp&PolyId=800001&Crop=alfalfa</a></td></tr>
+  <tr><th></th><th>Debug:</th><td><a href="http://<%=request.host%>/lsrs/service?&ClimateTable=Ca_all_slc_v3x0_climate1961x90&CmpTable=Ca_all_slc_v3x0_cmp&PolyId=800001&Crop=alfalfa&Response=Debug">http://<%=request.host%>/lsrs/service?&ClimateTable=Ca_all_slc_v3x0_climate1961x90&CmpTable=Ca_all_slc_v3x0_cmp&PolyId=800001&Crop=alfalfa&Response=Debug</a></td></tr>
+  <tr><td colspan="3"><hr/></td></tr>
+  <tr><th class="main">Client</th><td colspan="2"><a href="http://<%=request.host%>/lsrs/client">http://<%=request.host%>/lsrs/client</a></td></tr>
+  <tr><td colspan="3"><hr/></td></tr>
+</table>
+
+</body>
+</html>

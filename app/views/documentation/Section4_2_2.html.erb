@@ -1,0 +1,158 @@
+<%= render :partial => "clf1" %>
+<title>LSRS Manual, Section 4.2.3</title>
+<%= render :partial => "clf2" %>
+<h1>4.2.2 Organic matter content (F)</h1>
+
+<p ALIGN="JUSTIFY"><font face="Arial">Organic matter is a very important component of
+agricultural soils, contributing to the nutrient pool (mainly nitrogen), structure,
+workability and water holding capacity. Though there is no direct relationship between
+percentage of organic matter and soil quality, levels of organic matter below
+approximately 2% are generally associated with low soil quality for crop production. The
+maximum point deduction for low organic matter is limited to <strong>15</strong> because
+appropriate management can increase organic matter content.</font></p>
+
+<p ALIGN="JUSTIFY"><font face="Arial">Organic content can be measured in the laboratory or
+it can be estimated by soil color. The Value component (the darkness or gray component) of
+the Munsell Soil Color notation correlates well with percentage organic matter and can be
+used as a basis for estimating organic matter if other data are not available (Table 4.6).</font></p>
+
+<table border="1">
+  <tr>
+    <th colspan="4"><h5>Table 4.6 - Point deductions for surface<sup>1</sup> organic carbon content.</h5></th>
+  </tr>
+  <tr>
+    <td width="19%" align="center"><font face="Arial">Organic carbon<br>
+    %</font></td>
+    <td width="27%" align="center"><font face="Arial">Munsell color Value (dry)</font></td>
+    <td width="27%" align="center"><font face="Arial">Color</font></td>
+
+    <td width="27%" align="center"><font face="Arial">Point deduction</font></td>
+  </tr>
+  <tr>
+    <td width="19%" align="center"><font face="Arial">&gt;6</font></td>
+    <td width="27%" align="center"><font face="Arial">2</font></td>
+    <td width="27%"><font face="Arial">black</font></td>
+    <td width="27%" align="center"><font face="Arial">0</font></td>
+
+  </tr>
+  <tr>
+    <td width="19%" align="center"><font face="Arial">4 - 5</font></td>
+    <td width="27%" align="center"><font face="Arial">3</font></td>
+    <td width="27%"><font face="Arial">black</font></td>
+    <td width="27%" align="center"><font face="Arial">0</font></td>
+  </tr>
+
+  <tr>
+    <td width="19%" align="center"><font face="Arial">3</font></td>
+    <td width="27%" align="center"><font face="Arial">4</font></td>
+    <td width="27%"><font face="Arial">dark brown or dark gray</font></td>
+    <td width="27%" align="center"><font face="Arial">2</font></td>
+  </tr>
+  <tr>
+
+    <td width="19%" align="center"><font face="Arial">2</font></td>
+    <td width="27%" align="center"><font face="Arial">5</font></td>
+    <td width="27%"><font face="Arial">brown; gray</font></td>
+    <td width="27%" align="center"><font face="Arial">5</font></td>
+  </tr>
+  <tr>
+    <td width="19%" align="center"><font face="Arial">1</font></td>
+
+    <td width="27%" align="center"><font face="Arial">6</font></td>
+    <td width="27%"><font face="Arial">gray</font></td>
+    <td width="27%" align="center"><font face="Arial">10</font></td>
+  </tr>
+  <tr>
+    <td width="19%" align="center"><font face="Arial">0.5</font></td>
+    <td width="27%" align="center"><font face="Arial">7</font></td>
+
+    <td width="27%"><font face="Arial">light gray</font></td>
+    <td width="27%" align="center"><font face="Arial">15</font></td>
+  </tr>
+  <tr>
+    <td width="102%" colspan="4"><font face="Arial"><sup>1</sup>The surface layer considered
+    is the top 20 cm of mineral soil; in many cases this is the cultivated layer. In
+    uncultivated soils, or when cultivation depth is less than 20 cm, the average organic
+    matter content of the top 20 cm of mineral material should be estimated. If the surface
+    layer is less than 5 cm thick, the organic carbon content (or color) of the underlying
+    layer should be used as a basis for the point deduction.</font></td>
+  </tr>
+</table>
+<br/>
+<table border="1" width="100%">
+  <tr>
+    <td><h4><font face="Arial"><strong>Table 4.6 Implementation</strong> -
+    Deduction for Surface Organic Matter</font></h4>
+    </td>
+
+  </tr>
+  <tr>
+    <td width="100%"><font face="Arial">Logarithm Fit: <strong>Point Deduction = a + b * ln(x)
+    <br>
+    </strong><br>
+    Coefficient Data: <br>
+    a = 9.9928375 <br>
+    b = -7.229321 <br>
+
+    <br>
+    x = % Organic Carbon<br>
+    </font></td>
+  </tr>
+  <tr>
+    <td width="100%"><font face="Arial"><img src="/images/Table4-06_OC.gif"
+    alt="Table4-06_OC.gif (5969 bytes)" width="576" height="434"></font></td>
+  </tr>
+  <tr>
+
+    <td width="100%"><font face="Arial">COMMENTS:</font><ul>
+      <li><font face="Arial">Maximum deduction allowed is 15.</font></li>
+      <li><font face="Arial">In determining this deduction, the formula using %OC is used. If %OC
+        is not given, then Color Value may be used to determine %OC as outlined Table 4.6
+        Implementation notes.</font></li>
+    </ul>
+    </td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<hr>
+
+<p>&nbsp;</p>
+
+<table border="1" width="100%">
+  <tr>
+    <td width="68%"><h4><font face="Arial"><strong>Table 4.6 Implementation - Proxy - Munsell
+    color value (dry) to Organic carbon %.</strong></font></h4>
+    </td>
+  </tr>
+  <tr>
+
+    <td width="100%"><font face="Arial">Logarithm Fit: <strong>%OC = a + b*ln(x) </strong><br>
+    <br>
+    Coefficient Data: <br>
+    a = 9.9928375 <br>
+    b = -7.229321 </font><p><font face="Arial">x = Color Value<br>
+    y = % Organic Carbon</font></td>
+
+  </tr>
+  <tr>
+    <td width="100%"><font face="Arial"><img src="/images/Table4-06_Color2OC.gif"
+    alt="Table4-06_Color2OC.gif (10155 bytes)" width="605" height="454"></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><font face="Arial">COMMENTS: </font><ul>
+      <li><font face="Arial">This equation is being used as an interim proxy for conversion from
+        Color to %OC. </font></li>
+    </ul>
+
+    </td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+
+
+
+<%= render :partial => "clf3" %>

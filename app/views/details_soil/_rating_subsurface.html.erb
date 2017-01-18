@@ -1,0 +1,155 @@
+<tr><th colspan="9">3) Subsurface Factors</th></tr>
+	<tr>
+		<td class="Abbr">Subsurface Impedence</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Highest Impedence BD =</td>
+		<td><%=@site.soil.SubsurfaceHighestImpedenceBD.round(2)%></td>
+		<td class="Abbr"></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>% Clay =</td>
+		<td><%=@site.soil.SubsurfaceHighestImpedenceClay.round(0)%></td>
+		<td>% reduction =</td>
+		<td><%=@site.soil.SubsurfaceHighestImpedenceClayDeduction.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td class="Abbr">(<b>D</b>)</td>
+		<td class="Abbr"><a href="/documentation/Section4_2_1">more info</a></td>	</tr>
+	</tr>
+	<tr>
+		<td class="Abbr">Impedence Modification</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Depth to impeding layer =</td>
+		<td><%=@site.soil.SubsurfaceImpedenceDepth.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Moisture Deficit (P-PE) =</td>
+		<td><%=@site.climate.PPE%></td>
+		<td>% modification =</td>
+		<td><%=@site.soil.SubsurfaceHighestImpedenceModificationDeduction.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>% reduction =</td>
+		<td><%=@site.soil.SubsurfaceHighestImpedenceDeduction.round(0)%></td>
+		<td class="Abbr">(<b>D</b>)</td>
+		<td class="Abbr"><a href="/documentation/Section4_2_1">more info</a></td>	</tr>
+	</tr>
+	<tr>
+		<td class="Abbr">Chemistry</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Reaction (pH) =</td>
+		<td><%=@site.soil.SubsurfaceReaction.round(2)%></td>
+		<td>% reduction =</td>
+		<td><%=@site.soil.SubsurfaceReactionDeductionInterim.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td class="Abbr">(<b>V</b>)</td>
+		<td class="Abbr"><a href="/documentation/Section4_2_4">more info</a></td>	</tr>
+	</tr>
+	<tr>
+		<td>Salinity (EC) (dS/m) =</td>
+		<td><%=@site.soil.SubsurfaceSalinity.round(2)%></td>
+		<td>% reduction =</td>
+		<td><%=@site.soil.SubsurfaceSalinityDeductionInterim.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td class="Abbr">(<b>N</b>)</td>
+		<td class="Abbr"><a href="/documentation/Section4_2_5">more info</a></td>	</tr>
+	</tr>
+	<tr>
+		<td>Sodicity (SAR) =</td>
+		<td><%=@site.soil.SubsurfaceSodicity.round(2)%></td>
+		<td>% reduction =</td>
+		<td><%=@site.soil.SubsurfaceSodicityDeductionInterim.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td class="Abbr">(<b>Y</b>)</td>
+		<td class="Abbr"><a href="/documentation/Section4_2_6">more info</a></td>	</tr>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>% reduction (max of V, N, Y) =</td>
+		<td><%=@site.soil.SubsurfaceMostLimitingDeduction.round(0)%></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>total % reduction =</td>
+		<td><%=@site.soil.SubsurfacePercentDeduction.round(0)%></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>total subsurface deduction =</td>
+		<td><%=@site.soil.SubsurfaceDeduction.round(0)%></td>
+		<td class="Abbr">(<i>f</i>)</td>
+		<td></td>
+	</tr>
+	<tr>
+		<th colspan="9"></th>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>Basic Soil Rating (<i>e</i> - <i>f</i>)</td>
+		<td><%=@site.soil.FinalBasicSoilRating.round(0)%></td>
+		<td class="Abbr">(<i>g</i>)</td>
+		<td></td>
+	</tr>
+

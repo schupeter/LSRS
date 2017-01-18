@@ -1,0 +1,42 @@
+<%= render :partial => "/lsrs/clf1" %>
+<title>LSRS Manual, Section 3.3</title>
+<%= render :partial => "/lsrs/clf2" %>
+
+
+<h2>3.3.1 Excess spring moisture</h2>
+
+<p>This modifier was identified to recognize the effect of excess spring moisture in
+delaying seeding operations and effectively shortening the growing season. It uses the
+(P-PE) index for May as the rating variable [LSRS Manual Figure 3.3]. A deficit of 50 mm
+was considered to be no problem and an excess of 50 mm was considered a significant
+concern.</p>
+
+<center>
+<table border="1" width="100%">
+  <tr>
+    <td class="left">
+      <strong>Figure 3.3 Implementation - % Deduction for Excess Spring Moisture</strong>
+      Linear Fit<hr/>
+      Deduction = a + bx<br/>
+      <br/>
+      Coefficient Data:<br/>
+      a = 5<br/>
+      b = 0.1<br/>
+      <br/>
+      x = P-PE (mm) for May.
+    </td>
+  </tr>
+  <tr>
+    <td><img SRC="/images/Figure3-3.gif" width="600" height="450"></td>
+  </tr>
+  <tr>
+    <td class="left">COMMENTS: Maximum deduction allowed is 10%.</td>
+  </tr>
+</table>
+<br/><br/>
+</center>
+
+
+
+
+<%= render :partial => "/lsrs/clf3" %>

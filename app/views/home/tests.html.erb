@@ -1,0 +1,118 @@
+<%= render :partial => "/lsrs/clf1" %>
+<title>LSRS tests</title>
+<%= render :partial => "/lsrs/clf2" %>
+<center>
+<h2>LSRS v5</h2>
+
+<ol>
+	<li><a href="http://lsrs.soilinfo.ca/climateindices/calculate_daily.debug?station=2101300&daily=1947&chu2springfirstday=April%2015&chu2springtemp=14.2&chu2springdays=5&chu2springtemp10ave=10&chu2falltemp=10.1&chu2falltempmin=-2&chu2falltemp10min=10&chu2falllastday=October%2015">Daily Climate Indices</a></li>
+	<li><a href="http://lsrs.soilinfo.ca/lsrs5/crop/alfalfa/climate/-161/1749/194/-40/20/details.html">Climate rating for Alfalfa</a></li>
+	<li><a href="http://lsrs.soilinfo.ca/lsrs5/crop/corn/climate/-161/1500/-40/20/details.html">Climate rating for Alfalfa</a></li>
+	<li><a href="http://lsrs.soilinfo.ca/lsrs5/documentation/climate/ppe/alfalfa">Aridity factor - Alfalfa</a></li>
+	<br/>
+	<li><a href="http://lsrs.soilinfo.ca/lsrs5/crop/alfalfa/soil/ONBSB~~~~~A/unimproved/details.html">Soil rating for Alfalfa</a></li>
+</ol>
+
+
+
+<ul>
+	<li><a href="http://lsrs.soilinfo.ca/lsrs5/xx/potato/test">Potatoes</a></li>
+</ul>
+
+<hr/>
+<h1>LSRS v4 tests</h1>
+<ul>
+<li><a href="http://lsrs.landresources.ca/lsrs/service?FrameworkName=dss_v3_on&PolyId=OND001008442&ClimateTable=Slc_v3r0_canada_climate1961x90nlwis&Crop=alfalfa&Management=basic&Response=Details">DSS OND001008442</a></li>
+<br/>
+<li><a href="http://lsrs.soilinfo.ca/lsrs/service?ClimateTable=Slc_v3r0_canada_climate1961x90nlwis&FrameworkName=slc_v3r2_canada&POLYID=1000001&CROP=sssgrain&RESPONSE=Details">SLC v3r2</a></li>
+<li><a href="http://lsrs.soilinfo.ca/lsrs/service?FrameworkName=dss_v3_ab&PolyId=ABD1921000&ClimateTable=Slc_v3r0_canada_climate1961x90nlwis&CROP=sssgrain&RESPONSE=Details">DSS Alberta</a></li>
+<li><a href="http://lsrs.soilinfo.ca/lsrs/service?FrameworkName=dss_v3_bclowerfraser&PolyId=BCC0115011194&ClimateTable=Slc_v3r0_canada_climate1961x90nlwis&CROP=corn&RESPONSE=Details">DSS BC LowerFraser</a></li>
+<li><a href="http://lsrs.soilinfo.ca/lsrs/service?FrameworkName=dss_v3_bcokanagan&PolyId=70003&ClimateTable=Slc_v3r0_canada_climate1961x90uvic&CROP=alfalfa&RESPONSE=Details">DSS BC Okanagan</a></li>
+<li><a href="http://lsrs.soilinfo.ca/lsrs/service?FrameworkName=dss_v3_mb&PolyId=MB0100100&ClimateTable=Slc_v3r0_canada_climate1961x90uvic&CROP=alfalfa&RESPONSE=Details">DSS Manitoba</a></li>
+<li><a href="http://lsrs.soilinfo.ca/lsrs/service?FrameworkName=dss_v3_on&PolyId=OND0019774&ClimateTable=Slc_v3r0_canada_climate1961x90nlwis&CROP=sssgrain&RESPONSE=Details">DSS Ontario</a></li>
+<li><a href="http://lsrs.soilinfo.ca/lsrs/service?FrameworkName=dss_v3_ns&PolyId=NSD001Sp~A&ClimateTable=Slc_v3r0_canada_climate1961x90nlwis&CROP=sssgrain&RESPONSE=Details">DSS Nova Scotia</a></li>
+</ul>
+
+
+<h3>Alfalfa</h3>
+<ol>
+	<li>
+	LSRS v4: 
+		<a href="http://lsrs.landresources.ca/lsrs/service?FrameworkName=dss_v3_on&PolyId=OND001008442&ClimateTable=Slc_v3r0_canada_climate1961x90nlwis&Crop=alfalfa&Management=basic&Response=Details">DSS OND001008442</a> --
+	LSRS v5:	 
+		<a href="http://lsrs.soilinfo.ca/lsrs5/crop/alfalfa/climate/-161/1749/194/-50/-50/details.html">climate</a> -- 
+		<a href="http://lsrs.soilinfo.ca/lsrs5/crop/alfalfa/site/ONBSB~~~~~A/1/-161/1.2/100/0.01/details.html">site</a>
+	</li>
+	<li>
+	LSRS v4: 
+		<a href="http://lsrs.landresources.ca/lsrs/service?FrameworkName=dss_v3_ab&PolyId=ABD192001234&ClimateTable=Slc_v3r0_canada_climate1961x90nlwis&CROP=alfalfa&MANAGEMENT=basic&RESPONSE=Details">DSS OND001008442</a> --
+	LSRS v5:	 
+		climate -- 
+		<a href="http://lsrs.soilinfo.ca/lsrs5/crop/alfalfa/soil/ABPUN~~~~~A/-351/details.html">soil</a> -- 
+		landscape
+	</li>
+</ol>
+
+<h3>Brome</h3>
+<ol>
+	<li>
+	LSRS v4: 
+		<a href="http://lsrs.landresources.ca/lsrs/service?FrameworkName=dss_v3_on&PolyId=OND001008442&ClimateTable=Slc_v3r0_canada_climate1961x90nlwis&Crop=brome&Management=basic&Response=Details">DSS OND001008442</a> --
+	LSRS v5:	 
+		<a href="http://lsrs.soilinfo.ca/lsrs5/crop/brome/climate/-161/1749/194/-50/-50/details.html">climate</a> -- 
+		soil -- 
+		landscape
+	</li>
+</ol>
+
+<h3>Canola</h3>
+<ol>
+	<li>
+	LSRS v4: 
+		<a href="http://lsrs.landresources.ca/lsrs/service?FrameworkName=dss_v3_on&PolyId=OND001008442&ClimateTable=Slc_v3r0_canada_climate1961x90nlwis&Crop=canola&Management=basic&Response=Details">DSS OND001008442</a> --
+	LSRS v5:	 
+		<a href="http://lsrs.soilinfo.ca/lsrs5/crop/canola/climate/-161/1680/5/-50/-50/details.html">climate</a> -- 
+		soil -- 
+		landscape
+	</li>
+</ol>
+
+<h3>SSSGrain</h3>
+<ol>
+	<li>
+	LSRS v4: 
+		<a href="http://lsrs.landresources.ca/lsrs/service?FrameworkName=dss_v3_on&PolyId=OND001008442&ClimateTable=Slc_v3r0_canada_climate1961x90nlwis&Crop=sssgrain&Management=basic&Response=Details">DSS OND001008442</a> --
+	LSRS v5:	 
+		<a href="http://lsrs.soilinfo.ca/lsrs5/crop/sssgrain/climate/-161/1680/-50/-50/details.html">climate</a> -- 
+		soil -- 
+		landscape
+	</li>
+</ol>
+
+<h3>Corn</h3>
+<ol>
+	<li>
+	LSRS v4: 
+		<a href="http://lsrs.landresources.ca/lsrs/service?FrameworkName=dss_v3_on&PolyId=OND001008442&ClimateTable=Slc_v3r0_canada_climate1961x90nlwis&Crop=corn&Management=basic&Response=Details">DSS OND001008442</a> --
+	LSRS v5:	 
+		<a href="http://lsrs.soilinfo.ca/lsrs5/crop/corn/climate/-161/2627/-50/-50/details.html">climate</a> -- 
+		soil -- 
+		landscape
+	</li>
+</ol>
+
+<h3>Soybean</h3>
+<ol>
+	<li>
+	LSRS v4: 
+		<a href="http://lsrs.landresources.ca/lsrs/service?FrameworkName=dss_v3_on&PolyId=OND001008442&ClimateTable=Slc_v3r0_canada_climate1961x90nlwis&Crop=soybean&Management=basic&Response=Details">DSS OND001008442</a> --
+	LSRS v5:	 
+		<a href="http://lsrs.soilinfo.ca/lsrs5/crop/soybean/climate/-161/2627/-50/-50/details.html">climate</a> -- 
+		soil -- 
+		landscape
+	</li>
+</ol>
+
+
+</center>
+<%= render :partial => "/lsrs/clf3" %>

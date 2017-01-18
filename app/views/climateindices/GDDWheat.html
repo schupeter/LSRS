@@ -1,0 +1,12 @@
+<html>
+<head><title>GDDWheat</title></head>
+<body>
+<b> Definition </b><br />
+Average growing degree-days above 5°C for wheat<br /><br />
+<b> Method of calculation </b><br />
+Sum of average daily GDD from GDD2Start to STOPWheat.
+Daily GDD = Tmean -5.0 where Tmean is the average mean daily air temperature (°C); <br />
+If Tmean is < 5.0, Daily GDD=0.0.<br />
+If STOPWheat ‘-99’, i.e.later than GDD2Stop (estimated average date of first fall frost), then accumulation is stopped on GDD2Stop.
+</body>
+</html>

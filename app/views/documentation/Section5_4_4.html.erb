@@ -1,0 +1,96 @@
+<%= render :partial => "clf1" %>
+<title>LSRS Manual, Section 4.2.3</title>
+<%= render :partial => "clf2" %>
+
+<p>&nbsp;</p>
+
+<h3>5.4.4 Salinity (N)</h3>
+
+<p>A subsurface salinity deduction (Table 5.11) should be made only if
+it is greater than the deduction for the surface layer.</p>
+
+<p>&nbsp;</p>
+
+<b><p>Table 5.11 </b>Percent deduction for subsurface salinity.</p>
+
+<table BORDER="1" CELLSPACING="1" CELLPADDING="5" WIDTH="303">
+  <tr>
+    <td WIDTH="31%" VALIGN="TOP"><p ALIGN="CENTER">Salinity<br>
+    dS/m (1)</td>
+    <td WIDTH="69%" VALIGN="TOP"><p align="center">Point deduction</td>
+  </tr>
+  <tr>
+    <td WIDTH="31%" VALIGN="TOP"><p ALIGN="CENTER">4</td>
+    <td WIDTH="69%" VALIGN="TOP"><p ALIGN="CENTER">0</td>
+  </tr>
+  <tr>
+    <td WIDTH="31%" VALIGN="TOP"><p ALIGN="CENTER">8</td>
+    <td WIDTH="69%" VALIGN="TOP"><p ALIGN="CENTER">10</td>
+  </tr>
+  <tr>
+    <td WIDTH="31%" VALIGN="TOP"><p ALIGN="CENTER">16</td>
+    <td WIDTH="69%" VALIGN="TOP"><p ALIGN="CENTER">20</td>
+  </tr>
+  <tr>
+    <td WIDTH="100%" VALIGN="TOP" colspan="2">(1) Measured in saturated
+    paste.</td>
+  </tr>
+</table>
+
+
+<p>&nbsp;</p>
+
+<table border="1" height="259" width="100%">
+  <tbody><tr>
+    <td><strong>Table 5.11 Implementation - Subsurface Salinity % Deduction
+    (N)</strong><p>Quadratic Fit: <strong>% Deduction N = a+bx+cx^2 </strong><br>
+    Coefficient Data: <br>
+    a = -13.333333 <br>
+    b = 3.75 <br>
+    c = -0.10416667<br>
+    <br>
+    x = Salinity (EC)</p></td>
+  </tr>
+  <tr>
+    <td height="18" width="100%"><img src="/images/Table5-11a.gif" alt="Table5-11.gif (6038 bytes)" height="450" width="600"></td>
+  </tr>
+  <tr>
+    <td height="18" width="100%">Comments:<ul>
+      <li>Min Deduction allowed is 0.</li>
+    </ul>
+    </td>
+  </tr>
+</tbody></table>
+
+
+<p>&nbsp;</p>
+
+<table border="1" width="100%">
+  <tbody><tr>
+    <td bgcolor="#FFFF00" width="100%"><strong>IMPORTANT NOTE:</strong><p><br>
+    Page 30 of the LSRS Manual indicates that a Subsurface Salinity deduction should only be
+    made if it is greater than the Surface Salinity deduction. This has not been implemented.
+    It was decided that Salinity is a minor factor in Organic soils and that Reaction would
+    most often be the major factor.</p>
+    <p>&nbsp;</p></td>
+  </tr>
+</tbody></table>
+
+<p>&nbsp;</p>
+
+<table border="1" width="100%">
+  <tbody><tr>
+    <td bgcolor="#FFFF00" width="100%"><strong>IMPORTANT NOTE:</strong><p><br>
+    Only the larger of the two <strong>Subsurface</strong> deductions for Reaction and
+    Salinity is used for soil rating calculations purposes.</p>
+    <p>Thus if the <strong>Subsurface Reaction</strong> deduction is 15 and
+    the <strong>Subsurface Salinity</strong> deduction is 7, only the 15 is used for further
+    rating calculations (this is similar to Surface rules).</p>
+    <p>&nbsp;</p></td>
+  </tr>
+</tbody></table>
+
+<p>&nbsp;</p>
+
+
+<%= render :partial => "clf3" %>

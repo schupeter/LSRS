@@ -1,0 +1,140 @@
+<% form_for(@lsrs_framework) do |f| %>
+  <%= f.error_messages %>
+  <table>
+    <tr>
+      <th>Framework URI</th>
+      <td><%= f.text_field :FrameworkURI, :size => 80 %></td>
+    </tr>
+    <tr>
+      <th>WebRoot:</th>
+      <td><%= f.text_field :WebRoot %></td>
+    </tr>
+    <tr>
+      <th>WebBase:</th>
+      <td><%= f.text_field :WebBase %></td>
+    </tr>
+    <tr>
+      <th>WebVersion:</th>
+      <td><%= f.text_field :WebVersion %></td>
+    </tr>
+    <tr>
+      <th>SourceName:</th>
+      <td><%= f.text_field :SourceName %></td>
+    </tr>
+    <tr>
+      <th>Extent:</th>
+      <td><%= f.text_field :Extent %></td>
+    </tr>
+    <tr>
+      <th>Group:</th>
+      <td><%= f.text_field :Group %></td>
+    </tr>
+    <tr>
+      <th>ShapeDir:</th>
+      <td><%= f.text_field :ShapeDir %></td>
+    </tr>
+    <tr>
+      <th>FrameworkName:</th>
+      <td><%= f.text_field :FrameworkName %></td>
+    </tr>
+    <tr>
+      <th>WarehouseName:</th>
+      <td><%= f.text_field :WarehouseName %></td>
+    </tr>
+    <tr>
+      <th>Organization_en:</th>
+      <td><%= f.text_field :Organization_en %></td>
+    </tr>
+    <tr>
+      <th>Title_en:</th>
+      <td><%= f.text_field :Title_en %></td>
+    </tr>
+    <tr>
+      <th>FrameworkKey:</th>
+      <td><%= f.text_field :FrameworkKey %></td>
+    </tr>
+    <tr>
+      <th>DataType:</th>
+      <td><%= f.text_field :DataType %></td>
+    </tr>
+    <tr>
+      <th>Length:</th>
+      <td><%= f.text_field :Length %></td>
+    </tr>
+    <tr>
+      <th>Decimals:</th>
+      <td><%= f.text_field :Decimals %></td>
+    </tr>
+    <tr>
+      <th>Complete:</th>
+      <td><%= f.text_field :Complete %></td>
+    </tr>
+    <tr>
+      <th>Relationship:</th>
+      <td><%= f.text_field :Relationship %></td>
+    </tr>
+    <tr>
+      <th>Scale:</th>
+      <td><%= f.text_field :Scale %></td>
+    </tr>
+    <tr>
+      <th>MaxScale:</th>
+      <td><%= f.text_field :MaxScale %></td>
+    </tr>
+    <tr>
+      <th>MinScale:</th>
+      <td><%= f.text_field :MinScale %></td>
+    </tr>
+    <tr>
+      <th>South:</th>
+      <td><%= f.text_field :South %></td>
+    </tr>
+    <tr>
+      <th>West:</th>
+      <td><%= f.text_field :West %></td>
+    </tr>
+    <tr>
+      <th>North:</th>
+      <td><%= f.text_field :North %></td>
+    </tr>
+    <tr>
+      <th>East:</th>
+      <td><%= f.text_field :East %></td>
+    </tr>
+    <tr>
+      <th>CenterLong:</th>
+      <td><%= f.text_field :CenterLong %></td>
+    </tr>
+    <tr>
+      <th>CenterLat:</th>
+      <td><%= f.text_field :CenterLat %></td>
+    </tr>
+    <tr>
+      <th>Zoom:</th>
+      <td><%= f.text_field :Zoom %></td>
+    </tr>
+    <tr>
+      <th>GetData:</th>
+      <td><%= f.text_field :GetData %></td>
+    </tr>
+    <tr>
+      <th>JoinData:</th>
+      <td><%= f.text_field :JoinData %></td>
+    </tr>
+    <tr>
+      <th>UpdateSupported:</th>
+      <td><%= f.text_field :UpdateSupported %></td>
+    </tr>
+    <tr>
+      <th>Publish:</th>
+      <td><%= f.text_field :Publish %></td>
+    </tr>
+    <tr>
+      <th>Version:</th>
+      <td><%= f.text_field :Version %></td>
+    </tr>
+  </table>
+  <p>
+    <%= f.submit @action %>
+  </p>
+<% end %>

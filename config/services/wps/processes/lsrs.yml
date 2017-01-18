@@ -1,0 +1,69 @@
+# WPS Process config file.  
+#
+# Edit the example contents as appropriate.  Note that the 
+# field names and indentation are important!!!  Just edit the 
+# content after the colon (:).
+# To add a language, add new human readable text sections with a new language code (e.g. fr:) to supplement the existing human readable text sections (en:) and fill in contents
+
+Identifier: lsrs
+Title: 
+  en: LSRS batch processor
+Abstract: 
+  en: This service performs the Land Suitability Rating System calculation on a series of polygons for a specified crop and climate scenario.
+Metadata:
+  en:
+   - LSRS
+   - Land Suitability Rating System
+   - WPS
+   - GDAS
+processVersion: 1
+storeSupported: true
+statusSupported: true
+Profile: http://lsrs.gis.agr.gc.ca/lsrsbatch/serv
+DataInputs:
+  - 
+    minOccurs: 1
+    maxOccurs: 1
+    Identifier: FromPoly
+    Title: 
+      en: First SL number
+    Abstract: 
+      en: First polygon identifier of the set for which LSRS ratings will be determined.
+    InputForm: LiteralData
+    DataType: string
+    UOMs:
+      Default: n/a
+      Supported:
+        - n/a
+  - 
+    minOccurs: 1
+    maxOccurs: 1
+    Identifier: ToPoly
+    Title: 
+      en: Last SL number
+    Abstract: 
+      en: Last polygon identifier of the set for which LSRS ratings will be determined.
+    InputForm: LiteralData
+    DataType: string
+    UOMs:
+      Default: n/a
+      Supported:
+        - n/a
+ProcessOutputs:
+  -
+    Identifier: Ratings
+    Title: 
+      en: LSRS Ratings
+    Abstract: 
+      en: Land Suitability Rating System ratings for SLC polygons, encoded in GDAS format.
+    OutputForm: ComplexOutput
+    DefaultFormat:
+      Format:
+        MimeType: text/xml
+        Encoding: UTF-8
+        Schema: http://www.ogcnetwork.net/schemas/tjs/1.0.0/tjsGetData_response.xsd
+    SupportedFormats:
+      -
+        MimeType: text/xml
+        Encoding: UTF-8
+        Schema: http://www.ogcnetwork.net/schemas/tjs/1.0.0/tjsGetData_response.xsd

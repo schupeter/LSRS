@@ -1,0 +1,77 @@
+<%= render :partial => "/lsrs/clf1" %>
+<title>LSRS client</title>
+<%= render :partial => "/lsrs/clf2" %>
+<center>
+
+<h1>LSRS client</h1>
+
+<form name="formSearch" method="get" action="/lsrs/service">
+  <table>
+    <tr>
+      <td>Climate Scenario:</td>
+      <td class="left">
+        <select name="ClimateTable" size="1">
+          <option selected="selected" value="Ca_all_slc_v3x0_climate1961x90nlwis">1961-90 climate normals (NLWIS)</option>
+          <option value="Ca_all_slc_v3x0_climate1961x90uvic">1961-90 climate normals (UVic)</option>
+          <option value="Bc_okanagan_soil_v2x0_climate20101221">XXXX-XX climate normals (Okanagan)</option>
+          <option value="Bc_okanagan_soil_v2x0_climate_ppe100">XXXX-XX climate normals (Okanagan) ppe=-100</option>
+         </select>
+      </td>
+    </tr>
+    <tr>
+      <td>Spatial Framework:</td>
+      <td class="left">
+        <select name="CmpTable" size="1">
+          <option selected="selected" value="Ca_all_slc_v3x2_cmp">SLC 3.2</option>
+          <option value="Ca_all_slc_v3x0_cmp">SLC 3.0</option>
+          <option value="Bc_tulameen_soil_v2x0_cmp">Tulameen</option>
+          <option value="Bc_okanagan_soil_v2x0_cmp">Okanagan</option>
+          <option value="Ab_compiled_soil_v1x0_cmp">AGRISID</option>
+          <option value="Mb_compiled_soil_v1x0_cmp">Manitoba</option>
+         </select>
+      </td>
+    </tr>
+    <tr>
+      <td>Polygon Identifier</td>
+      <td class="left"><input type="text" name="PolyId" size="25" /></td>
+    </tr>
+    <tr>
+      <td>Crop:</td>
+      <td class="left">
+        <select name="CROP" size="1">
+          <option selected="selected" value="alfalfa">Alfalfa</option>
+          <option value="brome">Brome</option>
+          <option value="canola">Canola</option>
+          <option value="corn">Corn</option>
+          <option value="soybean">Soybeans</option>
+          <option value="sssgrain">Spring seeded small grains</option>
+         </select>
+      </td>
+    </tr>
+    <tr>
+      <td>Response:</td>
+      <td class="left">
+        <select name="RESPONSE" size="1">
+          <option selected="selected" value="Details">Calculate</option>
+          <option value="Summary">Summarize</option>
+          <option value="Rate">Rate</option>
+          <option value="Debug">Debug</option>
+         </select>
+      </td>
+    </tr>
+    <tr>
+      <td/>
+      <td class="left">
+<br><input type="submit" value="Get a rating!">
+      </td>
+    </tr>
+  </table>
+</form>
+</center>
+<p><b>Instructions:</b>  Enter the Polygon Identifier for an SLC or detailed soil survey polygon to calculate its LSRS rating.</p>
+<ul>
+  <li>For SLC enter an SL number such as 244055 or 800001</li>
+  <li>For DSS enter a POLY_ID such as 71119 (Okanagan) or 29158 (Agrisid) or MB01001067 (Manitoba)</li>
+</ul>
+</center>
+<%= render :partial => "/lsrs/clf3" %>

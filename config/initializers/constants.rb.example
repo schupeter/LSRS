@@ -1,0 +1,74 @@
+# Be sure to restart your server when you modify this file.
+
+PASSWORDS = {"schutp"=>"secretpassword","py"=>"secretpassword"}
+PROVINCES = %w[ AB BC MB NB NF NS NT ON PE PQ SK YT]
+
+# CIT
+ROOT = Pathname.new("/production/proxies/cit_v1r2")
+
+# InterpNB
+# pre-load rating values from MySQL
+SECTORS = ["Agriculture", "Engineering", "Forestry"]
+INTERPS = Hash.new
+for sector in SECTORS do
+	INTERPS[sector] = Hash.new
+	for interp in Interpretation.interpretations(sector)
+		if interp != nil then INTERPS[sector][interp] = Hash.new end
+		for factor in Ratingvalue.factors(sector,interp)
+			INTERPS[sector][interp][factor] = Hash.new
+		end
+	end
+	#for value in Ratingvalue.all
+	#	INTERPS[value.sector][value.interpretation][value.factor][value.lookup_value] = value.rating
+	#end
+end
+
+VALID_CROPS = {
+"alfalfa"=>{:name=>"alfalfa", :model_doc=>"AlfalfaBromeTimothyModelDevelopment.doc"},
+"brome"=>{:name=>"brome", :model_doc=>"AlfalfaBromeTimothyModelDevelopment.doc"},
+"canola"=>{:name=>"canola", :model_doc=>"CanolaModelDevelopment.doc"},
+"corn"=>{:name=>"corn", :model_doc=>"CornSoybeanModelDevelopment.doc"},
+"sssgrain"=>{:name=>"sssgrain", :model_doc=>"TBD.doc"},
+"soybean"=>{:name=>"soybean", :model_doc=>"CornSoybeanModelDevelopment.doc"}
+}
+
+# THIS IS OBSOLETE but still needed for LSRSv4.
+# deduction factors, as a set of lookup tables, where each table is
+# a vector (array) of numeric key/value subarray pairs, sorted by key
+# this data is now loaded from individual crop models because it allows date stamping !!!!!!!
+DEDUCTIONS = {
+"alfalfa"=>{
+:ppe=>[[-650, 100], [-500, 70], [-400, 50], [-300, 30], [-150, 0]],
+:gdd=>[[500, 90], [900, 70], [1050, 55], [1200, 40], [1600, 0]],
+:surfaceSalinity=>[[2, 0], [4, 20], [8, 50], [16, 90], [18, 100]],
+:subsurfaceSalinity=>[[0, 0], [4, 10], [8, 20], [12, 40], [16, 70]] 
+},
+"brome"=>{
+:ph=>[[4.2, 90], [4.4, 70], [4.5,40], [4.8, 20], [5.2, 0], [5.5, 0], [6.8, 40], [7.0, 60], [7.5, 90]],
+:surfaceSalinity=>[[2, 0], [4, 20], [8, 50], [16, 90], [18, 100]],
+:subsurfaceSalinity=>[[0, 0], [4, 10], [8, 20], [12, 40], [16, 70]] 
+},
+"canola"=>{
+:surfaceSalinity=>[[2, 0], [4, 20], [8, 50], [16, 90], [18, 100]],
+:subsurfaceSalinity=>[[0, 0], [4, 10], [8, 20], [12, 40], [16, 70]] 
+},
+"corn"=>{
+:surfaceSalinity=>[[2, 0], [4, 20], [8, 50], [16, 90], [18, 100]],
+:subsurfaceSalinity=>[[0, 0], [4, 10], [8, 20], [12, 40], [16, 70]] 
+},
+"potato"=>{
+:chu=>[[1200, 90], [2000, 70], [2300, 55], [2700, 40], [3500, 0]],
+:ph=>[[4.3, 90], [4.4, 70], [4.5,30], [4.8, 10], [5.2, 0], [5.5, 0], [6.0,30], [6.8, 50], [7.0, 60], [7.5, 90]],
+:root_restri=>[[10, 100], [40, 90], [50, 60], [70, 20], [100, 0]],
+:surfaceSalinity=>[[0, 0], [1, 5], [3, 50], [7, 90], [10, 100]],
+:subsurfaceSalinity=>[[0, 0], [4, 10], [8, 20], [12, 40], [16, 70]] 
+},
+"soybean"=>{
+:surfaceSalinity=>[[2, 0], [4, 20], [8, 50], [16, 90], [18, 100]],
+:subsurfaceSalinity=>[[0, 0], [4, 10], [8, 20], [12, 40], [16, 70]] 
+},
+"sssgrain"=>{
+:surfaceSalinity=>[[2, 0], [4, 20], [8, 50], [16, 90], [18, 100]],
+:subsurfaceSalinity=>[[0, 0], [4, 10], [8, 20], [12, 40], [16, 70]] 
+}
+}

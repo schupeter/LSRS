@@ -1,0 +1,17 @@
+<table border="1">
+  <tr>
+    <th><%=@factor[:acronym_en]%> (<%=@factor[:units_en]%>)</td>
+    <th><b>Assigned Deduction</b></td>
+  </tr>
+<%for datum in @data do%>
+  <tr>
+    <td class="mid"><%=datum[:value]%></td>
+    <td class="left">
+      <ul>
+				<%if datum[:rating] != nil then%><%for text in datum[:rating] do%><li><%=text%></li><%end%><%end%>
+        <li><%=datum[:deduction]%> points deduction</font></li>
+      </ul>
+    </td>
+  </tr>
+<%end%>
+</table>

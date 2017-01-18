@@ -1,0 +1,79 @@
+Tmax, Growth
+0,0
+5,1
+10,8
+15,10
+20,10
+25,9
+30,7
+35,3
+40,0
+too cold => no growth
+too cool => lower growth
+perfect => optimal growth
+too warm => lower growth
+too hot => no growth
+
+do not want to model growth, much too complicated.
+instead use some simple indices that give good general predictions of suitability
+
+Currently use:
+ - growing season length (GSL)
+ - crop heat units (CHU)
+ - growing degree days (GDD)
+ - effective growing degree days (EGDD)
+ - seasonal P-PE (PPE)
+
+could add:
+ - moderate growing degree days (MGDD) (from 5 to 25 degrees, where below 5 = 0, and degrees above 25 are subtracted from 25)
+
+
+ and some special factors:
+  - too hot at critical times (e.g. canola flowering)
+ 
+ 
+ Could add:
+  - Excessive Moisture for Germination (EMG)
+		- typical number of days from GSS to GSS+40 where P-PE > 0
+		point deductions = {0=>0, 10=>0, 15=>5, 20=>15, 30=>40, 35=>60, 40=>70}
+
+	- Insufficient Moisture for Germination (IMG)
+		- typical P-PE for the period GSS to GSS+30
+		point deductions = {-50=>0, -150=>20, -300=>70}
+
+	- Excessive Moisture for Maturation (EMM)
+		- typical number of days from EGDD1200 to EGDD2000 (crop specific) where P-PE > 0
+		point deductions = {20=>0, 40=>10, 60=>30, 80=>50}
+
+	- Insufficient Moisture for Maturation (IMM)
+		- (number of consecutive days where P-PE < -5)
+		- (maximum PE-P)
+		- [typical?] number of days in any 40 day mid to end-growth period where P-PE < -5
+		point deductions = {10=>0, 20=>10, 25=>30, 30=>40, 40=>70}
+		
+	- Excessive Moisture for Harvest (EMH)
+	 - assume harvest from EGDD2000 to EGDD2000+45 (crop specific)
+		SSSG
+	 - typical number of days from EGDD1200 to EGDD1600+45 where P-PE > 0
+	 - point deductions (sssg) = {5=>0, 25=>25, 35=>50, 45=>70}
+		CORN
+	 - typical number of days from EGDD2300 to Dec 31 where P-PE > 0
+	 - point deductions (corn) = {40=>0, 60=>10, 100=>30, 45=>70}
+	 
+	 excessively intense rainfall events
+		- maximum rainfall in one day?
+ 
+ all of these "typical" values could be:
+	- actual values recorded for one individual year
+	- median values calculated for a decade
+	
+	for "maximum" or "minimum" values:
+	-	probability of surpassing a threshold per year
+	
+	** look up Tony's old emails re. small fruits and threaten Scott that I'll code them
+ 
+ Assume crops are planted in the spring once threshold conditions are reached.
+
+CODE:
+
+deductions = YAML.load_file("#{Rails.root.to_s}/LSRS_daily_climate_indices.yml")

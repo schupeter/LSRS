@@ -1,0 +1,79 @@
+<%= render :partial => "/lsrs/clf1" %>
+<title>LSRS Manual, Section 3.1</title>
+<%= render :partial => "/lsrs/clf2" %>
+
+<h1>3.1 Moisture Deficit Point Deduction (A) </h1>
+
+<p>Deduction points are caluclated as a function of a moisture deficit accumulated 
+during the growing season. The equation for calculating moisture deficit deduction
+ is derived from the critical cutoff points in the table below.</p>
+
+<table border="1">
+  <tr>
+    <th><b>P-PE</b></td>
+    <th><b>Assigned Deduction</b></td>
+  </tr>
+  <tr>
+    <td class="mid">-150</td>
+    <td class="left">
+      <ul>
+        <li>0 points deduction</font></li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td class="mid">-300</td>
+    <td class="left">
+      <ul>
+	<li>Corresponds roughly to the Grassland-Parkland boundary</li>
+        <li>Class 2</li>
+        <li>assigned 30 point deduction</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td class="mid">-400</td>
+    <td class="left">
+      <ul>
+        <li>near the point where one major crop (barley) becomes a minor part of the cropping system</li>
+        <li>considered a moderate moisture limitation</li>
+        <li>Class 3</li>
+        <li>assigned 50 point deduction</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td class="mid">-500</td>
+    <td class="left">
+      <ul>
+        <li>dryland farming is severely restricted</li>
+        <li>considered a<b> </b>very severe moisture limitation</li>
+        <li>Class 4&#151;5</li>
+        <li>assigned 70 point deduction (this is the driest area in Canada)</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+</br>
+
+<table border="1">
+  <tr>
+    <td class="left">
+      <strong>Figure 3.1 Implementation - Moisture Point Deduction (A)</strong>
+      <p>Linear Fit</p>
+      <p>Point Deduction A = a + bx<br/>
+      Coefficient Data:<br/>
+      a = -30<br/>
+      b = -0.2</p>
+      <p>x = P-PE</p>
+    </td>
+  </tr>
+  <tr>
+    <td><img SRC="/images/Figure3-1.gif" width="600" height="450"></td>
+  </tr>
+</table>
+
+
+<%= render :partial => "/lsrs/clf3" %>
+
+

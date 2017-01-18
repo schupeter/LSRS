@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>SLC climate/landscape service</title>
+  </head>
+  <body>
+    <div id="page">
+      <div id="sidebar">
+      </div>
+
+      <div id="content">
+        <div id="header">
+          <h1>SLC climate/landscape service</h1>
+        </div>
+
+<p>This service provides a list of inputs that are required to perform LSRS calculations.  Requests to the service take the form:</p>
+<p>http://<%=request.host%>/lsrsinput/service?<font color="red">POLY_ID=</font>244055<font color="red">&DATA=</font>climate<font color="red">&VALUE</font>=climate1961x90UVic</p>
+<p>where:
+<table>
+<tr><td align="right">POLY_ID</td><td>=</td><td>a polygon identifier (e.g. "800001"), and</td></tr>
+<tr><td align="right">DATA</td><td>=</td><td>type of data, either "climate" or "landscape", and</td></tr>
+<tr><td align="right">TABLE_NAME</td><td>=</td><td>"Ca_all_slc_v3x0_climate1961x90uvic" OR "Ca_all_slc_v3x0_climate1961x90nlwis".  Required if DATATYPE = "climate".</td></tr>
+</table>
+</p>
+
+<h2>Client</h2>
+
+  <ul>
+    <li><a href="client">client</a></li>
+  </ul>
+
+<h2>Example requests</h2>
+
+  <ul>
+    <li><a href="service?poly_id=244055&data=climate&table_name=Ca_all_slc_v3x0_climate1961x90uvic">http://<%=request.host%>/lsrsinput/service?poly_id=244055&data=climate&table_name=Ca_all_slc_v3x0_climate1961x90uvic</a></li>
+    <li><a href="service?poly_id=244055&data=landscape">http://<%=request.host%>/lsrsinput/service?poly_id=244055&data=landscape</a></li>
+  </ul>
+
+
+
+</div>
+</body>
+</html>

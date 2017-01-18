@@ -1,0 +1,27 @@
+<h1>Criteria for <%=params[:interpretation]%></h1>
+
+<table>
+<%for factor in @value_factors.keys do%>
+<tr><th><%=factor%></th></tr>
+	<tr><th></th><th>Value</th><th>Rating</th></tr>
+	<%for value in @value_factors[factor].keys do%>
+	<tr><td></td><td><%=value%></td><td><%=@value_factors[factor][value]%></td></tr>
+	<%end%>
+<%end%>
+</table>
+<hr/>
+<%=@value_factors%>
+<hr/>
+
+<table>
+<%for factor in @range_factors.keys do%>
+<tr><th><%=factor%></th></tr>
+	<tr><th></th><th>From</th><th>To</th><th>Rating</th></tr>
+	<%for range in @range_factors[factor] do%>
+	<tr><td></td><td><%=range.min_value%></td><td><%=range.max_value%></td><td><%=range.rating%></td></tr>
+	<%end%>
+<%end%>
+</table>
+<hr/>
+<%=@range_factors%>
+</hr>

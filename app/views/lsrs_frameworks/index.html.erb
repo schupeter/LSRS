@@ -1,0 +1,23 @@
+<h1>LSRS Frameworks</h1>
+
+<table border = "1">
+  <tr>
+    <th>Framework URI</th>
+    <th>Title en</th>
+    <th>Warehouse name</th>
+  </tr>
+
+<% for framework in @lsrs_frameworks %>
+  <tr>
+    <td><%=h framework.FrameworkURI %></td>
+    <td><%=h framework.Title_en %></td>
+    <td><%=h framework.WarehouseName %></td>
+    <td><%= link_to 'Show', framework %></td>
+    <td><%= link_to 'Edit', edit_lsrs_framework_path(framework) %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New lsrs_framework', new_lsrs_framework_path %>

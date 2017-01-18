@@ -1,0 +1,22 @@
+<tr><th colspan="9">2) Heat Factor</th></tr>
+  <tr>
+		<td>Effective Growing Degree Days (EGDD)  =</td>
+		<td><%=@site.climate.EGDD%></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>deduction =</td>
+		<td><%=@site.climate.heat.H.round(0)%></td>
+		<td class="Abbr">(<b>H</b>)</td>
+		<td class="Abbr"><a href="/lsrs5/documentation/climate/egdd/<%=@crop%>">more info</a></td>
+	</tr>
+  <tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>heat rating =</td>
+		<td><%=@site.climate.heat.Rating.round(0)%></td>
+		<td class="Abbr">(<i>h</i>)</td>
+	</tr>
