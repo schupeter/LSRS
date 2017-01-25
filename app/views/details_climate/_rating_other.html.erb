@@ -3,7 +3,7 @@
 		<td>Excess Spring Moisture (ESM) =</td>
 		<td><%=@site.climate.ESM%></td>
 		<td>% deduction =</td>
-		<td><%=@site.climate.modifiers.m1.round(0)%></td>
+		<td><%=@site.climate.modifiers.m1.ceil%></td>
 		<td></td>
 		<td></td>
 		<td></td>
@@ -14,7 +14,7 @@
 		<td>Excess Fall Moisture (EFM) =</td>
 		<td><%=@site.climate.EFM%></td>
 		<td>% deduction =</td>
-		<td><%=@site.climate.modifiers.m2.round(0)%></td>
+		<td><%=@site.climate.modifiers.m2.ceil%></td>
 		<td></td>
 		<td></td>
 		<td></td>
@@ -26,7 +26,7 @@
 		<td>Canola Flowering Inhibited (CFI) =</td>
 		<td><%=@site.climate.CANHM%></td>
 		<td>% deduction =</td>
-		<td><%=@site.climate.modifiers.canhm.round(0)%></td>
+		<td><%=@site.climate.modifiers.canhm.ceil%></td>
 		<td></td>
 		<td></td>
 		<td></td>
@@ -38,7 +38,7 @@
 		<td></td>
 		<td></td>
 		<td>Total % deduction =</td>
-		<td><%=@site.climate.modifiers.total_percent.round(0)%></td>
+		<td><%=@site.climate.modifiers.total_percent.ceil%></td>
 		<td></td>
 	</tr>
 	<tr>
@@ -47,6 +47,6 @@
 		<td></td>
 		<td></td>
 		<td></td>
-		<td>deduction applied =</td><td><%=@site.climate.modifiers.deduction.round(0)%></td>
+		<td>deduction applied =</td><td><%=@site.climate.modifiers.deduction.floor%></td>
 		<td class="Abbr">(<i>m</i>)</td>
 	</tr>

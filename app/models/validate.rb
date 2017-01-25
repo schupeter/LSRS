@@ -37,7 +37,11 @@ class Validate
 	end
 
 	# SOIL + LANDSCAPE
-	def Validate.site_params(params, climate, soil, landscape, errors)
+	def Validate.site_params(params, site, climate, soil, landscape, errors)
+		if params.has_key?(:crop) then
+			site.crop = params[:crop]
+			errors.push "crop" if not ["alfalfa","brome","canola","corn","soybean","sssgrain"].include?(site.crop)
+		end
 		if params.has_key?(:ppe) then
 			climate.PPE = params[:ppe].to_f
 			errors.push "ppe" if not climate.PPE.between?(-2000,1000) 

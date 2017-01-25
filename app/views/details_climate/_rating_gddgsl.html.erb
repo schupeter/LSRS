@@ -3,7 +3,7 @@
 		<td>Growing Degree Days (GDD)  =</td>
 		<td><%=@site.climate.GDD%></td>
 		<td>deduction =</td>
-		<td><%=@site.climate.heat.HF1.round(0)%></td>
+		<td><%=@site.climate.heat.HF1.ceil%></td>
 		<td class="Abbr">(<i>h1</i>)</td>
 		<td></td>
 		<td></td>
@@ -14,7 +14,7 @@
 		<td>Growing Season Length (GSL)  =</td>
 		<td><%=@site.climate.GSL%></td>
 		<td>deduction =</td>
-		<td><%=@site.climate.heat.HF2.round(0)%></td>
+		<td><%=@site.climate.heat.HF2.ceil%></td>
 		<td class="Abbr">(<i>h2</i>)</td>
 		<td></td>
 		<td></td>
@@ -28,7 +28,7 @@
 		<td></td>
 		<td></td>
 		<td>maximum deduction =</td>
-		<td><%=@site.climate.heat.H.round(0)%></td>
+		<td><%=@site.climate.heat.H.ceil%></td>
 		<td class="Abbr">(<b>H</b>)</td>
 	</tr>
   <tr>
@@ -38,6 +38,6 @@
 		<td></td>
 		<td></td>
 		<td>heat rating =</td>
-		<td><%=@site.climate.heat.Rating.round(0)%></td>
+		<td><%=@site.climate.heat.Rating.floor%></td>
 		<td class="Abbr">(<i>h</i>)</td>
 	</tr>

@@ -56,7 +56,6 @@ EFM_DEDUCTIONS = [
 		climate.suitability = Calculate.rating(climate.final_rating)
 	end
 
-
 	def Alfalfa.rate_soil(params, site)
 		MineralPrep.inputsSLC(site.soil)
 		MineralPrep.generalize_layers(site.soil, site.climate.PPE)
@@ -73,8 +72,6 @@ EFM_DEDUCTIONS = [
 		Landscape.slopeFactor(site.crop, site.landscape)
 		Landscape.fragmentsFactor(site.crop, site.soil, site.landscape)
 		Landscape.otherFactors(site.crop, site.landscape)
-
-		#	@landscape = Landscape.calc(cmp, @landscapePoly, @cropLandscapeModel, @crop)
 	end
 
 	def Alfalfa.deductions()

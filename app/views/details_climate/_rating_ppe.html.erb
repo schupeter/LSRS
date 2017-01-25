@@ -6,7 +6,7 @@
 		<td></td>
 		<td></td>
 		<td>deduction =</td>
-		<td><%=@site.climate.aridity.A.round(0)%></td>
+		<td><%=@site.climate.aridity.A.ceil%></td>
 		<td class="Abbr">(<b>A</b>)</td>
 		<td class="Abbr"><a href="/lsrs5/documentation/climate/ppe/<%=@crop%>">more info</a></td>
 	</tr>
@@ -17,6 +17,6 @@
 		<td></td>
 		<td></td>
 		<td>aridity rating =</td>
-		<td><%=@site.climate.aridity.Rating.round(0)%></td>
+		<td><%=@site.climate.aridity.Rating.floor%></td>
 		<td class="Abbr">(<i>a</i>)</td>
 	</tr>
