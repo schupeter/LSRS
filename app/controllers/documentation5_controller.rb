@@ -5,13 +5,18 @@ class Documentation5Controller < ApplicationController
     render
   end
 
-	def factor
+	def factor2
 		if VALID_CROPS.keys.include?(params[:crop]) then @crop = VALID_CROPS[params[:crop]]  end
-		#@factor=VALID_FACTORS[params[:factor]]
 		@factor=Definition.where(:name=>params[:factor]).first
 		@data = eval("#{@crop[:name].capitalize}::#{@factor[:name].upcase}_DEDUCTIONS")
-		#render "#{@factor[:category]}_#{@factor[:name]}"
 	end
+
+	def factorCropSpecificWithChart
+		if VALID_CROPS.keys.include?(params[:crop]) then @crop = VALID_CROPS[params[:crop]]  end
+		@factor=Definition.where(:name=>params[:factor]).first
+		@data = eval("#{@crop[:name].capitalize}::#{@factor[:name].upcase}_DEDUCTIONS")
+	end
+
 
 	def input
 		@input = Definition.where(:name=>params[:name]).first
