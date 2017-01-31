@@ -1,0 +1,167 @@
+<h3>Reaction (V)</h3>
+
+<p>A neutral to slightly acid condition is considered
+ideal for crop growth. As soils become more acidic than pH 5, yields of many crops are
+depressed, and at values below 4 some elements may be present in quantities that are toxic
+to some crops. Crops differ markedly in response to acidity with oats being the most
+tolerant and wheat the least tolerant of the small grains.</p>
+
+<p>The rating (Table 4.8) was developed from the
+following assumptions (cf Kiniry et al., 1983):</p>
+
+<table border="1" width="47%">
+  <tr>
+    <td>a)&nbsp;&nbsp;&nbsp; pH 5.5 is a slight limitation</td>
+    <td>5 points</td>
+  </tr>
+  <tr>
+    <td>b)&nbsp;&nbsp;&nbsp; pH 4.0 is a severe limitation
+    (Class 4) </td>
+    <td>55 points</td>
+  </tr>
+  <tr>
+    <td>c)&nbsp;&nbsp;&nbsp; pH 3.0 not suitable for small
+    grains</td>
+    <td>100 points</td>
+  </tr>
+</table>
+
+<p>A high pH or alkaline condition can also affect
+plant response but this situation is usually associated with saline or sodic conditions
+(see sections on salinity and sodicity). <strong>If a deduction is made for salinity or
+sodicity no deduction is made for high pH values.</strong></p>
+
+<p>There are several common methods for determining pH:
+saturated paste (water), 1:2 soilwater suspension and 1:2 soil<font SIZE="1"> -&nbsp; 0.01
+M CaCl<sub>2</sub>. Compared to the saturated paste, the CaCI<sub>2</sub> pH is usually
+about 1/2 unit lower in value and the 1:2 water value slightly higher. It should be kept
+in mind that seasonal variation in soil pH is often in the order of 1/2 unit.</p>
+<font SIZE="2">
+
+
+
+<table>
+  <tr>
+    <td colspan="2"><b><br>
+    Table 4.8 </b>Point deductions for surface soil pH.<sup>1</sup><br>
+    </td>
+  </tr>
+  <tr>
+    <td>Soil pH<sup>2</sup></td>
+    <td>Points deducted</td>
+  </tr>
+  <tr>
+    <td>9.0</td>
+    <td>60</td>
+  </tr>
+  <tr>
+    <td>8.5</td>
+    <td>20</td>
+  </tr>
+  <tr>
+    <td>8.0</td>
+    <td>5</td>
+  </tr>
+  <tr>
+    <td>6.0 - 7.5</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>5.5</td>
+    <td>5</td>
+  </tr>
+  <tr>
+    <td>5.0</td>
+    <td>15</td>
+  </tr>
+  <tr>
+    <td>4.5</td>
+    <td>30</td>
+  </tr>
+  <tr>
+    <td>4.0</td>
+    <td>55</td>
+  </tr>
+  <tr>
+    <td>3.5</td>
+    <td>80</td>
+  </tr>
+  <tr>
+    <td WIDTH="393" VALIGN="TOP" colspan="2"><p><sup>1</sup>Measured
+    in saturated paste.<br>
+    <sup>2</sup>Add 0.5 Units to pH values measured in 0.01 M CaCI2.</td>
+  </tr>
+</table>
+
+<hr>
+
+<p>&nbsp;</p>
+
+ 
+<p>Reaction (in Table 4.8) is implemented with two equations. One for
+pH &lt;= 6.0 and the other for pH &gt;= 7.5.<br>
+For pH between 6.0 and 7.5, the point deduction is set to 0 (zero).</p>
+
+<table border="1" width="100%">
+  <tr>
+    <td width="68%"><h4><strong>Table 4.8 Implementation - Surface Reaction
+    - Point Deduction for pH &lt;= 6.0 </strong></h4>
+    </td>
+  </tr>
+  <tr>
+    <td width="100%">Quadratic Fit:<strong> Point Deduction = a + b*x +
+    c*x^2 </strong><br>
+    Coefficient Data: <br>
+    <br>
+    a = 433.71429 <br>
+    b = -140.85714 <br>
+    c = 11.428571 <br>
+    <br>
+    x = Soil pH</td>
+  </tr>
+  <tr>
+    <td width="100%"><img src="/images/Table4-08_LTEQ60.gif" width="576"
+    height="434" alt="Table4-08_LTEQ60.gif (6329 bytes)"></td>
+  </tr>
+  <tr>
+    <td width="100%">COMMENTS:</td>
+  </tr>
+</table>
+
+
+
+<h3><strong>Table 4.8 Implementation pH &gt;= 7.5</strong></h3>
+
+<table border="1">
+  <tr>
+    <td><h4><strong>Table 4.8 Implementation - Surface Reaction
+    - Point Deduction for pH &gt;= 7.5</strong></h4>
+    </td>
+  </tr>
+  <tr>
+    <td>Rational Function: <strong>Point Deduction = (a + b*x)
+    / (1 + c*x + d*x^2) </strong><br>
+    Coefficient Data: <br>
+    <br>
+    a =&nbsp; -20.543722 <br>
+    b = 2.7164411 <br>
+    c = -0.07521742 <br>
+    d = -0.0031859168 <br>
+    <br>
+    x = Soil pH</td>
+  </tr>
+  <tr>
+    <td><img src="/images/Table4-08_GTEQ75.gif"
+    alt="Table4-08_GTEQ75_Rational.gif (7038 bytes)" width="576" height="432"></td>
+  </tr>
+
+</table>
+
+
+<p>IMPORTANT NOTE:  High
+    pH, high salinity (and high sodicity) values often indicate the same problem - a poor soil
+    solution chemical balance that inhibits water uptake by plants. In order to limit
+    &quot;double counting&quot;, only the most limiting of surface and subsurface values of
+    the most limiting factor is used for the final deduction. This comparison is made after
+    all factors have been calculated.
+</p>

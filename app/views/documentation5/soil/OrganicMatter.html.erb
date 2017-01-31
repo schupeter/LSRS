@@ -1,0 +1,144 @@
+<h3>Organic Matter Content (F)</h3>
+
+<p>Organic matter is a very important component of
+agricultural soils, contributing to the nutrient pool (mainly nitrogen), structure,
+workability and water holding capacity. Though there is no direct relationship between
+percentage of organic matter and soil quality, levels of organic matter below
+approximately 2% are generally associated with low soil quality for crop production. The
+maximum point deduction for low organic matter is limited to <strong>15</strong> because
+appropriate management can increase organic matter content.</p>
+
+<p>Organic content can be measured in the laboratory or
+it can be estimated by soil color. The Value component (the darkness or gray component) of
+the Munsell Soil Color notation correlates well with percentage organic matter and can be
+used as a basis for estimating organic matter if other data are not available (Table 4.6).</p>
+
+<table>
+	<caption><strong>Table 4.6 - Point deductions for surface<sup>1</sup> organic carbon content</strong></caption>
+	<thead>
+		<tr>
+			<th>Organic carbon (%)</th>
+			<th>Munsell color Value (dry)</th>
+			<th>Color</th>
+			<th>Point deduction</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>&gt;6</td>
+			<td>2</td>
+			<td>black</td>
+			<td>0</td>
+		</tr>
+		<tr>
+			<td>4 - 5</td>
+			<td>3</td>
+			<td>black</td>
+			<td>0</td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>4</td>
+			<td>dark brown or dark gray</td>
+			<td>2</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>5</td>
+			<td>brown; gray</td>
+			<td>5</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>6</td>
+			<td>gray</td>
+			<td>10</td>
+		</tr>
+		<tr>
+			<td>0.5</td>
+			<td>7</td>
+			<td>light gray</td>
+			<td>15</td>
+		</tr>
+	</tbody>
+</table>
+<p>Notes:<br/>
+	<sup>1</sup> The surface layer considered
+    is the top 20 cm of mineral soil; in many cases this is the cultivated layer. In
+    uncultivated soils, or when cultivation depth is less than 20 cm, the average organic
+    matter content of the top 20 cm of mineral material should be estimated. If the surface
+    layer is less than 5 cm thick, the organic carbon content (or color) of the underlying
+    layer should be used as a basis for the point deduction.</p>
+		
+<br/>
+<table>
+  <tr>
+    <td><h4><font face="Arial"><strong>Table 4.6 Implementation</strong> -
+    Deduction for Surface Organic Matter</font></h4>
+    </td>
+
+  </tr>
+  <tr>
+    <td width="100%"><font face="Arial">Logarithm Fit: <strong>Point Deduction = a + b * ln(x)
+    <br>
+    </strong><br>
+    Coefficient Data: <br>
+    a = 9.9928375 <br>
+    b = -7.229321 <br>
+
+    <br>
+    x = % Organic Carbon<br>
+    </font></td>
+  </tr>
+  <tr>
+    <td width="100%"><font face="Arial"><img src="/images/Table4-06_OC.gif"
+    alt="Table4-06_OC.gif (5969 bytes)" width="576" height="434"></font></td>
+  </tr>
+  <tr>
+
+    <td width="100%"><font face="Arial">COMMENTS:</font><ul>
+      <li><font face="Arial">Maximum deduction allowed is 15.</font></li>
+      <li><font face="Arial">In determining this deduction, the formula using %OC is used. If %OC
+        is not given, then Color Value may be used to determine %OC as outlined Table 4.6
+        Implementation notes.</font></li>
+    </ul>
+    </td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<hr>
+
+<p>&nbsp;</p>
+
+<table>
+  <tr>
+    <td width="68%"><h4><font face="Arial"><strong>Table 4.6 Implementation - Proxy - Munsell
+    color value (dry) to Organic carbon %.</strong></font></h4>
+    </td>
+  </tr>
+  <tr>
+
+    <td width="100%"><font face="Arial">Logarithm Fit: <strong>%OC = a + b*ln(x) </strong><br>
+    <br>
+    Coefficient Data: <br>
+    a = 9.9928375 <br>
+    b = -7.229321 </font><p><font face="Arial">x = Color Value<br>
+    y = % Organic Carbon</font></td>
+
+  </tr>
+  <tr>
+    <td width="100%"><font face="Arial"><img src="/images/Table4-06_Color2OC.gif"
+    alt="Table4-06_Color2OC.gif (10155 bytes)" width="605" height="454"></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><font face="Arial">COMMENTS: </font><ul>
+      <li><font face="Arial">This equation is being used as an interim proxy for conversion from
+        Color to %OC. </font></li>
+    </ul>
+
+    </td>
+  </tr>
+</table>
+

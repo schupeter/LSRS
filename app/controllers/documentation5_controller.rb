@@ -5,10 +5,8 @@ class Documentation5Controller < ApplicationController
     render
   end
 
-	def factor2
-		if VALID_CROPS.keys.include?(params[:crop]) then @crop = VALID_CROPS[params[:crop]]  end
-		@factor=Definition.where(:name=>params[:factor]).first
-		@data = eval("#{@crop[:name].capitalize}::#{@factor[:name].upcase}_DEDUCTIONS")
+	def canned
+		render "/documentation5/#{params[:category]}/#{params[:factor]}"
 	end
 
 	def factorCropSpecificWithChart

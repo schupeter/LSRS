@@ -1,0 +1,12 @@
+<% content_for :title do %>LSRSv5: <%= @factor[:section].capitalize%> factor: <%= @factor[:name]%><%end%>
+
+<h1><%= @factor[:section].capitalize%> Factor: <%= @factor[:name]%></h1>
+
+<%= raw @factor[:definition_en]%>
+<%if @factor[:purpose_en] != nil then%><%= raw @factor[:purpose_en]%><%end%>
+<%if @factor[:description_en] != nil then%><%= raw @factor[:description_en]%><%end%>
+
+<h3>More info</h3>
+<ul>
+	<li><a href="/climateindices/documentation/<%= @factor[:name]%>.html">Determining <%= @factor[:title_en]%> (<%= @factor[:acronym_en]%>)</a></li>
+</ul>

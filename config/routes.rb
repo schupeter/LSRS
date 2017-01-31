@@ -48,7 +48,7 @@ Lsrs::Application.routes.draw do
 	get '/lsrs5/documentation/:action' => 'documentation5'
 	get '/lsrs5/documentation/interface/inputs/:name' => 'documentation5#input'
 	get '/lsrs5/documentation/:category/:factor/:crop' => 'documentation5#factorCropSpecificWithChart'
-	get '/lsrs5/documentation/:category/:factor' => 'documentation5#factor2'
+	get '/lsrs5/documentation/:category/:factor' => 'documentation5#canned'
 
 
 #	get '/contents.html' => 'home#contents'

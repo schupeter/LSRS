@@ -2,15 +2,9 @@
 <center>
 <h2>Site Rating for <%=@site.crop.capitalize%></h2>
 <table class="intro">
-<tr><td class="subheader">Soil_id:</td><td class="Abbr"><%=params[:soil_id]%></td></tr>
-<tr><td class="subheader">region:</td><td class="Abbr"><%=params[:region]%></td></tr>
-<tr><td class="subheader">PPE:</td><td class="Abbr"><%=params[:ppe]%></td></tr>
-<tr><td class="subheader">Slope:</td><td class="Abbr"><%=params[:slope]%></td></tr>
-<tr><td class="subheader">Slope length:</td><td class="Abbr"><%=params[:length]%></td></tr>
-<tr><td class="subheader">Stoniness:</td><td class="Abbr"><%=params[:stoniness]%></td></tr>
-<tr></tr>
-<tr><td class="subheader">Order:</td><td class="Abbr"><xsl:value-of select="Order3" /></td></tr>
-<tr><td class="subheader">SubGroup.GreatGroup:</td><td class="Abbr"><%=@site.soil.SubGroup3%>.<xsl:value-of select="GreatGroup3" /></td></tr>
+<tr><td class="subheader">Soil_id:</td><td class="Abbr"><a href="http://sis.agr.gc.ca/cansis/soils/<%=params[:soil_id][0..1].downcase%>/<%=params[:soil_id][2..4]%>/<%=params[:soil_id][5..9]%>/<%=params[:soil_id][10]%>/description.html"><%=params[:soil_id]%></a></td></tr>
+<tr><td class="subheader">Order:</td><td class="Abbr"><%=@site.soil.name.order3%></td></tr>
+<tr><td class="subheader">SubGroup.GreatGroup:</td><td class="Abbr"><%=@site.soil.name.s_group3%>.<%=@site.soil.name.g_group3%></td></tr>
 </table>
 <br/>
 <table cellspacing="0">
