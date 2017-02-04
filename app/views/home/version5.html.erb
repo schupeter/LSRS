@@ -1,0 +1,18 @@
+<h2>LSRS version 5</h2>
+
+<p>LSRS version 5 is a production system that incorporates the calculation of climate indices and supports raster data processing.  Major new features and improvements incorporated into this release.  Version 5:</p>
+
+<ol>
+	<li>validates climate data, calculates climate indices, and store the calculated indices (to simplify access, performance, and reliability)</li>
+	<li>reads climate indicies directly into climate rating (to simplify use and eliminate a significant source of human errors)</li>
+	<li>implements formula parameters as configuration hashes within the code instead of MySQL data tables (to simplify system maintenance)</li>
+	<li>eliminates storage of historic runs (this was to support development of the formulas, but is no longer needed given the maturity of the system)</li>
+	<li>generates ratings directly from configuration points, not formulas (eliminates unintended effects that occured at climate extremes)</li>
+	<li>stores configuration points in one place and use for ratings and to generate documentation (to improve consistency and simplify deduction curve edits)</li>
+	<li>changes access mechanism to REST (to support saving data for use in raster assessments)</li>
+	<li>creates separate access for climate. and soil+ landscape ratings, and stores complete details separately (to improve performance in support of raster calculations)</li>
+	<li>puts soil/climate/lansdcape ratings in Redis or Mysql or a table (to support fast access for raster)</li>
+	<li>drops XSLT and uses plain HTML for all human-readable outputs (to simplify maintenance)</li>
+	<li>&nbsp;</li>
+	<li><i>separates all interactions between soil/climate/lansdcape into final calc (to improve logic and simplify raster calculations)</i></li>
+</ol> 
