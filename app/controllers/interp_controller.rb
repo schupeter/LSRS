@@ -35,7 +35,7 @@ for factor in @value_factors.keys do
 @interpretations[factor] = @value_factors[factor][:ratings][eval("@#{@value_factors[factor][:table]}.#{@value_factors[factor][:method]}")]
 end
 end
-
+=begin
 def test_lookups
 	# build some sample data
 	params = {:sector=>"Agriculture",:interpretation=>"Alfalfa"}
@@ -57,5 +57,5 @@ def test_lookups
 	INTERPS["Agriculture"]["Alfalfa"][factor.capitalize][:ratings][Soil_name_nb_v2.first.send(factor)]
 	factors = ["drainage","drainage"]
 end
-
+=end
 end
