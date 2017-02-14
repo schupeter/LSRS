@@ -43,6 +43,7 @@ class AccessorsSoil
 	:MoistureDeduction,
 	:MoistureDeficitDeduction,
 	:MoistureReductionAmount,
+	:NotRatedReason,
 	:Order3,
 	:OrganicBD,
 	:OrganicBaseRating,

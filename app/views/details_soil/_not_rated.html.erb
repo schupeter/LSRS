@@ -1,0 +1,9 @@
+<% content_for :title do %>LSRS detailed calculation<%end%>
+<center>
+<h2>Site Rating for <%=@site.crop.capitalize%></h2>
+<table class="intro">
+<tr><td class="subheader">Soil_id:</td><td class="Abbr"><a href="http://sis.agr.gc.ca/cansis/soils/<%=params[:soil_id][0..1].downcase%>/<%=params[:soil_id][2..4]%>/<%=params[:soil_id][5..9]%>/<%=params[:soil_id][10]%>/description.html"><%=params[:soil_id]%></a></td></tr>
+<tr><td class="subheader">Suitability Rating</td><td class="Abbr">NOT RATED</td></tr>
+<tr><td class="subheader">Reason:</td><td class="Abbr"><%=@site.soil.NotRatedReason%></td></tr>
+</table>
+</center>

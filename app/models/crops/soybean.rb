@@ -28,6 +28,22 @@ EFM_DEDUCTIONS = [
 	{:value=>100, :deduction=>10}
 ]
 
+SURFACESALINITY_DEDUCTIONS = [
+	{:value=>2, :deduction=>0},
+	{:value=>4, :deduction=>20},
+	{:value=>8, :deduction=>50},
+	{:value=>16, :deduction=>90},
+	{:value=>18, :deduction=>100}
+]
+
+SUBSURFACESALINITY_DEDUCTIONS = [
+	{:value=>0, :deduction=>0},
+	{:value=>4, :deduction=>10},
+	{:value=>8, :deduction=>20},
+	{:value=>12, :deduction=>40},
+	{:value=>16, :deduction=>70}
+]
+
 	def Soybean.rate_climate(params, climate)
 		# aridity
 		climate.aridity = Assess_climate.aridity(climate.PPE, PPE_DEDUCTIONS)

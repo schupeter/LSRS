@@ -1,6 +1,6 @@
 class MineralFormulas
 	
-	def MineralFormulas.mineral(soil, ppe, coeff, deductions)
+	def MineralFormulas.mineral(soil, ppe, coeff, crop)
     # calculate rating
     # surface moisture factor = Table 4.2
     soil.SurfaceSTP = ( soil.SurfaceSi + soil.SurfaceC ) * ( 1 - soil.SurfaceCF / 100 )
@@ -66,11 +66,11 @@ class MineralFormulas
     if soil.SubsurfaceSi + soil.SubsurfaceC > 50 then soil.SubsurfaceSodicityDeductionInterim = 0 end
     # Surface salinity - EC - Table 4.9
 #    soil.SurfaceSalinityDeductionInterim = Calculate.constrain( ( (-28.704261 * 17.748344 + 278.70426 * soil.SurfaceSalinity ** 0.87021431) / (17.748344 + soil.SurfaceSalinity ** 0.87021431) ), 0, 100) # switched Nov 23 2015 to lookup
-		soil.SurfaceSalinityDeductionInterim = Calculate.lookup(soil.SurfaceSalinity, deductions[:surfaceSalinity])
+		soil.SurfaceSalinityDeductionInterim = Calculate.interpolate(soil.SurfaceSalinity, eval("#{crop}::SURFACESALINITY_DEDUCTIONS"))
     if soil.SurfaceSodicityDeductionInterim > soil.SurfaceSalinityDeductionInterim then soil.SurfaceSalinityDeductionInterim = 0 end
     # Subsurface Salinity - modified from Table 4.16 in LSRS manual
 #    soil.SubsurfaceSalinityDeductionInterim = Calculate.constrain( (-20 + 5.375 * soil.SubsurfaceSalinity), 0, 100)# switched Nov 23 2015 to lookup
-		soil.SubsurfaceSalinityDeductionInterim = Calculate.lookup(soil.SubsurfaceSalinity, deductions[:subsurfaceSalinity])
+		soil.SubsurfaceSalinityDeductionInterim = Calculate.interpolate(soil.SubsurfaceSalinity, eval("#{crop}::SUBSURFACESALINITY_DEDUCTIONS"))
     if soil.SubsurfaceSodicityDeductionInterim > soil.SubsurfaceSalinityDeductionInterim then soil.SubsurfaceSalinityDeductionInterim = 0 end
     # Surface sodicity final = Table 4.10
     if (soil.SubsurfaceSodicityDeductionInterim / 100) * (100 - soil.MoistureDeduction) >= soil.SurfaceSodicityDeductionInterim then soil.SurfaceSodicityDeduction = 0 else soil.SurfaceSodicityDeduction = soil.SurfaceSodicityDeductionInterim end

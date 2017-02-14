@@ -1,6 +1,6 @@
  class MineralPrep
 
-  def MineralPrep.inputsSLC(soil)
+  def MineralPrep.inputs(soil)
     # SNF/SLF records retrieved.  Calculate rating inputs.
     # Get "order" from selected record in the SNF file and set the Current order.
     soil.order = soil.name.order3
