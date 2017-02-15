@@ -29,7 +29,7 @@ Lsrs::Application.routes.draw do
 	# for SLC, the slope_len will need to be precalculated from locsf
 
 	# for alfalfa, brome, canola,, corn, soybean, sssgrain
-	get '/lsrs5/crop/:crop/site/:soil_id/:region/:ppe/:slope/:length/:stoniness/:view.:format' => 'crop_fieldcrop#site', :constraints => { :slope => /[^\/]+/ , :stoniness => /[^\/]+/}
+	get '/lsrs5/crop/:crop/site/:soil_id/:region/:egdd/:ppe/:slope/:length/:stoniness/:view.:format' => 'crop_fieldcrop#site', :constraints => { :slope => /[^\/]+/ , :stoniness => /[^\/]+/}
 	
 	
 	# new api documentation

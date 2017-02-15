@@ -17,10 +17,14 @@ class Fieldcrop1
 						site.soil.NotRatedReason = "Folic Humisol"
 					else # normal organic
 						#cmp = Organic.inputsSLC(cmp, @nameRecords[0])
+						OrganicPrep.inputs(site.soil)
 						#cmp = Organic.horizonsSLC(cmp, @layerRecords)
+						OrganicPrep.generalize_layers(site.soil)
 						#if @management == "improved" then cmp = Organic.management(cmp, manageBySoil, manageByCrop) end# deleted 20151027
 						#if @management == "improved" then cmp = Organic.management(cmp) end
+						
 						#cmp = Organic.calc(cmp, @climatePoly, @organicCoeff)
+						OrganicFormulas.calc(site.soil, site.climate, Organic.params(LsrsOrganicparam.where(:crop=>site.crop)) )
 					end
 				elsif site.soil.name.order3 == "-" then  # unclassified soil  - process as pseudo mineral component (not rated)
 						site.soil.SuitabilityClass = "NotRated"

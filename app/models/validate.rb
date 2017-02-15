@@ -42,6 +42,10 @@ class Validate
 			site.crop = params[:crop]
 			errors.push "crop" if not ["alfalfa","brome","canola","corn","soybean","sssgrain"].include?(site.crop)
 		end
+		if params.has_key?(:egdd) then
+			climate.EGDD = params[:egdd].to_i
+			errors.push "egdd" if not climate.EGDD.between?(0,5000) 
+		end		
 		if params.has_key?(:ppe) then
 			climate.PPE = params[:ppe].to_f
 			errors.push "ppe" if not climate.PPE.between?(-2000,1000) 

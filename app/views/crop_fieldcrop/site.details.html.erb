@@ -1,15 +1,24 @@
 <%if @site.soil.SuitabilityClass == "NotRated" then%>
 	<%= render :partial => "/details_soil/not_rated" %>
 <%else%>
-	<%= render :partial => "/details_soil/header" %>
+	<%if @site.soil.order3 == "OR" then%>
+	
+		<%= render :partial => "/details_soil/header" %>
+		<h3>Organic Soil Rating</h3>
+		Perhaps put all of this logic in the controller, not the view
+		<%= render :partial => "/details_soil/footer" %>
+	<%else%>
+	
+		<%= render :partial => "/details_soil/header" %>
 		<h3>Mineral Soil Rating</h3>
-	<%= render :partial => "/details_soil/rating_waterholding" %>
-	<%= render :partial => "/details_soil/rating_surface" %>
-	<%= render :partial => "/details_soil/rating_subsurface" %>
-	<%= render :partial => "/details_soil/rating_drainage" %>
-	<%= render :partial => "/details_soil/rating_final" %>
-	<%= render :partial => "/details_soil/footer" %>
-
+		<%= render :partial => "/details_soil/mineral_waterholding" %>
+		<%= render :partial => "/details_soil/mineral_surface" %>
+		<%= render :partial => "/details_soil/mineral_subsurface" %>
+		<%= render :partial => "/details_soil/mineral_drainage" %>
+		<%= render :partial => "/details_soil/mineral_final" %>
+		<%= render :partial => "/details_soil/footer" %>
+	<%end%>
+	
 	<%= render :partial => "/details_landscape/header" %>
 		<h3>Landscape Rating</h3>
 	<%= render :partial => "/details_landscape/rating_topography" %>
