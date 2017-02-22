@@ -83,17 +83,17 @@
 		<td>Reaction (pH) =</td>
 		<td><%=@site.soil.SubsurfaceReaction.round(2)%></td>
 		<td>% reduction =</td>
-		<td><%=@site.soil.SubsurfaceReactionDeductionInterim.round(0)%></td>
+		<td><%=@site.soil.SubsurfaceReactionDeduction.round(0)%></td>
 		<td></td>
 		<td></td>
 		<td class="Abbr">(<b>V</b>)</td>
-		<td class="Abbr"><a href="/documentation/Section4_2_4">more info</a></td>	</tr>
+		<td class="Abbr"><a href="/documentation/Section4_2_4">more info</a></td>
 	</tr>
 	<tr>
 		<td>Salinity (EC) (dS/m) =</td>
 		<td><%=@site.soil.SubsurfaceSalinity.round(2)%></td>
 		<td>% reduction =</td>
-		<td><%=@site.soil.SubsurfaceSalinityDeductionInterim.round(0)%></td>
+		<td><%=@site.soil.SubsurfaceSalinityDeduction.round(0)%></td>
 		<td></td>
 		<td></td>
 		<td class="Abbr">(<b>N</b>)</td>
@@ -103,7 +103,7 @@
 		<td>Sodicity (SAR) =</td>
 		<td><%=@site.soil.SubsurfaceSodicity.round(2)%></td>
 		<td>% reduction =</td>
-		<td><%=@site.soil.SubsurfaceSodicityDeductionInterim.round(0)%></td>
+		<td><%=@site.soil.SubsurfaceSodicityDeduction.round(0)%></td>
 		<td></td>
 		<td></td>
 		<td class="Abbr">(<b>Y</b>)</td>
@@ -125,7 +125,7 @@
 		<td></td>
 		<td></td>
 		<td>total % reduction =</td>
-		<td><%=@site.soil.SubsurfacePercentDeduction.round(0)%></td>
+		<td><%=@site.soil.SubsurfacePercentReduction.round(0)%></td>
 		<td></td>
 		<td></td>
 	</tr>

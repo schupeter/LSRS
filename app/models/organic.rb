@@ -31,6 +31,7 @@ class Organic
     # Horizon Processing if ORGANIC component.
     # initialize values for horizon processing
     cmp.OrganicDepth = 0
+    cmp.SurfaceCF = 0
     cmp.SurfaceDepth = 40
     cmp.SurfaceBD = 0.0
     cmp.SurfaceFibre = 0
@@ -246,11 +247,11 @@ class Organic
     subsurfaceFibre = [cmp.SubsurfaceFibre,0].max
     waterTableDepth = [cmp.WaterTableDepth,0].max
     if climatePoly.ppe < 150 then
-      cmp.DrainagePercentDeduction = Calculate.constrain((100 - (((((climatePoly.ppe) - 150) / -150) ** 2) * (Math.sqrt(subsurfaceFibre / 10))) - (waterTableDepth * Math.sqrt(((climatePoly.ppe) - 150) / -300))),0,100)
+      cmp.DrainagePercentReduction = Calculate.constrain((100 - (((((climatePoly.ppe) - 150) / -150) ** 2) * (Math.sqrt(subsurfaceFibre / 10))) - (waterTableDepth * Math.sqrt(((climatePoly.ppe) - 150) / -300))),0,100)
     else # bug 46
-      cmp.DrainagePercentDeduction = 100
+      cmp.DrainagePercentReduction = 100
     end
-    cmp.DrainageDeduction = (cmp.DrainagePercentDeduction / 100) * cmp.InterimFinalRating
+    cmp.DrainageDeduction = (cmp.DrainagePercentReduction / 100) * cmp.InterimFinalRating
     cmp.FinalSoilRating = (cmp.InterimFinalRating - cmp.DrainageDeduction).round
     cmp.SoilClass = Calculate.rating(cmp.FinalSoilRating) 
     # End of Horizon processing for ORGANIC component.

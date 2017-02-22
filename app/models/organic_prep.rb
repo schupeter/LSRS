@@ -23,6 +23,7 @@ class OrganicPrep
     # Horizon Processing if ORGANIC component.
     # initialize values for horizon processing
     soil.OrganicDepth = 0
+    soil.SurfaceCF = 0
     soil.SurfaceDepth = 40
     soil.SurfaceBD = 0.0
     soil.SurfaceFibre = 0

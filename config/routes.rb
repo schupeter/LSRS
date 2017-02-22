@@ -29,7 +29,8 @@ Lsrs::Application.routes.draw do
 	# for SLC, the slope_len will need to be precalculated from locsf
 
 	# for alfalfa, brome, canola,, corn, soybean, sssgrain
-	get '/lsrs5/crop/:crop/site/:soil_id/:region/:egdd/:ppe/:slope/:length/:stoniness/:view.:format' => 'crop_fieldcrop#site', :constraints => { :slope => /[^\/]+/ , :stoniness => /[^\/]+/}
+	# organic requires an extra parameter (egdd).  For mineral egdd is ignored.
+	get '/lsrs5/crop/:crop/site/:soil_id/:region/:slope/:length/:stoniness/:ppe/:egdd/:view.:format' => 'crop_fieldcrop#site', :constraints => { :slope => /[^\/]+/ , :stoniness => /[^\/]+/}
 	
 	
 	# new api documentation
@@ -37,10 +38,7 @@ Lsrs::Application.routes.draw do
 	# not implemented 
 	get '/lsrs5/:service/wadl.xml' => 'wadl#WADL'
 	
-	# combined service which will be split into climate/soil/landscape
-	get '/lsrs5/:soil_id/brome/:ppe/:gdd/:gsl/:region/:slope_p/:slope_len/:stoniness/:management' => 'lsrs5#brome'
-	get '/lsrs5/:soil_id/canola/:ppe/:egdd/:region/:slope_p/:slope_len/:stoniness/:management' => 'lsrs5#canola'
-	
+
 	get '/lsrs5/:soil_id/potato/:slope/:stoniness/:julymeantemp' => 'lsrs5#potato'
 	get '/lsrs5/:soil_id/potato/test' => 'lsrs5#potato'
 	

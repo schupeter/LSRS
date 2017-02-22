@@ -1,0 +1,41 @@
+<tr><th colspan="9">5) Drainage Factor</th></tr>
+	<tr>
+		<td>P-PE Index =</td>
+		<td><%=@site.climate.PPE.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Water Table Depth =</td>
+		<td><%=@site.soil.WaterTableDepth.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Subsurface % Fibre =</td>
+		<td><%=@site.soil.SubsurfaceFibre.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td>% reduction =</td>
+		<td><%=@site.soil.DrainagePercentReduction.round(0)%></td>
+		<td class="Abbr">(<b>W</b>)</td>
+		<td class="Abbr"><a href="/documentation/Section5_5_1">more info</a></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>total drainage deduction =</td>
+		<td><%=@site.soil.DrainageDeduction.round(0)%></td>
+		<td class="Abbr">(<i>f</i>)</td>
+		<td></td>
+	</tr>

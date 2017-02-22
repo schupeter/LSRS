@@ -76,13 +76,11 @@ xml.LSRS do
             xml.DeductionUsed(@climate.H_deduct)
           end
         end
-        if @climateCoeff.HF == "EGDD" then
-					xml.EGDD do
-						xml.EGDD(@climatePoly.egdd)
-						xml.DeductionRaw(@climate.H_deduct_raw)
-						xml.DeductionUsed(@climate.H_deduct)
-					end
-        end
+				xml.EGDD do
+					xml.EGDD(@climatePoly.egdd)
+					xml.DeductionRaw(@climate.H_deduct_raw)
+					xml.DeductionUsed(@climate.H_deduct)
+				end
         if @climateCoeff.HF == "GDD" then
           xml.GDD do
             xml.HF1 do
@@ -283,7 +281,7 @@ xml.LSRS do
               xml.InterimFinalRating(cmp.InterimFinalRating)
             end
             xml.DrainageFactor do
-              xml.PercentDeduction(cmp.DrainagePercentDeduction)
+              xml.PercentDeduction(cmp.DrainagePercentReduction)
               xml.Deduction(cmp.DrainageDeduction)
             end
             xml.Rating(cmp.FinalSoilRating)
@@ -376,7 +374,7 @@ xml.LSRS do
               xml.SodicityDeductionInterim(cmp.SubsurfaceSodicityDeductionInterim)
               xml.SodicityDeduction(cmp.SubsurfaceSodicityDeduction)
               xml.MostLimitingDeduction(cmp.SubsurfaceMostLimitingDeduction)
-              xml.PercentDeduction(cmp.SubsurfacePercentDeduction)
+              xml.PercentDeduction(cmp.SubsurfacePercentReduction)
               xml.PercentReduction(cmp.SubsurfaceDeduction)
             end
             xml.InterimBasicSoilRating(cmp.InterimBasicSoilRating)
@@ -386,7 +384,7 @@ xml.LSRS do
               xml.PPE(@climatePoly.ppe)
               xml.PercentSi(cmp.SurfaceSi)
               xml.PercentC(cmp.SurfaceC)
-              xml.PercentDeduction(cmp.DrainagePercentDeduction)
+              xml.PercentDeduction(cmp.DrainagePercentReduction)
               xml.Deduction(cmp.DrainageDeduction)
             end
             xml.Rating(cmp.FinalSoilRating)
@@ -407,17 +405,17 @@ xml.LSRS do
             xml.BasicRating(cmp.LandscapeBasicRating)
           end
           xml.CoarseFragment do
-            xml.StoninessPercentDeduction(cmp.LandscapeStoninessPercentDeduction)
-            xml.GravelPercentDeduction(cmp.LandscapeGravelPercentDeduction)
-            xml.WoodContentPercentDeduction(cmp.LandscapeWoodContentPercentDeduction)
-            xml.TotalCFPercentDeduction(cmp.LandscapeTotalCFPercentDeduction)
+            xml.StoninessPercentDeduction(cmp.LandscapeStoninessPercentReduction)
+            xml.GravelPercentDeduction(cmp.LandscapeGravelPercentReduction)
+            xml.WoodContentPercentDeduction(cmp.LandscapeWoodContentPercentReduction)
+            xml.TotalCFPercentDeduction(cmp.LandscapeTotalCFPercentReduction)
             xml.CFDeduction(cmp.LandscapeCFDeduction)
             xml.InterimRating(cmp.LandscapeInterimRating)
           end
           xml.Other do
-            xml.PatternPercentDeduction(cmp.LandscapePatternPercentDeduction)
-            xml.FloodingPercentDeduction(cmp.LandscapeFloodingPercentDeduction)
-            xml.TotalPercentDeductions(cmp.LandscapeTotalOtherPercentDeductions)
+            xml.PatternPercentDeduction(cmp.LandscapePatternPercentReduction)
+            xml.FloodingPercentDeduction(cmp.LandscapeFloodingPercentReduction)
+            xml.TotalPercentDeductions(cmp.LandscapeTotalOtherPercentReductions)
             xml.Deduction(cmp.LandscapeOtherDeduction)
           end
           xml.Rating(cmp.LandscapeFinalRating)

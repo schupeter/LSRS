@@ -277,10 +277,10 @@ class Mineral
     cmp.SurfaceTotalDeductions = 0
     cmp.SurfaceInterimSoilRating = 0
     cmp.SubsurfaceMostLimitingDeduction = 0
-    cmp.SubsurfacePercentDeduction = 0
+    cmp.SubsurfacePercentReduction = 0
     cmp.SubsurfaceDeduction = 0
     cmp.InterimBasicSoilRating = 0
-    cmp.DrainagePercentDeduction = 0
+    cmp.DrainagePercentReduction = 0
     cmp.DrainageDeduction = 0
     cmp.FinalSoilRating = 0
     cmp.FinalBasicSoilRating = 0
@@ -291,11 +291,11 @@ class Mineral
       else type = "Rock"
     end
     if type == "Water" then
-      cmp.DrainagePercentDeduction = 100
+      cmp.DrainagePercentReduction = 100
       cmp.DrainageDeduction = 100
     else # Rock
       cmp.SubsurfaceImpedenceDeduction = 100
-      cmp.SubsurfacePercentDeduction = 100
+      cmp.SubsurfacePercentReduction = 100
       cmp.SubsurfaceDeduction = 100
     end
     return cmp
@@ -416,16 +416,16 @@ class Mineral
     cmp.SurfaceInterimSoilRating = Calculate.constrain((100 - cmp.MoistureDeduction - cmp.SurfaceTotalDeductions), 0, 100)
     # max of subsurface deductions
     cmp.SubsurfaceMostLimitingDeduction = [cmp.SubsurfaceReactionDeduction, cmp.SubsurfaceSalinityDeduction, cmp.SubsurfaceSodicityDeduction].max
-    cmp.SubsurfacePercentDeduction = cmp.SubsurfaceHighestImpedenceDeduction + cmp.SubsurfaceMostLimitingDeduction
-    #cmp.SubsurfaceDeduction = cmp.SubsurfacePercentDeduction / 100 * cmp.SurfaceInterimSoilRating
-    cmp.SubsurfaceDeduction = cmp.SurfaceInterimSoilRating * cmp.SubsurfacePercentDeduction / 100
+    cmp.SubsurfacePercentReduction = cmp.SubsurfaceHighestImpedenceDeduction + cmp.SubsurfaceMostLimitingDeduction
+    #cmp.SubsurfaceDeduction = cmp.SubsurfacePercentReduction / 100 * cmp.SurfaceInterimSoilRating
+    cmp.SubsurfaceDeduction = cmp.SurfaceInterimSoilRating * cmp.SubsurfacePercentReduction / 100
     cmp.InterimBasicSoilRating = cmp.SurfaceInterimSoilRating - cmp.SubsurfaceDeduction
     if cmp.InterimBasicSoilRating < 0 then cmp.FinalBasicSoilRating = 0 else cmp.FinalBasicSoilRating = cmp.InterimBasicSoilRating end
 # Calculations for Drainage (W) = Tables 4.18, 4.19, 4.20
     if cmp.SurfaceSi == 0 then surfaceSi = 0.000001 else surfaceSi = cmp.SurfaceSi end
     if cmp.SurfaceC == 0 then surfaceC = 0.000001 else surfaceC = cmp.SurfaceC end
-    cmp.DrainagePercentDeduction = Calculate.constrain( ( (100 - ((100 + climatePoly.ppe) / -100) * 3) - (cmp.WaterTableDepth * (1.65 / Math.log10( surfaceSi + surfaceC))) ), 0, 100)
-    cmp.DrainageDeduction = ( cmp.FinalBasicSoilRating * cmp.DrainagePercentDeduction ) /100
+    cmp.DrainagePercentReduction = Calculate.constrain( ( (100 - ((100 + climatePoly.ppe) / -100) * 3) - (cmp.WaterTableDepth * (1.65 / Math.log10( surfaceSi + surfaceC))) ), 0, 100)
+    cmp.DrainageDeduction = ( cmp.FinalBasicSoilRating * cmp.DrainagePercentReduction ) /100
     cmp.FinalSoilRating = (cmp.FinalBasicSoilRating - cmp.DrainageDeduction).round
     cmp.SoilClass = Calculate.rating(cmp.FinalSoilRating) 
 

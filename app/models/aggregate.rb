@@ -19,7 +19,7 @@ class Aggregate
       if cmp.SoilClass == "NotRated" then # step 1.1
         # Populate water bodies category by adding to existing percent
         category.NotRated.push cmp
-      elsif cmp.DrainagePercentDeduction > 60 then # step 1.2 - drainage component
+      elsif cmp.DrainagePercentReduction > 60 then # step 1.2 - drainage component
         category.Drainage.push cmp
       else # dominant or dissimilar component
         domplusArray.push cmp
@@ -127,14 +127,14 @@ class Aggregate
       # assign summarized values to subfactorHash components
       for cmp in category do
         if cmp.LandscapeSlopeDeduction != nil then subfactorHash['landscapeT'] += cmp.LandscapeSlopeDeduction * cmp.percent end
-        if cmp.LandscapeStoninessPercentDeduction != nil then subfactorHash['landscapeP'] += cmp.LandscapeStoninessPercentDeduction * cmp.percent end
-        if cmp.LandscapeGravelPercentDeduction != nil then subfactorHash['landscapeP'] += cmp.LandscapeGravelPercentDeduction * cmp.percent end # add Gravel to Stoniness to create P summary
-        if cmp.LandscapeWoodContentPercentDeduction != nil then subfactorHash['landscapeJ'] += cmp.LandscapeWoodContentPercentDeduction * cmp.percent end
-        if cmp.LandscapePatternPercentDeduction != nil then subfactorHash['landscapeK'] += cmp.LandscapePatternPercentDeduction * cmp.percent end
-        if cmp.LandscapeFloodingPercentDeduction != nil then subfactorHash['landscapeI'] += cmp.LandscapeFloodingPercentDeduction * cmp.percent end
+        if cmp.LandscapeStoninessPercentReduction != nil then subfactorHash['landscapeP'] += cmp.LandscapeStoninessPercentReduction * cmp.percent end
+        if cmp.LandscapeGravelPercentReduction != nil then subfactorHash['landscapeP'] += cmp.LandscapeGravelPercentReduction * cmp.percent end # add Gravel to Stoniness to create P summary
+        if cmp.LandscapeWoodContentPercentReduction != nil then subfactorHash['landscapeJ'] += cmp.LandscapeWoodContentPercentReduction * cmp.percent end
+        if cmp.LandscapePatternPercentReduction != nil then subfactorHash['landscapeK'] += cmp.LandscapePatternPercentReduction * cmp.percent end
+        if cmp.LandscapeFloodingPercentReduction != nil then subfactorHash['landscapeI'] += cmp.LandscapeFloodingPercentReduction * cmp.percent end
         if cmp.MoistureDeficitDeduction != nil then subfactorHash['organicM'] += cmp.MoistureDeficitDeduction * cmp.percent end
         if cmp.TemperatureDeduction != nil then subfactorHash['organicZ'] += cmp.TemperatureDeduction * cmp.percent end
-        if cmp.DrainagePercentDeduction != nil then subfactorHash['organicW'] += cmp.DrainagePercentDeduction * cmp.percent end
+        if cmp.DrainagePercentReduction != nil then subfactorHash['organicW'] += cmp.DrainagePercentReduction * cmp.percent end
         maxDeduction= [cmp.SurfaceSalinityDeduction, cmp.SubsurfaceSalinityDeduction].compact.max
         if maxDeduction != nil then subfactorHash['organicN'] += maxDeduction * cmp.percent end
         maxDeduction= [cmp.SurfaceStructureDeduction,cmp.SubsurfaceStructureDeduction].compact.max
@@ -143,7 +143,7 @@ class Aggregate
         if maxDeduction != nil then subfactorHash['organicV'] += maxDeduction * cmp.percent end
         if cmp.SubsurfaceSubstrateDeduction != nil then subfactorHash['organicG'] += cmp.SubsurfaceSubstrateDeduction * cmp.percent end
         if cmp.MoistureDeduction != nil then subfactorHash['mineralM'] += cmp.MoistureDeduction * cmp.percent end
-        if cmp.DrainagePercentDeduction != nil then subfactorHash['mineralW'] += cmp.DrainagePercentDeduction * cmp.percent end
+        if cmp.DrainagePercentReduction != nil then subfactorHash['mineralW'] += cmp.DrainagePercentReduction * cmp.percent end
         maxDeduction = [cmp.SurfaceDeductionD,cmp.SubsurfaceImpedenceDeduction].compact.max
         if maxDeduction != nil then subfactorHash['mineralD'] += maxDeduction * cmp.percent end
         if cmp.SurfaceDeductionF != nil then subfactorHash['mineralF'] += cmp.SurfaceDeductionF * cmp.percent end

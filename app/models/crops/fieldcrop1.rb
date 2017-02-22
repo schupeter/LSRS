@@ -1,8 +1,6 @@
 class Fieldcrop1
 
  	def Fieldcrop1.rate_soil(params, site)
-		console
-		
 		if site.soil.name == nil   # missing name data - process as non-soil
 			site.soil.SuitabilityClass = "NotRated"
 			site.soil.NotRatedReason = "Missing soil name data"

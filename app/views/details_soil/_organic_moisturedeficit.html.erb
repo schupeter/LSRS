@@ -1,0 +1,84 @@
+<tr><th colspan="9">2) Moisture Deficit Factor</th></tr>
+	<tr>
+		<td class="Abbr">Water Capacity</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>P-PE index =</td>
+		<td><%=@site.climate.PPE.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Surface % Fibre =</td>
+		<td><%=@site.soil.SurfaceFibre.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td>deduction =</td>
+		<td><%=@site.soil.WaterCapacityDeduction.round(0)%></td>
+		<td class="Abbr">(<i>m1</i>)</td>
+		<td class="Abbr"><a href="/documentation/Section5_2_2">more info</a></td>
+	</tr>
+	<tr>
+		<td class="Abbr">Water Table Adjustment</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Water Table Depth =</td>
+		<td><%=@site.soil.WaterTableDepth.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Subsurface % Fibre =</td>
+		<td><%=@site.soil.SubsurfaceFibre.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td>deduction =</td>
+		<td><%=@site.soil.WaterTableAdjustment.round(0)%></td>
+		<td class="Abbr">(<i>m2</i>)</td>
+		<td class="Abbr"><a href="/documentation/Section5_2_3">more info</a></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>total moisture deficit deduction =</td>
+		<td><%=@site.soil.MoistureDeficitDeduction.round(0)%></td>
+		<td class="Abbr">(<b>M</b>)</td>
+		<td></td>
+	</tr>
+	<tr>
+		<th colspan="9"></th>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>Interim Rating (100 - Z - M) =</td>
+		<td><%=@site.soil.InterimRating.round(0)%></td>
+		<td class="Abbr">(<i>a</i>)</td>
+		<td></td>
+	</tr>

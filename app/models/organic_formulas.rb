@@ -64,11 +64,11 @@ class OrganicFormulas
     subsurfaceFibre = [soil.SubsurfaceFibre,0].max
     waterTableDepth = [soil.WaterTableDepth,0].max
     if climate.PPE < 150 then
-      soil.DrainagePercentDeduction = Calculate.constrain((100 - (((((climate.PPE) - 150) / -150) ** 2) * (Math.sqrt(subsurfaceFibre / 10))) - (waterTableDepth * Math.sqrt(((climate.PPE) - 150) / -300))),0,100)
+      soil.DrainagePercentReduction = Calculate.constrain((100 - (((((climate.PPE) - 150) / -150) ** 2) * (Math.sqrt(subsurfaceFibre / 10))) - (waterTableDepth * Math.sqrt(((climate.PPE) - 150) / -300))),0,100)
     else # bug 46
-      soil.DrainagePercentDeduction = 100
+      soil.DrainagePercentReduction = 100
     end
-    soil.DrainageDeduction = (soil.DrainagePercentDeduction / 100) * soil.InterimFinalRating
+    soil.DrainageDeduction = (soil.DrainagePercentReduction / 100) * soil.InterimFinalRating
     soil.FinalSoilRating = (soil.InterimFinalRating - soil.DrainageDeduction).round
     soil.SuitabilityClass = Calculate.rating(soil.FinalSoilRating) 
   end 

@@ -115,16 +115,16 @@ class MineralFormulas
     soil.SurfaceInterimSoilRating = Calculate.constrain((100 - soil.MoistureDeduction - soil.SurfaceTotalDeductions), 0, 100)
     # max of subsurface deductions
     soil.SubsurfaceMostLimitingDeduction = [soil.SubsurfaceReactionDeduction, soil.SubsurfaceSalinityDeduction, soil.SubsurfaceSodicityDeduction].max
-    soil.SubsurfacePercentDeduction = soil.SubsurfaceHighestImpedenceDeduction + soil.SubsurfaceMostLimitingDeduction
-    #soil.SubsurfaceDeduction = soil.SubsurfacePercentDeduction / 100 * soil.SurfaceInterimSoilRating
-    soil.SubsurfaceDeduction = soil.SurfaceInterimSoilRating * soil.SubsurfacePercentDeduction / 100
+    soil.SubsurfacePercentReduction = soil.SubsurfaceHighestImpedenceDeduction + soil.SubsurfaceMostLimitingDeduction
+    #soil.SubsurfaceDeduction = soil.SubsurfacePercentReduction / 100 * soil.SurfaceInterimSoilRating
+    soil.SubsurfaceDeduction = soil.SurfaceInterimSoilRating * soil.SubsurfacePercentReduction / 100
     soil.InterimBasicSoilRating = soil.SurfaceInterimSoilRating - soil.SubsurfaceDeduction
     if soil.InterimBasicSoilRating < 0 then soil.FinalBasicSoilRating = 0 else soil.FinalBasicSoilRating = soil.InterimBasicSoilRating end
 # Calculations for Drainage (W) = Tables 4.18, 4.19, 4.20
     if soil.SurfaceSi == 0 then surfaceSi = 0.000001 else surfaceSi = soil.SurfaceSi end
     if soil.SurfaceC == 0 then surfaceC = 0.000001 else surfaceC = soil.SurfaceC end
-    soil.DrainagePercentDeduction = Calculate.constrain( ( (100 - ((100 + ppe) / -100) * 3) - (soil.WaterTableDepth * (1.65 / Math.log10( surfaceSi + surfaceC))) ), 0, 100)
-    soil.DrainageDeduction = ( soil.FinalBasicSoilRating * soil.DrainagePercentDeduction ) /100
+    soil.DrainagePercentReduction = Calculate.constrain( ( (100 - ((100 + ppe) / -100) * 3) - (soil.WaterTableDepth * (1.65 / Math.log10( surfaceSi + surfaceC))) ), 0, 100)
+    soil.DrainageDeduction = ( soil.FinalBasicSoilRating * soil.DrainagePercentReduction ) /100
     soil.FinalSoilRating = (soil.FinalBasicSoilRating - soil.DrainageDeduction).round
     soil.SuitabilityClass = Calculate.rating(soil.FinalSoilRating) 
   end

@@ -1,0 +1,105 @@
+<tr><th colspan="9">3) Surface Factor</th></tr>
+	<tr>
+		<td class="Abbr">Structure</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>P-PE Index =</td>
+		<td><%=@site.climate.PPE.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Surface % Fibre =</td>
+		<td><%=@site.soil.SurfaceFibre.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td>% reduction =</td>
+		<td><%=@site.soil.SurfaceStructureDeduction.round(0)%></td>
+		<td class="Abbr">(<b>B</b>)</td>
+		<td class="Abbr"><a href="/documentation/Section5_3_1">more info</a></td>
+	</tr>
+	<tr>
+		<td class="Abbr">Chemistry</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Reaction (pH) =</td>
+		<td><%=@site.soil.SurfaceReaction.round(2)%></td>
+		<td>&nbsp;&nbsp;&nbsp;&nbsp;% reduction =</td>
+		<td><%=@site.soil.SurfaceReactionDeduction.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td class="Abbr">(<b>V</b>)</td>
+		<td class="Abbr"><a href="/documentation/Section5_3_2">more info</a></td>
+	</tr>
+	<tr>
+		<td>Salinity (EC) (dS/m) =</td>
+		<td><%=@site.soil.SurfaceSalinity.round(2)%></td>
+		<td>% reduction =</td>
+		<td><%=@site.soil.SurfaceSalinityDeduction.round(0)%></td>
+		<td></td>
+		<td></td>
+		<td class="Abbr">(<b>N</b>)</td>
+		<td class="Abbr"><a href="/documentation/Section5_3_3">more info</a></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>% reduction (max of V, N) =</td>
+		<td><%=@site.soil.SurfaceMostLimitingDeduction.round(0)%></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>total % reduction =</td>
+		<td><%=@site.soil.SurfaceTotalDeductions.round(0)%></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>total surface deduction =</td>
+		<td><%=@site.soil.SurfaceFinalDeduction.round(0)%></td>
+		<td class="Abbr">(<i>b</i>)</td>
+		<td></td>
+	</tr>
+
+	<tr>
+		<th colspan="9"></th>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>Basic Rating (<i>a</i> - <i>b</i>) =</td>
+		<td><%=@site.soil.BasicOrganicRating.round(0)%></td>
+		<td class="Abbr">(<i>c</i>)</td>
+		<td></td>
+	</tr>

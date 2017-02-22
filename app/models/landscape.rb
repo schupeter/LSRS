@@ -123,41 +123,41 @@ class Landscape
     cmp.LandscapeBasicRating = 100 - cmp.LandscapeSlopeDeduction
     #Coarse Fragment modifier
     # Stoniness
-#    cmp.LandscapeStoninessPercentDeduction = Calculate.constrain((cmp.stoninessValue * 53.333333), 0, 100) ## replaced July 2009
-#    cmp.LandscapeStoninessPercentDeduction = Calculate.constrain(((74.584 * cmp.stoninessValue ) + (-13.985 * cmp.stoninessValue ** 2)), 0, 100) ## replaced Jan 6, 2010 to make database driven
-#    cmp.LandscapeStoninessPercentDeduction = Calculate.constrain(((coeff.Pa + coeff.Pb * cmp.stoninessValue ) + (coeff.Pc * cmp.stoninessValue ** 2)), 0, 100) # replaced April 16 2012 
+#    cmp.LandscapeStoninessPercentReduction = Calculate.constrain((cmp.stoninessValue * 53.333333), 0, 100) ## replaced July 2009
+#    cmp.LandscapeStoninessPercentReduction = Calculate.constrain(((74.584 * cmp.stoninessValue ) + (-13.985 * cmp.stoninessValue ** 2)), 0, 100) ## replaced Jan 6, 2010 to make database driven
+#    cmp.LandscapeStoninessPercentReduction = Calculate.constrain(((coeff.Pa + coeff.Pb * cmp.stoninessValue ) + (coeff.Pc * cmp.stoninessValue ** 2)), 0, 100) # replaced April 16 2012 
     case slopeFactorModel
       when "perennial" then
-        cmp.LandscapeStoninessPercentDeduction = Calculate.constrain((-9.1851 + (77.356 * cmp.stoninessValue ) + (-11.499 * cmp.stoninessValue ** 2)), 0, 100)
+        cmp.LandscapeStoninessPercentReduction = Calculate.constrain((-9.1851 + (77.356 * cmp.stoninessValue ) + (-11.499 * cmp.stoninessValue ** 2)), 0, 100)
       else
-        cmp.LandscapeStoninessPercentDeduction = Calculate.constrain(((74.584 * cmp.stoninessValue ) + (-13.985 * cmp.stoninessValue ** 2)), 0, 100)
+        cmp.LandscapeStoninessPercentReduction = Calculate.constrain(((74.584 * cmp.stoninessValue ) + (-13.985 * cmp.stoninessValue ** 2)), 0, 100)
     end
     # Gravel - Figure 6.5
     if cmp.SurfaceCF != nil then
       if crop == "alfalfa" or crop == "brome" then
-        cmp.LandscapeGravelPercentDeduction = 0
+        cmp.LandscapeGravelPercentReduction = 0
       else
-        cmp.LandscapeGravelPercentDeduction = Calculate.constrain((-9 + cmp.SurfaceCF * 0.96285714 + (-0.0057142857 * cmp.SurfaceCF ** 2 )), 0, 100) 
+        cmp.LandscapeGravelPercentReduction = Calculate.constrain((-9 + cmp.SurfaceCF * 0.96285714 + (-0.0057142857 * cmp.SurfaceCF ** 2 )), 0, 100) 
       end
     else 
-      cmp.LandscapeGravelPercentDeduction = 0
+      cmp.LandscapeGravelPercentReduction = 0
     end
     # Wood
     if cmp.order == "OR" then
-      cmp.LandscapeWoodContentPercentDeduction = Calculate.constrain((cmp.SurfaceWood * 2 + cmp.SubsurfaceWood), 0, 25)
+      cmp.LandscapeWoodContentPercentReduction = Calculate.constrain((cmp.SurfaceWood * 2 + cmp.SubsurfaceWood), 0, 25)
     else
-      cmp.LandscapeWoodContentPercentDeduction = 0
+      cmp.LandscapeWoodContentPercentReduction = 0
     end
-    cmp.LandscapeTotalCFPercentDeduction = cmp.LandscapeStoninessPercentDeduction + cmp.LandscapeGravelPercentDeduction + cmp.LandscapeWoodContentPercentDeduction
-    cmp.LandscapeCFDeduction = cmp.LandscapeBasicRating * cmp.LandscapeTotalCFPercentDeduction / 100
+    cmp.LandscapeTotalCFPercentReduction = cmp.LandscapeStoninessPercentReduction + cmp.LandscapeGravelPercentReduction + cmp.LandscapeWoodContentPercentReduction
+    cmp.LandscapeCFDeduction = cmp.LandscapeBasicRating * cmp.LandscapeTotalCFPercentReduction / 100
     cmp.LandscapeInterimRating = cmp.LandscapeBasicRating - cmp.LandscapeCFDeduction
     #Other deductions
-    cmp.LandscapePatternPercentDeduction = Calculate.constrain(cmp.LandscapePattern, 0, 10)
+    cmp.LandscapePatternPercentReduction = Calculate.constrain(cmp.LandscapePattern, 0, 10)
     # flooding
     inundation = [nil,[nil,0,5,5,10],[nil,0,5,10,20],[nil,10,30,65,75],[nil,30,65,70,90]]
-    cmp.LandscapeFloodingPercentDeduction = inundation[cmp.LandscapeFloodingFreq][cmp.LandscapeFloodingPeriod]
-    cmp.LandscapeTotalOtherPercentDeductions = cmp.LandscapePatternPercentDeduction + cmp.LandscapeFloodingPercentDeduction
-    cmp.LandscapeOtherDeduction = cmp.LandscapeInterimRating * cmp.LandscapeTotalOtherPercentDeductions / 100
+    cmp.LandscapeFloodingPercentReduction = inundation[cmp.LandscapeFloodingFreq][cmp.LandscapeFloodingPeriod]
+    cmp.LandscapeTotalOtherPercentReductions = cmp.LandscapePatternPercentReduction + cmp.LandscapeFloodingPercentReduction
+    cmp.LandscapeOtherDeduction = cmp.LandscapeInterimRating * cmp.LandscapeTotalOtherPercentReductions / 100
     cmp.LandscapeFinalRating = (cmp.LandscapeInterimRating - cmp.LandscapeOtherDeduction).round
     cmp.LandscapeClass = Calculate.rating(cmp.LandscapeFinalRating)
     return cmp
