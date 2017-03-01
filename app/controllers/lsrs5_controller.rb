@@ -15,20 +15,34 @@ class Lsrs5Controller < ApplicationController
 # drop XSLT and use plain HTML for all human-readable outputs (to simplify maintenance)
 
 
+  def polygon_client
+    params.each do |key, value|      # standardize request parameters
+      case key.upcase        # clean up letter case in request parameters
+        when "FRAMEWORKNAME"
+          @frameworkName = value
+					@cmpTable = value.delete("~") + "_cmp"
+					@patTable = value.delete("~").capitalize + "_pat"
+      end # case
+    end # params
+    if !(defined? @frameworkName) or @frameworkName == "" then
+      @step = 1
+      @soilDatasets = LsrsCmp.order("Title_en ASC")
+    else
+      @step = 2
+      @soilDataset = LsrsCmp.where(:WarehouseName=>@cmpTable).first
+      @climateTables = LsrsClimate.where('PolygonTable like ? or PolygonTable like ?',@soilDataset.DSSClimatePolygonTable,@soilDataset.SLCClimatePolygonTable).order("Title_en")
+      @crops = Lsrs_crop.all
+    end
+    render
+  end
 
-# OBSOLETE because these are now separate services.
-	def potato
-		@test = Initialize.parameters(params)
-		@soilHash = {}
-		@soilHash.store("province", "ON")
-		@soilHash.store("soil_code", "BSB")
-		@soilHash.store("modifier", "~~~~~")
-		@soilHash.store("profile", "A")
-		@nameRecords = Soil_name_on_v2.where(@soilHash)
-		@crop = Potato.calculate
-		render "test"
+	def polygon_urls
+		@rating = AccessorsRating.new
+		Validate.polygon_urls(params, @rating)
+		Polygon.get_data(@rating.polygon, @rating.climate, @rating.errors)
+
+		render
 	end
-	
 
   def Index
     render

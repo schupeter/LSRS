@@ -99,4 +99,24 @@ class Validate
 		end
 	end
 
+	def Validate.polygon_urls(params, rating)
+    params.each do |key, value|
+      case key.upcase        # clean up letter case in request parameters
+        when "FRAMEWORKNAME"
+					rating.polygon.frameworkName = value
+        when "POLYID"  
+          rating.polygon.poly_id = value
+        when "CROP"
+          rating.crop = value
+        when "CLIMATETABLE"
+          rating.climate.tableName = value.capitalize
+        when "RESPONSE"
+          rating.responseForm = value
+				when "MANAGEMENT"
+					rating.management = value
+      end
+    end
+		return rating
+	end
+
 end
