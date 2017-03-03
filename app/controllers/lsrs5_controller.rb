@@ -44,7 +44,7 @@ class Lsrs5Controller < ApplicationController
 		Validate.polygon_urls(params, @rating)
 		Polygon.get_data(@rating.polygon, @rating.climateData, @rating.errors)
 		Polygon.get_ratings(@rating.crop, @rating.polygon, @rating.climateData.data, @rating.climate, @rating.errors)
-		Polygon.aggregate_ratings(@rating.polygon)
+		Polygon.aggregate_ratings(@rating.polygon.components, @rating.climate, @rating.aggregate)
 		console
 	end
 

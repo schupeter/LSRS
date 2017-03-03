@@ -1,5 +1,5 @@
 class AccessorsSite
-  attr_accessor :climate, :soil, :landscape, :crop, :errors
+  attr_accessor :climate, :soil, :landscape, :crop, :percent, :errors
 	def initialize
 		self.climate = AccessorsClimate.new
 		self.soil = AccessorsSoil.new
