@@ -1,13 +1,14 @@
 <center>
 
 <h3>climate rating</h3>
-<a href="<%=Interface.lsrs5climate(@rating.crop, @rating.climate)%>/details.html"><%=@rating.polygon.poly_id%></a>
+<a href="<%=Interface.lsrs5climate(@rating.crop, @rating.climateData)%>/details.html"><%=@rating.polygon.poly_id%></a>
 
 <h3>component ratings</h3>
 <ol>
-<%for cmp in @rating.polygon.components do%>
-	<li><a href="<%=Interface.lsrs5sitefieldcrop(@rating.crop, @rating.polygon, cmp, @rating.climate)%>/details.html"><%=cmp.cmp_id%></a></li>
+<%for cmp in @rating.polygon.cmpData do%>
+	<li><a href="<%=Interface.lsrs5sitefieldcrop(@rating.crop, @rating.polygon, cmp, @rating.climateData)%>/details.html"><%=cmp.cmp_id%></a></li>
 <%end%>
 </ol>
 
 </center>
+<%= debug @rating.polygon.components%>

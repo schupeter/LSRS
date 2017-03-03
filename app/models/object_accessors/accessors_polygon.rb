@@ -9,5 +9,9 @@ class AccessorsPolygon
 	:landscape_id,
 	:climate_id,
 	:erosivity_region,
+	:cmpData,
 	:components
+	def initialize
+		self.components = []
+	end
 end

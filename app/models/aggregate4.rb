@@ -1,15 +1,15 @@
-class Aggregate
+class Aggregate4
 # functions to aggregate individual component ratings into a single rating for the polygon. 
 # category = drainage, water, dominant, subdominant
 # factor = climate, mineral/organic, landscape
 # subfactor = A, H, W etc
 
-  def Aggregate.AddWater(lsrsArray)
+  def Aggregate4.AddWater(lsrsArray)
     cmp = Lsrs_cmp_class.new
 #    cmp.percent = area of water / area of land + area of water
   end
   
-  def Aggregate.Categorize(lsrsArray)
+  def Aggregate4.Categorize(lsrsArray)
     # sort components into categories: NotRated, Drainage, Dominant and Dissimilar
     category = Lsrs_aggregate_class.new
     category.NotRated = Array.new
@@ -60,7 +60,7 @@ class Aggregate
     return category
   end
   
-  def Aggregate.NotRated(notRatedArray)
+  def Aggregate4.NotRated(notRatedArray)
     # Step 2.1: aggregate water component
     percent = 0
     for cmp in notRatedArray do
@@ -69,7 +69,7 @@ class Aggregate
     return percent
   end
   
-  def Aggregate.Soil(soilArray)
+  def Aggregate4.Soil(soilArray)
     # Step 3:  aggregate normal components
     factorHash = Hash.new
     factorHash['Percent'] = 0
@@ -89,7 +89,7 @@ class Aggregate
     return factorHash
   end
 
-  def Aggregate.MostLimitingFactor(factorHash)
+  def Aggregate4.MostLimitingFactor(factorHash)
     # Step 4.1
     # assumes climate is more important than soil which is more important than landscape
     factorHash['MostLimitingFactor'] = "Climate"
@@ -99,7 +99,7 @@ class Aggregate
     return factorHash
   end
   
-  def Aggregate.SummarizeSubfactors(category, sumPercent)
+  def Aggregate4.SummarizeSubfactors(category, sumPercent)
     if sumPercent > 0 then
       # initialize summary values for this category
       subfactorHash = Hash.new
@@ -225,7 +225,7 @@ class Aggregate
     return subfactorHash2
   end
   
-  def Aggregate.DropBelow20(subfactorHash)
+  def Aggregate4.DropBelow20(subfactorHash)
     # delete subfactor values below 20
     if subfactorHash['A'] != nil and subfactorHash['A'] <= 20 then subfactorHash.delete('A') end
     if subfactorHash['H'] != nil and subfactorHash['H'] <= 20 then subfactorHash.delete('H') end
@@ -249,7 +249,7 @@ class Aggregate
     return subfactorHash
   end
   
-  def Aggregate.DropAH(subfactorHash, rating)
+  def Aggregate4.DropAH(subfactorHash, rating)
     # Step 5.2 drop A and H if climate is not the most limiting factor
     if rating['MostLimitingFactor'] != "Climate" then
       subfactorHash.delete('A')
@@ -258,7 +258,7 @@ class Aggregate
     return subfactorHash
   end
 
-  def Aggregate.DropAM(subfactorHash)
+  def Aggregate4.DropAM(subfactorHash)
     # Step 5.3  drop A or M if both are present
     if (subfactorHash['A'] != nil) and (subfactorHash['M'] != nil) then
       if subfactorHash['M'] >= subfactorHash['A'] + 5 then 
@@ -270,7 +270,7 @@ class Aggregate
     return subfactorHash
   end
   
-  def Aggregate.DeleteSubfactors(subfactorHash, allSubfactorKeys)
+  def Aggregate4.DeleteSubfactors(subfactorHash, allSubfactorKeys)
     # part of Step 5.4.1
     keysArray = allSubfactorKeys & subfactorHash.keys
     if keysArray.size > 1 then
@@ -284,20 +284,20 @@ class Aggregate
     return subfactorHash
   end    
     
-  def Aggregate.DropWithinFactor(subfactorHash)
+  def Aggregate4.DropWithinFactor(subfactorHash)
     # Step 5.4.1  within factor comparison
     if subfactorHash != {} then
       # Climate Factor
-      subfactorHash = Aggregate.DeleteSubfactors(subfactorHash, ['A','H'])
+      subfactorHash = Aggregate4.DeleteSubfactors(subfactorHash, ['A','H'])
       # Landscape Factor
-      subfactorHash = Aggregate.DeleteSubfactors(subfactorHash, ['T','P','J','K','I'])
+      subfactorHash = Aggregate4.DeleteSubfactors(subfactorHash, ['T','P','J','K','I'])
       # Soil Factor
-      subfactorHash = Aggregate.DeleteSubfactors(subfactorHash, ['M','Z','W','N','B','V','G','D','F','E','O','Y'])
+      subfactorHash = Aggregate4.DeleteSubfactors(subfactorHash, ['M','Z','W','N','B','V','G','D','F','E','O','Y'])
     end
     return subfactorHash
   end
   
-  def Aggregate.DropWithinFactorOLD(subfactorHash)
+  def Aggregate4.DropWithinFactorOLD(subfactorHash)
     # Step 5.4.1  within factor comparison
     if subfactorHash != {} then
       # Climate Factor
@@ -329,7 +329,7 @@ class Aggregate
     return subfactorHash
   end
 
-  def Aggregate.DropOtherFactors(subfactorHash, category)
+  def Aggregate4.DropOtherFactors(subfactorHash, category)
     # Step 5.4.2  between factor comparison
 #    threshold = 100 - (100 - category[category['MostLimitingFactor'] + "Rating"]) * 0.33
     threshold = category[category['MostLimitingFactor'] + "Rating"] * 0.33
@@ -361,7 +361,7 @@ class Aggregate
     return subfactorHash
   end
  
-  def Aggregate.PrimarySubclass(subfactorHash, category)
+  def Aggregate4.PrimarySubclass(subfactorHash, category)
     # Step 5.5 determine primary subclass
     factorSummary = Hash.new
     if category['MostLimitingFactor'] == 'Climate' then
@@ -398,7 +398,7 @@ class Aggregate
     return category
   end
 
-  def Aggregate.AdditionalSubclasses(subfactorHash, factorHash)
+  def Aggregate4.AdditionalSubclasses(subfactorHash, factorHash)
     # Step 5.5b determine additional subclasses
     if subfactorHash != {} then
       summary2 = subfactorHash
@@ -415,7 +415,7 @@ class Aggregate
     return factorHash
   end
   
-  def Aggregate.FinalClass(subfactorHash, factorHash)
+  def Aggregate4.FinalClass(subfactorHash, factorHash)
     # Step 6 Final class and subclasses
     if factorHash['Percent'] != 0 then
       subfactors =  factorHash['PrimarySubfactor']
@@ -430,7 +430,7 @@ class Aggregate
     return factorHash
   end
 
-  def Aggregate.rating(drainageFactorHash,dominantFactorHash,dissimilarFactorHash,perdecimNotRated)
+  def Aggregate4.rating(drainageFactorHash,dominantFactorHash,dissimilarFactorHash,perdecimNotRated)
     # create a new set of arrays for processing
     factorArray = [drainageFactorHash,dominantFactorHash,dissimilarFactorHash]
     # get rid of zero perdecim 

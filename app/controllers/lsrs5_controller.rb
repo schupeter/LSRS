@@ -15,6 +15,7 @@ class Lsrs5Controller < ApplicationController
 # drop XSLT and use plain HTML for all human-readable outputs (to simplify maintenance)
 
 
+	# prepares a valid request for the polygon_urls action
   def polygon_client
     params.each do |key, value|      # standardize request parameters
       case key.upcase        # clean up letter case in request parameters
@@ -36,12 +37,15 @@ class Lsrs5Controller < ApplicationController
     render
   end
 
+	# generates the LSRSv5 urls for a given polygon + climate + crop
+	# first validates the input parameters, then gets component and climate data for the polygon
 	def polygon_urls
 		@rating = AccessorsRating.new
 		Validate.polygon_urls(params, @rating)
-		Polygon.get_data(@rating.polygon, @rating.climate, @rating.errors)
-
-		render
+		Polygon.get_data(@rating.polygon, @rating.climateData, @rating.errors)
+		Polygon.get_ratings(@rating.crop, @rating.polygon, @rating.climateData.data, @rating.climate, @rating.errors)
+		Polygon.aggregate_ratings(@rating.polygon)
+		console
 	end
 
   def Index

@@ -109,7 +109,7 @@ class Validate
         when "CROP"
           rating.crop = value
         when "CLIMATETABLE"
-          rating.climate.tableName = value.capitalize
+          rating.climateData.tableName = value.capitalize
         when "RESPONSE"
           rating.responseForm = value
 				when "MANAGEMENT"

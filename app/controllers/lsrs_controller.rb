@@ -221,13 +221,13 @@ class LsrsController < ApplicationController
     
     # Create aggregate rating
     # STEP 1: Assign Components to Categories
-    category = Aggregate.Categorize(@lsrsArray)
+    category = Aggregate4.Categorize(@lsrsArray)
     # STEP 2: Summarize the special Not Rated category
-    percentNotRated = Aggregate.NotRated(category.NotRated)
+    percentNotRated = Aggregate4.NotRated(category.NotRated)
     # STEP 3: Summarize the normal categories:
-    drainageFactorHash = Aggregate.Soil(category.Drainage)
-    dominantFactorHash = Aggregate.Soil(category.Dominant)
-    dissimilarFactorHash = Aggregate.Soil(category.Dissimilar)
+    drainageFactorHash = Aggregate4.Soil(category.Drainage)
+    dominantFactorHash = Aggregate4.Soil(category.Dominant)
+    dissimilarFactorHash = Aggregate4.Soil(category.Dissimilar)
     
     # STEP 4: Determine the class number 
     # assign climate factor rating
@@ -235,15 +235,15 @@ class LsrsController < ApplicationController
     dominantFactorHash['ClimateRating'] = @climate.Value.round
     dissimilarFactorHash['ClimateRating'] = @climate.Value.round
     # determine most limiting factor and calculate class
-    drainageFactorHash = Aggregate.MostLimitingFactor(drainageFactorHash)
-    dominantFactorHash = Aggregate.MostLimitingFactor(dominantFactorHash)
-    dissimilarFactorHash = Aggregate.MostLimitingFactor(dissimilarFactorHash)
+    drainageFactorHash = Aggregate4.MostLimitingFactor(drainageFactorHash)
+    dominantFactorHash = Aggregate4.MostLimitingFactor(dominantFactorHash)
+    dissimilarFactorHash = Aggregate4.MostLimitingFactor(dissimilarFactorHash)
     
-    # STEP 5: Aggregate the subclass values (do this before step 4 to initialize *SubfactorHash easily)
+    # STEP 5: Aggregate4 the subclass values (do this before step 4 to initialize *SubfactorHash easily)
     # Step 5.1: Calculate weighted average for soil and landscape factors
-    drainageSubfactorHash = Aggregate.SummarizeSubfactors(category.Drainage, drainageFactorHash['Percent'])
-    dominantSubfactorHash = Aggregate.SummarizeSubfactors(category.Dominant, dominantFactorHash['Percent'])
-    dissimilarSubfactorHash = Aggregate.SummarizeSubfactors(category.Dissimilar, dissimilarFactorHash['Percent'])
+    drainageSubfactorHash = Aggregate4.SummarizeSubfactors(category.Drainage, drainageFactorHash['Percent'])
+    dominantSubfactorHash = Aggregate4.SummarizeSubfactors(category.Dominant, dominantFactorHash['Percent'])
+    dissimilarSubfactorHash = Aggregate4.SummarizeSubfactors(category.Dissimilar, dissimilarFactorHash['Percent'])
     # introduce climate subfactors A/H
     drainageSubfactorHash['H'] = @climate.H_deduct
     drainageSubfactorHash['A'] = @climate.A_deduct
@@ -258,39 +258,39 @@ class LsrsController < ApplicationController
     
     # STEP 6: Drop the less important subclasses
     # Step 6.1 drop subfactor values less than or equal to 20
-    drainageSubfactorHash = Aggregate.DropBelow20(drainageSubfactorHash)
-    dominantSubfactorHash = Aggregate.DropBelow20(dominantSubfactorHash)
-    dissimilarSubfactorHash = Aggregate.DropBelow20(dissimilarSubfactorHash)
+    drainageSubfactorHash = Aggregate4.DropBelow20(drainageSubfactorHash)
+    dominantSubfactorHash = Aggregate4.DropBelow20(dominantSubfactorHash)
+    dissimilarSubfactorHash = Aggregate4.DropBelow20(dissimilarSubfactorHash)
     # Step 6.2 drop A and H if climate is not the most limiting factor
-    drainageSubfactorHash = Aggregate.DropAH(drainageSubfactorHash, drainageFactorHash)
-    dominantSubfactorHash = Aggregate.DropAH(dominantSubfactorHash, dominantFactorHash)
-    dissimilarSubfactorHash = Aggregate.DropAH(dissimilarSubfactorHash, dissimilarFactorHash)
+    drainageSubfactorHash = Aggregate4.DropAH(drainageSubfactorHash, drainageFactorHash)
+    dominantSubfactorHash = Aggregate4.DropAH(dominantSubfactorHash, dominantFactorHash)
+    dissimilarSubfactorHash = Aggregate4.DropAH(dissimilarSubfactorHash, dissimilarFactorHash)
     # Step 6.3  drop A or M if both are present
-    drainageSubfactorHash = Aggregate.DropAM(drainageSubfactorHash)
-    dominantSubfactorHash = Aggregate.DropAM(dominantSubfactorHash)
-    dissimilarSubfactorHash = Aggregate.DropAM(dissimilarSubfactorHash)
+    drainageSubfactorHash = Aggregate4.DropAM(drainageSubfactorHash)
+    dominantSubfactorHash = Aggregate4.DropAM(dominantSubfactorHash)
+    dissimilarSubfactorHash = Aggregate4.DropAM(dissimilarSubfactorHash)
     # Step 6.4  drop less significant subclasses
     # Step 6.4.1  within factor comparison
-    drainageSubfactorHash = Aggregate.DropWithinFactor(drainageSubfactorHash)
-    dominantSubfactorHash = Aggregate.DropWithinFactor(dominantSubfactorHash)
-    dissimilarSubfactorHash = Aggregate.DropWithinFactor(dissimilarSubfactorHash)
+    drainageSubfactorHash = Aggregate4.DropWithinFactor(drainageSubfactorHash)
+    dominantSubfactorHash = Aggregate4.DropWithinFactor(dominantSubfactorHash)
+    dissimilarSubfactorHash = Aggregate4.DropWithinFactor(dissimilarSubfactorHash)
     # Step 6.4.2  between factor comparison
-    drainageSubfactorHash = Aggregate.DropOtherFactors(drainageSubfactorHash, drainageFactorHash)
-    dominantSubfactorHash = Aggregate.DropOtherFactors(dominantSubfactorHash, dominantFactorHash)
-    dissimilarSubfactorHash = Aggregate.DropOtherFactors(dissimilarSubfactorHash, dissimilarFactorHash)
+    drainageSubfactorHash = Aggregate4.DropOtherFactors(drainageSubfactorHash, drainageFactorHash)
+    dominantSubfactorHash = Aggregate4.DropOtherFactors(dominantSubfactorHash, dominantFactorHash)
+    dissimilarSubfactorHash = Aggregate4.DropOtherFactors(dissimilarSubfactorHash, dissimilarFactorHash)
     # Step 6.5 determine primary subclass
-    drainageFactorHash = Aggregate.PrimarySubclass(drainageSubfactorHash, drainageFactorHash)
-    dominantFactorHash = Aggregate.PrimarySubclass(dominantSubfactorHash, dominantFactorHash)
-    dissimilarFactorHash = Aggregate.PrimarySubclass(dissimilarSubfactorHash, dissimilarFactorHash)
+    drainageFactorHash = Aggregate4.PrimarySubclass(drainageSubfactorHash, drainageFactorHash)
+    dominantFactorHash = Aggregate4.PrimarySubclass(dominantSubfactorHash, dominantFactorHash)
+    dissimilarFactorHash = Aggregate4.PrimarySubclass(dissimilarSubfactorHash, dissimilarFactorHash)
     # determine remaining subclasses
-    drainageFactorHash = Aggregate.AdditionalSubclasses(drainageSubfactorHash, drainageFactorHash)
-    dominantFactorHash = Aggregate.AdditionalSubclasses(dominantSubfactorHash, dominantFactorHash)
-    dissimilarFactorHash = Aggregate.AdditionalSubclasses(dissimilarSubfactorHash, dissimilarFactorHash)
+    drainageFactorHash = Aggregate4.AdditionalSubclasses(drainageSubfactorHash, drainageFactorHash)
+    dominantFactorHash = Aggregate4.AdditionalSubclasses(dominantSubfactorHash, dominantFactorHash)
+    dissimilarFactorHash = Aggregate4.AdditionalSubclasses(dissimilarSubfactorHash, dissimilarFactorHash)
 
     # STEP 7: Create Category Ratings
-    drainageFactorHash = Aggregate.FinalClass(drainageSubfactorHash, drainageFactorHash)
-    dominantFactorHash = Aggregate.FinalClass(dominantSubfactorHash, dominantFactorHash)
-    dissimilarFactorHash = Aggregate.FinalClass(dissimilarSubfactorHash, dissimilarFactorHash)
+    drainageFactorHash = Aggregate4.FinalClass(drainageSubfactorHash, drainageFactorHash)
+    dominantFactorHash = Aggregate4.FinalClass(dominantSubfactorHash, dominantFactorHash)
+    dissimilarFactorHash = Aggregate4.FinalClass(dissimilarSubfactorHash, dissimilarFactorHash)
     
     # STEP 8: Create a Composite Rating
     # calculate deciles
@@ -300,7 +300,7 @@ class LsrsController < ApplicationController
     dissimilarFactorHash['PerDecim'] = decileArray[2]
     perdecimNotRated = decileArray[3]
     # create rating
-    @lsrsRating = Aggregate.rating(drainageFactorHash,dominantFactorHash,dissimilarFactorHash,perdecimNotRated)
+    @lsrsRating = Aggregate4.rating(drainageFactorHash,dominantFactorHash,dissimilarFactorHash,perdecimNotRated)
 
     #Render results as XML
     case @response 

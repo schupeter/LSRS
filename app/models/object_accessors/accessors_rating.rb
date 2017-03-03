@@ -1,13 +1,15 @@
 class AccessorsRating
   attr_accessor :crop, 
 	:polygon, 
-	:climate, 
+	:climateData,
+	:climate,
 	:management, 
 	:responseForm, 
 	:errors
 	def initialize
 		self.polygon = AccessorsPolygon.new
-		self.climate = AccessorsPolygonclimate.new
+		self.climateData = AccessorsPolygonclimate.new
+		self.climate = AccessorsClimate.new
 		self.errors = []
 	end
 end
