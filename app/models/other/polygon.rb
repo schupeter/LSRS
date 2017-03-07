@@ -57,20 +57,20 @@ class Polygon
 		Validate.climate_params(params, climateRating, errors)
 		eval(crop.capitalize).rate_climate(params, climateRating)
 		for cmp in polygon.cmpData do
-			if polygon.cmpType == "SLC" then
-				slope = cmp.slope
-				length = cmp.locsf
-				stoniness = cmp.stone
-			else #DSS
-				slope = cmp.slope_p
-				length = cmp.slope_len
-				stoniness = cmp.stoniness
-			end
-			params = {:crop=>crop, :soil_id=>cmp.soil_id, :region=>polygon.erosivity_region, :slope=>slope, :length=>length, :stoniness=>stoniness, :ppe=>climateData.ppe, :egdd=>climateData.egdd}
 			site = AccessorsSite.new		
+			if polygon.cmpType == "SLC" then
+				site.slope = cmp.slope
+				site.length = cmp.locsf
+				site.stoniness = cmp.stone
+			else #DSS
+				site.slope = cmp.slope_p
+				site.length = cmp.slope_len
+				site.stoniness = cmp.stoniness
+			end
+			params = {:crop=>crop, :soil_id=>cmp.soil_id, :region=>polygon.erosivity_region, :slope=>site.slope, :length=>site.length, :stoniness=>site.stoniness, :ppe=>climateData.ppe, :egdd=>climateData.egdd}
 			Validate.site_params(params, site, site.climate, site.soil, site.landscape, site.errors)
-			#if @site.errors == [] then 
 			site.percent = cmp.percent
+			site.cmp_id = cmp.cmp_id
 			site.soil = Soildata.get(params[:soil_id])
 			Fieldcrop1.rate_soil(params, site)
 			Fieldcrop1.rate_landscape(params, site)

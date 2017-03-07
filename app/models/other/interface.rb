@@ -14,11 +14,12 @@ class Interface
 	end
 	
 	def Interface.lsrs5sitefieldcrop(crop, polygon, cmp, climate)
-		if polygon.cmpType == "SLC" then
-			"/lsrs5/crop/#{crop}/site/#{cmp.soil_id}/#{polygon.erosivity_region}/#{cmp.slope}/#{cmp.locsf}/#{cmp.stone}/#{climate.data[:ppe].round}/#{climate.data[:egdd].round}"
-		else #DSS
-			"/lsrs5/crop/#{crop}/site/#{cmp.soil_id}/#{polygon.erosivity_region}/#{cmp.slope_p}/#{cmp.slope_len}/#{cmp.stoniness}/#{climate.data[:ppe].round}/#{climate.data[:egdd].round}"
-		end
+#		if polygon.cmpType == "SLC" then
+#			"/lsrs5/crop/#{crop}/site/#{cmp.soil_id}/#{polygon.erosivity_region}/#{cmp.slope}/#{cmp.locsf}/#{cmp.stone}/#{climate.data[:ppe].round}/#{climate.data[:egdd].round}"
+#		else #DSS
+#			"/lsrs5/crop/#{crop}/site/#{cmp.soil_id}/#{polygon.erosivity_region}/#{cmp.slope_p}/#{cmp.slope_len}/#{cmp.stoniness}/#{climate.data[:ppe].round}/#{climate.data[:egdd].round}"
+#		end
+		"/lsrs5/crop/#{crop}/site/#{cmp.soil.name.soil_id}/#{polygon.erosivity_region}/#{cmp.slope}/#{cmp.length}/#{cmp.stoniness}/#{climate.data[:ppe].round}/#{climate.data[:egdd].round}"
 	end
 
 end

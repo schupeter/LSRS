@@ -79,6 +79,8 @@ class Validate
 			if ('A'..'Z').to_a.include?(params[:length][0]) then
 				if ["H","K","R","U"].include?(params[:length]) then landscape.SlopeLength = 100 else landscape.SlopeLength = 300 end
 			end
+			# handle missing value
+			landscape.SlopeLength = 300 if landscape.SlopeLength == -9 
 			errors.push "length" if not landscape.SlopeLength.between?(5,3000) 
 		end
 		if params.has_key?(:stoniness) then
