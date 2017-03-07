@@ -34,11 +34,11 @@ class Aggregate5
         domLandscapeRating = cmp.landscape.FinalRating
         domSoilType = cmp.soil.soil_id
       elsif cmp.percent == domPercent then # if there is more than one with the largest area then use highest soil rating
-        if cmp.FinalSoilRating > domSoilRating then 
-          domSoilRating = cmp.FinalSoilRating
+        if cmp.soil.FinalSoilRating > domSoilRating then 
+          domSoilRating = cmp.soil.FinalSoilRating
           domLandscapeRating = cmp.landscape.FinalRating
           domSoilType = cmp.soil_id
-        elsif cmp.FinalSoilRating == domSoilRating then # if there is still a tie then use highest landscape rating
+        elsif cmp.soil.FinalSoilRating == domSoilRating then # if there is still a tie then use highest landscape rating
           #deal with landscape rating
           if cmp.landscape.FinalRating > domLandscapeRating then
             domLandscapeRating = cmp.landscape.FinalRating
