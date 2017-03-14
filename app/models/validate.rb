@@ -113,7 +113,7 @@ class Validate
         when "CLIMATETABLE"
           rating.climateData.tableName = value.capitalize
         when "RESPONSE"
-          rating.responseForm = value
+          rating.responseForm = value.downcase
 				when "MANAGEMENT"
 					rating.management = value
       end

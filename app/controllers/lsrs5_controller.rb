@@ -45,8 +45,8 @@ class Lsrs5Controller < ApplicationController
 		Polygon.get_data(@rating.polygon, @rating.climateData, @rating.errors) if @rating.errors == []
 		Polygon.get_ratings(@rating.crop, @rating.polygon, @rating.climateData.data, @rating.climate, @rating.errors) if @rating.errors == []
 		Polygon.aggregate_ratings(@rating.polygon.components, @rating.climate, @rating.aggregate) if @rating.errors == []
-		if @rating.errors == [] then render else render  "polygon_error" end
-		console
+		if @rating.errors.size > 0 then @rating.responseForm = "error" end
+		render "polygon_" + @rating.responseForm
 	end
 
   def Index
