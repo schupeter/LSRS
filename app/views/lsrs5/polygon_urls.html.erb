@@ -10,7 +10,7 @@
 <%for cmp in @rating.polygon.components do%>
 	<li>
 		<a href="<%=Interface.lsrs5sitefieldcrop(@rating.crop, @rating.polygon, cmp, @rating.climateData)%>/details.html"><%=cmp.cmp_id%></a>
-		(Soil Class  <%=cmp.soil.SuitabilityClass%>, Landscape Class <%=cmp.landscape.SuitabilityClass%>)
+		(<%=cmp.percent%>% soil Class  <%=cmp.soil.SuitabilityClass%>, landscape Class <%=cmp.landscape.SuitabilityClass%>)
 	</li>
 <%end%>
 </ol>
@@ -18,4 +18,3 @@
 Polygon rating = <%=@rating.aggregate%>
 
 </center>
-<%= debug @rating.polygon.components%>

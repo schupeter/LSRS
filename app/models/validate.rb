@@ -101,7 +101,7 @@ class Validate
 		end
 	end
 
-	def Validate.polygon_urls(params, rating)
+	def Validate.polygon(params, rating)
     params.each do |key, value|
       case key.upcase        # clean up letter case in request parameters
         when "FRAMEWORKNAME"

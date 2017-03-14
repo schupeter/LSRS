@@ -36,11 +36,15 @@ class Polygon
     end
 		climate.data = eval(climate.tableName).where(:poly_id=>climate.poly_id).first
 		errors.push "Climate data not found" if climate.data ==  nil
-		# erosivity_region
-		if polygon.cmpType == "SLC" then slc_v3r2 = polygon.poly_id else slc_v3r2 = polygon.prtRecord.slc_v3r2 end
-		eco_id = Slc_v3r2_canada_pat.where(:poly_id=>slc_v3r2).first.eco_id
-		ecoprovince = Slc_v3r2_canada_eft.where(:eco_id=>eco_id).first.ecoprovinc
-		polygon.erosivity_region = Climate_erosivity.identify_erosivityregion(ecoprovince).to_s
+		if polygon.prtRecord == nil then
+			errors.push "Polygon data not found"
+		else
+			# erosivity_region
+			if polygon.cmpType == "SLC" then slc_v3r2 = polygon.poly_id else slc_v3r2 = polygon.prtRecord.slc_v3r2 end
+			eco_id = Slc_v3r2_canada_pat.where(:poly_id=>slc_v3r2).first.eco_id
+			ecoprovince = Slc_v3r2_canada_eft.where(:eco_id=>eco_id).first.ecoprovinc
+			polygon.erosivity_region = Climate_erosivity.identify_erosivityregion(ecoprovince).to_s
+		end
 	end
 
 	def Polygon.get_ratings(crop, polygon, climateData, climateRating, errors)
