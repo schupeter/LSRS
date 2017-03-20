@@ -68,8 +68,8 @@ SUBSURFACESALINITY_DEDUCTIONS = [
 		climate.modifiers.total_percent = climate.modifiers.m1 + climate.modifiers.m2
 		climate.modifiers.deduction = climate.basic_rating * climate.modifiers.total_percent / 100
 		# final
-		climate.final_rating = climate.basic_rating - climate.modifiers.deduction
-		climate.suitability = Calculate.rating(climate.final_rating)
+		climate.FinalRating = climate.basic_rating - climate.modifiers.deduction
+		climate.suitability = Calculate.rating(climate.FinalRating)
 	end
 
 end 

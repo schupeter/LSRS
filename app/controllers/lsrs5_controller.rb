@@ -15,6 +15,18 @@ class Lsrs5Controller < ApplicationController
 # drop XSLT and use plain HTML for all human-readable outputs (to simplify maintenance)
 
 
+	# generates the LSRSv5 urls for a given polygon + climate + crop
+	# first validates the input parameters, then gets component and climate data for the polygon
+	def polygon
+		@rating = AccessorsRating.new
+		Validate.polygon(params, @rating)
+		Polygon.get_data(@rating.polygon, @rating.climateData, @rating.errors) if @rating.errors == []
+		Polygon.get_ratings(@rating.crop, @rating.polygon, @rating.climateData.data, @rating.climate, @rating.errors) if @rating.errors == []
+		Polygon.aggregate_ratings(@rating.polygon.components, @rating.climate, @rating.aggregate) if @rating.errors == []
+		if @rating.errors.size > 0 then @rating.responseForm = "error" end
+		render "polygon_" + @rating.responseForm
+	end
+
 	# prepares a valid request for the polygon action
   def polygon_client
     params.each do |key, value|      # standardize request parameters
@@ -37,17 +49,52 @@ class Lsrs5Controller < ApplicationController
     render
   end
 
-	# generates the LSRSv5 urls for a given polygon + climate + crop
-	# first validates the input parameters, then gets component and climate data for the polygon
-	def polygon
-		@rating = AccessorsRating.new
-		Validate.polygon(params, @rating)
-		Polygon.get_data(@rating.polygon, @rating.climateData, @rating.errors) if @rating.errors == []
-		Polygon.get_ratings(@rating.crop, @rating.polygon, @rating.climateData.data, @rating.climate, @rating.errors) if @rating.errors == []
-		Polygon.aggregate_ratings(@rating.polygon.components, @rating.climate, @rating.aggregate) if @rating.errors == []
-		if @rating.errors.size > 0 then @rating.responseForm = "error" end
-		render "polygon_" + @rating.responseForm
+	# generates the LSRSv5 ratings for a given set of polygons + climate + crop
+	def polygonbatch
+		if params.size == 2 then
+			@processHash = YAML.load_file("#{Rails.root.to_s}/config/services/wps/processes/lsrs.yml")
+			@lang="en"
+			render "polygonbatch_DescribeProcess_response"
+		else
+			@batch = AccessorsPolygonbatch.new
+			@batch.host = request.host
+			Validate.polygonbatch(params, @batch)
+			Polygonbatch.get_poly_ids(@batch) if @batch.errors == []
+			if @responseForm == "ResponseDocument" or @batch.polyArray.size > 30 then
+				Polygonbatch.queue(@batch) if @batch.errors == []
+			else
+				Polygonbatch.run(@batch) if @batch.errors == []
+			end
+			if @batch.errors.size > 0 then @batch.view = "polygonbatch_error" end
+			if @batch.view == "xml" then
+				render :file => @batch.outputFilename, :content_type => "text/xml", :layout => false and File.delete(@batch.outputFilename)
+			else
+				render @batch.view
+			end
+		end
 	end
+
+	# prepares a valid request for the polygon batch processor
+	def polygonbatch_client
+    params.each do |key, value|      # standardize request parameters
+      case key.upcase        # clean up letter case in request parameters
+        when "FRAMEWORKNAME"
+          @frameworkName = value
+					@cmpTable = value.delete("~") + "_cmp"
+					@patTable = value.delete("~").capitalize + "_pat"
+      end # case
+    end # params
+    if !(defined? @frameworkName) or @frameworkName == "" then
+      @step = 1
+      @soilDatasets = LsrsCmp.order("Title_en ASC")
+    else
+      @step = 2
+      @soilDataset = LsrsCmp.where(:WarehouseName=>@cmpTable).first
+      @climateTables = LsrsClimate.where('PolygonTable like ? or PolygonTable like ?',@soilDataset.DSSClimatePolygonTable,@soilDataset.SLCClimatePolygonTable)
+      @crops = Lsrs_crop.all
+    end
+    render
+  end
 
   def Index
     render

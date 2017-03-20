@@ -1,0 +1,72 @@
+<% content_for :title do %>LSRSv5 polygon batch client<% end %>
+<center>
+<h1>LSRS.v5 batch processor</h1>
+
+<%if @step == 1 then%>
+  <%= render :partial => "client1" %>
+<%else%>
+  <%= render :partial => "client2" %>
+
+  <h2>Step 2</h2>
+  <form name="BatchInputs" method="get" action="/lsrs5/polygonbatch">
+    <input type="hidden" name="FrameworkName" value="<%=@frameworkName%>" />
+    <table>
+      <tr>
+        <td><br/><b>Select a range of polygons:</b></td>
+      </tr>
+      <tr>
+        <td>From Polygon Id:</td>
+        <td class="left"><input type="text" name="FROMPOLY" size="25" /> (e.g. <%= eval(@patTable).minimum(:poly_id)%>)</td>
+      </tr>
+      <tr>
+        <td>To Polygon Id:</td>
+        <td class="left"><input type="text" name="TOPOLY" size="25" /> (e.g. <%= eval(@patTable).maximum(:poly_id)%>)</td>
+      </tr>
+      <%if @soilDataset.Region == 'ca' then%>
+      <tr>
+        <td><br/><b>or, select a region:</b></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <center>
+          <input type="radio" name="REGION" value="ab" />AB | 
+          <input type="radio" name="REGION" value="bc" /> BC | 
+          <input type="radio" name="REGION" value="mb" /> MB | 
+          <input type="radio" name="REGION" value="nb" /> NB | 
+          <input type="radio" name="REGION" value="nl" /> NL | 
+          <input type="radio" name="REGION" value="ns" /> NS | 
+          <input type="radio" name="REGION" value="on" /> ON | 
+          <input type="radio" name="REGION" value="pe" /> PE | 
+          <input type="radio" name="REGION" value="qc" /> QC | 
+          <input type="radio" name="REGION" value="sk" /> SK | <br/>
+          <input type="radio" name="REGION" value="nt" /> NT | 
+          <input type="radio" name="REGION" value="nu" /> NU | 
+          <input type="radio" name="REGION" value="yt" /> YT <br/>
+          <input type="radio" name="REGION" value="all" />ALL
+          </center>
+        </td>
+      </tr>
+      <%end%>
+      <%if @soilDataset.Region == 'mb' then%>
+      <tr>
+        <td><br/><b>or, select a region:</b></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <center>
+          <input type="radio" name="REGION" value="boyne" />Boyne | 
+          <input type="radio" name="REGION" value="lasalle" />LaSalle  | 
+          <input type="radio" name="REGION" value="littlesask" /> Little Sask | 
+          <input type="radio" name="REGION" value="all" />ALL
+          </center>
+        </td>
+      </tr>
+      <%end%>
+      <%= render :partial => "client3" %>
+      <%= render :partial => "client4" %>
+      <%= render :partial => "client5" %>
+    </table>
+    <br/><input type="submit" value="Rate these polygons!"><br/><br/>
+  </form>
+<%end%>
+</center>

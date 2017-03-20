@@ -118,7 +118,39 @@ class Validate
 					rating.management = value
       end
     end
-		return rating
+	end
+
+	def Validate.polygonbatch(params, batch)
+    params.each do |key, value|
+      case key.upcase        # clean up letter case in request parameters
+        when "FRAMEWORKNAME"
+					batch.frameworkName = value
+          batch.cmpTableName = value.delete("~") + "_cmp"
+        when "FROMPOLY"  
+          batch.fromPoly = value
+        when "TOPOLY"  
+          batch.toPoly = value
+        when "REGION"
+          batch.region = value
+        when "CROP"
+					if VALID_CROPS.keys.include?(value) then
+						batch.crop = value
+						batch.cropHash.store("CROP", value)
+					else
+						batch.errors.push "crop name"
+					end
+        when "RESPONSEFORM"
+          if value == xml then batch.view = "xml" end
+        when "CLIMATETABLE"
+          batch.climateTableName = value
+				when "MANAGEMENT"
+					batch.management = value
+      end # case
+    end # params
+		# set defaulits
+		batch.management = "basic" if batch.management != "improved"
+		batch.view = "xml" if batch.view == nil
+		batch.region = "all" if batch.region == nil and batch.toPoly == nil
 	end
 
 end

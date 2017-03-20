@@ -95,9 +95,9 @@ class Polygon
     
     # STEP 4: Determine the class number 
     # assign climate factor rating
-    drainageFactorHash['ClimateRating'] = climate.final_rating.round
-    dominantFactorHash['ClimateRating'] = climate.final_rating.round
-    dissimilarFactorHash['ClimateRating'] = climate.final_rating.round
+    drainageFactorHash['ClimateRating'] = climate.FinalRating.round
+    dominantFactorHash['ClimateRating'] = climate.FinalRating.round
+    dissimilarFactorHash['ClimateRating'] = climate.FinalRating.round
     # determine most limiting factor and calculate class
     drainageFactorHash = Aggregate5.MostLimitingFactor(drainageFactorHash)
     dominantFactorHash = Aggregate5.MostLimitingFactor(dominantFactorHash)

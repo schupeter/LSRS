@@ -1,0 +1,80 @@
+<center>
+
+<h3>climate rating</h3>
+<a href="<%=Interface.lsrs5climate(@rating.crop, @rating.climateData)%>/details.html"><%=@rating.polygon.poly_id%></a>
+
+(Class <%=@rating.climate.suitability%>)
+
+<h3>component ratings</h3>
+<ol>
+<%for cmp in @rating.polygon.components do%>
+	<li>
+		<a href="<%=Interface.lsrs5sitefieldcrop(@rating.crop, @rating.polygon, cmp, @rating.climateData)%>/details.html"><%=cmp.cmp_id%></a>
+		(<%=cmp.percent%>% soil Class  <%=cmp.soil.SuitabilityClass%>, landscape Class <%=cmp.landscape.SuitabilityClass%>)
+	</li>
+<%end%>
+</ol>
+
+Polygon rating = <%=@rating.aggregate%>
+
+<%=console%>
+
+<h2>Land Suitability Rating Information</h2>
+
+<table class="intro">
+<tr><th>Site/Polynumb/SL:</th><td class="Abbr"><%=@rating.polygon.poly_id%></td></tr>
+<tr><th>Database:</th><td class="Abbr"><%=@rating.polygon.databaseTitle%></td></tr>
+<tr><th>Climate:</th><td class="Abbr"><%=@rating.climateData.tableMetadata.Title_en%></td></tr>
+<tr><th>Crop:</th><td class="Abbr"><%=@rating.crop%></td></tr>
+<tr><th>Management:</th><td class="Abbr"><%=@rating.management%></td></tr>
+<tr><th>Rating:</th><td class="Abbr"><%=@rating.aggregate%></td></tr>
+</table>
+
+<h3>Soil Components</h3>
+
+<table class="intro">
+  <tr>
+    <th colspan="4">Component</th>
+    <th colspan="2">Climate</th>
+    <th colspan="2">Soil</th>
+    <th colspan="2">Landscape</th>
+  </tr>
+  <tr>
+    <th>Number</th>
+    <th>Percent</th>
+    <th>Soil Name</th>
+    <th>Soilkey/LU:</th>
+    <th>Rating</th>
+    <th>Class</th>
+    <th>Rating</th>
+    <th>Class</th>
+    <th>Rating</th>
+    <th>Class</th>
+  </tr>
+	<%for cmp in @rating.polygon.components do%>
+	<tr>
+		<td><%=cmp.cmp_id%></td>
+		<td><%=cmp.percent%></td>
+		<td class="Text"><%=cmp.soil.name.soilname%></td>
+		<td class="Text"><%=cmp.soil.name.soil_id%></td>
+		<td><%=@rating.climate.FinalRating.round%></td>
+		<td><%=@rating.climate.suitability%></td>
+		<td><%=cmp.soil.FinalSoilRating.round%></td>
+		<td><%=cmp.soil.SuitabilityClass%></td>
+		<td><%=cmp.landscape.FinalRating.round%></td>
+		<td><%=cmp.landscape.SuitabilityClass%></td>
+   </tr>
+	<%end%>
+</table>
+<br/>
+<xsl:element name="a"><xsl:attribute name="href">/lsrs/service?ClimateTable=<xsl:value-of select="//LSRS/Request/ClimateTable"/>&amp;FrameworkName=<xsl:value-of select="//LSRS/Request/FrameworkName"/>&amp;POLYID=<xsl:value-of select="//LSRS/Request/Polygon" />&amp;CROP=<xsl:value-of select="//LSRS/Request/Crop" />&amp;RESPONSE=Details</xsl:attribute>Calculation details</xsl:element>
+<br/>
+</center>
+
+TODO:  
+<ol>
+<li>clean up the names (FinalSoilRating=>FinalRating, suitability=>SuitabilityClass) </li>
+<li>make clickable componet identifiers in table</li>
+<li>add management by calculating default when nil</li>
+<li>add link to climate rating</li>
+</ol>

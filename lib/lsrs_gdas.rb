@@ -3,9 +3,9 @@ module LSRS_GDAS
   def LSRS_GDAS.top(outputFile, crop, framework, cmpTable, climateTitle, climateTableName)
     outputFile.puts '<?xml version="1.0" encoding="UTF-8" standalone="no"?>'
     if crop == "all" then
-      outputFile.puts '<?xml-stylesheet type="text/xsl" href="/stylesheets/lsrs/1.0/gdasMulticropOutput_02.xsl"?>'
+      outputFile.puts '<?xml-stylesheet type="text/xsl" href="/schemas/lsrs/5.0/stylesheets/gdasMulticropOutput_02.xsl"?>'
     else
-      outputFile.puts '<?xml-stylesheet type="text/xsl" href="/stylesheets/lsrs/1.0/gdasBatchOutput_03.xsl"?>'
+      outputFile.puts '<?xml-stylesheet type="text/xsl" href="/schemas/lsrs/5.0/stylesheets/gdasBatchOutput_03.xsl"?>'
     end
     outputFile.puts '<GDAS service="TJS" xmlns="http://www.opengis.net/tjs/1.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/tjs/1.0  /schemas/tjs/1.0/tjsGetData_response.xsd" version="1.0" xml:lang="">'
     outputFile.puts ' <Framework>' + "\n"

@@ -1,14 +1,11 @@
-<% content_for :title do %>LSRSv5 client<% end %>
-
+<% content_for :title do %>LSRSv5 polygon client<% end %>
 <center>
-
 <h1>Calculate an LSRSv5 rating</h1>
 
 <%if @step == 1 then%>
   <%= render :partial => "client1" %>
 <%else%>
   <%= render :partial => "client2" %>
-
 
   <h2>Step 2</h2>
   <form name="formSearch" method="get" action="polygon">
@@ -45,8 +42,3 @@
 <%end%>
 
 </center>
-<ol>
-<li>Select spatial framework => populate list of climate scenarios</li>
-<li>Select climate scenario => populate example of polygon id</li>
-<li>Enter polygon id, select crop, select management => populate list of urls for all components</li>
-</ol>

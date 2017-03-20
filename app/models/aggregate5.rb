@@ -37,12 +37,12 @@ class Aggregate5
         if cmp.soil.FinalSoilRating > domSoilRating then 
           domSoilRating = cmp.soil.FinalSoilRating
           domLandscapeRating = cmp.landscape.FinalRating
-          domSoilType = cmp.soil_id
+          domSoilType = cmp.soil.soil_id
         elsif cmp.soil.FinalSoilRating == domSoilRating then # if there is still a tie then use highest landscape rating
           #deal with landscape rating
           if cmp.landscape.FinalRating > domLandscapeRating then
             domLandscapeRating = cmp.landscape.FinalRating
-            domSoilType = cmp.soil_id
+            domSoilType = cmp.soil.soil_id
           end
         end
       end
