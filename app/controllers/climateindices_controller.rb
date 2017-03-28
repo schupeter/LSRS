@@ -44,10 +44,14 @@ class ClimateindicesController < ApplicationController
 
 	def load_daily_data
 		# load and sanitize daily observations data
-		@loaded = Climate_load.daily(params, params[:file].path)
-		# update flash hash with messages
-		flash[:daily] = "Climate data in #{params[:file].original_filename} was loaded."
-		redirect_to :action=>"index"
+		@result = Climate_load.daily(params, params[:file].path)
+		if @result[0].class == Hash then #error condition
+			render "error"
+		else # looks like it loaded properly
+			# update flash hash with messages
+			flash[:daily] = "Climate data in #{params[:file].original_filename} was loaded."
+			redirect_to :action=>"index"
+		end
 #		render "debug_loaddaily"
 	end
 

@@ -35,6 +35,7 @@ class Climate_load
 		# - collapse Dec 30 & 31 for leap years.
 		# - remove Feb 29 for non-leap years
 		require 'fileutils'
+		errors = Array.new
 		for station in @observationsHash.keys do
 			for year in @observationsHash[station].keys do
 				if Date.leap?(year) then # collapse Dec 30 & 31
@@ -53,7 +54,11 @@ class Climate_load
 				CSV.open("#{dirname}/#{year}.csv", 'w', col_sep: "\t") do |csv|
 					csv << ['tmin', 'tmax', 'precip'] # Add headers
 					@observationsHash[station][year].each do |row|
-						csv << [row[:tmin], row[:tmax], row[:precip]]
+						if row == nil then
+							errors.push({:station=>[station], :year=>[year]})
+						else
+							csv << [row[:tmin], row[:tmax], row[:precip]]
+						end
 					end
 				end #creating csv
 			end #for year
@@ -61,7 +66,11 @@ class Climate_load
 			File.open("/production/data/climate/stations/#{station}/coordinates.json","w"){ |f| f << coordinatesHash[station].to_json }
 		end #for station
 		# - ensure that there are 365 days with no nils. 
-		# TBD
+		if errors.size > 0 then
+			return errors
+		else
+			return @observationsHash[station].keys
+		end
 	end
 
 	def Climate_load.monthly(filename)
