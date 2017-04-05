@@ -58,18 +58,25 @@ class Lsrs5Controller < ApplicationController
 		else
 			@batch = AccessorsPolygonbatch.new
 			@batch.host = request.host
-			Validate.polygonbatch(params, @batch)
+			Validate.polygonbatch(params, request, @batch)
 			Polygonbatch.get_poly_ids(@batch) if @batch.errors == []
-			if @responseForm == "ResponseDocument" or @batch.polyArray.size > 30 then
-				Polygonbatch.queue(@batch) if @batch.errors == []
-			else
-				Polygonbatch.run(@batch) if @batch.errors == []
+			if @batch.errors == [] then
+				if @responseForm == "ResponseDocument" or @batch.polyArray.size > 30 then #add to the batch queue
+					Polygonbatch.queue(@batch) if @batch.errors == []
+				else # run immediately
+					Polygonbatch.run(@batch) if @batch.errors == []
+					render
+				end
 			end
-			if @batch.errors.size > 0 then @batch.view = "polygonbatch_error" end
-			if @batch.view == "xml" then
-				render :file => @batch.outputFilename, :content_type => "text/xml", :layout => false and File.delete(@batch.outputFilename)
+			if @batch.errors == [] then
+#				if @batch.view == "xml" then
+#console
+					render :file => @batch.statusFilename, :content_type => "text/xml", :layout => false #and File.delete(@batch.statusFilename)
+#				else
+#					render @batch.view
+#				end
 			else
-				render @batch.view
+				render "polygonbatch_error"
 			end
 		end
 	end
@@ -93,6 +100,7 @@ class Lsrs5Controller < ApplicationController
       @climateTables = LsrsClimate.where('PolygonTable like ? or PolygonTable like ?',@soilDataset.DSSClimatePolygonTable,@soilDataset.SLCClimatePolygonTable)
       @crops = Lsrs_crop.all
     end
+		console
     render
   end
 

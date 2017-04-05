@@ -55,67 +55,67 @@ class Polygonbatch
 	end
 
 	def Polygonbatch.queue(batch)
+		# create unique string for temporary directory names
+		timeString = DateTime::now.to_s[0,19].delete("-:").gsub("T", "t") + "r" + rand.to_s[2,4] 
     # return status document as per WPS
     # create unique string for temporary directory names
 		batch.dir =  "#{Rails.root.to_s}/public/batch/"
-		batch.url = "/batch/results/#{batch.timeStamp}/"
+		batch.url = "/batch/results/#{timeString}"
     # prepare output
     # determine temporary directory/file names and file URLs for status file and others
-		statusDirName = "#{Rails.root.to_s}/public/batch/results/" + timeString
-		statusFilename = "#{Rails.root.to_s}/public/batch/results/#{timeString}/status.xml"
-		controlFilename = "#{Rails.root.to_s}/public/batch/pending/#{timeString}_control.yml"
-		polygonFilename = "#{Rails.root.to_s}/public/batch/results/#{timeString}/polygons.txt"
-		outputXmlFilename = "#{Rails.root.to_s}/public/batch/results/#{timeString}/output.xml"
-		outputCsvFilename = "#{Rails.root.to_s}/public/batch/results/#{timeString}/output.csv"
-		outputHtmlFilename = "#{Rails.root.to_s}/public/batch/results/#{timeString}/output.html"
-		outputDbfFilename = "#{Rails.root.to_s}/public/batch/results/#{timeString}/#{@frameworkName}_#{@crop}_#{@management}_#{@climateTableName}_#{timeString}.dbf"
-		outputDbfSummaryFilename = "#{Rails.root.to_s}/public/batch/results/#{timeString}/#{@frameworkName}_#{@crop}_#{@management}_#{@climateTableName}_#{timeString}summary.dbf"
-		detailsDirName = "#{Rails.root.to_s}/public/batch/results/#{timeString}/details/"
-		detailsRootURL = "/batch/results/#{timeString}/"
-		outputDbfURL = "/batch/results/#{timeString}/#{@frameworkName}_#{@crop}_#{@management}_#{@climateTableName}_#{timeString}.dbf"
-		@statusURL = "/batch/results/#{timeString}/status.xml"
-		@outputURL = "/batch/results/#{timeString}/output.xml"
+		statusDirName = "#{batch.dir}/results/" + timeString
+		statusFilename = "#{batch.dir}/results/#{timeString}/status.xml"
+		controlFilename = "#{batch.dir}/pending/#{timeString}_control.yml"
+		polygonFilename = "#{batch.dir}/results/#{timeString}/polygons.txt"
+		outputXmlFilename = "#{batch.dir}/results/#{timeString}/output.xml"
+		outputCsvFilename = "#{batch.dir}/results/#{timeString}/output.csv"
+		outputHtmlFilename = "#{batch.dir}/results/#{timeString}/output.html"
+		outputDbfFilename = "#{batch.dir}/results/#{timeString}/#{batch.frameworkName}_#{batch.crop}_#{batch.management}_#{batch.climateTableName}_#{timeString}.dbf"
+		outputDbfSummaryFilename = "#{batch.dir}/results/#{timeString}/#{batch.frameworkName}_#{batch.crop}_#{batch.management}_#{batch.climateTableName}_#{timeString}summary.dbf"
+		detailsRootURL = "#{batch.url}/"
+		outputDbfURL = "#{batch.url}/#{batch.frameworkName}_#{batch.crop}_#{batch.management}_#{batch.climateTableName}_#{timeString}.dbf"
+		# pass configuration back to controller
+		batch.statusFilename = statusFilename
+		batch.statusURL = "#{batch.url}/status.xml"
+		batch.outputURL = "#{batch.url}/output.xml"
 		# create HTTP directories
 		Dir.mkdir(statusDirName) unless File::directory?(statusDirName)
-		Dir.mkdir(detailsDirName) unless File::directory?(detailsDirName)
 		#Create XML for status document
 		require 'wps'
-		xml = Wps.CreateStatusXml(@statusURL, @outputURL, @cmpTable, @fromPoly, @toPoly, @crop, @management, @climateTableName, "ProcessAccepted", 0)
+		xml = Wps1.CreateStatusXml(batch.statusURL, batch.outputURL, batch.cmpTableName, batch.fromPoly, batch.toPoly, batch.crop, batch.management, batch.climateTableName, "ProcessAccepted", 0)
 		# store status document as file
 		statusFile = File.open(statusFilename, 'w')
 		statusFile << xml.target!
 		statusFile.close
 		# create control file
 		controlFile = File.open(controlFilename, 'w')
-		controlFile.puts "Hostname: " + request.host
+		controlFile.puts "Hostname: " + batch.host
 		controlFile.puts "RailsRoot: " + Rails.root.to_s
-		controlFile.puts "DetailsDirName: " + detailsDirName
 		controlFile.puts "DetailsRootURL: " + detailsRootURL
 		controlFile.puts "PolygonsFilename: " + polygonFilename
 		controlFile.puts "StatusFilename: " + statusFilename
-		controlFile.puts "StatusURL: " + @statusURL
+		controlFile.puts "StatusURL: " + batch.statusURL
 		controlFile.puts "OutputXmlFilename: " + outputXmlFilename
 		controlFile.puts "OutputCsvFilename: " + outputCsvFilename
 		controlFile.puts "OutputDbfFilename: " + outputDbfFilename
 		controlFile.puts "OutputHtmlFilename: " + outputHtmlFilename
 		controlFile.puts "OutputDbfSummaryFilename: " + outputDbfSummaryFilename
-		controlFile.puts "OutputURL: " + @outputURL
+		controlFile.puts "OutputURL: " + batch.outputURL
 		controlFile.puts "OutputDbfURL: " + outputDbfURL
-		controlFile.puts "FrameworkName: " + framework.FrameworkName
-		controlFile.puts "ComponentTable: " + @cmpTable
-		controlFile.puts 'FromPoly: "' + @fromPoly + '"'
-		controlFile.puts 'ToPoly: "' + @toPoly + '"'
-		controlFile.puts "Crop: " + @crop
-		controlFile.puts "Management: " + @management
-		controlFile.puts "ClimateTable: " + @climateTableName 
+		controlFile.puts "FrameworkName: " + batch.frameworkName
+		controlFile.puts "ComponentTable: " + batch.cmpTableName
+		controlFile.puts 'FromPoly: "' + batch.fromPoly + '"'
+		controlFile.puts 'ToPoly: "' + batch.toPoly + '"'
+		controlFile.puts "Crop: " + batch.crop
+		controlFile.puts "Management: " + batch.management
+		controlFile.puts "ClimateTable: " + batch.climateTableName 
 		controlFile.close
 		# create polygon file
 		polygonFile = File.open(polygonFilename, 'w')
-		for poly in @polyArray do
+		for poly in batch.polyArray do
 			polygonFile.puts poly
 		end
 		polygonFile.close
-		redirect_to @statusURL
 	end
 
 end

@@ -1,9 +1,0 @@
-mysqldump -uroot -p45home -c --add-drop-table --add-locks --all --quick --lock-tables gls_development > sqldump.sql
-
-mysql -u root -p45home gls_development < gframeworks.sql
-mysql -u root -p45home gls_development < gdatasets.sql
-mysql -u root -p45home gls_development < gattributes.sql
-mysql -u root -p45home gls_development < gclasses.sql
-mysql -u root -p45home gls_development < gvalues.sql
-mysql -u root -p45home gls_development < schemas.sql
-mysql -u root -p45home gls_development < definitions.sql

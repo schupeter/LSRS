@@ -15,7 +15,9 @@ class AccessorsPolygonbatch
 	:dir,
 	:url,
 	:host,
-	:outputFilename,
+	:statusFilename,
+	:statusURL,
+	:outputURL,
 	:errors
 	def initialize
 		self.cropHash = {}

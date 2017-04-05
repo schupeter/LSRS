@@ -2,6 +2,8 @@ This directory contains all of the LSRS code.
 This application is maintained on SISWEBDEV2
 the snapshot /archive/sites/sislsrs.2015-11-26 was taken just before version 5 structural adjustments commenced
 
+The following technologies are directly employed or used to support LSRS:
+
 HTML
 JSON
 XML (GDAS, WPS)

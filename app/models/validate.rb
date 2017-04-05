@@ -120,7 +120,7 @@ class Validate
     end
 	end
 
-	def Validate.polygonbatch(params, batch)
+	def Validate.polygonbatch(params, request, batch)
     params.each do |key, value|
       case key.upcase        # clean up letter case in request parameters
         when "FRAMEWORKNAME"
@@ -140,7 +140,7 @@ class Validate
 						batch.errors.push "crop name"
 					end
         when "RESPONSEFORM"
-          if value == xml then batch.view = "xml" end
+          if value == "xml" then batch.view = "xml" end
         when "CLIMATETABLE"
           batch.climateTableName = value
 				when "MANAGEMENT"
@@ -149,8 +149,9 @@ class Validate
     end # params
 		# set defaulits
 		batch.management = "basic" if batch.management != "improved"
-		batch.view = "xml" if batch.view == nil
+		#batch.view = "html" if batch.view == nil
 		batch.region = "all" if batch.region == nil and batch.toPoly == nil
+		batch.host = request.host
 	end
 
 end
