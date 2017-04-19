@@ -117,7 +117,6 @@ class Climate_load
 				filename = "#{dirname}/monthly/#{@yaml['Timeframe']}_#{@yaml['Origin']}.json".gsub(" ","_")
 				File.open(filename,"w"){ |f| f << @normalsHash[row[:id]].to_json }
 				@sitesArray.push(filename)
-				puts dirname
 			end
 		end
 		return @sitesArray

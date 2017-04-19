@@ -1,5 +1,13 @@
 #!/usr/local/bin/ruby
-# Script to call climate loading and calculations
+# Script to call climate loading and calculations and load them into Redis
+# - it the dump file from Redis exists and is current then it loads it into Redis. (TODO) Otherwise,
+# - it loads the datafile from development that was used to populate the raw climate data in production
+# - it calculates the climate indices 
+# - it stores them in Redis (TODO)
+# - it creates a dump file from Redis (TODO)
+# this script should be run when new climate data has been uploaded.
+# perhaps better to include it as part of the upload process.
+
 
 require "/home/peter/bin/lib/colorize.rb"
 
@@ -38,15 +46,16 @@ require 'json'
 require 'fileutils'
 require 'active_support/core_ext/enumerable.rb'
 require 'active_support/core_ext/string.rb'
-require '/production/sites/sislsrs/app/models/climate_calc.rb'
-require '/production/sites/sislsrs/app/models/climate_canolaheat.rb'
-require '/production/sites/sislsrs/app/models/climate_chu.rb'
-require '/production/sites/sislsrs/app/models/climate_egdd.rb'
-require '/production/sites/sislsrs/app/models/climate_erosivity.rb'
-require '/production/sites/sislsrs/app/models/climate_evap.rb'
-require '/production/sites/sislsrs/app/models/climate_gdd.rb'
-require '/production/sites/sislsrs/app/models/climate_load.rb'
-require '/production/sites/sislsrs/app/models/web.rb'
+require '/production/sites/sislsrs/app/models/climate_indices/climate_calc.rb'
+require '/production/sites/sislsrs/app/models/climate_indices/climate_canolaheat.rb'
+require '/production/sites/sislsrs/app/models/climate_indices/climate_chu.rb'
+require '/production/sites/sislsrs/app/models/climate_indices/climate_egdd.rb'
+require '/production/sites/sislsrs/app/models/climate_indices/climate_erosivity.rb'
+require '/production/sites/sislsrs/app/models/climate_indices/climate_evap.rb'
+require '/production/sites/sislsrs/app/models/climate_indices/climate_gdd.rb'
+require '/production/sites/sislsrs/app/models/climate_indices/climate_load.rb'
+require '/production/sites/sislsrs/app/models/other/web.rb'
+require 'redis'
 case datatype
 when "monthly"
 	puts "Organizing data".yellow
@@ -63,7 +72,11 @@ when "monthly"
 		Climate_calc.monthly(params)
 		puts params
 		puts location
+		# add to the hash in Redis
 	end
+	# dump the hash from Redis
+	
+	File.open("/production/data/climate/monthly/#{filename[0..-5]}.indices.redisdump","w"){ |f| f << redis.dump("#{params[:polygonset]}:#{params[:normals]}") }
 when "daily"
 	Climate_load.daily("/development/data/climate/#{datatype}/#{filename}")
 end

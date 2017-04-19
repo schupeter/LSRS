@@ -81,7 +81,9 @@ class Climate_calc
 		# canhm
 		site[:EGDD600] = Climate_canolaheat.egdd_sum(site[:climate],site[:EGDD_First],600)
 		site[:EGDD1100] = Climate_canolaheat.egdd_sum(site[:climate],site[:EGDD_First],1100)
-		site[:TmaxEGDD] = Climate_canolaheat.tmax_egdd(site[:climate],site[:EGDD600],site[:EGDD1100])
+		if site[:EGDD1100] == nil then site[:TmaxEGDD] = 0 else
+			site[:TmaxEGDD] = Climate_canolaheat.tmax_egdd(site[:climate],site[:EGDD600],site[:EGDD1100])
+		end
 		site[:CanHM] = Climate_canolaheat.canhm(site[:TmaxEGDD])
 		File.open("#{dir}/monthly/#{params[:normals]}_indices.json","w"){ |f| f << site.except(:monthly, :climate, :lat, :long, :elev, :chu_thresholds).to_json }
 		return site

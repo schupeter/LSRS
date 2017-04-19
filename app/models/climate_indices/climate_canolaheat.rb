@@ -36,7 +36,7 @@ class Climate_canolaheat
 		egdd_sum = 0
 		daynumber = nil
 		for day in climateArray[egdd_first..-1] do
-			egdd_sum += day[:egdd]
+			if day[:egdd] == nil then break else egdd_sum += day[:egdd] end
 			if egdd_sum >= threshold then 
 				daynumber = day[:daynumber]
 				break 

@@ -2,9 +2,9 @@ module GDAS2DBF
   
   def GDAS2DBF.convert(gdas, dbfname, rails_root)
     #initialize environment
-    require "#{rails_root}/lib/gdas_read"
+    require "/production/sites/sislsrs/app/models/ogc/gdas_read"
     require 'dbf'
-    require "#{rails_root}/app/helpers/dbf-helper"
+    require "/production/sites/sislsrs/app/helpers/dbf-helper"
     
     # get GDAS file
     gdas.register_default_namespace("tjs")

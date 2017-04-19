@@ -12,6 +12,8 @@ gem 'builder'
 
 gem 'dbf'
 
+gem 'redis', '~> 3.3', '>= 3.3.1'
+
 group :development do
   gem 'web-console'
 end
