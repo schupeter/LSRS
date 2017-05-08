@@ -11,7 +11,7 @@
 <%period = filename[0..-6]%>
 	<tr>
 		<td><%=period%></td>
-		<td><a href="calculate_monthly.html?polygonset=<%=params[:polygonset]%>&polygon=<%=params[:polygon]%>&normals=<%=period%>">calculate</a></td>
+		<td><a href="calculate_monthly.html?polygonset=<%=params[:polygonset]%>&polygon=<%=params[:polygon]%>&climate=<%=period%>">calculate</a></td>
 	</tr>
 <%end%>
 <%end%>
@@ -41,7 +41,7 @@
 <%period = filename.split("/")[1].split(".")[0]%>
 	<tr>
 		<td><%=params[:station]%>: <%=period%></td>
-		<td><a href="calculate_monthly.html?station=<%=params[:station]%>&normals=<%=period%>">calculate</a></td>
+		<td><a href="calculate_monthly.html?station=<%=params[:station]%>&climate=<%=period%>">calculate</a></td>
 	</tr>
 <%end%>
 </table>

@@ -27,8 +27,13 @@ class ClimateindicesController < ApplicationController
 	end
 
 	def calculate_monthly
-		# calculates and stores climate indices for a site based on monthly climate normals
-		@station = Climate_calc.monthly(params)
+		# calculates climate indices for a site based on monthly climate normals
+		@station = Climate_calc.monthly(params[:station], params[:polygonset], params[:polygon], params[:climate])
+	end
+	
+	def calculate_monthlies
+		# calculates and stores climate indices for a polygonset based on monthly climate normals
+		Climate_calc.monthlies(params[:polygonset], params[:climate])
 	end
 
 	def calculate_daily
@@ -57,8 +62,8 @@ class ClimateindicesController < ApplicationController
 
 	def load_monthly_data
 		# load and sanitize monthly normals data
-		@loaded = Climate_load.monthly(params[:file].path)
-		if @loaded.class == Array then render"load_monthly_data.html.erb" else render "error.html.erb" end
+		#@loaded = Climate_load.monthly(params[:file].path)
+		Climate_load.monthly(params[:file])
 	end
 
 end

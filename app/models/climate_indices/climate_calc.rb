@@ -39,16 +39,16 @@ class Climate_calc
 		end
 	end
 
-	def Climate_calc.monthly(params)
+	def Climate_calc.monthly(station, polygonset, polygon, normals)
 		# calculates and stores climate indices for a site based on monthly climate normals data
 		# get data
-		if params[:station] then
-			dir = "/production/data/climate/stations/#{params[:station]}"
+		if polygon == nil then
+			dir = "/production/data/climate/stations/#{station}"
 		else
-			dir = "/production/data/climate/polygons/#{params[:polygonset]}/#{params[:polygon]}"
+			dir = "/production/data/climate/polygons/#{polygonset}/#{polygon}"
 		end
 		site = JSON.parse(File.read("#{dir}/coordinates.json"),:symbolize_names => true)
-		site[:monthly]  = JSON.parse(File.read("#{dir}/monthly/#{params[:normals]}.json"),:symbolize_names => true)
+		site[:monthly]  = JSON.parse(File.read("#{dir}/monthly/#{normals}.json"),:symbolize_names => true)
 		@year = site[:year] 
 		# create climate array with daily values of TMAX, TMIN, TMEAN, PRECIP
 		site[:climate] = Array.new(365){|e| {}} # create empty hashes
@@ -85,9 +85,28 @@ class Climate_calc
 			site[:TmaxEGDD] = Climate_canolaheat.tmax_egdd(site[:climate],site[:EGDD600],site[:EGDD1100])
 		end
 		site[:CanHM] = Climate_canolaheat.canhm(site[:TmaxEGDD])
-		File.open("#{dir}/monthly/#{params[:normals]}_indices.json","w"){ |f| f << site.except(:monthly, :climate, :lat, :long, :elev, :chu_thresholds).to_json }
+#		File.open("#{dir}/monthly/#{params[:normals]}_indices.json","w"){ |f| f << site.except(:monthly, :climate, :lat, :long, :elev, :chu_thresholds).to_json }
+#		redis.hset("ytc003:1961x90_Observations","10",site.except(:monthly, :climate, :lat, :long, :elev, :chu_thresholds).to_json)  # TODO fix this
 		return site
 	end
+
+	def Climate_calc.monthlies(polygonset, climate)
+		# calculates indices for all polygons in a polygonset, based on monthly normals
+		redis = Redis.new
+		# make sure raw climate data is in Redis  -- TODO
+		
+		# Find all the polygons that form part of a polygonset
+		#Dir.chdir("/production/data/climate/polygons/#{polygonset}")
+		#polygons = Dir.glob("*").sort
+		
+		# calc and store values in Redis
+		for polygon in redis.hkeys("#{polygonset}:#{climate}") do
+			redis.hset("#{polygonset}:#{climate}", polygon, Climate_calc.monthly(nil, polygonset, polygon, climate).except(:monthly, :climate, :lat, :long, :elev, :chu_thresholds).to_json)
+		end
+		# dump the hash to a file
+		File.open("/production/data/climate/polygons/#{polygonset}.#{climate}.redisdump","w"){ |f| f << redis.dump("#{polygonset}:#{climate}") }
+	end
+
 
 	def Climate_calc.daily(params)
 		# calculates and stores climate indices for a site based on daily climate data

@@ -1,11 +1,4 @@
 <h1>Monthly Data Loaded</h1>
 
-<p>The following data was loaded:</p>
+<p><%=params[:file].original_filename%> was loaded:</p>
 
-<table>
-<%for file in @loaded do %>
-	<tr>
-		<td><%=file%></td>
-	</tr>
-<%end%>
-</table>

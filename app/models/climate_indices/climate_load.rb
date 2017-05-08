@@ -76,7 +76,7 @@ class Climate_load
 		end
 	end
 
-	def Climate_load.monthly(filename)
+	def Climate_load.monthly2json(filename)
 		@input = File.read(filename).gsub("\r\n","\n")
 		@yaml = YAML.safe_load(@input)
 		@normalsArray = CSV.parse(@input.split("--- #TSV\n")[1], headers:true, header_converters: :symbol, converters: :all, col_sep: "\t")
@@ -84,7 +84,7 @@ class Climate_load
 		@normalsHash = Hash.new
 		@coordinatesHash = Hash.new
 		@sitesArray = Array.new
-		require 'net/http'
+		require 'net/http' # for Web.get_ecoprovince
 		for row in @normalsArray do
 			if row != [] then
 				if row[:id].class == Float then row[:id] = row[:id].to_i end
@@ -125,5 +125,41 @@ class Climate_load
 filename = "/development/data/climate/monthly/CD_dss_ACCESS1_3_85_2025.txt"
 
 =end
+
+	def Climate_load.monthly(tempfile)
+		redis = Redis.new
+		@input = File.read(tempfile.path).gsub("\r\n","\n")
+		@yaml = YAML.safe_load(@input)
+		@sourceArray = CSV.parse(@input.split("--- #TSV\n")[1], headers:true, header_converters: :symbol, converters: :all, col_sep: "\t")
+		@normalsHash = Hash.new
+		require 'net/http' # for Web.get_ecoprovince
+		for row in @sourceArray do
+			if row != [] then
+				if row[:id].class == Float then row[:id] = row[:id].to_i end
+				# set up a hash for a new polygon
+				#if @normalsHash.keys.include?(row[:id]) == false then 
+				#@normalsHash[row[:id]] = Hash.new
+				@normalsHash[row[:id]] = {:lat=>row[:lat] ,:long=>row[:long] , :elev=>row[:elev], :precip=>Array.new(12, nil),:tmin=>Array.new(12, nil),:tmax=>Array.new(12, nil)}
+				@normalsHash[row[:id]][:ER] = Climate_erosivity.identify_erosivityregion(Web.get_ecoprovince(row[:lat],row[:long]))				
+				#end
+				# initialize monthly data arrays with nils
+				#if @normalsHash[row[:id]].keys.include?(row[:scenario]) == false then @normalsHash[row[:id]] = {:precip=>Array.new(12, nil),:tmin=>Array.new(12, nil),:tmax=>Array.new(12, nil)} end
+				# populate array with data
+				for month in 1..12 do
+					@normalsHash[row[:id]][:precip][month-1] = row[sprintf("ptot%02d", month).to_sym]
+					@normalsHash[row[:id]][:tmin][month-1] = row[sprintf("tmin%02d", month).to_sym]
+					@normalsHash[row[:id]][:tmax][month-1] = row[sprintf("tmax%02d", month).to_sym]
+				end
+				# save station normals data into Redis as JSON
+				redis.hset("#{@yaml["Framework"]}:#{tempfile.original_filename}", row[:id], @normalsHash[row[:id]].to_json)
+			end
+		end
+		# save original file and output redis hash as dump file
+		dir = "/production/data/climate/#{@yaml["Geography"].downcase}/#{@yaml["Framework"]}"
+		climate = tempfile.original_filename
+		FileUtils.move(tempfile.path,"#{dir}/#{climate}")
+		File.open("#{dir}/#{climate}.metadata","w"){ |f| f << @yaml.to_json }
+		File.open("#{dir}/#{climate}.redisdump","w"){ |f| f << redis.dump("#{@yaml["Framework"]}:#{climate}") }
+	end
 
 end
