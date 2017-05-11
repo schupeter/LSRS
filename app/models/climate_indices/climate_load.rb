@@ -126,12 +126,23 @@ filename = "/development/data/climate/monthly/CD_dss_ACCESS1_3_85_2025.txt"
 
 =end
 
-	def Climate_load.monthly(tempfile)
+	def Climate_load.monthlies(source, normalsKey)
+		# initialize variables
+		if source.class == String then # source must be in /production/data/climate
+			uploaded = false
+			sourcePathname = source
+			climate = source.split('/')[-1] 
+		else #source must be an ActionDispatch::Http::UploadedFile
+			uploaded = true
+			sourcePathname = source.path
+			climate = source.original_filename
+		end
 		redis = Redis.new
-		@input = File.read(tempfile.path).gsub("\r\n","\n")
+		@input = File.read(sourcePathname).gsub("\r\n","\n")
 		@yaml = YAML.safe_load(@input)
 		@sourceArray = CSV.parse(@input.split("--- #TSV\n")[1], headers:true, header_converters: :symbol, converters: :all, col_sep: "\t")
 		@normalsHash = Hash.new
+		@redisHash = "#{@yaml["Framework"]}:#{climate}:normals"
 		require 'net/http' # for Web.get_ecoprovince
 		for row in @sourceArray do
 			if row != [] then
@@ -151,15 +162,17 @@ filename = "/development/data/climate/monthly/CD_dss_ACCESS1_3_85_2025.txt"
 					@normalsHash[row[:id]][:tmax][month-1] = row[sprintf("tmax%02d", month).to_sym]
 				end
 				# save station normals data into Redis as JSON
-				redis.hset("#{@yaml["Framework"]}:#{tempfile.original_filename}", row[:id], @normalsHash[row[:id]].to_json)
+				redis.hset(@redisHash, row[:id], @normalsHash[row[:id]].to_json)
 			end
 		end
 		# save original file and output redis hash as dump file
-		dir = "/production/data/climate/#{@yaml["Geography"].downcase}/#{@yaml["Framework"]}"
-		climate = tempfile.original_filename
-		FileUtils.move(tempfile.path,"#{dir}/#{climate}")
-		File.open("#{dir}/#{climate}.metadata","w"){ |f| f << @yaml.to_json }
-		File.open("#{dir}/#{climate}.redisdump","w"){ |f| f << redis.dump("#{@yaml["Framework"]}:#{climate}") }
+		targetPathname = "/production/data/climate/#{@yaml["Geography"].downcase}/#{@yaml["Framework"]}/#{climate}"
+		if uploaded then
+			FileUtils.move(sourcePathname,targetPathname)
+		else
+		end
+		File.open("#{targetPathname}.metadata","w"){ |f| f << @yaml.to_json }
+		File.open("#{targetPathname}.normals.redisdump","w"){ |f| f << redis.dump(@redisHash) }
 	end
 
 end

@@ -39,23 +39,17 @@ class Climate_calc
 		end
 	end
 
-	def Climate_calc.monthly(station, polygonset, polygon, normals)
+	def Climate_calc.monthly(normalsKey, polygon, redis)
 		# calculates and stores climate indices for a site based on monthly climate normals data
-		# get data
-		if polygon == nil then
-			dir = "/production/data/climate/stations/#{station}"
-		else
-			dir = "/production/data/climate/polygons/#{polygonset}/#{polygon}"
-		end
-		site = JSON.parse(File.read("#{dir}/coordinates.json"),:symbolize_names => true)
-		site[:monthly]  = JSON.parse(File.read("#{dir}/monthly/#{normals}.json"),:symbolize_names => true)
-		@year = site[:year] 
+		# get data (based in redis)
+		site = JSON.parse(redis.hget(normalsKey,polygon),:symbolize_names => true)  # TODO - add or delete [:monthly]
+		@year = "2017" # just any non-leap year - required for yday
 		# create climate array with daily values of TMAX, TMIN, TMEAN, PRECIP
 		site[:climate] = Array.new(365){|e| {}} # create empty hashes
 		daysPerMonth = [31,28,31,30,31,30,31,31,30,31,30,31]
-		Climate_calc.monthly2dailyinterps(site[:monthly][:tmax],daysPerMonth).map.with_index{|v,i| site[:climate][i][:tmax]=v}
-		Climate_calc.monthly2dailyinterps(site[:monthly][:tmin],daysPerMonth).map.with_index{|v,i| site[:climate][i][:tmin]=v}
-		Climate_calc.monthly2dailyprecip(site[:monthly][:precip],daysPerMonth).map.with_index{|v,i| site[:climate][i][:precip]=v}
+		Climate_calc.monthly2dailyinterps(site[:tmax],daysPerMonth).map.with_index{|v,i| site[:climate][i][:tmax]=v}
+		Climate_calc.monthly2dailyinterps(site[:tmin],daysPerMonth).map.with_index{|v,i| site[:climate][i][:tmin]=v}
+		Climate_calc.monthly2dailyprecip(site[:precip],daysPerMonth).map.with_index{|v,i| site[:climate][i][:precip]=v}
 		# populate climate array with DAYNUMBER, TMEAN
 		site[:climate].each_with_index{|v,i| v[:daynumber] = i+1}
 		site[:climate].map{|v| v[:tmean] = ( v[:tmax] + v[:tmin] ) / 2}
@@ -85,26 +79,17 @@ class Climate_calc
 			site[:TmaxEGDD] = Climate_canolaheat.tmax_egdd(site[:climate],site[:EGDD600],site[:EGDD1100])
 		end
 		site[:CanHM] = Climate_canolaheat.canhm(site[:TmaxEGDD])
-#		File.open("#{dir}/monthly/#{params[:normals]}_indices.json","w"){ |f| f << site.except(:monthly, :climate, :lat, :long, :elev, :chu_thresholds).to_json }
-#		redis.hset("ytc003:1961x90_Observations","10",site.except(:monthly, :climate, :lat, :long, :elev, :chu_thresholds).to_json)  # TODO fix this
 		return site
 	end
 
-	def Climate_calc.monthlies(polygonset, climate)
+	def Climate_calc.monthlies(normalsKey, indicesKey, indicesDumpPathname, redis)
 		# calculates indices for all polygons in a polygonset, based on monthly normals
-		redis = Redis.new
-		# make sure raw climate data is in Redis  -- TODO
-		
-		# Find all the polygons that form part of a polygonset
-		#Dir.chdir("/production/data/climate/polygons/#{polygonset}")
-		#polygons = Dir.glob("*").sort
-		
-		# calc and store values in Redis
-		for polygon in redis.hkeys("#{polygonset}:#{climate}") do
-			redis.hset("#{polygonset}:#{climate}", polygon, Climate_calc.monthly(nil, polygonset, polygon, climate).except(:monthly, :climate, :lat, :long, :elev, :chu_thresholds).to_json)
+		# assumes raw climate data is available in Redis 
+		for polygon in redis.hkeys(normalsKey) do
+			redis.hset(indicesKey, polygon, Climate_calc.monthly(normalsKey, polygon, redis).except(:monthly, :climate, :lat, :long, :elev, :chu_thresholds).to_json)
 		end
 		# dump the hash to a file
-		File.open("/production/data/climate/polygons/#{polygonset}.#{climate}.redisdump","w"){ |f| f << redis.dump("#{polygonset}:#{climate}") }
+		File.open(indicesDumpPathname,"w"){ |f| f << redis.dump(indicesKey) }
 	end
 
 
@@ -181,7 +166,7 @@ class Climate_calc
 
 	def Climate_calc.dailies(params)
 		# calculates and stores climate indices for a site for all years with daily climate data
-params = {:station=>"2101300", :daily=>"1951", :chu2springfirstday=>"April 15", :chu2springtemp=>"14.2", :chu2springdays=>"5", :chu2springtemp10ave=>"10", :chu2falltemp=>"10.1", :chu2falltempmin=>"-2", "chu2falltemp10min"=>"10", :chu2falllastday=>"October 15"}
+#params = {:station=>"2101300", :daily=>"1951", :chu2springfirstday=>"April 15", :chu2springtemp=>"14.2", :chu2springdays=>"5", :chu2springtemp10ave=>"10", :chu2falltemp=>"10.1", :chu2falltempmin=>"-2", "chu2falltemp10min"=>"10", :chu2falllastday=>"October 15"}
 
 Dir.chdir("/production/data/climate/stations/2101300/daily/")
 # calculate the indices for each year
