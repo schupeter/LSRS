@@ -52,18 +52,17 @@ puts "@climateName = #{@climateName}".yellow
 
 # set some names
 @climateSourcePathname = "/production/data/climate/polygons/#{@frameworkName}/#{@climateName}"
-@normalsDumpPathname = @climateSourcePathname + ".normals.redisdump"
-@indicesDumpPathname = @climateSourcePathname + ".indices.redisdump"
+@normalsDumpPathname = @climateSourcePathname + "2normals.redisdump"
+@indicesDumpPathname = @climateSourcePathname + "3indices.redisdump"
 @normalsKey = "#{@frameworkName}:#{@climateName}:normals"
-@indicesKey = "#{@frameworkName}:#{@climateName}:indices"
+@indicesKey = "#{@frameworkName}/#{@climateName}:indices"
 
 # check to see if climate data has been processed into indices
 if not File.exist?(@climateSourcePathname) then puts "ERROR: Climate data file doesn't exist"  end
-if not File.exist?(@normalsDumpPathname) then puts "NOTE: Climate normals redisdump file doesn't exist" end
+if not File.exist?(@normalsDumpPathname) then puts "NOTE: Climate data redisdump file doesn't exist" end
 if not File.exist?(@indicesDumpPathname) then puts "NOTE: Climate indices redisdump file doesn't exist" end
 
 # load or update climate data into Redis if necessary
-
 
 # normals dump may be outdated (if source data was edited or updated on disk) or was never created
 if File.exist?(@normalsDumpPathname) and File.mtime(@normalsDumpPathname) > File.mtime(@climateSourcePathname) then 
@@ -110,8 +109,19 @@ end
 puts "Debugging from here".red
 puts "Got to here".green
 
-# now calculate soil ratings
+# At this point redis has the latest climate data loaded, so calculate the soil ratings
+
+redis.restore("test2",20000000,File.read("/production/data/climate/polygons/dss_v3_bclowerfraser/climate1961x90nlwis_slcv3x0.txt3indices.redisdump"))
 
 
+=begin
+redis.restore(test,20000000,"/production/data/climate/polygons/dss_v3_bclowerfraser/climate1961x90nlwis_slcv3x0.txt3indices.redisdump")
 
- 
+redis.keys.each{|k| redis.del(k)}
+
+
+# how to get climate data for a polygon:
+json_string = redis.hget "dss_v3_bclowerfraser:climate1961x90uvic400m:indices", "2641"
+person = JSON.parse(json_string, object_class: OpenStruct)
+
+=end

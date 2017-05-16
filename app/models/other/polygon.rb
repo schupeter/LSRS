@@ -9,15 +9,17 @@ class Polygon
     polygon.cmpData = eval(polygon.cmpTableName).where(:poly_id=>polygon.poly_id)
 		errors.push "PolyId = #{polygon.poly_id}" if polygon.cmpData ==  nil
     # climate table
-    climate.tableMetadata = LsrsClimate.where("WarehouseName" => climate.tableName).first
-		errors.push "ClimateTable = #{climate.tableName}" if climate.tableMetadata ==  nil
+    #climate.tableMetadata = LsrsClimate.where("WarehouseName" => climate.tableName).first
+    #climate.metadata = LsrsClimate.where("WarehouseName" => climate.tableName).first
+		#errors.push "ClimateTable = #{climate.tableName}" if climate.tableMetadata ==  nil
+		
     # locate climate data for a polygon
     # if component table or climate table are based on the SLC, then use the appropriate SLC poly_id
     if polygon.cmpTableMetadata.FrameworkURI[0..35] == "http://sis.agr.gc.ca/cansis/nsdb/slc" then #cmp is from the SLC
       polygon.cmpType = "SLC"
       polygon.landscape_id = polygon.poly_id
       climate.poly_id = polygon.poly_id
-    elsif climate.tableMetadata.FrameworkURI[0..35] == "http://sis.agr.gc.ca/cansis/nsdb/slc" then #cmp is not based on SLC, but climatetable is based on SLC
+    elsif climate.redisKey[0..2] == "slc" then #cmp is not based on SLC, but climatetable is based on SLC
       polygon.prtRecord = eval(polygon.cmpTableMetadata.PolygonRatingTable.capitalize).where(:poly_id => polygon.poly_id).first
       if polygon.prtRecord == nil then
 				errors.push "PolyId = #{polygon.poly_id}"
@@ -30,11 +32,13 @@ class Polygon
       if polygon.prtRecord == nil then
 				errors.push "PolyId = #{polygon.poly_id}"
       else
-        polygon.landscape_id = prtRecord.poly_id
+        polygon.landscape_id = polygon.prtRecord.poly_id
         climate.poly_id = polygon.landscape_id
       end
     end
-		climate.data = eval(climate.tableName).where(:poly_id=>climate.poly_id).first
+		#climate.data = eval(climate.tableName).where(:poly_id=>climate.poly_id).first # get this from Redis
+		redis = Redis.new # TODO move this up and out of here
+		climate.data = JSON.parse(redis.hget(climate.redisKey, climate.poly_id), object_class: OpenStruct)
 		errors.push "Climate data not found" if climate.data ==  nil
 		if polygon.prtRecord == nil then
 			errors.push "Polygon data not found"

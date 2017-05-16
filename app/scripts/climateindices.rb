@@ -47,8 +47,8 @@ require 'yaml'
 require 'csv'
 require 'json'
 require 'fileutils'
-require 'active_support/core_ext/enumerable.rb'
-require 'active_support/core_ext/string.rb'
+require 'active_support/core_ext/enumerable.rb' # sum
+require 'active_support/core_ext/string.rb' # to_date
 require '/production/sites/sislsrs/app/models/climate_indices/climate_calc.rb'
 require '/production/sites/sislsrs/app/models/climate_indices/climate_canolaheat.rb'
 require '/production/sites/sislsrs/app/models/climate_indices/climate_chu.rb'
@@ -88,7 +88,7 @@ when "monthly"
 	end
 	# dump the hash from Redis
 	puts filename[0..-5]
-	File.open("/production/data/climate/polygons/#{filename[0..-5]}.indices.redisdump","w"){ |f| f << redis.dump("#{params[:polygonset]}:#{params[:normals]}") }
+	File.open("/production/data/climate/polygons/#{filename[0..-5]}.properties.redisdump","w"){ |f| f << redis.dump("#{params[:polygonset]}:#{params[:normals]}") }
 when "daily"
 	Climate_load.daily("/development/data/climate/#{datatype}/#{filename}")
 end

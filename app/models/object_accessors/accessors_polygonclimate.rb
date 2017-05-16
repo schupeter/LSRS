@@ -1,6 +1,6 @@
 class AccessorsPolygonclimate
   attr_accessor :poly_id, 
-	:tableName, 
-	:tableMetadata,
+	:redisKey, 
+	:metadata,
 	:data
 end

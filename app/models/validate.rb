@@ -111,7 +111,7 @@ class Validate
         when "CROP"
           rating.crop = value
         when "CLIMATETABLE"
-          rating.climateData.tableName = value.capitalize
+          rating.climateData.redisKey = value
         when "RESPONSE"
           rating.responseForm = value.downcase
 				when "MANAGEMENT"

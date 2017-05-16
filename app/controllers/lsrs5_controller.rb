@@ -24,6 +24,7 @@ class Lsrs5Controller < ApplicationController
 		Polygon.get_ratings(@rating.crop, @rating.polygon, @rating.climateData.data, @rating.climate, @rating.errors) if @rating.errors == []
 		Polygon.aggregate_ratings(@rating.polygon.components, @rating.climate, @rating.aggregate) if @rating.errors == []
 		if @rating.errors.size > 0 then @rating.responseForm = "error" end
+		console
 		render "polygon_" + @rating.responseForm
 	end
 
@@ -43,7 +44,31 @@ class Lsrs5Controller < ApplicationController
     else
       @step = 2
       @soilDataset = LsrsCmp.where(:WarehouseName=>@cmpTable).first
-      @climateTables = LsrsClimate.where('PolygonTable like ? or PolygonTable like ?',@soilDataset.DSSClimatePolygonTable,@soilDataset.SLCClimatePolygonTable).order("Title_en")
+			
+#      @climateTables = LsrsClimate.where('PolygonTable like ? or PolygonTable like ?',@soilDataset.DSSClimatePolygonTable,@soilDataset.SLCClimatePolygonTable).order("Title_en")
+			# gather metadata for DSS climate scenarios
+			dirName = "/production/data/climate/polygons/#{@soilDataset.DSSClimatePolygonTable[0..-5]}/"
+			Dir.chdir(dirName)
+			climatesDss = Hash[Dir.glob("*.txt").collect { |f| [f, JSON.parse(File.read("#{f}1metadata.json"),:symbolize_names => true)] } ].collect{|k,v|  ["#{v[:Framework]}/#{k}", v[:Title]]}.sort {|a,b| a[1] <=> b[1]}
+#			climateDss = climatesDss.collect{|k,v|  [k, v[:Title]]}.sort {|a,b| a[1] <=> b[1]}
+#			climatesDss.keys.each{|k| climatesDss[k][:pathname]=dirName+k}
+
+			# gather metadata for SLC climate scenarios
+			dirName = "/production/data/climate/polygons/#{@soilDataset.SLCClimatePolygonTable[0..-5]}/"
+			Dir.chdir(dirName)
+			climatesSlc = Hash[Dir.glob("*.txt").collect { |f| [f, JSON.parse(File.read("#{f}1metadata.json"),:symbolize_names => true)] } ].collect{|k,v|  ["#{v[:Framework]}/#{k}", v[:Title]]}.sort {|a,b| a[1] <=> b[1]}
+#			climatesSlc.keys.each{|k| climatesSlc[k][:pathname]=dirName+k}
+			@climates = climatesDss + climatesSlc
+			console
+			#pause
+#Dir.chdir "/production/data/climate/polygons/dss_v3_bclowerfraser"
+#climatesDss = Hash[Dir.glob("*.txt").collect { |f| [f, JSON.parse(File.read("#{f}1metadata.json"),:symbolize_names => true)] } ]
+#@climates = Array.new
+
+#climatesDss.collect{|k,v|  [k, v[:Title]]}.sort {|a,b| a[1] <=> b[1]} + 
+
+
+
       @crops = Lsrs_crop.all
     end
     render

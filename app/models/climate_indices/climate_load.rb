@@ -171,7 +171,7 @@ filename = "/development/data/climate/monthly/CD_dss_ACCESS1_3_85_2025.txt"
 			FileUtils.move(sourcePathname,targetPathname)
 		else
 		end
-		File.open("#{targetPathname}.metadata","w"){ |f| f << @yaml.to_json }
+		File.open("#{targetPathname}.metadata.json","w"){ |f| f << @yaml.to_json }
 		File.open("#{targetPathname}.normals.redisdump","w"){ |f| f << redis.dump(@redisHash) }
 	end
 

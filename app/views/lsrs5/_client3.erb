@@ -3,8 +3,8 @@
         <td><b>Select a Climate Scenario</b>:</td>
         <td class="left">
           <select name="ClimateTable" size="1">
-            <%for climateTable in @climateTables do%>
-            <option value="<%=climateTable.WarehouseName.capitalize%>"><%=climateTable.Title_en%></option>
+            <%for climate in @climates do%>
+            <option value="<%=climate[0][0..-5]+":indices"%>"><%=climate[1]%></option>
             <%end%>
            </select>
         </td>
