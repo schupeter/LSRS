@@ -111,10 +111,10 @@ puts "Got to here".green
 
 # At this point redis has the latest climate data loaded, so calculate the soil ratings
 
-redis.restore("test2",20000000,File.read("/production/data/climate/polygons/dss_v3_bclowerfraser/climate1961x90nlwis_slcv3x0.txt3indices.redisdump"))
 
 
 =begin
+redis.restore("test2",20000000,File.read("/production/data/climate/polygons/dss_v3_bclowerfraser/climate1961x90nlwis_slcv3x0.txt3indices.redisdump"))
 redis.restore(test,20000000,"/production/data/climate/polygons/dss_v3_bclowerfraser/climate1961x90nlwis_slcv3x0.txt3indices.redisdump")
 
 redis.keys.each{|k| redis.del(k)}

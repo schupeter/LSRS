@@ -24,109 +24,44 @@ class Lsrs5Controller < ApplicationController
 		Polygon.get_ratings(@rating.crop, @rating.polygon, @rating.climateData.data, @rating.climate, @rating.errors) if @rating.errors == []
 		Polygon.aggregate_ratings(@rating.polygon.components, @rating.climate, @rating.aggregate) if @rating.errors == []
 		if @rating.errors.size > 0 then @rating.responseForm = "error" end
-		console
 		render "polygon_" + @rating.responseForm
 	end
 
 	# prepares a valid request for the polygon action
   def polygon_client
-    params.each do |key, value|      # standardize request parameters
-      case key.upcase        # clean up letter case in request parameters
-        when "FRAMEWORKNAME"
-          @frameworkName = value
-					@cmpTable = value.delete("~") + "_cmp"
-					@patTable = value.delete("~").capitalize + "_pat"
-      end # case
-    end # params
-    if !(defined? @frameworkName) or @frameworkName == "" then
-      @step = 1
-      @soilDatasets = LsrsCmp.order("Title_en ASC")
-    else
-      @step = 2
-      @soilDataset = LsrsCmp.where(:WarehouseName=>@cmpTable).first
-			
-#      @climateTables = LsrsClimate.where('PolygonTable like ? or PolygonTable like ?',@soilDataset.DSSClimatePolygonTable,@soilDataset.SLCClimatePolygonTable).order("Title_en")
-			# gather metadata for DSS climate scenarios
-			dirName = "/production/data/climate/polygons/#{@soilDataset.DSSClimatePolygonTable[0..-5]}/"
-			Dir.chdir(dirName)
-			climatesDss = Hash[Dir.glob("*.txt").collect { |f| [f, JSON.parse(File.read("#{f}1metadata.json"),:symbolize_names => true)] } ].collect{|k,v|  ["#{v[:Framework]}/#{k}", v[:Title]]}.sort {|a,b| a[1] <=> b[1]}
-#			climateDss = climatesDss.collect{|k,v|  [k, v[:Title]]}.sort {|a,b| a[1] <=> b[1]}
-#			climatesDss.keys.each{|k| climatesDss[k][:pathname]=dirName+k}
-
-			# gather metadata for SLC climate scenarios
-			dirName = "/production/data/climate/polygons/#{@soilDataset.SLCClimatePolygonTable[0..-5]}/"
-			Dir.chdir(dirName)
-			climatesSlc = Hash[Dir.glob("*.txt").collect { |f| [f, JSON.parse(File.read("#{f}1metadata.json"),:symbolize_names => true)] } ].collect{|k,v|  ["#{v[:Framework]}/#{k}", v[:Title]]}.sort {|a,b| a[1] <=> b[1]}
-#			climatesSlc.keys.each{|k| climatesSlc[k][:pathname]=dirName+k}
-			@climates = climatesDss + climatesSlc
-			console
-			#pause
-#Dir.chdir "/production/data/climate/polygons/dss_v3_bclowerfraser"
-#climatesDss = Hash[Dir.glob("*.txt").collect { |f| [f, JSON.parse(File.read("#{f}1metadata.json"),:symbolize_names => true)] } ]
-#@climates = Array.new
-
-#climatesDss.collect{|k,v|  [k, v[:Title]]}.sort {|a,b| a[1] <=> b[1]} + 
-
-
-
-      @crops = Lsrs_crop.all
-    end
-    render
+		private_set_rating_parameters
   end
 
 	# generates the LSRSv5 ratings for a given set of polygons + climate + crop
 	def polygonbatch
-		if params.size == 2 then
-			@processHash = YAML.load_file("#{Rails.root.to_s}/config/services/wps/processes/lsrs.yml")
-			@lang="en"
-			render "polygonbatch_DescribeProcess_response"
-		else
+		if params.size > 2 then # set up batch process
 			@batch = AccessorsPolygonbatch.new
 			@batch.host = request.host
 			Validate.polygonbatch(params, request, @batch)
 			Polygonbatch.get_poly_ids(@batch) if @batch.errors == []
 			if @batch.errors == [] then
-				if @responseForm == "ResponseDocument" or @batch.polyArray.size > 30 then #add to the batch queue
-					Polygonbatch.queue(@batch) if @batch.errors == []
+				if @responseForm == "ResponseDocument" or @batch.polygonsHash.keys.size > 30 then #add to the batch queue
+					Polygonbatch.queue(@batch)
+					render :file => @batch.statusFilename, :content_type => "text/xml", :layout => false 
 				else # run immediately
-					Polygonbatch.run(@batch) if @batch.errors == []
-					render
+					Polygonbatch.calc_ratings(@batch)
+					render"polygonbatch_small"
 				end
-			end
-			if @batch.errors == [] then
-#				if @batch.view == "xml" then
-#console
-					render :file => @batch.statusFilename, :content_type => "text/xml", :layout => false #and File.delete(@batch.statusFilename)
-#				else
-#					render @batch.view
-#				end
 			else
 				render "polygonbatch_error"
 			end
+		else # display usage instructions
+			@processHash = YAML.load_file("#{Rails.root.to_s}/config/services/wps/processes/lsrs.yml")
+			@lang="en"
+			render "polygonbatch_DescribeProcess_response"
 		end
 	end
 
 	# prepares a valid request for the polygon batch processor
 	def polygonbatch_client
-    params.each do |key, value|      # standardize request parameters
-      case key.upcase        # clean up letter case in request parameters
-        when "FRAMEWORKNAME"
-          @frameworkName = value
-					@cmpTable = value.delete("~") + "_cmp"
-					@patTable = value.delete("~").capitalize + "_pat"
-      end # case
-    end # params
-    if !(defined? @frameworkName) or @frameworkName == "" then
-      @step = 1
-      @soilDatasets = LsrsCmp.order("Title_en ASC")
-    else
-      @step = 2
-      @soilDataset = LsrsCmp.where(:WarehouseName=>@cmpTable).first
-      @climateTables = LsrsClimate.where('PolygonTable like ? or PolygonTable like ?',@soilDataset.DSSClimatePolygonTable,@soilDataset.SLCClimatePolygonTable)
-      @crops = Lsrs_crop.all
-    end
+		private_set_rating_parameters
 		console
-    render
+
   end
 
   def Index
@@ -136,4 +71,41 @@ class Lsrs5Controller < ApplicationController
 	def debug
 		render "/home/debug.html"
 	end
+
+	# private methods (these are called without referencing the class name)
+	private
+
+	def private_climate_scenarios
+		# gather metadata for DSS climate scenarios
+		dirName = "/production/data/climate/polygons/#{@soilDataset.DSSClimatePolygonTable[0..-5]}/"
+		Dir.chdir(dirName)
+		climatesDss = Hash[Dir.glob("*.txt").collect { |f| [f, JSON.parse(File.read("#{f}1metadata.json"),:symbolize_names => true)] } ].collect{|k,v|  ["#{v[:Framework]}/#{k}", v[:Title]]}.sort {|a,b| a[1] <=> b[1]}
+		# gather metadata for SLC climate scenarios
+		dirName = "/production/data/climate/polygons/#{@soilDataset.SLCClimatePolygonTable[0..-5]}/"
+		Dir.chdir(dirName)
+		climatesSlc = Hash[Dir.glob("*.txt").collect { |f| [f, JSON.parse(File.read("#{f}1metadata.json"),:symbolize_names => true)] } ].collect{|k,v|  ["#{v[:Framework]}/#{k}", v[:Title]]}.sort {|a,b| a[1] <=> b[1]}
+		# return them as one hash
+		climatesDss + climatesSlc
+	end
+
+	def private_set_rating_parameters
+    params.each do |key, value|      # standardize request parameters
+      case key.upcase        # clean up letter case in request parameters
+        when "FRAMEWORKNAME"
+          @frameworkName = value
+					@cmpTable = value.delete("~") + "_cmp"
+					@patTable = value.delete("~").capitalize + "_pat"
+      end # case
+    end # params
+    if !(defined? @frameworkName) or @frameworkName == "" then
+      @step = 1
+      @soilDatasets = LsrsCmp.order("Title_en ASC")
+    else
+      @step = 2
+      @soilDataset = LsrsCmp.where(:WarehouseName=>@cmpTable).first
+			@climates = private_climate_scenarios
+      @crops = Lsrs_crop.all
+    end
+	end
+
 end

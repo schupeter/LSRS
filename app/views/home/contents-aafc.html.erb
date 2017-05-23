@@ -1,17 +1,14 @@
-<%= render :partial => "/lsrs/clf1" %>
-<title>LSRS</title>
-<%= render :partial => "/lsrs/clf2" %>
+<% content_for :title do %>LSRS version 5<% end %>
+
 <center>
 <h1>Land Suitability Rating System<br/>(LSRS) version 5</h1>
 </center>
 
-<h2>Introduction</h2>
-LSRS is an expert system that assesses the suitability of land for crop production, based on measurable qualities of soil, climate, and landform.  
-This site contains <a href="/lsrsdoc_v3/LSRS_Index.htm">complete documentation of the original LSRS prototype</a>, 
-a copy of the <a href="/lsrsdoc_v3/LSRSManualPDF/1995_6e.pdf">LSRS Spring Seeded Small Grains manual</a>, 
-as well as links to the latest LSRS clients and services.
 
-<h2>The rating system</h2>
+LSRS is an expert system that assesses the suitability of Canadian land for crop production, based on measurable qualities of soil, climate, and landform.  
+This site allows on-line calculation of LSRS ratings for a variety of historical climate normals and future scenarios.
+
+<h2>Documentation</h2>
 <ol>
 <li><a href="/lsrsdoc_v3/Section1_Introduction/Section1_LSRSManual.html">Introduction to LSRS</a></li>
 <li><a href="/lsrsdoc_v3/Section2_SystemDevelopment/Section2_LSRSManual.htm">Description of the ratings</a></li>
@@ -26,48 +23,37 @@ as well as links to the latest LSRS clients and services.
 <li><a href="/lsrsdoc_v3/AppendixB_Glossary/Glossary.htm">Glossary</a></li>
 </ol>
 
-<h2>LSRS clients and services</h2>
+<h2>LSRS calculator</h2>
 <center>
 <table class="lsrsSubheader">
 <tr>
 <th>Clients</th>
-<th>Services</th>
 </tr>
 <tr>
-<td class="mid"><a href="/lsrs5/polygon_client">LSRS calculator</a></td>
+<td class="mid"><a href="/lsrs5/polygon_client">Crop calculator</a></td>
 </tr>
 <tr>
-<td class="mid"><a href="/lsrs5/multicrop_client">MultiCrop (TODO)</a></td>
+<td class="mid"><a href="/lsrs5/multicrop_client">MultiCrop calculator (TODO)</a></td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr>
+<td class="mid"><a href="/lsrs5/polygonbatch_client">Batch processor</a></td>
 </tr>
 <tr>
-<td class="mid"><a href="/lsrs5/polygonbatch_client">batch processor</a></td>
+<td class="mid"><a href="/lsrsbatchstatus/client">Batch queue</a></td>
 </tr>
+<tr><td><hr/></td></tr>
 <tr>
-<td class="mid"><a href="/lsrsbatchstatus/client">batch queue</a></td>
+<td class="mid"><a href="/climateindices/index.html">Load Climate Data</a></td>
 </tr>
+<tr><td><hr/></td></tr>
 <tr>
-<td class="mid"><a href="">Climate Indices</a></td>
-</tr>
-<tr>
-<td class="mid"><a href="tests.html">Test page</a></td>
+<td class="mid"><a href="tests.html">test page</a></td>
 </tr>
 </table>
 <br/>
 <br/>
-<table class="lsrsSubheader">
-  <tr>
-    <th>Configuration</th>
-  </tr>
-  <tr>
-    <td class="mid"><a href="/lsrs_frameworks/">Soil Polygon Tables</a></td>
-  </tr>
-  <tr>
-    <td class="mid"><a href="/lsrs_cmps/">Soil Component Tables</a></td>
-  </tr>
-  <tr>
-    <td class="mid"><a href="/lsrs_soils/">Soil Name and Layer Tables</a></td>
-  </tr>
-</table>
+
 
 </center>
 
@@ -80,4 +66,3 @@ as well as links to the latest LSRS clients and services.
 <p>See the full <a href="history.html">history</a>.</p>
 
 </center>
-<%= render :partial => "/lsrs/clf3" %>

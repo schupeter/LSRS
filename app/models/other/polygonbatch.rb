@@ -6,36 +6,55 @@ class Polygonbatch
 		batch.framework = LsrsFramework.where("FrameworkURI"=>dataset.FrameworkURI).first
     # determine polygon numbers for processing
     if batch.region == nil then # determine valid polygon numbers from a range
-      batch.polyArray = eval(batch.cmpTableName.capitalize).where(:poly_id=>batch.fromPoly..batch.toPoly).select(:poly_id).map{|x| x.poly_id}.sort.uniq
+      polyArray = eval(batch.cmpTableName.capitalize).where(:poly_id=>batch.fromPoly..batch.toPoly).select(:poly_id).map{|x| x.poly_id}
     else # read in all polygon numbers, or numbers for a region
       if batch.region == "all" then #select all polygons
-        batch.polyArray = eval(batch.cmpTableName.capitalize).all.select(:poly_id).map{|x| x.poly_id}.sort.uniq
+        polyArray = eval(batch.cmpTableName.capitalize).all.select(:poly_id).map{|x| x.poly_id}
       else # must be a region
 				regionDir = "/production/geodata/" + batch.cmpTableName.split("_")[0..2].join("/") + "/polygonsets/"
         f = File.open(regionDir + batch.region + ".txt", "r")
-        batch.polyArray = f.readlines
+        polyArray = f.readlines
       end
       # ensure batch status page works RELOCATE THIS CODE!!!
       @fromPoly = @region
       @toPoly = @region
     end
-    batch.errors.push("No polygon identifiers found") if batch.polyArray == []
+		if polyArray == [] then
+			batch.errors.push("No polygon identifiers found")
+		else
+			batch.polygonsHash = Hash[polyArray.sort.uniq.zip] # convert array of poly_ids to a hash with nil values
+		end
     batch.timeStamp = DateTime::now.to_s[0,19].delete("-:").gsub("T", "t") + "r" + rand.to_s[2,4]
 	end
 
-	def Polygonbatch.run(batch)
+	def Polygonbatch.calc_ratings(batch)
+		for poly in batch.polygonsHash.keys do
+			params2 = {"FrameworkName"=>batch.frameworkName, "Climate"=>batch.climateTableName, "Crop"=>batch.crop, "Management"=>batch.management, "PolyId"=>poly}
+			# this part is identical to how a single polygon gets calculated
+			@rating = AccessorsRating.new
+			Validate.polygon(params2, @rating)
+			Polygon.get_data(@rating.polygon, @rating.climateData, @rating.errors) if @rating.errors == []
+			Polygon.get_ratings(@rating.crop, @rating.polygon, @rating.climateData.data, @rating.climate, @rating.errors) if @rating.errors == []
+			Polygon.aggregate_ratings(@rating.polygon.components, @rating.climate, @rating.aggregate) if @rating.errors == []
+			if @rating.errors == [] then
+				batch.polygonsHash[poly] = @rating.aggregate
+			else
+				batch.polygonsHash[poly] = @rating.errors
+			end
+		end
+	end
+
+	def Polygonbatch.run(batch) # OBSOLETE
 		# return response directly (RawDataOutput)
-		# determine temporary directory/file names and file URLs for status file and others
-		batch.outputFilename = "#{Rails.root.to_s}/tmp/#{batch.timeStamp}.xml"
 		# prepare to call LSRS routine
 		require "#{Rails.root.to_s}/app/helpers/libxml-helper"
-		require "#{Rails.root.to_s}/lib/lsrs_gdas"
+		require "#{Rails.root.to_s}/app/models/ogc/lsrs_gdas"
 		require "open-uri"
 		# create output file
-		outputFile = File.open(batch.outputFilename, 'w') 
+		outputFile = File.open("#{Rails.root.to_s}/tmp/#{batch.timeStamp}.xml", 'w') 
 		# populate top section
-		climateTitle = LsrsClimate.where(:WarehouseName=>batch.climateTableName).first.Title_en
-		LSRS_GDAS.top(outputFile, batch.crop, batch.framework, batch.cmpTableName, climateTitle, batch.climateTableName)
+		#climateTitle = LsrsClimate.where(:WarehouseName=>batch.climateTableName).first.Title_en
+		LSRS_GDAS.top(outputFile, batch.crop, batch.framework, batch.cmpTableName, batch.climateMetadata[:title], batch.climateTableName)
 		#populate rowset by calling LSRS routine for each polygon
 		batch.polyArray.each_with_index do | poly, i |
 			lsrsURL = "http://#{batch.host}/lsrs5/polygon?FRAMEWORKNAME=" + batch.frameworkName + "&POLYID=" + poly.to_s + "&CROP=" + batch.crop + "&CLIMATETABLE=" + batch.climateTableName + "&MANAGEMENT=" + batch.management + "&RESPONSE=Rate"

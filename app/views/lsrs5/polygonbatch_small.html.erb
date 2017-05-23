@@ -1,5 +1,16 @@
-<h1>Polygon batch response (small)</h1>
-<%= debug @batch%> 
+<h1>LSRS ratings</h1>
 
-<%= console%> 
+<b>Framework:</b> <%= @batch.frameworkName%> (<%= @batch.framework.Title_en%>) </br>
+<b>From:</b> <%= @batch.fromPoly%></br>
+<b>To:</b> <%= @batch.toPoly%></br>
+<b>Climate:</b> <%= @batch.climateMetadata.Title%> </br>
+<b>Management:</b> <%= @batch.management%> </br>
+<b>Crop:</b> <%= @batch.crop%> </br>
 
+<%require 'open-uri'%>
+
+<%for poly in @batch.polygonsHash.keys do%>
+<%lsrsURL = "http://#{@batch.host}/lsrs5/polygon?FRAMEWORKNAME=" + @batch.frameworkName + "&POLYID=" + poly + "&CROP=" + @batch.crop + "&CLIMATE=" + @batch.climateTableName + "&MANAGEMENT=" + @batch.management + "&RESPONSE=Details"%>
+
+	<a href="<%=lsrsURL%>"><%=poly%></a>:  <%=@batch.polygonsHash[poly]%><br/>
+<%end%>

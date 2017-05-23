@@ -12,14 +12,14 @@ class Polygon
     #climate.tableMetadata = LsrsClimate.where("WarehouseName" => climate.tableName).first
     #climate.metadata = LsrsClimate.where("WarehouseName" => climate.tableName).first
 		#errors.push "ClimateTable = #{climate.tableName}" if climate.tableMetadata ==  nil
-		
+
     # locate climate data for a polygon
     # if component table or climate table are based on the SLC, then use the appropriate SLC poly_id
     if polygon.cmpTableMetadata.FrameworkURI[0..35] == "http://sis.agr.gc.ca/cansis/nsdb/slc" then #cmp is from the SLC
       polygon.cmpType = "SLC"
       polygon.landscape_id = polygon.poly_id
       climate.poly_id = polygon.poly_id
-    elsif climate.redisKey[0..2] == "slc" then #cmp is not based on SLC, but climatetable is based on SLC
+    elsif climate.climateIndicesKey[0..2] == "slc" then #cmp is not based on SLC, but climatetable is based on SLC
       polygon.prtRecord = eval(polygon.cmpTableMetadata.PolygonRatingTable.capitalize).where(:poly_id => polygon.poly_id).first
       if polygon.prtRecord == nil then
 				errors.push "PolyId = #{polygon.poly_id}"
@@ -38,12 +38,18 @@ class Polygon
     end
 		#climate.data = eval(climate.tableName).where(:poly_id=>climate.poly_id).first # get this from Redis
 		redis = Redis.new # TODO move this up and out of here
-		climate.data = JSON.parse(redis.hget(climate.redisKey, climate.poly_id), object_class: OpenStruct)
-		errors.push "Climate data not found" if climate.data ==  nil
+
+		climateString = redis.hget(climate.climateIndicesKey, climate.poly_id)
+		if climateString == nil then
+			errors.push "Climate data not found"
+		else
+			climate.data = JSON.parse(climateString, object_class: OpenStruct)
+		end
+		#errors.push "Climate data not found" if climate.data ==  nil
 		if polygon.prtRecord == nil then
 			errors.push "Polygon data not found"
 		else
-			# erosivity_region
+			# erosivity_region  TODO remove this because it is available from the climate table
 			if polygon.cmpType == "SLC" then slc_v3r2 = polygon.poly_id else slc_v3r2 = polygon.prtRecord.slc_v3r2 end
 			eco_id = Slc_v3r2_canada_pat.where(:poly_id=>slc_v3r2).first.eco_id
 			ecoprovince = Slc_v3r2_canada_eft.where(:eco_id=>eco_id).first.ecoprovinc
@@ -60,7 +66,7 @@ class Polygon
 		when "sssgrain"
 			params = {:ppe=>climateData.ppe.round, :egdd=>climateData.egdd.round, :esm=>climateData.esm.round, :efm=>climateData.efm.round}
 		when "corn", "soybean"
-			params = {:ppe=>climateData.ppe.round, :chu=>climateData.egdd.round, :esm=>climateData.esm.round, :efm=>climateData.efm.round}
+			params = {:ppe=>climateData.ppe.round, :chu=>climateData.chu.round, :esm=>climateData.esm.round, :efm=>climateData.efm.round}
 		end
 		Validate.climate_params(params, climateRating, errors)
 		eval(crop.capitalize).rate_climate(params, climateRating)

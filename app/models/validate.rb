@@ -110,8 +110,8 @@ class Validate
           rating.polygon.poly_id = value
         when "CROP"
           rating.crop = value
-        when "CLIMATETABLE"
-          rating.climateData.redisKey = value
+        when "CLIMATE"
+          rating.climateData.climateIndicesKey = value + ":indices"
         when "RESPONSE"
           rating.responseForm = value.downcase
 				when "MANAGEMENT"
@@ -141,8 +141,10 @@ class Validate
 					end
         when "RESPONSEFORM"
           if value == "xml" then batch.view = "xml" end
-        when "CLIMATETABLE"
+        when "CLIMATE"
           batch.climateTableName = value
+					batch.climateIndicesKey = value + ":indices"
+					batch.climateMetadata = JSON.parse(File.read("/production/data/climate/polygons/#{value}.txt1metadata.json"), object_class: OpenStruct)
 				when "MANAGEMENT"
 					batch.management = value
       end # case

@@ -2,9 +2,9 @@
       <tr>
         <td><b>Select a Climate Scenario</b>:</td>
         <td class="left">
-          <select name="ClimateTable" size="1">
+          <select name="Climate" size="1">
             <%for climate in @climates do%>
-            <option value="<%=climate[0][0..-5]+":indices"%>"><%=climate[1]%></option>
+            <option value="<%=climate[0][0..-5]%>"><%=climate[1]%></option>
             <%end%>
            </select>
         </td>
