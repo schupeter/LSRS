@@ -19,7 +19,8 @@ Lsrs::Application.routes.draw do
 	get '/batch/results/:tmpdir/output.kml' => 'kml#create'
 	
 # version 5 (REST)
-	get '/lsrs5/debug.html' => 'lsrs5#debug'
+	get '/lsrs5/batch/queue' => 'lsrs5#batch_queue'
+	post '/lsrs5/batch/delete' => 'lsrs5#batch_delete'
 	get '/lsrs5/crop/alfalfa/climate/:ppe/:gdd/:gsl/:esm/:efm/:view.:format' => 'crop_alfalfa#climate'
 	get '/lsrs5/crop/brome/climate/:ppe/:gdd/:gsl/:esm/:efm/:view.:format' => 'crop_brome#climate'
 	get '/lsrs5/crop/canola/climate/:ppe/:egdd/:canhm/:esm/:efm/:view.:format' => 'crop_canola#climate'
@@ -32,6 +33,12 @@ Lsrs::Application.routes.draw do
 	# organic requires an extra parameter (egdd).  For mineral egdd is ignored.
 	get '/lsrs5/crop/:crop/site/:soil_id/:region/:slope/:length/:stoniness/:ppe/:egdd/:view.:format' => 'crop_fieldcrop#site', :constraints => { :slope => /[^\/]+/ , :stoniness => /[^\/]+/}
 	
+	get '/lsrs5/documentation/:action' => 'documentation5'
+	get '/lsrs5/documentation/interface/inputs/:name' => 'documentation5#input'
+	get '/lsrs5/documentation/:category/:factor/:crop' => 'documentation5#factorCropSpecificWithChart'
+	get '/lsrs5/documentation/:category/:factor' => 'documentation5#canned'
+
+	get '/lsrs5/debug.html' => 'lsrs5#debug'
 	
 	# new api documentation
 	get '/lsrs5/:crop/api.html' => 'api#show'
@@ -42,11 +49,6 @@ Lsrs::Application.routes.draw do
 	get '/lsrs5/:soil_id/potato/:slope/:stoniness/:julymeantemp' => 'lsrs5#potato'
 	get '/lsrs5/:soil_id/potato/test' => 'lsrs5#potato'
 	
-
-	get '/lsrs5/documentation/:action' => 'documentation5'
-	get '/lsrs5/documentation/interface/inputs/:name' => 'documentation5#input'
-	get '/lsrs5/documentation/:category/:factor/:crop' => 'documentation5#factorCropSpecificWithChart'
-	get '/lsrs5/documentation/:category/:factor' => 'documentation5#canned'
 
 
 #	get '/contents.html' => 'home#contents'

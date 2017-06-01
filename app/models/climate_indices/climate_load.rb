@@ -140,6 +140,7 @@ filename = "/development/data/climate/monthly/CD_dss_ACCESS1_3_85_2025.txt"
 		redis = Redis.new
 		@input = File.read(sourcePathname).gsub("\r\n","\n")
 		@yaml = YAML.safe_load(@input)
+		puts sourcePathname
 		@sourceArray = CSV.parse(@input.split("--- #TSV\n")[1], headers:true, header_converters: :symbol, converters: :all, col_sep: "\t")
 		@normalsHash = Hash.new
 		@redisHash = "#{@yaml["Framework"]}:#{climate}:normals"

@@ -1,4 +1,5 @@
 class Polygonbatch
+	#lsrs5
 
 	def Polygonbatch.get_poly_ids(batch)
     # get metadata
@@ -28,8 +29,9 @@ class Polygonbatch
 	end
 
 	def Polygonbatch.calc_ratings(batch)
+		params2 = {"FrameworkName"=>batch.frameworkName, "Climate"=>batch.climateTableName, "Crop"=>batch.crop, "Management"=>batch.management}
 		for poly in batch.polygonsHash.keys do
-			params2 = {"FrameworkName"=>batch.frameworkName, "Climate"=>batch.climateTableName, "Crop"=>batch.crop, "Management"=>batch.management, "PolyId"=>poly}
+			params2["PolyId"] = poly
 			# this part is identical to how a single polygon gets calculated
 			@rating = AccessorsRating.new
 			Validate.polygon(params2, @rating)
@@ -39,7 +41,7 @@ class Polygonbatch
 			if @rating.errors == [] then
 				batch.polygonsHash[poly] = @rating.aggregate
 			else
-				batch.polygonsHash[poly] = @rating.errors
+				batch.polygonsHash[poly] = @rating.errors.join("; ")
 			end
 		end
 	end
@@ -78,13 +80,13 @@ class Polygonbatch
 		timeString = DateTime::now.to_s[0,19].delete("-:").gsub("T", "t") + "r" + rand.to_s[2,4] 
     # return status document as per WPS
     # create unique string for temporary directory names
-		batch.dir =  "#{Rails.root.to_s}/public/batch/"
-		batch.url = "/batch/results/#{timeString}"
+		batch.dir =  "#{Rails.root.to_s}/public/batch5"
+		batch.url = "/lsrs5/batch/results/#{timeString}"
     # prepare output
     # determine temporary directory/file names and file URLs for status file and others
 		statusDirName = "#{batch.dir}/results/" + timeString
 		statusFilename = "#{batch.dir}/results/#{timeString}/status.xml"
-		controlFilename = "#{batch.dir}/pending/#{timeString}_control.yml"
+		controlFilename = "#{batch.dir}/results/#{timeString}/control.yml"
 		polygonFilename = "#{batch.dir}/results/#{timeString}/polygons.txt"
 		outputXmlFilename = "#{batch.dir}/results/#{timeString}/output.xml"
 		outputCsvFilename = "#{batch.dir}/results/#{timeString}/output.csv"
@@ -129,9 +131,11 @@ class Polygonbatch
 		controlFile.puts "Management: " + batch.management
 		controlFile.puts "ClimateTable: " + batch.climateTableName 
 		controlFile.close
+		# create link in pending
+		FileUtils.ln_s(controlFilename, "#{batch.dir}/pending/#{timeString}_control.yml")
 		# create polygon file
 		polygonFile = File.open(polygonFilename, 'w')
-		for poly in batch.polyArray do
+		for poly in batch.polygonsHash.keys.sort do
 			polygonFile.puts poly
 		end
 		polygonFile.close

@@ -1,0 +1,53 @@
+<center>
+<h1>LSRS batch queue</h1>
+
+<p>As of <%= DateTime::now.to_s[0,19].gsub("-", ".").gsub("T"," ") %></p>
+
+<p><a href="queue">Reload</a> to update.</p>
+
+<p><b>Note</b>: When status = "FAILED", execution of subsequent batch processes is blocked.<br/>
+Delete the failed job to continue processing.</p>
+
+<table width="1100">
+  <tr>
+    <th class="mid">Job submission date</th>
+    <th>Framework</th>
+    <th>Crop</th>
+    <th>Climate</th>
+    <th>Management</th>
+    <th>From #</th>
+    <th>To #</th>
+    <th>Status</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% for jobName in @resultsJobsArray %>
+  <tr>
+    <td class="mid"><%= jobName[0..3] %>.<%= jobName[4..5] %>.<%= jobName[6..7] %> <%= jobName[9..10] %>:<%= jobName[11..12] %>:<%= jobName[13..14] %></td>
+    <td class="mid"><%= @statusHash[jobName]["FrameworkName"] %></td>
+    <td class="mid"><%= @statusHash[jobName]["Crop"] %></td>
+    <td class="mid"><%= @statusHash[jobName]["ClimateTable"].split('/')[1] %></td>
+    <td class="mid"><%= @statusHash[jobName]["Management"] %></td>
+    <td class="mid"><%= @statusHash[jobName]["FromPoly"] %></td>
+    <td class="mid"><%= @statusHash[jobName]["ToPoly"] %></td>
+    <td class="mid"><%= @statusHash[jobName][:Status] %></td>
+    <td class="mid">
+      <% if @statusHash[jobName][:Status] == "Complete" %><a href="/batch5/results/<%= jobName %>/output.html">Results</a>
+      <% elsif @statusHash[jobName][:Status] == "** FAILED **" %><a href="/batch5/results/<%= jobName %>/output.html">Results</a>
+      <% elsif @statusHash[jobName][:Status] == "Processing" %><a href="/batch5/results/<%= jobName %>/status.xml">Status</a>
+      <% end %></td>
+    <td class="mid">
+      <% if @statusHash[jobName][:Status] == "Complete" %>
+        <a href="http://<%= request.host %>/batch5/results/<%= jobName %>/output.csv">csv</a>
+      <% end %></td>
+    <td class="mid">
+			<form action="delete?JobName=<%= jobName %>" method="post">
+				<button type="submit" name="none" value="none" class="btn-link"><% if @statusHash[jobName][:Status] == "Complete" %>Delete<% elsif @statusHash[jobName][:Status] == "** FAILED **" %>Delete<% elsif @statusHash[jobName][:Status] == "Pending" %>Cancel<% end %></button>
+			</form>
+		</td>
+  </tr>
+  <% end %>
+</table>
+
+</center>

@@ -1,5 +1,5 @@
 class LsrsbatchstatusController < ApplicationController
-
+ # for LSRSv4 only
   def client
     #get libraries
     require "yaml"
