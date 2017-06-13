@@ -51,7 +51,17 @@ for frameworkName in LsrsFramework.all.select(:WarehouseName).map{|n| n.Warehous
 		end
 		# populate the indices dump file for each climate scenario
 		indicesKey = "#{frameworkName}/#{fileName}:indices"
-		require "/production/sites/sislsrs/app/models/mysql_tables/#{climate.WarehouseName}.rb"
+		# load the model 
+		modelPathname = "/production/sites/sislsrs/app/models/mysql_tables/#{climate.WarehouseName}.rb"
+		if not File.exists?(modelPathname) then 
+			m = File.open(modelPathname,"w")
+			m.puts "class #{climate.WarehouseName.capitalize} < ActiveRecord::Base"
+			m.puts " self.table_name=\"geodata.#{climate.WarehouseName.downcase}\""
+			m.puts "end"
+			m.close
+		end
+		require "#{modelPathname}"
+		# transfer the contents to redis
 		for p in eval(climate.WarehouseName.capitalize).all do
 			redis.hset(indicesKey, p.poly_id, {"ppe"=>p.ppe,"egdd"=>p.egdd,"chu"=>p.chu,"esm"=>p.esm,"efm"=>p.efm,"eff"=>p.eff,"rhi"=>p.rhi,"er"=>p.ErosivityRegion,"julymean"=>p.julymean,"canhm"=>p.canhm,"gdd"=>p.gdd,"gss"=>p.gss,"gse"=>p.gse,"gsl"=>p.gsl}.to_json)
 		end
