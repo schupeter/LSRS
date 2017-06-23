@@ -20,6 +20,12 @@
 /config/initializers/constants.rb
 /config/initializers/secret_token.rb
 
+# ignore batch files content
+/public/batch5/lsrsbatchlog
+/public/batch5/pending
+/public/batch5/processing
+/public/batch5/results
+
 # ignore obsolete content
 /public/batch/pending
 /public/batch/processing

@@ -1,6 +1,4 @@
-<%= render :partial => "/lsrs/clf1" %>
-<title>LSRS history</title>
-<%= render :partial => "/lsrs/clf2" %>
+<% content_for :title do %>LSRS history<% end %>
 <center>
 <h1>LSRS history</h1>
 </center>
@@ -19,11 +17,9 @@
  
 <p>2009.  <b>Version 4</b>.  Peter Schut (AAFC) begins to rewrite LSRS in Ruby as a suite of web services, so that it can be integrated with other models for climate change, environmental impact, and socio-economic impact.  This latest program has the ability to run and store batch processes, calculate results for multiple crops simultaneously, use both DSS and SLC data, accept climate scenarios transmitted from other systems, output data as HTML, CSV, and GDAS, display CLI-style ratings, and provide thematic maps via WMS and KML.  It supports batch processing compliant with WPS.  Internally at AAFC it is fully integrated with the NSDB data and systems.  A significant number of adjustments are made to the original algorithms as the results are validated for agricultural areas outside of Alberta.</p>
  
-<p>2011.  Limited calculator functionality is made available to the general public via the Internet.</p>
+<p>2011.  Limited calculator functionality is made available to collaborators and the general public via the Internet.</p>
 
-<p>2013.  Peter Schut (AAFC) takes over scientific direction of LSRS.</p>
-
-<p>2014.  Scott Smith and Pierre-Yves Gasser start to use LSRS to assess the impact of future climate scenarios.</p>
+<p>2014.  Version 4 is completed.  Scott Smith and Pierre-Yves Gasser (AAFC) start to use LSRS to assess the impact of future climate scenarios.</p>
 
 <p>2017.  <b>Version 5</b> is released.  This latest version:
 <ul>
@@ -37,4 +33,3 @@
 </p>
 
 </center>
-<%= render :partial => "/lsrs/clf3" %>
