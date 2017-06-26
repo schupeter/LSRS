@@ -25,6 +25,7 @@
 /public/batch5/pending
 /public/batch5/processing
 /public/batch5/results
+/public/batch5/lsrsbatchlog
 
 # ignore obsolete content
 /public/batch/pending

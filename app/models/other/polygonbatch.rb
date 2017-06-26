@@ -84,23 +84,25 @@ class Polygonbatch
 		batch.url = "/lsrs5/batch/results/#{timeString}"
     # prepare output
     # determine temporary directory/file names and file URLs for status file and others
-		statusDirName = "#{batch.dir}/results/" + timeString
-		statusFilename = "#{batch.dir}/results/#{timeString}/status.xml"
-		controlFilename = "#{batch.dir}/results/#{timeString}/control.yml"
-		polygonFilename = "#{batch.dir}/results/#{timeString}/polygons.txt"
-		outputXmlFilename = "#{batch.dir}/results/#{timeString}/output.xml"
-		outputCsvFilename = "#{batch.dir}/results/#{timeString}/output.csv"
-		outputHtmlFilename = "#{batch.dir}/results/#{timeString}/output.html"
-		outputDbfFilename = "#{batch.dir}/results/#{timeString}/#{batch.frameworkName}_#{batch.crop}_#{batch.management}_#{batch.climateTableName}_#{timeString}.dbf"
-		outputDbfSummaryFilename = "#{batch.dir}/results/#{timeString}/#{batch.frameworkName}_#{batch.crop}_#{batch.management}_#{batch.climateTableName}_#{timeString}summary.dbf"
+		batchDirName = "#{batch.dir}/results/" + timeString
+		batchName  = "#{batch.frameworkName}_#{batch.crop}_#{batch.management}_#{batch.climateTableName.delete('/')}_#{timeString}"
+		
+		statusFilename = "#{batchDirName}/status.xml"
+		controlFilename = "#{batchDirName}/control.yml"
+		polygonFilename = "#{batchDirName}/polygons.txt"
+		outputXmlFilename = "#{batchDirName}/output.xml"
+		outputCsvFilename = "#{batchDirName}/#{batchName}.csv"
+		outputHtmlFilename = "#{batchDirName}/#{batchName}.html"
+		outputDbfFilename = "#{batchDirName}/#{batchName}.dbf"
+		outputDbfSummaryFilename = "#{batchDirName}/#{batchName}summary.dbf"
 		detailsRootURL = "#{batch.url}/"
-		outputDbfURL = "#{batch.url}/#{batch.frameworkName}_#{batch.crop}_#{batch.management}_#{batch.climateTableName}_#{timeString}.dbf"
+		outputDbfURL = "#{batch.url}/#{batchName}.dbf"
 		# pass configuration back to controller
 		batch.statusFilename = statusFilename
 		batch.statusURL = "#{batch.url}/status.xml"
 		batch.outputURL = "#{batch.url}/output.xml"
 		# create HTTP directories
-		Dir.mkdir(statusDirName) unless File::directory?(statusDirName)
+		Dir.mkdir(batchDirName) unless File::directory?(batchDirName)
 		#Create XML for status document
 		require 'wps'
 		xml = Wps1.CreateStatusXml(batch.statusURL, batch.outputURL, batch.cmpTableName, batch.fromPoly, batch.toPoly, batch.crop, batch.management, batch.climateTableName, "ProcessAccepted", 0)

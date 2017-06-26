@@ -33,13 +33,13 @@ Delete the failed job to continue processing.</p>
     <td class="mid"><%= @statusHash[jobName]["ToPoly"] %></td>
     <td class="mid"><%= @statusHash[jobName][:Status] %></td>
     <td class="mid">
-      <% if @statusHash[jobName][:Status] == "Complete" %><a href="/batch5/results/<%= jobName %>/output.html">Results</a>
-      <% elsif @statusHash[jobName][:Status] == "** FAILED **" %><a href="/batch5/results/<%= jobName %>/output.html">Results</a>
+      <% if @statusHash[jobName][:Status] == "Complete" %><a href="/batch5/results/<%= jobName %>/<%= @statusHash[jobName]["OutputHtmlFilename"].split('/')[-1] %>">Results</a>
+      <% elsif @statusHash[jobName][:Status] == "** FAILED **" %><a href="/batch5/results/<%= jobName %>/<%= @statusHash[jobName]["OutputHtmlFilename"].split('/')[-1] %>">Results</a>
       <% elsif @statusHash[jobName][:Status] == "Processing" %><a href="/batch5/results/<%= jobName %>/status.xml">Status</a>
       <% end %></td>
     <td class="mid">
       <% if @statusHash[jobName][:Status] == "Complete" %>
-        <a href="http://<%= request.host %>/batch5/results/<%= jobName %>/output.csv">csv</a>
+        <a href="http://<%= request.host %>/batch5/results/<%= jobName %>/<%= @statusHash[jobName]["OutputCsvFilename"].split('/')[-1] %>">csv</a>
       <% end %></td>
     <td class="mid">
 			<form action="delete?JobName=<%= jobName %>" method="post">
