@@ -81,7 +81,7 @@ class Polygonbatch
     # return status document as per WPS
     # create unique string for temporary directory names
 		batch.dir =  "#{Rails.root.to_s}/public/batch5"
-		batch.url = "/lsrs5/batch/results/#{timeString}"
+		batch.url = "/batch5/results/#{timeString}"
     # prepare output
     # determine temporary directory/file names and file URLs for status file and others
 		batchDirName = "#{batch.dir}/results/" + timeString
