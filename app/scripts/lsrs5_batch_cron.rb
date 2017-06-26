@@ -129,7 +129,7 @@ outputHtmlFile.puts '<table>'
 
 # Initialize the CSV file
 outputCsvFile = File.open(@control['OutputCsvFilename'], 'w')
-outputCsvFile.puts "POLY_ID,CMP_ID,POLY_RATING,CMP,PERCENT,CMP_CLASS,CLIMATE_POINTS,CLIMATE_CLASS,PROVINCE,SOIL_CODE,SOIL_NAME,SOIL_POINTS,SOIL_CLASS,LANDSCAPE_POINTS,LANDSCAPE_CLASS"
+outputCsvFile.puts "POLY_ID,CMP_ID,POLY_RATING,CMP,PERCENT,CMP_CLASS,C_POINTS,C_CLASS,PROVINCE,SOIL_CODE,SOIL_NAME,S_POINTS,S_CLASS,L_POINTS,L_CLASS"
 
 # populate the HTML and CSV files
 i = 0 # initialize the status counter
@@ -165,8 +165,8 @@ for poly in @batch.polygonsHash.keys do
 		csv += ',' + @rating.climate.FinalRating.to_i.to_s # CLIMATE_POINTS
 		csv += ',' + @rating.climate.suitability.to_s # CLIMATE_CLASS
 		csv += ',' + cmp.soil.name.province # PROVINCE
-		csv += ',' + cmp.soil.name.soil_code # SOIL_CODE
-		csv += ',' + cmp.soil.name.modifier # SOIL_NAME
+		csv += ',' + cmp.soil.name.soil_code + cmp.soil.name.modifier # SOIL_CODE
+		csv += ',' + cmp.soil.name.soilname # SOIL_NAME
 		csv += ',' + cmp.soil.FinalSoilRating.to_s # SOIL_POINTS
 		csv += ',' + cmp.soil.SuitabilityClass.to_s # SOIL_CLASS
 		csv += ',' + cmp.landscape.FinalRating.to_s# LANDSCAPE_POINTS
