@@ -165,7 +165,7 @@ for poly in @batch.polygonsHash.keys do
 		csv += ',' + @rating.climate.FinalRating.to_i.to_s # CLIMATE_POINTS
 		csv += ',' + @rating.climate.suitability.to_s # CLIMATE_CLASS
 		csv += ',' + cmp.soil.name.province # PROVINCE
-		csv += ',' + cmp.soil.name.soil_code + cmp.soil.name.modifier # SOIL_CODE
+		csv += ',' + cmp.soil.name.soil_code + cmp.soil.name.modifier + cmp.soil.name.profile # SOIL_CODE
 		csv += ',' + cmp.soil.name.soilname # SOIL_NAME
 		csv += ',' + cmp.soil.FinalSoilRating.to_s # SOIL_POINTS
 		csv += ',' + cmp.soil.SuitabilityClass.to_s # SOIL_CLASS

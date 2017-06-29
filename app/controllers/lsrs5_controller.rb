@@ -60,7 +60,6 @@ class Lsrs5Controller < ApplicationController
 	# prepares a valid request for the polygon batch processor
 	def polygonbatch_client
 		private_set_rating_parameters
-		console
   end
 
   def batch_queue
