@@ -92,7 +92,7 @@ class Polygonbatch
 		polygonFilename = "#{batchDirName}/polygons.txt"
 		outputXmlFilename = "#{batchDirName}/output.xml"
 		outputCsvFilename = "#{batchDirName}/#{batchName}.csv"
-		outputHtmlFilename = "#{batchDirName}/#{batchName}.html"
+		outputHtmlFilename = "#{batchDirName}/output.html"
 		outputDbfFilename = "#{batchDirName}/#{batchName}.dbf"
 		outputDbfSummaryFilename = "#{batchDirName}/#{batchName}summary.dbf"
 		detailsRootURL = "#{batch.url}/"
