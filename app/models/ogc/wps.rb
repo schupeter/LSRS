@@ -2,7 +2,7 @@ module Wps
   def Wps.CreateStatusXml(statusURL, outputURL, cmpTable, fromSL, toSL, crop, management, climateTable, status, percentCompleted)
     xml = Builder::XmlMarkup.new
     xml.instruct! :xml, :version=>"1.0", :encoding=>"UTF-8", :standalone=>"no"
-    xml.instruct! :'xml-stylesheet', :type=>"text/xsl", :href=>"/stylesheets/lsrs/1.0/lsrsBatchStatus.xsl" 
+    xml.instruct! :'xml-stylesheet', :type=>"text/xsl", :href=>"/schemas/lsrs/1.0/stylesheets/lsrsBatchStatus.xsl" 
     xml.tag!("wps:ExecuteResponse", 
     "xml:lang".to_sym => "en", 
     "service".to_sym => "WPS", 
