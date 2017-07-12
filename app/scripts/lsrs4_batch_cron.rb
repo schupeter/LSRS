@@ -34,8 +34,8 @@ if pendingJobs.size > 2
     #get libraries
     #require "rubygems"
     require "#{@control['RailsRoot']}/app/helpers/libxml-helper"
-    require "#{@control['RailsRoot']}/app/models/lsrs_xml_read"
-    require "#{@control['RailsRoot']}/lib/wps"
+    require "#{@control['RailsRoot']}/app/models/v4andB4/lsrs_xml_read"
+    require "#{@control['RailsRoot']}/app/models/ogc/wps"
     require "open-uri"
     require "builder"
 
@@ -76,7 +76,7 @@ if pendingJobs.size > 2
     #prepare output file
     outputXmlFile = File.open(outputXmlFilename, 'w') 
     # populate top section
-    require "#{@control['RailsRoot']}/lib/lsrs_gdas"
+    require "#{@control['RailsRoot']}/app/models/ogc/lsrs_gdas"
     class LsrsClimate < ActiveRecord::Base
 			self.table_name="lsrs_configuration.lsrs_climates"
     end
@@ -209,7 +209,7 @@ if pendingJobs.size > 2
 
     # create the summary dbf file
     gdas = open(outputXmlFilename).read().to_libxml_doc.root
-    require "#{@control['RailsRoot']}/lib/gdas2dbf"
+    require "#{@control['RailsRoot']}/app/models/ogc/gdas2dbf"
     GDAS2DBF.convert(gdas, outputDbfSummaryFilename, @control['RailsRoot'])
     
     # update status file
